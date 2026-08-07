@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Check, Mail, Lock, User, Eye, EyeOff, ShieldCheck, ArrowRight, KeyRound, RefreshCw, Phone } from "lucide-react";
+import { Check, Mail, Lock, User, Eye, EyeOff, ShieldCheck, ArrowRight, Phone, AlertCircle, LogIn, UserPlus } from "lucide-react";
 import { Button, Input, Label, Card, Badge, cx } from "@/components/ui";
 import { Logo } from "@/components/chrome";
 import { HeroOrbits } from "@/components/orbits";
@@ -23,7 +23,7 @@ const COUNTRY_CODES = [
 
 export default function LoginPage() {
   const [mode, setMode] = useState<"login" | "signup">("login");
-  const [step, setStep] = useState<"form" | "otp" | "done">("form");
+  const [step, setStep] = useState<"form" | "done">("form");
 
   // Form states
   const [fullName, setFullName] = useState("");
@@ -33,74 +33,96 @@ export default function LoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  // Parse URL query params (e.g. ?email=user@domain.com&mode=signup)
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const emailParam = params.get("email");
-      const modeParam = params.get("mode");
-      if (emailParam) {
-        setEmail(emailParam);
-        setLoginIdentifier(emailParam);
-      }
-      if (modeParam === "signup") setMode("signup");
-    }
-  }, []);
-
-  // OTP states
-  const [otpCode, setOtpCode] = useState("");
-  const [otpSentCode, setOtpSentCode] = useState("849201");
-  const [timer, setTimer] = useState(45);
+  const [redirectPath, setRedirectPath] = useState<string | null>(null);
 
   // UI states
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [accountExists, setAccountExists] = useState(false);
+  const [accountNotFound, setAccountNotFound] = useState(false);
 
-  function startOtpFlow(targetEmail: string) {
-    setEmail(targetEmail);
-    // Generate a clean 6-digit code for preview demonstration
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
-    setOtpSentCode(code);
-    setOtpCode("");
-    setStep("otp");
+  // Parse URL query params (e.g. ?email=user@domain.com&mode=signup&redirect=/join)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const emailParam = params.get("email");
+      const modeParam = params.get("mode");
+      const redirectParam = params.get("redirect");
+      if (emailParam) {
+        setEmail(emailParam);
+        setLoginIdentifier(emailParam);
+      }
+      if (modeParam === "signup") setMode("signup");
+      if (redirectParam) setRedirectPath(redirectParam);
+    }
+  }, []);
+
+  function handleSuccessAuth(userData: { name: string; email: string }, accessToken?: string) {
+    try {
+      if (accessToken) {
+        localStorage.setItem("dts_access_token", accessToken);
+        document.cookie = `dts_access_token=${accessToken}; path=/; max-age=86400; SameSite=Lax`;
+      }
+      localStorage.setItem("dts_user", JSON.stringify(userData));
+    } catch {}
+
+    if (redirectPath) {
+      window.location.href = redirectPath;
+      return;
+    }
+
+    setStep("done");
   }
 
   async function handleLoginSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setAccountExists(false);
+    setAccountNotFound(false);
     setLoading(true);
+
+    const targetId = (loginIdentifier || email).trim();
+    if (!targetId || !password) {
+      setLoading(false);
+      setError("Please enter your email or phone number and password.");
+      return;
+    }
+
     try {
       const res = await fetch("/api/v1/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ identifier: loginIdentifier || email, password }),
+        body: JSON.stringify({ identifier: targetId, password }),
       });
       const data = await res.json();
       setLoading(false);
 
       if (!res.ok || !data.success) {
-        setError(data.error || "Authentication failed. Please check credentials.");
+        setAccountNotFound(true);
+        setError(data.error || "No account found with this email or phone number.");
         return;
       }
 
-      if (data.data?.accessToken) {
-        localStorage.setItem("dts_access_token", data.data.accessToken);
-        localStorage.setItem("dts_user", JSON.stringify(data.data.user));
-        document.cookie = `dts_access_token=${data.data.accessToken}; path=/; max-age=86400; SameSite=Lax`;
-      }
-
-      startOtpFlow(data.data?.user?.email || email || loginIdentifier);
+      handleSuccessAuth(
+        {
+          name: data.data?.user?.fullName || targetId.split("@")[0] || "Member",
+          email: data.data?.user?.email || targetId,
+        },
+        data.data?.accessToken
+      );
     } catch {
       setLoading(false);
-      startOtpFlow(email || loginIdentifier);
+      handleSuccessAuth({ name: targetId.split("@")[0] || "Member", email: targetId });
     }
   }
 
   async function handleSignupSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setAccountExists(false);
+    setAccountNotFound(false);
+
     if (password !== confirmPassword) {
       setError("Passwords do not match. Please check and try again.");
       return;
@@ -110,6 +132,7 @@ export default function LoginPage() {
       return;
     }
     setLoading(true);
+
     try {
       const res = await fetch("/api/v1/auth/register", {
         method: "POST",
@@ -120,49 +143,26 @@ export default function LoginPage() {
       setLoading(false);
 
       if (!res.ok || !data.success) {
+        if (res.status === 409 || data.error?.toLowerCase().includes("exist")) {
+          setAccountExists(true);
+          setError("An account with this email address already exists.");
+          return;
+        }
         setError(data.error || "Registration failed. Please try again.");
         return;
       }
 
-      if (data.data?.accessToken) {
-        localStorage.setItem("dts_access_token", data.data.accessToken);
-        localStorage.setItem("dts_user", JSON.stringify(data.data.user));
-        document.cookie = `dts_access_token=${data.data.accessToken}; path=/; max-age=86400; SameSite=Lax`;
-      }
-
-      startOtpFlow(email);
+      handleSuccessAuth(
+        {
+          name: fullName || email.split("@")[0] || "Member",
+          email,
+        },
+        data.data?.accessToken
+      );
     } catch {
       setLoading(false);
-      startOtpFlow(email);
+      handleSuccessAuth({ name: fullName || email.split("@")[0] || "Member", email });
     }
-  }
-
-  function handleVerifyOtp(e: React.FormEvent) {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      if (otpCode.trim() && otpCode.trim() !== otpSentCode) {
-        if (otpCode.trim() !== "123456") {
-          setError(`Invalid OTP code. Use test code ${otpSentCode} or 123456.`);
-          return;
-        }
-      }
-      try {
-        if (!localStorage.getItem("dts_user")) {
-          localStorage.setItem("dts_user", JSON.stringify({ name: fullName || email.split("@")[0] || "Member", email }));
-        }
-      } catch {}
-      setStep("done");
-    }, 600);
-  }
-
-  function resendOtp() {
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
-    setOtpSentCode(code);
-    setTimer(45);
-    setError("");
   }
 
   return (
@@ -170,12 +170,10 @@ export default function LoginPage() {
       <div className="relative w-full max-w-5xl animate-rise px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl border border-neutral-300 dark:border-neutral-800 bg-white/95 dark:bg-neutral-900/95 shadow-2xl overflow-hidden backdrop-blur-xl">
 
-          {/* ---------------- LEFT PANEL (DESKTOP ONLY: Obsidian Theme with DTS Orbits & Tagline) ---------------- */}
+          {/* ---------------- LEFT PANEL (Obsidian Theme with DTS Orbits & Tagline) ---------------- */}
           <div className="hidden md:flex flex-col justify-between p-10 lg:p-12 bg-neutral-950 text-neutral-50 relative overflow-hidden border-r border-neutral-800">
-            {/* Ambient Halo */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-96 rounded-full bg-white/5 blur-3xl pointer-events-none" />
 
-            {/* Top Brand & Tagline */}
             <div className="relative z-10">
               <div className="inline-flex items-center gap-2 rounded-md border border-neutral-800 bg-neutral-900 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-300">
                 <span className="size-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500 animate-pulse" />
@@ -190,12 +188,10 @@ export default function LoginPage() {
               </p>
             </div>
 
-            {/* Center Scaled Hero Orbit Graphic */}
             <div className="relative z-10 my-6 py-2">
               <HeroOrbits className="max-w-[280px] lg:max-w-[320px]" />
             </div>
 
-            {/* Bottom Member Quote */}
             <div className="relative z-10 border-t border-neutral-800/80 pt-6">
               <p className="font-sans text-xs sm:text-sm italic leading-relaxed text-neutral-300">
                 &ldquo;Direct peer access to quantum researchers and SOC playbooks transformed how our team deploys frontier infrastructure.&rdquo;
@@ -212,30 +208,30 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* ---------------- RIGHT PANEL (Interactive Form) ---------------- */}
+          {/* ---------------- RIGHT PANEL (Direct Email & Password Form) ---------------- */}
           <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center bg-white/95 dark:bg-neutral-900/95">
             <div className="flex items-center justify-between border-b border-neutral-200/90 pb-6 dark:border-neutral-800">
               <Logo />
               <Badge className="font-mono text-[10px] font-bold uppercase tracking-wider text-neutral-900 dark:text-neutral-100">
-                <ShieldCheck className="mr-1 size-3.5" /> OTP VERIFIED
+                <ShieldCheck className="mr-1 size-3.5" /> SECURE AUTH
               </Badge>
             </div>
 
-            {/* STEP 3: DONE / VERIFIED SUCCESS */}
+            {/* DONE / LOGGED IN SUCCESS */}
             {step === "done" && (
               <div className="mt-8 text-center">
                 <span className="mx-auto grid size-14 place-items-center rounded-2xl border border-neutral-300 bg-neutral-100 text-neutral-900 shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-50">
                   <Check className="size-7" aria-hidden />
                 </span>
                 <h1 className="mt-5 font-display text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-                  Email Verified Successfully!
+                  Authenticated Successfully!
                 </h1>
                 <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">
-                  Welcome, <strong className="text-neutral-900 dark:text-neutral-100">{fullName || email.split("@")[0]}</strong>. Your email <span className="font-mono text-xs">{email}</span> has been authenticated via OTP.
+                  Welcome back, <strong className="text-neutral-900 dark:text-neutral-100">{fullName || loginIdentifier.split("@")[0] || email.split("@")[0] || "Member"}</strong>.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <Button href="/community" variant="primary" size="lg" className="w-full font-bold">
-                    Enter Member Forum <ArrowRight className="size-4" />
+                  <Button href={redirectPath || "/community"} variant="primary" size="lg" className="w-full font-bold">
+                    {redirectPath ? "Continue to Application" : "Enter Member Forum"} <ArrowRight className="size-4" />
                   </Button>
                   <Button href="/events" variant="outline" size="lg" className="w-full font-bold">
                     View Symposia
@@ -244,281 +240,250 @@ export default function LoginPage() {
               </div>
             )}
 
-            {/* STEP 2: EMAIL OTP CODE VERIFICATION */}
-            {step === "otp" && (
+            {step === "form" && (
               <div className="mt-6">
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 bg-neutral-100 px-2.5 py-1 font-mono text-xs font-bold text-neutral-800 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200">
-                    <KeyRound className="size-3.5" /> STEP 2 OF 2
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setStep("form")}
-                    className="font-mono text-xs text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
-                  >
-                    [Back to Form]
-                  </button>
-                </div>
-
-                <h1 className="mt-4 font-display text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-                  Verify Email OTP Code
-                </h1>
-                <p className="mt-1.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">
-                  We sent a 6-digit security code to <strong className="text-neutral-900 dark:text-neutral-100">{email}</strong>.
-                </p>
-
-                {/* Sample OTP code banner for preview demonstration */}
-                <div className="mt-4 rounded-xl border border-neutral-300 bg-neutral-100 p-3.5 text-center dark:border-neutral-700 dark:bg-neutral-950">
-                  <p className="font-mono text-xs text-neutral-500">Your OTP Code:</p>
-                  <p className="font-mono text-2xl font-extrabold tracking-widest text-neutral-900 dark:text-neutral-100">{otpSentCode}</p>
-                  <p className="mt-1 font-mono text-[10px] text-neutral-500">(Enter {otpSentCode} or 123456 below)</p>
-                </div>
-
-                {error && (
-                  <div role="alert" className="mt-4 rounded-lg border border-red-300 bg-red-50 p-3 text-xs font-semibold text-red-900 dark:border-red-900 dark:bg-red-950 dark:text-red-200">
-                    {error}
+                {/* Redirect Banner Notice */}
+                {redirectPath && (
+                  <div className="mb-6 rounded-xl border border-neutral-300 bg-neutral-100 p-3.5 text-xs text-neutral-800 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-200 flex items-center gap-2">
+                    <AlertCircle className="size-4 shrink-0" />
+                    <span>Please log in or create an account first to complete your membership application.</span>
                   </div>
                 )}
 
-                <form onSubmit={handleVerifyOtp} className="mt-6 space-y-4">
-                  <div>
-                    <Label htmlFor="otp-input">6-DIGIT VERIFICATION CODE</Label>
-                    <Input
-                      id="otp-input"
-                      type="text"
-                      required
-                      maxLength={6}
-                      value={otpCode}
-                      onChange={(e) => setOtpCode(e.target.value)}
-                      placeholder="849201"
-                      className="text-center font-mono text-xl font-bold tracking-widest uppercase h-12"
-                      autoFocus
-                    />
-                  </div>
-
-                  <Button type="submit" variant="primary" size="lg" disabled={loading} className="w-full font-bold">
-                    {loading ? "Verifying OTP..." : "Verify OTP & Access Portal"}
-                  </Button>
-                </form>
-
-                <div className="mt-6 flex items-center justify-between border-t border-neutral-200/80 pt-4 dark:border-neutral-800">
-                  <button
-                    type="button"
-                    onClick={resendOtp}
-                    className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-neutral-800 hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white"
-                  >
-                    <RefreshCw className="size-3.5" /> Resend OTP Code
-                  </button>
-                  <span className="font-mono text-xs text-neutral-400">Expires in {timer}s</span>
-                </div>
-              </div>
-            )}
-
-            {/* STEP 1: INITIAL LOG IN / SIGN UP FORM */}
-            {step === "form" && (
-              <>
-                {/* Mode Switcher Tabs */}
-                <div className="mt-6 grid grid-cols-2 rounded-xl border border-neutral-300 bg-neutral-100/90 p-1 dark:border-neutral-800 dark:bg-neutral-950/80">
+                {/* Mode Selector Tabs */}
+                <div className="grid grid-cols-2 rounded-xl border border-neutral-300 p-1 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-950">
                   <button
                     type="button"
                     onClick={() => {
                       setMode("login");
                       setError("");
+                      setAccountExists(false);
+                      setAccountNotFound(false);
                     }}
                     className={cx(
-                      "rounded-lg py-2.5 font-mono text-xs font-bold uppercase tracking-wider transition-all cursor-pointer",
+                      "rounded-lg py-2 font-display text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5",
                       mode === "login"
-                        ? "bg-white text-neutral-950 shadow-sm dark:bg-neutral-800 dark:text-white"
-                        : "text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                        ? "bg-neutral-900 text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-sm"
+                        : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
                     )}
                   >
-                    Log In (Sign In)
+                    <LogIn className="size-3.5" /> Log In
                   </button>
                   <button
                     type="button"
                     onClick={() => {
                       setMode("signup");
                       setError("");
+                      setAccountExists(false);
+                      setAccountNotFound(false);
                     }}
                     className={cx(
-                      "rounded-lg py-2.5 font-mono text-xs font-bold uppercase tracking-wider transition-all cursor-pointer",
+                      "rounded-lg py-2 font-display text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5",
                       mode === "signup"
-                        ? "bg-white text-neutral-950 shadow-sm dark:bg-neutral-800 dark:text-white"
-                        : "text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+                        ? "bg-neutral-900 text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-sm"
+                        : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
                     )}
                   >
-                    Sign Up (Register)
+                    <UserPlus className="size-3.5" /> Sign Up
                   </button>
                 </div>
 
-                {/* Header Title */}
                 <div className="mt-6">
                   <h1 className="font-display text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-                    {mode === "login" ? "Sign In to Member Portal" : "Create Member Account"}
+                    {mode === "login" ? "Access Member Portal" : "Create Practitioner Account"}
                   </h1>
-                  <p className="mt-1 text-sm font-normal text-neutral-600 dark:text-neutral-400">
+                  <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
                     {mode === "login"
-                      ? "Enter your email address or phone number and password to sign in."
-                      : "Enter your full name, email address, phone number with country code, and password."}
+                      ? "Enter your email or phone number and password to log in."
+                      : "Enter your full name, email, phone number, and password."}
                   </p>
                 </div>
 
-                {error && (
-                  <div role="alert" className="mt-4 rounded-lg border border-red-300 bg-red-50 p-3.5 text-xs font-semibold text-red-900 dark:border-red-900 dark:bg-red-950 dark:text-red-200">
+                {/* Account Already Exists Banner */}
+                {accountExists && (
+                  <div role="alert" className="mt-4 rounded-xl border border-amber-300 bg-amber-50 p-4 text-xs text-amber-900 dark:border-amber-800 dark:bg-amber-950/80 dark:text-amber-200">
+                    <p className="font-bold flex items-center gap-1.5">
+                      <AlertCircle className="size-4 shrink-0" /> Account Already Exists
+                    </p>
+                    <p className="mt-1">An account with this email address is already registered.</p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLoginIdentifier(email);
+                        setMode("login");
+                        setError("");
+                        setAccountExists(false);
+                      }}
+                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg border border-amber-900/30 bg-amber-900/10 px-3 py-1.5 font-mono text-xs font-bold text-amber-950 dark:text-amber-100 hover:underline cursor-pointer"
+                    >
+                      Log in directly with {email || "your credentials"} <ArrowRight className="size-3.5" />
+                    </button>
+                  </div>
+                )}
+
+                {/* Account Not Found Banner */}
+                {accountNotFound && (
+                  <div role="alert" className="mt-4 rounded-xl border border-neutral-300 bg-neutral-100 p-4 text-xs text-neutral-800 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-200">
+                    <p className="font-bold flex items-center gap-1.5">
+                      <AlertCircle className="size-4 shrink-0" /> Account Not Found
+                    </p>
+                    <p className="mt-1">No account was found with this email or phone number.</p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (loginIdentifier.includes("@")) setEmail(loginIdentifier);
+                        setMode("signup");
+                        setError("");
+                        setAccountNotFound(false);
+                      }}
+                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg border border-neutral-400 bg-neutral-200 px-3 py-1.5 font-mono text-xs font-bold text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 hover:underline cursor-pointer"
+                    >
+                      Create an account now <ArrowRight className="size-3.5" />
+                    </button>
+                  </div>
+                )}
+
+                {/* Error Banner */}
+                {error && !accountExists && !accountNotFound && (
+                  <div role="alert" className="mt-4 rounded-lg border border-red-300 bg-red-50 p-3 text-xs font-semibold text-red-900 dark:border-red-900 dark:bg-red-950 dark:text-red-200">
                     {error}
                   </div>
                 )}
 
-                {/* LOG IN FORM */}
+                {/* FORM: LOG IN MODE */}
                 {mode === "login" ? (
                   <form onSubmit={handleLoginSubmit} className="mt-6 space-y-4">
                     <div>
-                      <Label htmlFor="l-identifier">EMAIL ADDRESS OR PHONE NUMBER</Label>
+                      <Label htmlFor="login-identifier">EMAIL ADDRESS OR PHONE NUMBER</Label>
                       <div className="relative">
-                        <Mail className="absolute left-3.5 top-3 size-4 text-neutral-400" />
                         <Input
-                          id="l-identifier"
+                          id="login-identifier"
                           type="text"
                           required
-                          value={loginIdentifier || email}
-                          onChange={(e) => {
-                            setLoginIdentifier(e.target.value);
-                            setEmail(e.target.value);
-                          }}
-                          placeholder="researcher@lab.org or +91 98765 43210"
-                          className="pl-10"
+                          value={loginIdentifier}
+                          onChange={(e) => setLoginIdentifier(e.target.value)}
+                          placeholder="name@domain.com or +91 98765 43210"
+                          className="pl-9"
                           autoComplete="username"
                         />
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
                       </div>
                     </div>
 
                     <div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="l-password">PASSWORD</Label>
-                        <button
-                          type="button"
-                          onClick={() => alert("Password reset OTP code sent to your registered email or phone.")}
-                          className="font-mono text-[11px] font-semibold text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
-                        >
-                          Forgot password?
-                        </button>
+                        <Label htmlFor="login-password">PASSWORD</Label>
                       </div>
                       <div className="relative">
-                        <Lock className="absolute left-3.5 top-3 size-4 text-neutral-400" />
                         <Input
-                          id="l-password"
+                          id="login-password"
                           type={showPass ? "text" : "password"}
                           required
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          placeholder="••••••••"
-                          className="pl-10 pr-10"
+                          placeholder="••••••••••••"
+                          className="pl-9 pr-10"
                           autoComplete="current-password"
                         />
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
                         <button
                           type="button"
                           onClick={() => setShowPass(!showPass)}
-                          className="absolute right-3 top-3 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
-                          aria-label="Toggle password visibility"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200"
                         >
                           {showPass ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                         </button>
                       </div>
                     </div>
 
-                    <Button type="submit" variant="primary" size="lg" disabled={loading} className="w-full font-bold">
-                      {loading ? "Sending OTP..." : "Continue to Verification OTP"}
+                    <Button type="submit" variant="primary" size="lg" disabled={loading} className="w-full font-bold mt-2">
+                      {loading ? "Authenticating..." : "Log In & Continue"}
                     </Button>
                   </form>
                 ) : (
-                  /* SIGN UP FORM WITH COUNTRY CODE & PHONE NUMBER */
+                  /* FORM: SIGN UP MODE */
                   <form onSubmit={handleSignupSubmit} className="mt-6 space-y-4">
                     <div>
-                      <Label htmlFor="s-name">FULL NAME</Label>
+                      <Label htmlFor="signup-name">FULL NAME</Label>
                       <div className="relative">
-                        <User className="absolute left-3.5 top-3 size-4 text-neutral-400" />
                         <Input
-                          id="s-name"
+                          id="signup-name"
                           type="text"
                           required
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
-                          placeholder="Dr. Elena Marchetti"
-                          className="pl-10"
+                          placeholder="Dr. Ada Lovelace"
+                          className="pl-9"
                           autoComplete="name"
                         />
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="s-email">EMAIL ADDRESS</Label>
+                      <Label htmlFor="signup-email">EMAIL ADDRESS</Label>
                       <div className="relative">
-                        <Mail className="absolute left-3.5 top-3 size-4 text-neutral-400" />
                         <Input
-                          id="s-email"
+                          id="signup-email"
                           type="email"
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          placeholder="elena@research.org"
-                          className="pl-10"
+                          placeholder="researcher@lab.org"
+                          className="pl-9"
                           autoComplete="email"
                         />
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="s-phone">PHONE NUMBER</Label>
+                      <Label htmlFor="signup-phone">PHONE NUMBER (WITH COUNTRY CODE)</Label>
                       <div className="flex gap-2">
-                        <div className="relative w-36 shrink-0">
-                          <select
-                            value={countryCode}
-                            onChange={(e) => setCountryCode(e.target.value)}
-                            aria-label="Select Country Code"
-                            className="w-full rounded-lg border border-neutral-300 bg-white px-2.5 py-3 font-mono text-xs font-semibold text-neutral-900 focus:border-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:focus:border-neutral-100 cursor-pointer"
-                          >
-                            {COUNTRY_CODES.map((c) => (
-                              <option key={`${c.country}-${c.code}`} value={c.code}>
-                                {c.flag} {c.code}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
+                        <select
+                          value={countryCode}
+                          onChange={(e) => setCountryCode(e.target.value)}
+                          className="h-10 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-950 px-2.5 font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100"
+                        >
+                          {COUNTRY_CODES.map((c) => (
+                            <option key={c.code} value={c.code}>
+                              {c.flag} {c.code}
+                            </option>
+                          ))}
+                        </select>
                         <div className="relative flex-1">
-                          <Phone className="absolute left-3.5 top-3 size-4 text-neutral-400" />
                           <Input
-                            id="s-phone"
+                            id="signup-phone"
                             type="tel"
-                            required
                             value={phoneNumber}
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             placeholder="98765 43210"
-                            className="pl-10 font-mono text-sm"
-                            autoComplete="tel-national"
+                            className="pl-9 font-mono text-sm"
+                            autoComplete="tel"
                           />
+                          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
                         </div>
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="s-password">PASSWORD</Label>
+                      <Label htmlFor="signup-password">CREATE PASSWORD</Label>
                       <div className="relative">
-                        <Lock className="absolute left-3.5 top-3 size-4 text-neutral-400" />
                         <Input
-                          id="s-password"
+                          id="signup-password"
                           type={showPass ? "text" : "password"}
                           required
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          placeholder="Min 6 characters"
-                          className="pl-10 pr-10"
+                          placeholder="At least 6 characters"
+                          className="pl-9 pr-10"
                           autoComplete="new-password"
                         />
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
                         <button
                           type="button"
                           onClick={() => setShowPass(!showPass)}
-                          className="absolute right-3 top-3 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
-                          aria-label="Toggle password visibility"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200"
                         >
                           {showPass ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                         </button>
@@ -526,41 +491,28 @@ export default function LoginPage() {
                     </div>
 
                     <div>
-                      <Label htmlFor="s-confirm">CONFIRM PASSWORD</Label>
+                      <Label htmlFor="signup-confirm-password">CONFIRM PASSWORD</Label>
                       <div className="relative">
-                        <Lock className="absolute left-3.5 top-3 size-4 text-neutral-400" />
                         <Input
-                          id="s-confirm"
+                          id="signup-confirm-password"
                           type={showPass ? "text" : "password"}
                           required
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
-                          placeholder="Repeat password"
-                          className="pl-10 pr-10"
+                          placeholder="Re-enter password"
+                          className="pl-9 pr-10"
                           autoComplete="new-password"
                         />
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
                       </div>
                     </div>
 
-                    <div className="pt-1">
-                      <label className="flex items-start gap-2.5 cursor-pointer font-sans text-xs font-semibold text-neutral-700 dark:text-neutral-300">
-                        <input type="checkbox" required className="mt-0.5 rounded border-neutral-300 dark:border-neutral-700" />
-                        <span>I agree to the Deep Tech Society Code of Conduct.</span>
-                      </label>
-                    </div>
-
-                    <Button type="submit" variant="primary" size="lg" disabled={loading} className="w-full font-bold">
-                      {loading ? "Sending OTP..." : "Send Email OTP Code"}
+                    <Button type="submit" variant="primary" size="lg" disabled={loading} className="w-full font-bold mt-2">
+                      {loading ? "Creating Account..." : "Create Account & Continue"}
                     </Button>
                   </form>
                 )}
-
-                <div className="mt-6 border-t border-neutral-200/80 pt-4 text-center dark:border-neutral-800">
-                  <p className="font-mono text-xs font-semibold text-neutral-600 dark:text-neutral-400">
-                    TWO-FACTOR EMAIL OTP SECURITY ENABLED
-                  </p>
-                </div>
-              </>
+              </div>
             )}
           </div>
         </div>
