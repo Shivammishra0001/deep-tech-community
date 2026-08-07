@@ -1,6 +1,9 @@
-﻿node_modules
+node_modules
 .next
 out
 .env
 .env.local
 .vercel
+service-account.json
+credentials.json
+*.json.key

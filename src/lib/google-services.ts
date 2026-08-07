@@ -1,4 +1,6 @@
 import { google } from "googleapis";
+import fs from "fs";
+import path from "path";
 
 // Google API Scopes required for Sheets & Drive operations
 const SCOPES = [
@@ -9,24 +11,70 @@ const SCOPES = [
 export type GoogleCredentialsStatus = {
   configured: boolean;
   serviceAccountEmail?: string;
+  source: "env" | "json_file" | "none";
   missingVars: string[];
 };
 
 /**
- * Validates whether required Google Service Account credentials exist in Environment variables
+ * Loads credentials from environment variables OR directly from service-account.json / credentials.json
+ */
+function loadCredentials(): { email?: string; privateKey?: string; source: "env" | "json_file" | "none" } {
+  // 1. Environment variables
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
+    return {
+      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      privateKey: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      source: "env",
+    };
+  }
+
+  // 2. Check for service-account.json or credentials.json in project root
+  const rootDir = process.cwd();
+  const jsonPaths = [
+    path.join(rootDir, "service-account.json"),
+    path.join(rootDir, "credentials.json"),
+  ];
+
+  for (const jsonPath of jsonPaths) {
+    if (fs.existsSync(jsonPath)) {
+      try {
+        const fileContent = fs.readFileSync(jsonPath, "utf-8");
+        const parsed = JSON.parse(fileContent);
+        if (parsed.client_email && parsed.private_key) {
+          return {
+            email: parsed.client_email,
+            privateKey: parsed.private_key.replace(/\\n/g, "\n"),
+            source: "json_file",
+          };
+        }
+      } catch (err) {
+        console.warn(`[Google Services] Error reading credentials file at ${jsonPath}:`, err);
+      }
+    }
+  }
+
+  return { source: "none" };
+}
+
+/**
+ * Validates whether required Google Service Account credentials exist
  */
 export function checkGoogleCredentialsStatus(): GoogleCredentialsStatus {
-  const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const privateKey = process.env.GOOGLE_PRIVATE_KEY;
+  const creds = loadCredentials();
 
-  const missing: string[] = [];
-  if (!email) missing.push("GOOGLE_SERVICE_ACCOUNT_EMAIL");
-  if (!privateKey) missing.push("GOOGLE_PRIVATE_KEY");
+  if (creds.email && creds.privateKey) {
+    return {
+      configured: true,
+      serviceAccountEmail: creds.email,
+      source: creds.source,
+      missingVars: [],
+    };
+  }
 
   return {
-    configured: missing.length === 0,
-    serviceAccountEmail: email,
-    missingVars: missing,
+    configured: false,
+    source: "none",
+    missingVars: ["GOOGLE_SERVICE_ACCOUNT_EMAIL", "GOOGLE_PRIVATE_KEY", "service-account.json"],
   };
 }
 
@@ -34,20 +82,15 @@ export function checkGoogleCredentialsStatus(): GoogleCredentialsStatus {
  * Returns an authenticated Google JWT Auth Client using Service Account credentials
  */
 export function getGoogleServiceAccountAuth() {
-  const status = checkGoogleCredentialsStatus();
-  if (!status.configured) {
-    console.warn(`[Google Services] Pending credentials. Missing: ${status.missingVars.join(", ")}`);
+  const creds = loadCredentials();
+  if (!creds.email || !creds.privateKey) {
+    console.warn("[Google Services] Pending credentials. Please provide service-account.json or env vars.");
     return null;
   }
 
-  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const rawKey = process.env.GOOGLE_PRIVATE_KEY || "";
-  // Ensure private key handles escaped newlines properly
-  const privateKey = rawKey.replace(/\\n/g, "\n");
-
   return new google.auth.JWT({
-    email: clientEmail,
-    key: privateKey,
+    email: creds.email,
+    key: creds.privateKey,
     scopes: SCOPES,
   });
 }
@@ -68,35 +111,4 @@ export function getGoogleDriveClient() {
   const auth = getGoogleServiceAccountAuth();
   if (!auth) return null;
   return google.drive({ version: "v3", auth });
-}
-
-/**
- * Helper to append a row to a Google Spreadsheet (e.g. for membership applications or event signups)
- */
-export async function appendSpreadsheetRow(
-  spreadsheetId: string,
-  range: string,
-  values: (string | number | boolean)[]
-) {
-  const sheets = getGoogleSheetsClient();
-  if (!sheets) {
-    console.warn("[Google Sheets] API client uninitialized. Waiting for credentials.");
-    return { success: false, reason: "PENDING_CREDENTIALS" };
-  }
-
-  try {
-    const response = await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range,
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: [values],
-      },
-    });
-    return { success: true, data: response.data };
-  } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : "Google Sheets API Error";
-    console.error("[Google Sheets Append Error]:", msg);
-    return { success: false, error: msg };
-  }
 }
