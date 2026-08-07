@@ -31,8 +31,8 @@ function loadCredentials(): { email?: string; privateKey?: string; source: "env"
   // 2. Check for service-account.json or credentials.json in project root
   const rootDir = process.cwd();
   const jsonPaths = [
-    path.join(rootDir, "service-account.json"),
-    path.join(rootDir, "credentials.json"),
+    path.join(/*turbopackIgnore: true*/ process.cwd(), "service-account.json"),
+    path.join(/*turbopackIgnore: true*/ process.cwd(), "credentials.json"),
   ];
 
   for (const jsonPath of jsonPaths) {
