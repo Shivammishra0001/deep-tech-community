@@ -1,0 +1,383 @@
+// Deep Tech Society / Deep Tech Community Master Database Schema
+// Optimized for PostgreSQL with Multi-Domain Schemas & Microservices Evolution
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -----------------------------------------------------------------------------
+// ENUMS & RBAC ROLES
+// -----------------------------------------------------------------------------
+
+enum Role {
+  SUPER_ADMIN
+  GLOBAL_ADMIN
+  COUNTRY_ADMIN
+  CHAPTER_LEAD
+  MODERATOR
+  SPEAKER
+  MEMBER
+  GUEST
+}
+
+enum MemberStatus {
+  ACTIVE
+  PENDING_VERIFICATION
+  SUSPENDED
+  ARCHIVED
+}
+
+enum PostKind {
+  ARTICLE
+  PROJECT
+  QUESTION
+  ACHIEVEMENT
+}
+
+enum EventType {
+  SYMPOSIUM
+  WORKSHOP
+  PAPER_READING
+  SOC_SIMULATION
+  HACKATHON
+}
+
+enum EventFormat {
+  IN_PERSON
+  HYBRID
+  VIRTUAL
+}
+
+enum ResourceType {
+  WHITE_PAPER
+  ROADMAP
+  BENCHMARK_DATASET
+  LAB_GUIDE
+  CODE_PLAYBOOK
+}
+
+// -----------------------------------------------------------------------------
+// AUTH SCHEMA & RBAC ENTITIES
+// -----------------------------------------------------------------------------
+
+model User {
+  id               String       @id @default(uuid()) @db.Uuid
+  email            String       @unique
+  phoneNumber      String?      @unique
+  countryCode      String?      @default("+91")
+  passwordHash     String
+  fullName         String
+  authorRole       String       @default("Practitioner")
+  avatarUrl        String?
+  bio              String?      @db.Text
+  role             Role         @default(MEMBER)
+  status           MemberStatus @default(ACTIVE)
+  emailVerified    Boolean      @default(false)
+  phoneVerified    Boolean      @default(false)
+  tokenVersion     Int          @default(1)
+  
+  // Relations
+  memberships      ChapterMembership[]
+  posts            Post[]
+  postComments     PostComment[]
+  postLikes        PostLike[]
+  eventRegisters   EventRegistration[]
+  newsComments     NewsComment[]
+  newsLikes        NewsLike[]
+  refreshTokens    RefreshToken[]
+  loginHistory     LoginHistory[]
+  createdEvents    Event[]             @relation("EventCreator")
+  speakerEvents    EventSpeaker[]
+  
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@index([email])
+  @@index([phoneNumber])
+  @@index([role])
+}
+
+model RefreshToken {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @db.Uuid
+  tokenHash   String   @unique
+  deviceInfo  String?
+  ipAddress   String?
+  isRevoked   Boolean  @default(false)
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model LoginHistory {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @db.Uuid
+  ipAddress  String
+  userAgent  String?
+  country    String?
+  status     String   @default("SUCCESS")
+  createdAt  DateTime @default(now())
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// -----------------------------------------------------------------------------
+// REGIONAL CHAPTERS & GEOGRAPHY
+// -----------------------------------------------------------------------------
+
+model Country {
+  id        String    @id @default(uuid()) @db.Uuid
+  name      String    @unique
+  isoCode   String    @unique // e.g., "IN", "US", "SG"
+  dialCode  String    // e.g., "+91"
+  flag      String    // e.g., "🇮🇳"
+  chapters  Chapter[]
+
+  createdAt DateTime  @default(now())
+}
+
+model Chapter {
+  id          String              @id @default(uuid()) @db.Uuid
+  countryId   String              @db.Uuid
+  name        String
+  slug        String              @unique
+  city        String
+  code        String              @unique
+  blurb       String              @db.Text
+  coverImage  String?
+  leadName    String
+  leadEmail   String
+  memberCount Int                 @default(0)
+
+  country     Country             @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  memberships ChapterMembership[]
+  events      Event[]
+
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@index([slug])
+}
+
+model ChapterMembership {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  chapterId String   @db.Uuid
+  role      String   @default("Member") // "Member", "Lead", "Organizer"
+  joinedAt  DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, chapterId])
+}
+
+// -----------------------------------------------------------------------------
+// EVENTS MODULE
+// -----------------------------------------------------------------------------
+
+model Event {
+  id            String              @id @default(uuid()) @db.Uuid
+  chapterId     String              @db.Uuid
+  creatorId     String              @db.Uuid
+  title         String
+  slug          String              @unique
+  domain        String              // "ai", "quantum", "cybersecurity", "space"
+  type          EventType           @default(WORKSHOP)
+  format        EventFormat         @default(IN_PERSON)
+  date          DateTime
+  location      String
+  venueDetails  String?
+  summary       String              @db.Text
+  agenda        Json?               // Array of timeline steps
+  capacity      Int                 @default(100)
+  registered    Int                 @default(0)
+
+  chapter       Chapter             @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  creator       User                @relation("EventCreator", fields: [creatorId], references: [id])
+  speakers      EventSpeaker[]
+  registrations EventRegistration[]
+
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  @@index([slug])
+  @@index([domain])
+}
+
+model EventSpeaker {
+  id        String   @id @default(uuid()) @db.Uuid
+  eventId   String   @db.Uuid
+  userId    String?  @db.Uuid
+  name      String
+  role      String
+  company   String?
+  avatarUrl String?
+
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([eventId])
+}
+
+model EventRegistration {
+  id        String   @id @default(uuid()) @db.Uuid
+  eventId   String   @db.Uuid
+  userId    String   @db.Uuid
+  status    String   @default("CONFIRMED")
+  createdAt DateTime @default(now())
+
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, userId])
+}
+
+// -----------------------------------------------------------------------------
+// COMMUNITY POSTS MODULE
+// -----------------------------------------------------------------------------
+
+model Post {
+  id         String        @id @default(uuid()) @db.Uuid
+  authorId   String        @db.Uuid
+  kind       PostKind      @default(ARTICLE)
+  domain     String        // "ai", "quantum", "cybersecurity", "space"
+  title      String
+  body       String        @db.Text
+  image      String?
+  tags       String[]
+  likeCount  Int           @default(0)
+
+  author     User          @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments   PostComment[]
+  likes      PostLike[]
+
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([domain])
+  @@index([kind])
+}
+
+model PostComment {
+  id        String   @id @default(uuid()) @db.Uuid
+  postId    String   @db.Uuid
+  authorId  String   @db.Uuid
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([postId])
+}
+
+model PostLike {
+  id        String   @id @default(uuid()) @db.Uuid
+  postId    String   @db.Uuid
+  userId    String   @db.Uuid
+  createdAt DateTime @default(now())
+
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+}
+
+// -----------------------------------------------------------------------------
+// NEWS & TECHNICAL BRIEFINGS MODULE
+// -----------------------------------------------------------------------------
+
+model NewsArticle {
+  id          String        @id @default(uuid()) @db.Uuid
+  title       String
+  slug        String        @unique
+  domain      String        // "ai", "quantum", "cybersecurity", "space"
+  date        String
+  author      String
+  authorRole  String
+  excerpt     String        @db.Text
+  body        String[]
+  readingTime Int           @default(5)
+  image       String?
+  tags        String[]
+  likeCount   Int           @default(0)
+
+  comments    NewsComment[]
+  likes       NewsLike[]
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([slug])
+  @@index([domain])
+}
+
+model NewsComment {
+  id        String      @id @default(uuid()) @db.Uuid
+  articleId String      @db.Uuid
+  userId    String?     @db.Uuid
+  author    String
+  body      String      @db.Text
+  createdAt DateTime    @default(now())
+
+  article   NewsArticle @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  user      User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([articleId])
+}
+
+model NewsLike {
+  id        String      @id @default(uuid()) @db.Uuid
+  articleId String      @db.Uuid
+  userId    String      @db.Uuid
+  createdAt DateTime    @default(now())
+
+  article   NewsArticle @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([articleId, userId])
+}
+
+// -----------------------------------------------------------------------------
+// TECHNICAL RESOURCES & CMS
+// -----------------------------------------------------------------------------
+
+model Resource {
+  id          String       @id @default(uuid()) @db.Uuid
+  title       String
+  slug        String       @unique
+  domain      String       // "ai", "quantum", "cybersecurity", "space"
+  type        ResourceType @default(WHITE_PAPER)
+  description String       @db.Text
+  downloadUrl String?
+  fileSize    String?
+  author      String
+
+  createdAt   DateTime     @default(now())
+
+  @@index([domain])
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(uuid()) @db.Uuid
+  event     String   // e.g. "POST_VIEW", "EVENT_REGISTER", "BRIEFING_LIKE"
+  path      String
+  userId    String?  @db.Uuid
+  ipAddress String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([event])
+  @@index([createdAt])
+}
