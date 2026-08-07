@@ -1,0 +1,32 @@
+name: deep-tech-community
+region: blr
+services:
+- name: web
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: Shivammishra0001/deep-ten-community
+  build_command: npm run build
+  run_command: npm run start
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  http_port: 3000
+  envs:
+  - key: NODE_ENV
+    value: production
+  - key: PORT
+    value: "3000"
+  - key: GOOGLE_SERVICE_ACCOUNT_EMAIL
+    value: deep-tech-society@deep-tech-society.iam.gserviceaccount.com
+  - key: GOOGLE_PRIVATE_KEY
+    value: "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDEm5PK9b3ihd7t\nHjeoNmgiORzY6ladr9rtnzJh9J/Hx4u/Rz5pbt1h2wEEOgVjisWtAMMgs+aMHnNu\nsZD4TTrhZf5S0K412tkT/ZnQsGK5og9sWmefKoCRMaZpnVmeT/UcOhPQHThzPI+m\nmSb8NdqWfHBcAvHYuFOWyoChD8YHC6u+uk1F3v2xswd856xb+05UxxBGM9hGXrlY\nd2iRQZoUG9RXlbhp4OPQ5pU4CexGmQFY+SQawlyTeSOoqxrn5mDn24PWRoew3RQK\nXTo3lvL8T4AN4bc8GR5zRIlo3kByH/Wa8penR7+PmrtV4K4qisornsHEcPj/syLh\nglZutkblAgMBAAECggEAB2SDMOM/HdSjTn6voJFVJo5HtadQFPNPE9bD1feVB3XL\nHSjgYaYDyIFr3x0QZU8LQkdQTvs8vMGLXRrrpM6Am4eSgcordsZxGaWUQkrTl3/O\nvSgEE/HM7kiz5W4/d6qxgHt1kcJ7hCe/jgfdtaePvc9ViTwqHFhH+lhIcGXvsAWR\nGhHXp180zouJ57X4Y7q+O6a00gUebVZ5ZMS+7Bxk82Kp4Cq1l8JDO8iZ+cq3ZuLC\nGDVFVIeStl+DTcbR8kSSEHFySkMsOm+e4eEQ5byP5Mz7VUZi2zlagyfmHL5Cx5rH\nT8iFpG4LCDO/aMUMNYL8O67kWkH6SYQ4pyNq+Yu1qQKBgQD57k/0Dtel8SE6Rrg0\nFXvwIJdCU94P0/4A9dUqwkrXDFMixpjg4yu2Sc68v5s2ywzZVHCiZjhogvoFeZIG\nOymo17bRMfrGG4p/YTYXOdsskN8T35qG2dLkBzEvJMVx9vppGDAH/xHeU7zNpm5H\nXS9xV+4zJcjRcGNfUFzM7mizDQKBgQDJYch4uNJ/l5pMp0B4fQYPPF/AKISJeH3I\nv34zBOzwMQpmbDq0aos1eFvJKIzrY3s5mpV9Bm/ND524RKQvs6t3KLy1yeFg2sKC\novogIPsbEx+V8Sur8b6Uv+uj9ULMx+l8WaN7K68yNpDOzbVBD0CE4gNMWeb5g10l\nx4X7rNnNOQKBgA/cVsiXNIo8Xi5zlHcBsgbQGqlD50C75E+tSiTXhaZWCuSXE9aZ\ntAlyb6M8yZ3VjvAv0qILuKKxRSqZm38tEEmtiYWbFKhLi04Di+os21L19K2YfjEj\nEuhTfTgZ0XRJz4GWiKzw+PlVm/8/1AoGBAJYQ9PfpGouUKJp4hBWFbS+LWPrz9pg\nOnwUqldtlDz+J++sJOdHaF3S4BQXo3uJGFrx9UmqBkmyn92sqU4NsixjX1ZBOKVI\nokowQ8P1iNl0dqgrtVhLiqZdlUS60BJxfWMGedrHBguOTP+Or7SbXO8gKOFT8JZ/\nH4XDWtyQt0XwZAoGBAJpXT534dZbuhkMrwqyNmANV3isWePTSuqY+ZgAJ3Q9Iewg\nOsoiu4CqW84SYfLvCIyRn1gsgv3Nu4mf1wy3kqIPO09md8BHKQoqblzDfVBJPicg\nvkfi9QrsxnyPdr09Fzyneygw+dlv7TL97lCEi+7S3E8bSXqp6L/LyuB9KKAJs\n-----END PRIVATE KEY-----"
+    type: SECRET
+  - key: GOOGLE_SHEETS_SPREADSHEET_ID
+    value: 1-cq6hWzG5ztFqugUEuccPBSYIzdeChxr6rAMlW3HgzI
+  - key: JWT_SECRET
+    value: dts-deep-tech-society-jwt-secret-key-2026-super-secure
+    type: SECRET
+  - key: REFRESH_TOKEN_SECRET
+    value: dts-deep-tech-society-refresh-token-secret-2026
+    type: SECRET
