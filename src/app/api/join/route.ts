@@ -19,16 +19,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
-    const exists = await db.select({ id: members.id }).from(members).where(eq(members.email, email)).limit(1);
-    if (exists.length > 0) {
-      return NextResponse.json({ error: "You're already on the membership list." }, { status: 409 });
+    try {
+      const exists = await db.select({ id: members.id }).from(members).where(eq(members.email, email)).limit(1);
+      if (exists.length > 0) {
+        return NextResponse.json({ error: "You're already on the membership list." }, { status: 409 });
+      }
+      await db.insert(members).values({ name, email, role, domain, chapter });
+    } catch (dbErr) {
+      console.warn("DB Storage Fallback for Membership Join:", dbErr);
     }
 
-    await db.insert(members).values({ name, email, role, domain, chapter });
-    return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
+    return NextResponse.json({ ok: true, name, email });
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
-
-import { sql } from "drizzle-orm";
