@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
-import { members } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { GoogleSheetsDB, SHEET_TABS } from "@/lib/google-sheets-db";
 
 export async function POST(req: Request) {
   try {
@@ -19,15 +17,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
-    try {
-      const exists = await db.select({ id: members.id }).from(members).where(eq(members.email, email)).limit(1);
-      if (exists.length > 0) {
-        return NextResponse.json({ error: "You're already on the membership list." }, { status: 409 });
-      }
-      await db.insert(members).values({ name, email, role, domain, chapter });
-    } catch (dbErr) {
-      console.warn("DB Storage Fallback for Membership Join:", dbErr);
+    // Check if member already exists in Google Sheets
+    const existing = await GoogleSheetsDB.findRow(SHEET_TABS.MEMBERSHIPS, 1, email);
+    if (existing) {
+      return NextResponse.json({ error: "You're already on the membership list." }, { status: 409 });
     }
+
+    // Append to Google Sheets Memberships Tab
+    const row = [name, email, role, domain, chapter, new Date().toISOString()];
+    await GoogleSheetsDB.appendRow(SHEET_TABS.MEMBERSHIPS, row);
 
     return NextResponse.json({ ok: true, name, email });
   } catch (err: unknown) {

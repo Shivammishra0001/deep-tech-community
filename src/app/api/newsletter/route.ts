@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
-import { newsletterSubscriptions } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { GoogleSheetsDB, SHEET_TABS } from "@/lib/google-sheets-db";
 
 export async function POST(req: Request) {
   try {
@@ -12,20 +10,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
-    try {
-      const exists = await db
-        .select({ id: newsletterSubscriptions.id })
-        .from(newsletterSubscriptions)
-        .where(eq(newsletterSubscriptions.email, email))
-        .limit(1);
-      if (exists.length > 0) {
-        return NextResponse.json({ ok: true, already: true });
-      }
-
-      await db.insert(newsletterSubscriptions).values({ email });
-    } catch (dbErr) {
-      console.warn("DB Storage Fallback for Newsletter Subscription:", dbErr);
+    const existing = await GoogleSheetsDB.findRow(SHEET_TABS.NEWSLETTER_SUBSCRIPTIONS, 0, email);
+    if (existing) {
+      return NextResponse.json({ ok: true, already: true });
     }
+
+    // Append to Google Sheets NewsletterSubscriptions Tab
+    const row = [email, new Date().toISOString()];
+    await GoogleSheetsDB.appendRow(SHEET_TABS.NEWSLETTER_SUBSCRIPTIONS, row);
 
     return NextResponse.json({ ok: true });
   } catch {

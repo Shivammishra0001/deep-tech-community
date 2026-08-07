@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
-import { eventRegistrations } from "@/db/schema";
-import { and, eq } from "drizzle-orm";
+import { GoogleSheetsDB, SHEET_TABS } from "@/lib/google-sheets-db";
 
 export async function POST(req: Request) {
   try {
@@ -17,20 +15,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
-    try {
-      const exists = await db
-        .select({ id: eventRegistrations.id })
-        .from(eventRegistrations)
-        .where(and(eq(eventRegistrations.eventSlug, eventSlug), eq(eventRegistrations.email, email)))
-        .limit(1);
-      if (exists.length > 0) {
-        return NextResponse.json({ ok: true, already: true });
-      }
+    // Check if user already registered for this event
+    const rows = await GoogleSheetsDB.readRows(SHEET_TABS.EVENT_REGISTRATIONS);
+    const exists = rows.some(
+      (r) => r[0]?.trim().toLowerCase() === eventSlug.toLowerCase() && r[2]?.trim().toLowerCase() === email
+    );
 
-      await db.insert(eventRegistrations).values({ eventSlug, name, email });
-    } catch (dbErr) {
-      console.warn("DB Storage Fallback for Event Registration:", dbErr);
+    if (exists) {
+      return NextResponse.json({ ok: true, already: true });
     }
+
+    // Append to Google Sheets EventRegistrations Tab
+    const row = [eventSlug, name, email, new Date().toISOString()];
+    await GoogleSheetsDB.appendRow(SHEET_TABS.EVENT_REGISTRATIONS, row);
 
     return NextResponse.json({ ok: true });
   } catch {

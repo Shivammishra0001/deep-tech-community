@@ -2,25 +2,37 @@ import { type NextRequest } from "next/server";
 import { apiError, apiSuccess } from "@/lib/response";
 import { signAccessToken, signRefreshToken } from "@/lib/jwt";
 import { getRolePermissions } from "@/lib/rbac";
+import { GoogleSheetsDB, SHEET_TABS } from "@/lib/google-sheets-db";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { identifier, password } = body; // identifier can be email OR phone number
+    const { identifier, password } = body;
 
     if (!identifier || !password) {
       return apiError("Email/Phone number and password are required.", 400);
     }
 
-    // Mock Login Lookup (Supports Email OR Phone Number matching)
-    const isPhone = /^[+\d\s-]+$/.test(identifier.trim());
+    const cleanId = identifier.trim().toLowerCase();
+    const isPhone = /^[+\d\s-]+$/.test(cleanId);
+
+    // Look up in Google Sheets Users Tab
+    // Email is col 2 (0-indexed: 2), Phone is col 3 (0-indexed: 3)
+    const userRow = isPhone
+      ? await GoogleSheetsDB.findRow(SHEET_TABS.USERS, 3, cleanId)
+      : await GoogleSheetsDB.findRow(SHEET_TABS.USERS, 2, cleanId);
+
+    if (!userRow) {
+      return apiError("No account found with this email or phone number.", 404);
+    }
+
     const user = {
-      id: "usr_member_01",
-      email: isPhone ? "member@deeptech.society" : identifier.trim().toLowerCase(),
-      phoneNumber: isPhone ? identifier.trim() : "+91 98765 43210",
-      countryCode: "+91",
-      fullName: "Dr. Elena Marchetti",
-      role: "MEMBER" as const,
+      id: userRow[0] || "usr_member",
+      fullName: userRow[1] || "Member",
+      email: userRow[2] || cleanId,
+      phoneNumber: userRow[3] || "",
+      countryCode: userRow[4] || "+91",
+      role: (userRow[5] || "MEMBER") as any,
       status: "ACTIVE" as const,
       tokenVersion: 1,
     };
