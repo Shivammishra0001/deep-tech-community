@@ -7,3 +7,5 @@ out
 service-account.json
 credentials.json
 *.json.key
+digitalocean.env
+*.env

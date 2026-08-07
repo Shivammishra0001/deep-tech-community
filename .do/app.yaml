@@ -5,7 +5,7 @@ services:
   github:
     branch: main
     deploy_on_push: true
-    repo: Shivammishra0001/deep-ten-community
+    repo: Shivammishra0001/deep-tech-community
   build_command: npm run build
   run_command: npm run start
   environment_slug: node-js
