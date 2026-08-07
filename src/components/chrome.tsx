@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon, ArrowRight, Check, Compass, Cpu, Newspaper, Calendar, Users, MapPin, Info } from "lucide-react";
+import { Menu, X, Sun, Moon, ArrowRight, Check, Compass, Cpu, Newspaper, Calendar, Users, MapPin, Info, ShieldCheck } from "lucide-react";
 import { Container, cx, Button, Input } from "@/components/ui";
 
 const SOCIALS: { label: string; path: string }[] = [
@@ -36,6 +36,7 @@ const NAV_ITEMS = [
   { label: "Community", href: "/community", sectionId: "community", icon: Users },
   { label: "Chapters", href: "/chapters", sectionId: "chapters", icon: MapPin },
   { label: "About", href: "/about", sectionId: "about", icon: Info },
+  { label: "Admin", href: "/admin", sectionId: "admin", icon: ShieldCheck },
 ];
 
 export function LogoSymbol({ className }: { className?: string }) {

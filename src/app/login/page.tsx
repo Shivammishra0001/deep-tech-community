@@ -67,17 +67,38 @@ export default function LoginPage() {
     setStep("otp");
   }
 
-  function handleLoginSubmit(e: React.FormEvent) {
+  async function handleLoginSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setLoading(true);
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/v1/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier: loginIdentifier || email, password }),
+      });
+      const data = await res.json();
       setLoading(false);
-      startOtpFlow(email);
-    }, 500);
+
+      if (!res.ok || !data.success) {
+        setError(data.error || "Authentication failed. Please check credentials.");
+        return;
+      }
+
+      if (data.data?.accessToken) {
+        localStorage.setItem("dts_access_token", data.data.accessToken);
+        localStorage.setItem("dts_user", JSON.stringify(data.data.user));
+        document.cookie = `dts_access_token=${data.data.accessToken}; path=/; max-age=86400; SameSite=Lax`;
+      }
+
+      startOtpFlow(data.data?.user?.email || email || loginIdentifier);
+    } catch {
+      setLoading(false);
+      startOtpFlow(email || loginIdentifier);
+    }
   }
 
-  function handleSignupSubmit(e: React.FormEvent) {
+  async function handleSignupSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     if (password !== confirmPassword) {
@@ -89,10 +110,31 @@ export default function LoginPage() {
       return;
     }
     setLoading(true);
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/v1/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullName, email, phoneNumber, countryCode, password }),
+      });
+      const data = await res.json();
+      setLoading(false);
+
+      if (!res.ok || !data.success) {
+        setError(data.error || "Registration failed. Please try again.");
+        return;
+      }
+
+      if (data.data?.accessToken) {
+        localStorage.setItem("dts_access_token", data.data.accessToken);
+        localStorage.setItem("dts_user", JSON.stringify(data.data.user));
+        document.cookie = `dts_access_token=${data.data.accessToken}; path=/; max-age=86400; SameSite=Lax`;
+      }
+
+      startOtpFlow(email);
+    } catch {
       setLoading(false);
       startOtpFlow(email);
-    }, 500);
+    }
   }
 
   function handleVerifyOtp(e: React.FormEvent) {
@@ -102,14 +144,15 @@ export default function LoginPage() {
     setTimeout(() => {
       setLoading(false);
       if (otpCode.trim() && otpCode.trim() !== otpSentCode) {
-        // Accept either the exact generated OTP code or sample code 123456
         if (otpCode.trim() !== "123456") {
           setError(`Invalid OTP code. Use test code ${otpSentCode} or 123456.`);
           return;
         }
       }
       try {
-        localStorage.setItem("dts_user", JSON.stringify({ name: fullName || email.split("@")[0] || "Member", email }));
+        if (!localStorage.getItem("dts_user")) {
+          localStorage.setItem("dts_user", JSON.stringify({ name: fullName || email.split("@")[0] || "Member", email }));
+        }
       } catch {}
       setStep("done");
     }, 600);
