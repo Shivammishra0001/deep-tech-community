@@ -8,6 +8,7 @@ export const SHEET_TABS = {
   NEWSLETTER_SUBSCRIPTIONS: "NewsletterSubscriptions",
   COMMUNITY_POSTS: "CommunityPosts",
   USERS: "Users",
+  NEWS: "News",
 } as const;
 
 // Default headers for each sheet tab
@@ -17,6 +18,7 @@ const SHEET_HEADERS: Record<string, string[]> = {
   [SHEET_TABS.NEWSLETTER_SUBSCRIPTIONS]: ["Email Address", "Subscribed At"],
   [SHEET_TABS.COMMUNITY_POSTS]: ["Post ID", "Author Name", "Author Email", "Domain Focus", "Post Kind", "Title", "Content Body", "Tags", "Likes Count", "Created At"],
   [SHEET_TABS.USERS]: ["User ID", "Full Name", "Email Address", "Phone Number", "Country Code", "Role", "Password Hash", "Created At"],
+  [SHEET_TABS.NEWS]: ["id", "title", "summary", "category", "source", "source_url", "image_url", "image_source", "license", "published_at", "featured", "status", "created_at"],
 };
 
 export class GoogleSheetsDB {
@@ -96,28 +98,37 @@ export class GoogleSheetsDB {
   }
 
   /**
-   * Appends a row of values to a sheet tab
+   * Appends multiple rows of values to a sheet tab
    */
-  static async appendRow(tabName: string, rowValues: (string | number | boolean)[]): Promise<boolean> {
+  static async appendRows(tabName: string, multiRowValues: (string | number | boolean)[][]): Promise<boolean> {
     const sheets = getGoogleSheetsClient();
-    if (!sheets) return false;
+    if (!sheets || multiRowValues.length === 0) return false;
 
     try {
       await this.ensureTab(tabName);
-      const stringifiedValues = rowValues.map((v) => (v === null || v === undefined ? "" : String(v)));
+      const stringifiedRows = multiRowValues.map((row) =>
+        row.map((v) => (v === null || v === undefined ? "" : String(v)))
+      );
       await sheets.spreadsheets.values.append({
         spreadsheetId: SPREADSHEET_ID,
         range: `${tabName}!A1`,
         valueInputOption: "USER_ENTERED",
         requestBody: {
-          values: [stringifiedValues],
+          values: stringifiedRows,
         },
       });
       return true;
     } catch (err) {
-      console.error(`[GoogleSheetsDB] Error appending to ${tabName}:`, err);
+      console.error(`[GoogleSheetsDB] Error appending rows to ${tabName}:`, err);
       return false;
     }
+  }
+
+  /**
+   * Appends a row of values to a sheet tab
+   */
+  static async appendRow(tabName: string, rowValues: (string | number | boolean)[]): Promise<boolean> {
+    return this.appendRows(tabName, [rowValues]);
   }
 
   /**
