@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon, ArrowRight, Check, Compass, Cpu, Newspaper, Calendar, Users, MapPin, Info, ShieldCheck } from "lucide-react";
+import { Menu, X, Sun, Moon, ArrowRight, Check, Compass, Cpu, Newspaper, Calendar, Users, MapPin, Info, ShieldCheck, LogOut, User as UserIcon } from "lucide-react";
 import { Container, cx, Button, Input } from "@/components/ui";
 
 const SOCIALS: { label: string; path: string }[] = [
@@ -110,9 +110,37 @@ function ThemeToggle() {
 export function SidebarNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const pathname = usePathname();
 
   useEffect(() => setMobileOpen(false), [pathname]);
+
+  useEffect(() => {
+    const checkUser = () => {
+      try {
+        const stored = localStorage.getItem("dts_user");
+        if (stored) {
+          setUser(JSON.parse(stored));
+        } else {
+          setUser(null);
+        }
+      } catch {
+        setUser(null);
+      }
+    };
+    checkUser();
+    window.addEventListener("storage", checkUser);
+    return () => window.removeEventListener("storage", checkUser);
+  }, [pathname]);
+
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem("dts_user");
+      localStorage.removeItem("dts_token");
+    } catch {}
+    setUser(null);
+    window.location.href = "/login";
+  };
 
   // Scroll Spy with IntersectionObserver for rock-solid active tab switching
   useEffect(() => {
@@ -218,14 +246,39 @@ export function SidebarNav() {
             <ThemeToggle />
           </div>
 
-          <div className="grid gap-2">
-            <Button href="/login" variant="outline" size="sm" className="w-full justify-center">
-              Login
-            </Button>
-            <Button href="/join" variant="primary" size="sm" className="w-full justify-center">
-              Join Community
-            </Button>
-          </div>
+          {user ? (
+            <div className="rounded-xl border border-neutral-300 bg-neutral-100/90 p-3 dark:border-neutral-800 dark:bg-neutral-900/90 shadow-xs">
+              <div className="flex items-center gap-2.5">
+                <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-xs">
+                  {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-display text-xs font-bold tracking-tight text-neutral-900 dark:text-neutral-50 truncate">
+                    {user.name || "Member"}
+                  </p>
+                  <p className="font-mono text-[10px] text-neutral-500 dark:text-neutral-400 truncate">
+                    {user.email}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-lg border border-neutral-300 bg-white py-1.5 font-mono text-[11px] font-bold text-red-600 transition-colors hover:bg-red-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-red-400 dark:hover:bg-red-950/40 cursor-pointer"
+              >
+                <LogOut className="size-3.5" /> Sign Out
+              </button>
+            </div>
+          ) : (
+            <div className="grid gap-2">
+              <Button href="/login" variant="outline" size="sm" className="w-full justify-center">
+                Login
+              </Button>
+              <Button href="/join" variant="primary" size="sm" className="w-full justify-center">
+                Join Community
+              </Button>
+            </div>
+          )}
         </div>
       </aside>
 
@@ -238,9 +291,17 @@ export function SidebarNav() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <Button href="/join" variant="primary" size="sm" className="hidden sm:inline-flex">
-              Join Community
-            </Button>
+            {user ? (
+              <div className="flex items-center gap-2 rounded-full border border-neutral-300 bg-neutral-100 p-1 dark:border-neutral-800 dark:bg-neutral-900">
+                <div className="flex size-7 items-center justify-center rounded-full bg-neutral-900 font-mono text-[10px] font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950">
+                  {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
+                </div>
+              </div>
+            ) : (
+              <Button href="/join" variant="primary" size="sm" className="hidden sm:inline-flex">
+                Join Community
+              </Button>
+            )}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -265,13 +326,35 @@ export function SidebarNav() {
                   {item.label}
                 </Link>
               ))}
-              <div className="mt-2 flex gap-2 border-t border-neutral-200 pt-3 dark:border-neutral-800">
-                <Button href="/login" variant="outline" size="sm" className="flex-1">
-                  Login
-                </Button>
-                <Button href="/join" variant="primary" size="sm" className="flex-1">
-                  Join Community
-                </Button>
+              <div className="mt-2 border-t border-neutral-200 pt-3 dark:border-neutral-800">
+                {user ? (
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="flex size-8 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950">
+                        {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
+                      </div>
+                      <div>
+                        <p className="font-display text-xs font-bold text-neutral-900 dark:text-neutral-50">{user.name}</p>
+                        <p className="font-mono text-[10px] text-neutral-500 dark:text-neutral-400">{user.email}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleLogout}
+                      className="rounded-lg border border-red-300 px-3 py-1.5 font-mono text-xs font-bold text-red-600 dark:border-red-800 dark:text-red-400"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <Button href="/login" variant="outline" size="sm" className="flex-1">
+                      Login
+                    </Button>
+                    <Button href="/join" variant="primary" size="sm" className="flex-1">
+                      Join Community
+                    </Button>
+                  </div>
+                )}
               </div>
             </Container>
           </div>
