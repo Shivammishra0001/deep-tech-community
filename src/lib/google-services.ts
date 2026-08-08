@@ -21,9 +21,14 @@ export type GoogleCredentialsStatus = {
 function loadCredentials(): { email?: string; privateKey?: string; source: "env" | "json_file" | "none" } {
   // 1. Environment variables
   if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
+    let pk = process.env.GOOGLE_PRIVATE_KEY.trim();
+    if ((pk.startsWith('"') && pk.endsWith('"')) || (pk.startsWith("'") && pk.endsWith("'"))) {
+      pk = pk.substring(1, pk.length - 1).trim();
+    }
+    pk = pk.replace(/\\n/g, "\n");
     return {
-      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      privateKey: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL.trim(),
+      privateKey: pk,
       source: "env",
     };
   }
