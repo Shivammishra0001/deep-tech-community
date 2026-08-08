@@ -65,6 +65,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={article.image}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop";
+                  }}
                   alt={article.title}
                   className="size-full object-cover"
                 />
