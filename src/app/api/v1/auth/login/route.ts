@@ -26,6 +26,11 @@ export async function POST(request: NextRequest) {
       return apiError("No account found with this email or phone number.", 404);
     }
 
+    const storedPassword = userRow[6] || "";
+    if (storedPassword && storedPassword !== password && storedPassword !== "HASHED_PWD_" + password) {
+      return apiError("Incorrect password. Please check your credentials and try again.", 401);
+    }
+
     const user = {
       id: userRow[0] || "usr_member",
       fullName: userRow[1] || "Member",

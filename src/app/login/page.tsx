@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Check, Mail, Lock, User, Eye, EyeOff, ShieldCheck, ArrowRight, Phone, AlertCircle, LogIn, UserPlus } from "lucide-react";
-import { Button, Input, Label, Card, Badge, cx } from "@/components/ui";
+import { Button, Label, Badge, cx } from "@/components/ui";
 import { Logo } from "@/components/chrome";
 import { HeroOrbits } from "@/components/orbits";
 
@@ -21,6 +21,97 @@ const COUNTRY_CODES = [
   { code: "+41", country: "Switzerland", flag: "🇨🇭" },
 ];
 
+/* ---------------- Dedicated Input Components with Flex Architecture ---------------- */
+
+function FieldWithIcon({
+  id,
+  type = "text",
+  value,
+  onChange,
+  placeholder,
+  autoComplete,
+  required = true,
+  icon: Icon,
+}: {
+  id: string;
+  type?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  autoComplete?: string;
+  required?: boolean;
+  icon?: any;
+}) {
+  return (
+    <div className="group relative flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100 overflow-hidden">
+      {Icon && (
+        <div className="flex size-10 shrink-0 items-center justify-center text-neutral-400 pointer-events-none select-none">
+          <Icon className="size-4" />
+        </div>
+      )}
+      <input
+        id={id}
+        type={type}
+        required={required}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        className={`h-full flex-1 min-w-0 bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none border-none ring-0 shadow-none appearance-none ${
+          Icon ? "pr-3.5" : "px-3.5"
+        }`}
+      />
+    </div>
+  );
+}
+
+function PasswordFieldWithIcon({
+  id,
+  value,
+  onChange,
+  placeholder = "••••••••••••",
+  autoComplete = "current-password",
+  required = true,
+}: {
+  id: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  autoComplete?: string;
+  required?: boolean;
+}) {
+  const [show, setShow] = useState(false);
+
+  return (
+    <div className="group relative flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100 overflow-hidden">
+      <div className="flex size-10 shrink-0 items-center justify-center text-neutral-400 pointer-events-none select-none">
+        <Lock className="size-4" />
+      </div>
+      <input
+        id={id}
+        type={show ? "text" : "password"}
+        required={required}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        className="h-full flex-1 min-w-0 bg-transparent px-0 font-mono text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none border-none ring-0 shadow-none appearance-none"
+      />
+      <button
+        type="button"
+        onClick={() => setShow(!show)}
+        title={show ? "Hide password" : "Show password"}
+        tabIndex={-1}
+        className="flex size-10 shrink-0 items-center justify-center text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors cursor-pointer outline-none"
+      >
+        {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+      </button>
+    </div>
+  );
+}
+
+/* ---------------- Main Login & Registration Page ---------------- */
+
 export default function LoginPage() {
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [step, setStep] = useState<"form" | "done">("form");
@@ -36,7 +127,6 @@ export default function LoginPage() {
   const [redirectPath, setRedirectPath] = useState<string | null>(null);
 
   // UI states
-  const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [accountExists, setAccountExists] = useState(false);
@@ -99,9 +189,21 @@ export default function LoginPage() {
       setLoading(false);
 
       if (!res.ok || !data.success) {
-        if (targetId.includes("@")) setEmail(targetId);
-        setMode("signup");
-        setError("No account found with this email. Please complete your registration below to create your account.");
+        // If account does not exist (404), prompt signup with email pre-filled
+        if (res.status === 404) {
+          if (targetId.includes("@")) setEmail(targetId);
+          setMode("signup");
+          setError("No account found with this email. Please complete your registration below to create your account.");
+          return;
+        }
+
+        // If incorrect password (401), stay on login mode with clear error
+        if (res.status === 401) {
+          setError("Incorrect password. Please check your credentials and try again.");
+          return;
+        }
+
+        setError(data.error || "Authentication failed. Please check your credentials.");
         return;
       }
 
@@ -114,7 +216,7 @@ export default function LoginPage() {
       );
     } catch {
       setLoading(false);
-      handleSuccessAuth({ name: targetId.split("@")[0] || "Member", email: targetId });
+      setError("Unable to connect to authentication server. Please check your network connection.");
     }
   }
 
@@ -124,6 +226,10 @@ export default function LoginPage() {
     setAccountExists(false);
     setAccountNotFound(false);
 
+    if (!fullName || !email || !password) {
+      setError("Full name, email address, and password are required.");
+      return;
+    }
     if (password !== confirmPassword) {
       setError("Passwords do not match. Please check and try again.");
       return;
@@ -162,7 +268,7 @@ export default function LoginPage() {
       );
     } catch {
       setLoading(false);
-      handleSuccessAuth({ name: fullName || email.split("@")[0] || "Member", email });
+      setError("Unable to connect to registration server. Please try again.");
     }
   }
 
@@ -356,46 +462,30 @@ export default function LoginPage() {
                   <form onSubmit={handleLoginSubmit} className="mt-6 space-y-4">
                     <div>
                       <Label htmlFor="login-identifier">EMAIL ADDRESS OR PHONE NUMBER</Label>
-                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
-                        <Mail className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
-                        <input
-                          id="login-identifier"
-                          type="text"
-                          required
-                          value={loginIdentifier}
-                          onChange={(e) => setLoginIdentifier(e.target.value)}
-                          placeholder="name@domain.com or +91 98765 43210"
-                          className="w-full bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none font-sans"
-                          autoComplete="username"
-                        />
-                      </div>
+                      <FieldWithIcon
+                        id="login-identifier"
+                        type="text"
+                        required
+                        value={loginIdentifier}
+                        onChange={(e) => setLoginIdentifier(e.target.value)}
+                        placeholder="name@domain.com or +91 98765 43210"
+                        autoComplete="username"
+                        icon={Mail}
+                      />
                     </div>
 
                     <div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="login-password">PASSWORD</Label>
                       </div>
-                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
-                        <Lock className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
-                        <input
-                          id="login-password"
-                          type={showPass ? "text" : "password"}
-                          required
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          placeholder="••••••••••••"
-                          className="w-full bg-transparent text-sm font-mono text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none"
-                          autoComplete="current-password"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPass(!showPass)}
-                          title={showPass ? "Hide Password" : "Show Password"}
-                          className="shrink-0 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 p-1.5 rounded-md hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60 transition-colors cursor-pointer ml-1"
-                        >
-                          {showPass ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                        </button>
-                      </div>
+                      <PasswordFieldWithIcon
+                        id="login-password"
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="••••••••••••"
+                        autoComplete="current-password"
+                      />
                     </div>
 
                     <Button type="submit" variant="primary" size="lg" disabled={loading} className="w-full font-bold mt-2">
@@ -407,36 +497,30 @@ export default function LoginPage() {
                   <form onSubmit={handleSignupSubmit} className="mt-6 space-y-4">
                     <div>
                       <Label htmlFor="signup-name">FULL NAME</Label>
-                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
-                        <User className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
-                        <input
-                          id="signup-name"
-                          type="text"
-                          required
-                          value={fullName}
-                          onChange={(e) => setFullName(e.target.value)}
-                          placeholder="Dr. Ada Lovelace"
-                          className="w-full bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none font-sans"
-                          autoComplete="name"
-                        />
-                      </div>
+                      <FieldWithIcon
+                        id="signup-name"
+                        type="text"
+                        required
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        placeholder="Dr. Ada Lovelace"
+                        autoComplete="name"
+                        icon={User}
+                      />
                     </div>
 
                     <div>
                       <Label htmlFor="signup-email">EMAIL ADDRESS</Label>
-                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
-                        <Mail className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
-                        <input
-                          id="signup-email"
-                          type="email"
-                          required
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="researcher@lab.org"
-                          className="w-full bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none font-sans"
-                          autoComplete="email"
-                        />
-                      </div>
+                      <FieldWithIcon
+                        id="signup-email"
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="researcher@lab.org"
+                        autoComplete="email"
+                        icon={Mail}
+                      />
                     </div>
 
                     <div>
@@ -445,7 +529,7 @@ export default function LoginPage() {
                         <select
                           value={countryCode}
                           onChange={(e) => setCountryCode(e.target.value)}
-                          className="h-11 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-950 px-2.5 font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100 shrink-0"
+                          className="h-11 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-950 px-2.5 font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100 shrink-0 outline-none"
                         >
                           {COUNTRY_CODES.map((c) => (
                             <option key={c.code} value={c.code}>
@@ -453,16 +537,15 @@ export default function LoginPage() {
                             </option>
                           ))}
                         </select>
-                        <div className="flex h-11 flex-1 items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100 min-w-0">
-                          <Phone className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
-                          <input
+                        <div className="flex-1 min-w-0">
+                          <FieldWithIcon
                             id="signup-phone"
                             type="tel"
                             value={phoneNumber}
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             placeholder="98765 43210"
-                            className="w-full bg-transparent text-sm font-mono text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none"
                             autoComplete="tel"
+                            icon={Phone}
                           />
                         </div>
                       </div>
@@ -470,44 +553,26 @@ export default function LoginPage() {
 
                     <div>
                       <Label htmlFor="signup-password">CREATE PASSWORD</Label>
-                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
-                        <Lock className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
-                        <input
-                          id="signup-password"
-                          type={showPass ? "text" : "password"}
-                          required
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          placeholder="At least 6 characters"
-                          className="w-full bg-transparent text-sm font-mono text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none"
-                          autoComplete="new-password"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPass(!showPass)}
-                          title={showPass ? "Hide Password" : "Show Password"}
-                          className="shrink-0 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 p-1.5 rounded-md hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60 transition-colors cursor-pointer ml-1"
-                        >
-                          {showPass ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                        </button>
-                      </div>
+                      <PasswordFieldWithIcon
+                        id="signup-password"
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="At least 6 characters"
+                        autoComplete="new-password"
+                      />
                     </div>
 
                     <div>
                       <Label htmlFor="signup-confirm-password">CONFIRM PASSWORD</Label>
-                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
-                        <Lock className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
-                        <input
-                          id="signup-confirm-password"
-                          type={showPass ? "text" : "password"}
-                          required
-                          value={confirmPassword}
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                          placeholder="Re-enter password"
-                          className="w-full bg-transparent text-sm font-mono text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none"
-                          autoComplete="new-password"
-                        />
-                      </div>
+                      <PasswordFieldWithIcon
+                        id="signup-confirm-password"
+                        required
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        placeholder="Re-enter password"
+                        autoComplete="new-password"
+                      />
                     </div>
 
                     <Button type="submit" variant="primary" size="lg" disabled={loading} className="w-full font-bold mt-2">
