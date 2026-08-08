@@ -35,7 +35,7 @@ export const ARTICLES: Article[] = [
     date: "Feb 24, 2026",
     readingTime: 8,
     tags: ["reasoning", "inference", "evaluation", "frontier-models"],
-    image: "/images/news-ai.jpg",
+    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop",
   },
   {
     slug: "thousand-qubit-milestone",
@@ -55,7 +55,7 @@ export const ARTICLES: Article[] = [
     date: "Feb 18, 2026",
     readingTime: 7,
     tags: ["error-correction", "logical-qubits", "hardware", "surface-codes"],
-    image: "/images/news-quantum.jpg",
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop",
   },
   {
     slug: "zero-trust-continuous-verification",
@@ -75,7 +75,7 @@ export const ARTICLES: Article[] = [
     date: "Feb 11, 2026",
     readingTime: 6,
     tags: ["zero-trust", "identity", "soc", "architecture"],
-    image: "/images/news-cyber.jpg",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop",
   },
   {
     slug: "lunar-gateway-crew-module",
@@ -95,7 +95,7 @@ export const ARTICLES: Article[] = [
     date: "Feb 04, 2026",
     readingTime: 6,
     tags: ["gateway", "nasa", "systems-engineering", "lunar"],
-    image: "/images/news-space.jpg",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
   },
   {
     slug: "open-source-small-models-edge",
@@ -115,7 +115,7 @@ export const ARTICLES: Article[] = [
     date: "Jan 27, 2026",
     readingTime: 5,
     tags: ["small-models", "edge", "open-source", "deployment"],
-    image: "/images/news-ai-2.jpg",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop",
   },
   {
     slug: "quantum-network-southeast-asia",
@@ -135,7 +135,7 @@ export const ARTICLES: Article[] = [
     date: "Jan 20, 2026",
     readingTime: 5,
     tags: ["quantum-networking", "entanglement", "southeast-asia", "testbed"],
-    image: "/images/news-quantum-2.jpg",
+    image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?q=80&w=1200&auto=format&fit=crop",
   },
   {
     slug: "post-quantum-migration-checklist",
@@ -155,7 +155,7 @@ export const ARTICLES: Article[] = [
     date: "Jan 13, 2026",
     readingTime: 7,
     tags: ["post-quantum", "cryptography", "migration", "compliance"],
-    image: "/images/news-cyber-2.jpg",
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop",
   },
   {
     slug: "smallsats-space-data-economy",
@@ -175,7 +175,7 @@ export const ARTICLES: Article[] = [
     date: "Jan 06, 2026",
     readingTime: 6,
     tags: ["smallsat", "earth-observation", "data-pipelines", "newspace"],
-    image: "/images/news-space-2.jpg",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
