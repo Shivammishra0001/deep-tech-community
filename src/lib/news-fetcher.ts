@@ -53,7 +53,7 @@ const RSS_SOURCES = [
 // Licensed public images for deep tech categories (Unsplash free license / public domain)
 const CATEGORY_DEFAULT_IMAGES: Record<string, { image_url: string; image_source: string; license: string }> = {
   "AI / Machine Learning": {
-    image_url: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop",
+    image_url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
     image_source: "Unsplash (Steve Johnson)",
     license: "Unsplash License (Free Commercial Use)",
   },

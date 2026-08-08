@@ -35,7 +35,7 @@ export const ARTICLES: Article[] = [
     date: "Feb 24, 2026",
     readingTime: 8,
     tags: ["reasoning", "inference", "evaluation", "frontier-models"],
-    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
   },
   {
     slug: "thousand-qubit-milestone",
@@ -175,7 +175,7 @@ export const ARTICLES: Article[] = [
     date: "Jan 06, 2026",
     readingTime: 6,
     tags: ["smallsat", "earth-observation", "data-pipelines", "newspace"],
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 

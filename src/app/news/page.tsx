@@ -79,7 +79,7 @@ export default function NewsPage() {
 
   function fallbackToStatic() {
     const defaultImages: Record<string, string> = {
-      ai: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop",
+      ai: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
       quantum: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop",
       cybersecurity: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop",
       space: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
@@ -222,7 +222,7 @@ export default function NewsPage() {
                 <img
                   src={featuredArticle.image_url}
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop";
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
                   }}
                   alt={featuredArticle.title}
                   className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
@@ -302,7 +302,7 @@ export default function NewsPage() {
                     <img
                       src={article.image_url}
                       onError={(e) => {
-                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop";
+                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
                       }}
                       alt={article.title}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

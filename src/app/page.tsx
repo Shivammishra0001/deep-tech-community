@@ -196,7 +196,7 @@ export default function HomePage() {
                   <img
                     src={featuredArticle.image}
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop";
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
                     }}
                     alt={featuredArticle.title}
                     className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -240,7 +240,7 @@ export default function HomePage() {
                           <img
                             src={a.image}
                             onError={(e) => {
-                              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop";
+                              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
                             }}
                             alt={a.title}
                             className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
