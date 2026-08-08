@@ -169,15 +169,15 @@ export function SidebarNav() {
   return (
     <>
       {/* ----------------- DESKTOP STICKY LEFT VERTICAL FLOATING SIDEBAR ----------------- */}
-      <aside className="hidden xl:flex xl:sticky xl:top-4 xl:z-50 xl:my-4 xl:ml-5 xl:h-[calc(100vh-2rem)] xl:w-72 xl:flex-col xl:justify-between xl:rounded-2xl xl:border xl:border-neutral-200/90 xl:bg-white/90 xl:p-6 xl:shadow-[0_12px_40px_rgba(0,0,0,0.06)] xl:backdrop-blur-xl dark:xl:border-neutral-800/90 dark:xl:bg-neutral-950/90 dark:xl:shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
-        <div>
+      <aside className="hidden xl:flex xl:sticky xl:top-4 xl:z-50 xl:my-4 xl:ml-5 xl:h-[calc(100vh-2rem)] xl:w-72 xl:flex-col xl:justify-between xl:rounded-2xl xl:border xl:border-neutral-200/90 xl:bg-white/90 xl:p-5 xl:shadow-[0_12px_40px_rgba(0,0,0,0.06)] xl:backdrop-blur-xl dark:xl:border-neutral-800/90 dark:xl:bg-neutral-950/90 dark:xl:shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
+        <div className="flex flex-col min-h-0">
           {/* Brand Logo */}
-          <Link href="/" aria-label="Deep Tech Society — home" className="block mb-8">
+          <Link href="/" aria-label="Deep Tech Society — home" className="block mb-5 shrink-0">
             <Logo />
           </Link>
 
           {/* Vertical Navigation Links with Framer Motion layoutId pill animation */}
-          <nav aria-label="Sidebar Primary" className="space-y-1.5">
+          <nav aria-label="Sidebar Primary" className="space-y-1 overflow-y-auto pr-1">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isPageActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -209,18 +209,18 @@ export function SidebarNav() {
                     whileHover={{ x: 4, scale: 1.015 }}
                     whileTap={{ scale: 0.98 }}
                     className={cx(
-                      "relative z-10 flex items-center justify-between px-4 py-3.5 font-sans text-[15px] transition-colors duration-200",
+                      "relative z-10 flex items-center justify-between px-3.5 py-2.5 font-sans text-sm transition-colors duration-200",
                       active
                         ? "text-neutral-50 dark:text-neutral-950 font-semibold"
                         : "text-neutral-600 dark:text-neutral-400 font-medium hover:text-neutral-950 dark:hover:text-neutral-100"
                     )}
                   >
-                    <div className="flex items-center gap-3.5">
+                    <div className="flex items-center gap-3">
                       <Icon className={cx(
-                        "size-4.5 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3",
+                        "size-4 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3",
                         active ? "text-neutral-50 dark:text-neutral-950" : "text-neutral-400 dark:text-neutral-500 group-hover:text-neutral-900 dark:group-hover:text-neutral-100"
                       )} />
-                      <span className="tracking-tight font-sans text-[15px] font-semibold">{item.label}</span>
+                      <span className="tracking-tight font-sans text-sm font-semibold">{item.label}</span>
                     </div>
 
                     {/* Precise 6px Dot on Right Side */}
@@ -240,16 +240,16 @@ export function SidebarNav() {
         </div>
 
         {/* Sidebar Footer Controls */}
-        <div className="border-t border-neutral-200/80 pt-5 dark:border-neutral-800/80">
-          <div className="flex items-center justify-between mb-3.5">
+        <div className="border-t border-neutral-200/80 pt-4 shrink-0 dark:border-neutral-800/80">
+          <div className="flex items-center justify-between mb-3">
             <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-neutral-400">Theme Mode</span>
             <ThemeToggle />
           </div>
 
           {user ? (
-            <div className="rounded-xl border border-neutral-300 bg-neutral-100/90 p-3 dark:border-neutral-800 dark:bg-neutral-900/90 shadow-xs">
-              <div className="flex items-center gap-2.5">
-                <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-xs">
+            <div className="rounded-xl border border-neutral-300 bg-neutral-100/90 p-2.5 dark:border-neutral-800 dark:bg-neutral-900/90 shadow-xs flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-xs">
                   {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -264,9 +264,10 @@ export function SidebarNav() {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-lg border border-neutral-300 bg-white py-1.5 font-mono text-[11px] font-bold text-red-600 transition-colors hover:bg-red-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-red-400 dark:hover:bg-red-950/40 cursor-pointer"
+                title="Sign Out"
+                className="flex size-7.5 shrink-0 items-center justify-center rounded-lg border border-neutral-300 bg-white text-red-600 transition-colors hover:bg-red-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-red-400 dark:hover:bg-red-950/40 cursor-pointer"
               >
-                <LogOut className="size-3.5" /> Sign Out
+                <LogOut className="size-3.5" />
               </button>
             </div>
           ) : (
