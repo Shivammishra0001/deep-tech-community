@@ -52,9 +52,18 @@ export default function JoinPage() {
             });
             setName(parsed.name || parsed.fullName || "");
             setEmail(parsed.email || "");
+          } else {
+            window.location.href = "/login?mode=signup&redirect=/join";
+            return;
           }
+        } else {
+          window.location.href = "/login?mode=signup&redirect=/join";
+          return;
         }
-      } catch {}
+      } catch {
+        window.location.href = "/login?mode=signup&redirect=/join";
+        return;
+      }
       setIsAuthChecked(true);
     }
   }, []);
