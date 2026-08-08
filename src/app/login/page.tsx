@@ -356,18 +356,18 @@ export default function LoginPage() {
                   <form onSubmit={handleLoginSubmit} className="mt-6 space-y-4">
                     <div>
                       <Label htmlFor="login-identifier">EMAIL ADDRESS OR PHONE NUMBER</Label>
-                      <div className="relative">
-                        <Input
+                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
+                        <Mail className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
+                        <input
                           id="login-identifier"
                           type="text"
                           required
                           value={loginIdentifier}
                           onChange={(e) => setLoginIdentifier(e.target.value)}
                           placeholder="name@domain.com or +91 98765 43210"
-                          className="!pl-10"
+                          className="w-full bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none font-sans"
                           autoComplete="username"
                         />
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                       </div>
                     </div>
 
@@ -375,23 +375,23 @@ export default function LoginPage() {
                       <div className="flex items-center justify-between">
                         <Label htmlFor="login-password">PASSWORD</Label>
                       </div>
-                      <div className="relative">
-                        <Input
+                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
+                        <Lock className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
+                        <input
                           id="login-password"
                           type={showPass ? "text" : "password"}
                           required
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder="••••••••••••"
-                          className="!pl-10 !pr-11 font-mono"
+                          className="w-full bg-transparent text-sm font-mono text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none"
                           autoComplete="current-password"
                         />
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                         <button
                           type="button"
                           onClick={() => setShowPass(!showPass)}
                           title={showPass ? "Hide Password" : "Show Password"}
-                          className="absolute right-2.5 top-1/2 -translate-y-1/2 z-10 p-1 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 rounded-md hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60 transition-colors cursor-pointer"
+                          className="shrink-0 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 p-1.5 rounded-md hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60 transition-colors cursor-pointer ml-1"
                         >
                           {showPass ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                         </button>
@@ -407,35 +407,35 @@ export default function LoginPage() {
                   <form onSubmit={handleSignupSubmit} className="mt-6 space-y-4">
                     <div>
                       <Label htmlFor="signup-name">FULL NAME</Label>
-                      <div className="relative">
-                        <Input
+                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
+                        <User className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
+                        <input
                           id="signup-name"
                           type="text"
                           required
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
                           placeholder="Dr. Ada Lovelace"
-                          className="!pl-10"
+                          className="w-full bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none font-sans"
                           autoComplete="name"
                         />
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                       </div>
                     </div>
 
                     <div>
                       <Label htmlFor="signup-email">EMAIL ADDRESS</Label>
-                      <div className="relative">
-                        <Input
+                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
+                        <Mail className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
+                        <input
                           id="signup-email"
                           type="email"
                           required
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="researcher@lab.org"
-                          className="!pl-10"
+                          className="w-full bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none font-sans"
                           autoComplete="email"
                         />
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                       </div>
                     </div>
 
@@ -445,7 +445,7 @@ export default function LoginPage() {
                         <select
                           value={countryCode}
                           onChange={(e) => setCountryCode(e.target.value)}
-                          className="h-10 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-950 px-2.5 font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100 shrink-0"
+                          className="h-11 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-950 px-2.5 font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100 shrink-0"
                         >
                           {COUNTRY_CODES.map((c) => (
                             <option key={c.code} value={c.code}>
@@ -453,40 +453,40 @@ export default function LoginPage() {
                             </option>
                           ))}
                         </select>
-                        <div className="relative flex-1 min-w-0">
-                          <Input
+                        <div className="flex h-11 flex-1 items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100 min-w-0">
+                          <Phone className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
+                          <input
                             id="signup-phone"
                             type="tel"
                             value={phoneNumber}
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             placeholder="98765 43210"
-                            className="!pl-10 font-mono text-sm"
+                            className="w-full bg-transparent text-sm font-mono text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none"
                             autoComplete="tel"
                           />
-                          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                         </div>
                       </div>
                     </div>
 
                     <div>
                       <Label htmlFor="signup-password">CREATE PASSWORD</Label>
-                      <div className="relative">
-                        <Input
+                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
+                        <Lock className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
+                        <input
                           id="signup-password"
                           type={showPass ? "text" : "password"}
                           required
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder="At least 6 characters"
-                          className="!pl-10 !pr-11 font-mono"
+                          className="w-full bg-transparent text-sm font-mono text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none"
                           autoComplete="new-password"
                         />
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                         <button
                           type="button"
                           onClick={() => setShowPass(!showPass)}
                           title={showPass ? "Hide Password" : "Show Password"}
-                          className="absolute right-2.5 top-1/2 -translate-y-1/2 z-10 p-1 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 rounded-md hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60 transition-colors cursor-pointer"
+                          className="shrink-0 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 p-1.5 rounded-md hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60 transition-colors cursor-pointer ml-1"
                         >
                           {showPass ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                         </button>
@@ -495,18 +495,18 @@ export default function LoginPage() {
 
                     <div>
                       <Label htmlFor="signup-confirm-password">CONFIRM PASSWORD</Label>
-                      <div className="relative">
-                        <Input
+                      <div className="flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white px-3.5 dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100">
+                        <Lock className="size-4 shrink-0 text-neutral-400 mr-2.5 pointer-events-none" />
+                        <input
                           id="signup-confirm-password"
                           type={showPass ? "text" : "password"}
                           required
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           placeholder="Re-enter password"
-                          className="!pl-10 !pr-11 font-mono"
+                          className="w-full bg-transparent text-sm font-mono text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none"
                           autoComplete="new-password"
                         />
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                       </div>
                     </div>
 
