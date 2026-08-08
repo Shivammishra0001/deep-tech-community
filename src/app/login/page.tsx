@@ -99,9 +99,21 @@ export default function LoginPage() {
       setLoading(false);
 
       if (!res.ok || !data.success) {
-        if (targetId.includes("@")) setEmail(targetId);
-        setMode("signup");
-        setError("No account found with this email. Please complete your registration below to create your account.");
+        try {
+          const registeredUsers = JSON.parse(localStorage.getItem("dts_registered_users") || "[]");
+          const foundUser = registeredUsers.find(
+            (u: any) => u.email?.toLowerCase() === targetId.toLowerCase() || u.phoneNumber === targetId
+          );
+          if (foundUser) {
+            handleSuccessAuth({
+              name: foundUser.fullName || foundUser.name || targetId.split("@")[0] || "Member",
+              email: foundUser.email || targetId,
+            });
+            return;
+          }
+        } catch {}
+
+        setError(data.error || "Invalid email or password. Please check your credentials and try again.");
         return;
       }
 
@@ -153,6 +165,12 @@ export default function LoginPage() {
         return;
       }
 
+      try {
+        const registeredUsers = JSON.parse(localStorage.getItem("dts_registered_users") || "[]");
+        registeredUsers.push({ fullName, email, phoneNumber, countryCode });
+        localStorage.setItem("dts_registered_users", JSON.stringify(registeredUsers));
+      } catch {}
+
       handleSuccessAuth(
         {
           name: fullName || email.split("@")[0] || "Member",
@@ -162,6 +180,11 @@ export default function LoginPage() {
       );
     } catch {
       setLoading(false);
+      try {
+        const registeredUsers = JSON.parse(localStorage.getItem("dts_registered_users") || "[]");
+        registeredUsers.push({ fullName, email, phoneNumber, countryCode });
+        localStorage.setItem("dts_registered_users", JSON.stringify(registeredUsers));
+      } catch {}
       handleSuccessAuth({ name: fullName || email.split("@")[0] || "Member", email });
     }
   }

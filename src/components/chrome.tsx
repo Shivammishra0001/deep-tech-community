@@ -137,6 +137,8 @@ export function SidebarNav() {
     try {
       localStorage.removeItem("dts_user");
       localStorage.removeItem("dts_token");
+      localStorage.removeItem("dts_access_token");
+      document.cookie = "dts_access_token=; path=/; max-age=0;";
     } catch {}
     setUser(null);
     window.location.href = "/login";
