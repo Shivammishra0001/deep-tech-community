@@ -103,8 +103,9 @@ export default function LoginPage() {
       setLoading(false);
 
       if (!res.ok || !data.success) {
-        setAccountNotFound(true);
-        setError(data.error || "No account found with this email or phone number.");
+        if (targetId.includes("@")) setEmail(targetId);
+        setMode("signup");
+        setError("No account found with this email. Please complete your registration below to create your account.");
         return;
       }
 
