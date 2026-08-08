@@ -34,8 +34,8 @@ const RSS_SOURCES = [
     defaultCategory: "Emerging Technology",
   },
   {
-    name: "SecurityWeek",
-    url: "https://feed.securityweek.com/",
+    name: "Krebs on Security",
+    url: "https://krebsonsecurity.com/feed/",
     defaultCategory: "Cybersecurity",
   },
   {

@@ -78,6 +78,13 @@ export default function NewsPage() {
   }
 
   function fallbackToStatic() {
+    const defaultImages: Record<string, string> = {
+      ai: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=1200&auto=format&fit=crop",
+      quantum: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop",
+      cybersecurity: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop",
+      space: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
+    };
+
     const staticItems: NewsArticle[] = ARTICLES.map((a) => ({
       id: a.slug,
       title: a.title,
@@ -92,9 +99,9 @@ export default function NewsPage() {
           : "Space Technology",
       source: "Deep Tech Society Research",
       source_url: `/news/${a.slug}`,
-      image_url: a.image,
-      image_source: "Deep Tech Society Archives",
-      license: "Internal Publication",
+      image_url: defaultImages[a.domain] || defaultImages.ai,
+      image_source: "Unsplash / Deep Tech Society Archives",
+      license: "Unsplash License / Public Domain",
       published_at: a.date,
       featured: a.featured ? "true" : "false",
     }));
