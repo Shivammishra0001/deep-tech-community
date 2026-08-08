@@ -286,7 +286,7 @@ export default function LoginPage() {
                         : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
                     )}
                   >
-                    <UserPlus className="size-3.5" /> Sign Up
+                    <UserPlus className="size-3.5" /> Create Account
                   </button>
                 </div>
 
