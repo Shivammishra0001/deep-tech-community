@@ -317,8 +317,8 @@ export default function NewsPage() {
                     <span>{new Date(article.published_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                   </div>
 
-                  <h3 className="mt-2.5 font-display text-base font-bold tracking-tight text-neutral-900 dark:text-neutral-50 line-clamp-2">
-                    {article.title}
+                  <h3 className="mt-2.5 font-display text-base font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50 line-clamp-2 cursor-pointer">
+                    <Link href={`/news/${article.id}`}>{article.title}</Link>
                   </h3>
 
                   <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-600 dark:text-neutral-300 line-clamp-3">

@@ -1,24 +1,82 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, ExternalLink } from "lucide-react";
 import { Container, DomainBadge, Avatar, Tag, Card, Button } from "@/components/ui";
 import { SafeImage } from "@/components/safe-image";
-import { ARTICLES, relatedArticles } from "@/data/news";
-import { DOMAINS } from "@/data/core";
+import { ARTICLES, relatedArticles, Article } from "@/data/news";
 import { ArticleDetailPageActions } from "@/components/news-actions";
+import { getPublishedNews } from "@/lib/news-fetcher";
 import type { Metadata } from "next";
+import type { DomainSlug } from "@/data/core";
+
+export async function generateStaticParams() {
+  return ARTICLES.map((a) => ({ slug: a.slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const article = ARTICLES.find((a) => a.slug === slug);
-  if (!article) return { title: "Briefing Not Found" };
-  return { title: `${article.title} | Deep Tech Society`, description: article.excerpt };
+  if (article) {
+    return { title: `${article.title} | Deep Tech Society`, description: article.excerpt };
+  }
+  return { title: "Briefing | Deep Tech Society", description: "Technical briefing and research analysis." };
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = ARTICLES.find((a) => a.slug === slug);
-  if (!article) notFound();
+  let article: Article | undefined = ARTICLES.find((a) => a.slug === slug);
+
+  // If not in static dataset, check published news from database
+  if (!article) {
+    const dbArticles = await getPublishedNews();
+    const dbMatch = dbArticles.find((a) => a.id === slug || a.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug);
+    if (dbMatch) {
+      const domainMap: Record<string, DomainSlug> = {
+        "AI / Machine Learning": "ai",
+        "Quantum Computing": "quantum",
+        "Cybersecurity": "cybersecurity",
+        "Space Technology": "space",
+      };
+
+      article = {
+        slug: dbMatch.id,
+        domain: domainMap[dbMatch.category] || "ai",
+        title: dbMatch.title,
+        excerpt: dbMatch.summary,
+        body: [
+          dbMatch.summary,
+          `Source publication: ${dbMatch.source}. Original technical report available at: ${dbMatch.source_url}`,
+        ],
+        author: dbMatch.source,
+        authorRole: "Verified Feed Partner",
+        date: new Date(dbMatch.published_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+        readingTime: 4,
+        tags: [dbMatch.category.toLowerCase().replace(/\s+/g, "-")],
+        image: dbMatch.image_url,
+      };
+    }
+  }
+
+  // Fallback UI if article is missing
+  if (!article) {
+    return (
+      <Container className="py-20 text-center">
+        <div className="mx-auto max-w-md rounded-2xl border border-neutral-300 p-8 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-md">
+          <p className="font-mono text-xs uppercase font-bold text-neutral-400">Briefing Unavailable</p>
+          <h1 className="mt-3 font-display text-xl font-bold text-neutral-900 dark:text-neutral-50">
+            Article Not Found
+          </h1>
+          <p className="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
+            This technical briefing may have been updated or archived.
+          </p>
+          <div className="mt-6">
+            <Button href="/news" variant="primary" size="sm">
+              <ArrowLeft className="size-3.5" /> Back to News Section
+            </Button>
+          </div>
+        </div>
+      </Container>
+    );
+  }
 
   const related = relatedArticles(article);
 
@@ -31,7 +89,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <div className="max-w-3xl animate-rise">
             <Link
               href="/news"
-              className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
+              className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
             >
               <ArrowLeft className="size-3.5" aria-hidden /> All Briefings
             </Link>
@@ -45,7 +103,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               {article.title}
             </h1>
             <div className="mt-6 flex items-center gap-3">
-              <Avatar name={article.author} className="size-9" />
+              <Avatar name={article.author} className="size-9 font-bold" />
               <div>
                 <p className="font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{article.author}</p>
                 <p className="font-mono text-xs text-neutral-500">
@@ -86,7 +144,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
             {/* Author card */}
             <Card className="mt-8 flex items-center gap-4">
-              <Avatar name={article.author} className="size-10" />
+              <Avatar name={article.author} className="size-10 font-bold" />
               <div>
                 <p className="font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{article.author}</p>
                 <p className="font-mono text-xs text-neutral-500">{article.authorRole}</p>
@@ -96,7 +154,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               </div>
             </Card>
 
-            {/* Interactive Actions & Discussion: Like, Comment, Share, Save */}
+            {/* Interactive Actions & Discussion */}
             <ArticleDetailPageActions title={article.title} slug={article.slug} />
           </article>
 
