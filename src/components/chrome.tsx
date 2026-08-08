@@ -247,28 +247,33 @@ export function SidebarNav() {
           </div>
 
           {user ? (
-            <div className="rounded-xl border border-neutral-300 bg-neutral-100/90 p-2.5 dark:border-neutral-800 dark:bg-neutral-900/90 shadow-xs flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-xs">
-                  {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
+            <div className="grid gap-2">
+              <div className="rounded-xl border border-neutral-300 bg-neutral-100/90 p-2.5 dark:border-neutral-800 dark:bg-neutral-900/90 shadow-xs flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                  <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-xs">
+                    {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-display text-xs font-bold tracking-tight text-neutral-900 dark:text-neutral-50 truncate">
+                      {user.name || "Member"}
+                    </p>
+                    <p className="font-mono text-[10px] text-neutral-500 dark:text-neutral-400 truncate">
+                      {user.email}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-display text-xs font-bold tracking-tight text-neutral-900 dark:text-neutral-50 truncate">
-                    {user.name || "Member"}
-                  </p>
-                  <p className="font-mono text-[10px] text-neutral-500 dark:text-neutral-400 truncate">
-                    {user.email}
-                  </p>
-                </div>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  title="Sign Out"
+                  className="flex size-7.5 shrink-0 items-center justify-center rounded-lg border border-neutral-300 bg-white text-red-600 transition-colors hover:bg-red-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-red-400 dark:hover:bg-red-950/40 cursor-pointer"
+                >
+                  <LogOut className="size-3.5" />
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={handleLogout}
-                title="Sign Out"
-                className="flex size-7.5 shrink-0 items-center justify-center rounded-lg border border-neutral-300 bg-white text-red-600 transition-colors hover:bg-red-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-red-400 dark:hover:bg-red-950/40 cursor-pointer"
-              >
-                <LogOut className="size-3.5" />
-              </button>
+              <Button href="/join" variant="primary" size="sm" className="w-full justify-center">
+                Join Community
+              </Button>
             </div>
           ) : (
             <div className="grid gap-2">
