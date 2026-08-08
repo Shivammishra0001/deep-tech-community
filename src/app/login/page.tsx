@@ -229,10 +229,10 @@ export default function LoginPage() {
                   <Check className="size-7" aria-hidden />
                 </span>
                 <h1 className="mt-5 font-display text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-                  Authenticated Successfully!
+                  Welcome to Deep Tech Community!
                 </h1>
                 <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">
-                  Welcome back, <strong className="text-neutral-900 dark:text-neutral-100">{fullName || loginIdentifier.split("@")[0] || email.split("@")[0] || "Member"}</strong>.
+                  Hello <strong className="text-neutral-900 dark:text-neutral-100">{fullName || loginIdentifier.split("@")[0] || email.split("@")[0] || "Member"}</strong>, you are signed in successfully.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Button href={redirectPath || "/community"} variant="primary" size="lg" className="w-full font-bold">
