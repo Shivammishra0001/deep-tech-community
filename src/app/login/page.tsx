@@ -99,21 +99,9 @@ export default function LoginPage() {
       setLoading(false);
 
       if (!res.ok || !data.success) {
-        try {
-          const registeredUsers = JSON.parse(localStorage.getItem("dts_registered_users") || "[]");
-          const foundUser = registeredUsers.find(
-            (u: any) => u.email?.toLowerCase() === targetId.toLowerCase() || u.phoneNumber === targetId
-          );
-          if (foundUser) {
-            handleSuccessAuth({
-              name: foundUser.fullName || foundUser.name || targetId.split("@")[0] || "Member",
-              email: foundUser.email || targetId,
-            });
-            return;
-          }
-        } catch {}
-
-        setError(data.error || "Invalid email or password. Please check your credentials and try again.");
+        if (targetId.includes("@")) setEmail(targetId);
+        setMode("signup");
+        setError("No account found with this email. Please complete your registration below to create your account.");
         return;
       }
 
@@ -165,12 +153,6 @@ export default function LoginPage() {
         return;
       }
 
-      try {
-        const registeredUsers = JSON.parse(localStorage.getItem("dts_registered_users") || "[]");
-        registeredUsers.push({ fullName, email, phoneNumber, countryCode });
-        localStorage.setItem("dts_registered_users", JSON.stringify(registeredUsers));
-      } catch {}
-
       handleSuccessAuth(
         {
           name: fullName || email.split("@")[0] || "Member",
@@ -180,11 +162,6 @@ export default function LoginPage() {
       );
     } catch {
       setLoading(false);
-      try {
-        const registeredUsers = JSON.parse(localStorage.getItem("dts_registered_users") || "[]");
-        registeredUsers.push({ fullName, email, phoneNumber, countryCode });
-        localStorage.setItem("dts_registered_users", JSON.stringify(registeredUsers));
-      } catch {}
       handleSuccessAuth({ name: fullName || email.split("@")[0] || "Member", email });
     }
   }
@@ -387,10 +364,10 @@ export default function LoginPage() {
                           value={loginIdentifier}
                           onChange={(e) => setLoginIdentifier(e.target.value)}
                           placeholder="name@domain.com or +91 98765 43210"
-                          className="pl-9"
+                          className="!pl-10"
                           autoComplete="username"
                         />
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                       </div>
                     </div>
 
@@ -406,14 +383,15 @@ export default function LoginPage() {
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder="••••••••••••"
-                          className="pl-9 pr-10"
+                          className="!pl-10 !pr-11 font-mono"
                           autoComplete="current-password"
                         />
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                         <button
                           type="button"
                           onClick={() => setShowPass(!showPass)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200"
+                          title={showPass ? "Hide Password" : "Show Password"}
+                          className="absolute right-2.5 top-1/2 -translate-y-1/2 z-10 p-1 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 rounded-md hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60 transition-colors cursor-pointer"
                         >
                           {showPass ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                         </button>
@@ -437,10 +415,10 @@ export default function LoginPage() {
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
                           placeholder="Dr. Ada Lovelace"
-                          className="pl-9"
+                          className="!pl-10"
                           autoComplete="name"
                         />
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                       </div>
                     </div>
 
@@ -454,10 +432,10 @@ export default function LoginPage() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="researcher@lab.org"
-                          className="pl-9"
+                          className="!pl-10"
                           autoComplete="email"
                         />
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                       </div>
                     </div>
 
@@ -467,7 +445,7 @@ export default function LoginPage() {
                         <select
                           value={countryCode}
                           onChange={(e) => setCountryCode(e.target.value)}
-                          className="h-10 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-950 px-2.5 font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100"
+                          className="h-10 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-950 px-2.5 font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100 shrink-0"
                         >
                           {COUNTRY_CODES.map((c) => (
                             <option key={c.code} value={c.code}>
@@ -475,17 +453,17 @@ export default function LoginPage() {
                             </option>
                           ))}
                         </select>
-                        <div className="relative flex-1">
+                        <div className="relative flex-1 min-w-0">
                           <Input
                             id="signup-phone"
                             type="tel"
                             value={phoneNumber}
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             placeholder="98765 43210"
-                            className="pl-9 font-mono text-sm"
+                            className="!pl-10 font-mono text-sm"
                             autoComplete="tel"
                           />
-                          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
+                          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                         </div>
                       </div>
                     </div>
@@ -500,14 +478,15 @@ export default function LoginPage() {
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder="At least 6 characters"
-                          className="pl-9 pr-10"
+                          className="!pl-10 !pr-11 font-mono"
                           autoComplete="new-password"
                         />
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                         <button
                           type="button"
                           onClick={() => setShowPass(!showPass)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200"
+                          title={showPass ? "Hide Password" : "Show Password"}
+                          className="absolute right-2.5 top-1/2 -translate-y-1/2 z-10 p-1 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 rounded-md hover:bg-neutral-200/60 dark:hover:bg-neutral-800/60 transition-colors cursor-pointer"
                         >
                           {showPass ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
                         </button>
@@ -524,10 +503,10 @@ export default function LoginPage() {
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           placeholder="Re-enter password"
-                          className="pl-9 pr-10"
+                          className="!pl-10 !pr-11 font-mono"
                           autoComplete="new-password"
                         />
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400" />
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-neutral-400 pointer-events-none z-10" />
                       </div>
                     </div>
 

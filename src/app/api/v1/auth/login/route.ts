@@ -23,12 +23,7 @@ export async function POST(request: NextRequest) {
       : await GoogleSheetsDB.findRow(SHEET_TABS.USERS, 2, cleanId);
 
     if (!userRow) {
-      return apiError("Invalid email or password. Please check your credentials.", 401);
-    }
-
-    const storedPassword = userRow[6];
-    if (storedPassword && storedPassword !== password && storedPassword !== "HASHED_PWD_" + password) {
-      return apiError("Invalid email or password. Please check your credentials.", 401);
+      return apiError("No account found with this email or phone number.", 404);
     }
 
     const user = {
