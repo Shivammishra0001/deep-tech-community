@@ -319,7 +319,14 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
 
         {post.image && (
           <div className="mt-4 overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-800 max-h-64">
-            <img src={post.image} alt={post.title} className="w-full object-cover" />
+            <img
+              src={post.image}
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop";
+              }}
+              alt={post.title}
+              className="w-full object-cover"
+            />
           </div>
         )}
 

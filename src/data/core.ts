@@ -30,7 +30,7 @@ export const DOMAINS: Record<DomainSlug, Domain> = {
     description:
       "From foundation models to autonomous systems — work on the frontier of machine intelligence alongside researchers and engineers shipping real AI products.",
     icon: Brain,
-    image: "/images/domain-ai.jpg",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop",
     text: "text-neutral-900 dark:text-neutral-100",
     chip: "border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800/80 dark:text-neutral-100",
     dot: "bg-neutral-900 dark:bg-neutral-100",
@@ -46,7 +46,7 @@ export const DOMAINS: Record<DomainSlug, Domain> = {
     description:
       "Qubits, error correction, and algorithms that outpace classical machines. Join the researchers and engineers building the post-classical computing era.",
     icon: Atom,
-    image: "/images/domain-quantum.jpg",
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop",
     text: "text-neutral-900 dark:text-neutral-100",
     chip: "border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800/80 dark:text-neutral-100",
     dot: "bg-neutral-900 dark:bg-neutral-100",
@@ -62,7 +62,7 @@ export const DOMAINS: Record<DomainSlug, Domain> = {
     description:
       "Offense, defense, and post-quantum security architecture. Connect with security professionals hardening global infrastructure.",
     icon: ShieldCheck,
-    image: "/images/domain-cyber.jpg",
+    image: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?q=80&w=1200&auto=format&fit=crop",
     text: "text-neutral-900 dark:text-neutral-100",
     chip: "border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800/80 dark:text-neutral-100",
     dot: "bg-neutral-900 dark:bg-neutral-100",
@@ -78,7 +78,7 @@ export const DOMAINS: Record<DomainSlug, Domain> = {
     description:
       "Launch systems, satellite constellations, and deep-space science. Collaborate with engineers and scientists opening the space economy.",
     icon: Rocket,
-    image: "/images/domain-space.jpg",
+    image: "https://images.unsplash.com/photo-1446776811953-b23d57b?q=80&w=1200&auto=format&fit=crop",
     text: "text-neutral-900 dark:text-neutral-100",
     chip: "border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800/80 dark:text-neutral-100",
     dot: "bg-neutral-900 dark:bg-neutral-100",

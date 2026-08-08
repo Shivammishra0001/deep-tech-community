@@ -7,6 +7,7 @@ import { DOMAIN_LIST, STATS, CHAPTERS } from "@/data/core";
 import { TECH_PAGES } from "@/data/technologies";
 import { ARTICLES } from "@/data/news";
 import { EVENTS } from "@/data/events";
+import { SafeImage } from "@/components/safe-image";
 import type { DomainSlug } from "@/data/core";
 
 export default function HomePage() {
@@ -192,12 +193,8 @@ export default function HomePage() {
             <Reveal delay={100}>
               <Card hover className="group flex h-full flex-col justify-between overflow-hidden p-0">
                 <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-900">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <SafeImage
                     src={featuredArticle.image}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
-                    }}
                     alt={featuredArticle.title}
                     className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
@@ -237,11 +234,8 @@ export default function HomePage() {
                       {/* 64x64px Square Thumbnail Visual */}
                       <div className="relative size-16 shrink-0 overflow-hidden rounded-lg border border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-100 dark:bg-neutral-900 shadow-xs">
                         {a.image ? (
-                          <img
+                          <SafeImage
                             src={a.image}
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
-                            }}
                             alt={a.title}
                             className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />

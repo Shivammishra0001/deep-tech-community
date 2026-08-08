@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Search, ExternalLink, RefreshCw, Loader2, Calendar, ShieldCheck, Tag, AlertCircle } from "lucide-react";
 import { Container, PageHero, Button, Badge } from "@/components/ui";
 import { ARTICLES } from "@/data/news";
+import { SafeImage } from "@/components/safe-image";
 
 type NewsArticle = {
   id: string;
@@ -219,11 +220,8 @@ export default function NewsPage() {
           <div className="mt-8 overflow-hidden rounded-2xl border border-neutral-300 bg-white shadow-lg dark:border-neutral-800 dark:bg-neutral-900/90">
             <div className="grid md:grid-cols-2">
               <div className="relative h-64 md:h-auto overflow-hidden bg-neutral-950">
-                <img
+                <SafeImage
                   src={featuredArticle.image_url}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
-                  }}
                   alt={featuredArticle.title}
                   className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                 />
@@ -233,27 +231,27 @@ export default function NewsPage() {
               </div>
               <div className="flex flex-col justify-between p-6 sm:p-8">
                 <div>
-                  <div className="flex items-center gap-2 font-mono text-xs text-neutral-500 dark:text-neutral-400">
+                  <div className="flex items-center gap-2 font-mono text-xs text-neutral-500">
                     <span className="font-bold text-neutral-900 dark:text-neutral-100">{featuredArticle.category}</span>
-                    <span>•</span>
+                    <span>·</span>
                     <span>{new Date(featuredArticle.published_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                   </div>
                   <h2 className="mt-3 font-display text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 leading-snug">
                     {featuredArticle.title}
                   </h2>
-                  <p className="mt-3 font-sans text-xs sm:text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+                  <p className="mt-3 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3 leading-relaxed">
                     {featuredArticle.summary}
                   </p>
                 </div>
-                <div className="mt-6 flex flex-col gap-3 border-t border-neutral-200/80 pt-4 dark:border-neutral-800 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="font-mono text-[11px] text-neutral-500 dark:text-neutral-400">
-                    Source: <strong className="text-neutral-800 dark:text-neutral-200">{featuredArticle.source}</strong>
-                  </div>
+                <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-200/80 pt-4 dark:border-neutral-800 font-mono text-xs">
+                  <span className="text-neutral-500 truncate max-w-[200px]">
+                    Source: <strong className="text-neutral-700 dark:text-neutral-300">{featuredArticle.source}</strong>
+                  </span>
                   <a
                     href={featuredArticle.source_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-neutral-900 px-4 py-2 font-sans text-xs font-bold text-neutral-50 shadow-sm transition-transform hover:scale-105 dark:bg-neutral-100 dark:text-neutral-950"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 font-sans font-semibold text-neutral-900 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:hover:bg-neutral-700 transition-colors"
                   >
                     Read Original Article <ExternalLink className="size-3.5" />
                   </a>

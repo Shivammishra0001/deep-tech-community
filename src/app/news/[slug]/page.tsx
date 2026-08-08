@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import { Container, DomainBadge, Avatar, Tag, Card, Button } from "@/components/ui";
+import { SafeImage } from "@/components/safe-image";
 import { ARTICLES, relatedArticles } from "@/data/news";
 import { DOMAINS } from "@/data/core";
 import { ArticleDetailPageActions } from "@/components/news-actions";
@@ -62,12 +63,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-none">
             {article.image && (
               <div className="mb-8 relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-900 shadow-md">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <SafeImage
                   src={article.image}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
-                  }}
                   alt={article.title}
                   className="size-full object-cover"
                 />

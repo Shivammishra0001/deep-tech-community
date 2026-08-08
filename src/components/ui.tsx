@@ -225,14 +225,16 @@ export function Card({
 }
 
 /* Specialized News Card */
-export function NewsCard({
+import { SafeImage } from "@/components/safe-image";
+
+export function ArticleCard({
   title,
   domain,
   date,
   author,
   summary,
   slug,
-  readTime,
+  readTime = "5",
   image,
 }: {
   title: string;
@@ -248,8 +250,7 @@ export function NewsCard({
     <Card hover className="group flex flex-col justify-between overflow-hidden p-0">
       {image && (
         <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-900">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <SafeImage
             src={image}
             alt={title}
             className="size-full object-cover transition-transform duration-500 group-hover:scale-105"

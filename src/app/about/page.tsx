@@ -3,6 +3,7 @@ import { ArrowRight, HandHeart, Mail, MapPin, ShieldCheck, Globe, Terminal, Radi
 import { Container, Eyebrow, SectionHeading, Avatar, Card, Button, Badge, cx } from "@/components/ui";
 import { TEAM, PARTNERS, VALUES } from "@/data/core";
 import type { Metadata } from "next";
+import { SafeImage } from "@/components/safe-image";
 
 export const metadata: Metadata = {
   title: "About | Deep Tech Community",
@@ -28,8 +29,8 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="relative overflow-hidden rounded-lg border border-neutral-300 dark:border-neutral-700">
-              <img
-                src="/images/community.jpg"
+              <SafeImage
+                src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200&auto=format&fit=crop"
                 alt="Members at a Deep Tech Society summit"
                 className="aspect-[4/3] w-full object-cover"
               />
