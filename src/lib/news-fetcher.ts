@@ -302,6 +302,9 @@ export async function getPublishedNews(): Promise<NewsItem[]> {
 
       if (status && status.toLowerCase() === "draft") continue;
 
+      const validCategoryImg = CATEGORY_DEFAULT_IMAGES[category]?.image_url || CATEGORY_DEFAULT_IMAGES["Emerging Technology"].image_url;
+      const cleanImageUrl = (image_url && image_url.trim() && !image_url.includes("1677442136019")) ? image_url.trim() : validCategoryImg;
+
       items.push({
         id: id || `news-${i}`,
         title: title || "Deep Tech Update",
@@ -309,7 +312,7 @@ export async function getPublishedNews(): Promise<NewsItem[]> {
         category: category || "Emerging Technology",
         source: source || "Deep Tech Society",
         source_url: source_url || "#",
-        image_url: image_url || CATEGORY_DEFAULT_IMAGES["Emerging Technology"].image_url,
+        image_url: cleanImageUrl,
         image_source: image_source || "Unsplash",
         license: license || "Unsplash License",
         published_at: published_at || new Date().toISOString(),
