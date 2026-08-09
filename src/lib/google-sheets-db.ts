@@ -23,12 +23,18 @@ const SHEET_HEADERS: Record<string, string[]> = {
 
 // In-memory cache for user rows to ensure instant reliability
 const localUserCache: Map<string, string[]> = new Map();
+// Cache verified tabs to prevent redundant API calls on every request
+const verifiedTabs = new Set<string>();
 
 export class GoogleSheetsDB {
   /**
    * Ensures that a specific tab exists and has the correct header row
    */
   static async ensureTab(tabName: string): Promise<boolean> {
+    if (verifiedTabs.has(tabName.toLowerCase())) {
+      return true;
+    }
+
     const sheets = getGoogleSheetsClient();
     if (!sheets) return false;
 
@@ -58,14 +64,14 @@ export class GoogleSheetsDB {
       // 2. Check if header row exists
       const rangeRes = await sheets.spreadsheets.values.get({
         spreadsheetId: SPREADSHEET_ID,
-        range: `${tabName}!A1:Z1`,
+        range: `'${tabName}'!A1:Z1`,
       });
 
       const hasHeaders = rangeRes.data.values && rangeRes.data.values.length > 0;
       if (!hasHeaders && SHEET_HEADERS[tabName]) {
         await sheets.spreadsheets.values.update({
           spreadsheetId: SPREADSHEET_ID,
-          range: `${tabName}!A1`,
+          range: `'${tabName}'!A1`,
           valueInputOption: "USER_ENTERED",
           requestBody: {
             values: [SHEET_HEADERS[tabName]],
@@ -73,6 +79,7 @@ export class GoogleSheetsDB {
         });
       }
 
+      verifiedTabs.add(tabName.toLowerCase());
       return true;
     } catch (err) {
       console.warn(`[GoogleSheetsDB] ensureTab notice for ${tabName}:`, err instanceof Error ? err.message : err);
@@ -92,7 +99,7 @@ export class GoogleSheetsDB {
         await this.ensureTab(tabName);
         const res = await sheets.spreadsheets.values.get({
           spreadsheetId: SPREADSHEET_ID,
-          range: `${tabName}!A2:Z10000`,
+          range: `'${tabName}'!A2:Z10000`,
         });
         sheetRows = res.data.values || [];
       } catch (err) {
@@ -139,7 +146,7 @@ export class GoogleSheetsDB {
       await this.ensureTab(tabName);
       await sheets.spreadsheets.values.append({
         spreadsheetId: SPREADSHEET_ID,
-        range: `${tabName}!A1`,
+        range: `'${tabName}'!A1`,
         valueInputOption: "USER_ENTERED",
         requestBody: {
           values: stringifiedRows,
