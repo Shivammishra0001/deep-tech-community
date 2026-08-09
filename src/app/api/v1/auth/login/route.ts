@@ -14,13 +14,9 @@ export async function POST(request: NextRequest) {
     }
 
     const cleanId = identifier.trim().toLowerCase();
-    const isPhone = /^[+\d\s-]+$/.test(cleanId);
 
     // Look up in Google Sheets Users Tab
-    // Email is col 2 (0-indexed: 2), Phone is col 3 (0-indexed: 3)
-    const userRow = isPhone
-      ? await GoogleSheetsDB.findRow(SHEET_TABS.USERS, 3, cleanId)
-      : await GoogleSheetsDB.findRow(SHEET_TABS.USERS, 2, cleanId);
+    const userRow = await GoogleSheetsDB.findUser(cleanId);
 
     if (!userRow) {
       return apiError("No account found with this email or phone number.", 404);

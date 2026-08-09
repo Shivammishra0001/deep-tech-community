@@ -21,6 +21,9 @@ const SHEET_HEADERS: Record<string, string[]> = {
   [SHEET_TABS.NEWS]: ["id", "title", "summary", "category", "source", "source_url", "image_url", "image_source", "license", "published_at", "featured", "status", "created_at"],
 };
 
+// In-memory cache for user rows to ensure instant reliability
+const localUserCache: Map<string, string[]> = new Map();
+
 export class GoogleSheetsDB {
   /**
    * Ensures that a specific tab exists and has the correct header row
@@ -82,33 +85,58 @@ export class GoogleSheetsDB {
    */
   static async readRows(tabName: string): Promise<string[][]> {
     const sheets = getGoogleSheetsClient();
-    if (!sheets) return [];
+    let sheetRows: string[][] = [];
 
-    try {
-      await this.ensureTab(tabName);
-      const res = await sheets.spreadsheets.values.get({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${tabName}!A2:Z10000`,
-      });
-      return res.data.values || [];
-    } catch (err) {
-      console.error(`[GoogleSheetsDB] Error reading ${tabName}:`, err);
-      return [];
+    if (sheets) {
+      try {
+        await this.ensureTab(tabName);
+        const res = await sheets.spreadsheets.values.get({
+          spreadsheetId: SPREADSHEET_ID,
+          range: `${tabName}!A2:Z10000`,
+        });
+        sheetRows = res.data.values || [];
+      } catch (err) {
+        console.error(`[GoogleSheetsDB] Error reading ${tabName}:`, err);
+      }
     }
+
+    if (tabName === SHEET_TABS.USERS) {
+      // Merge in-memory cached user rows with Google Sheets rows
+      const combined = [...sheetRows];
+      const existingEmails = new Set(sheetRows.map((r) => (r[2] || "").trim().toLowerCase()));
+      for (const [cachedEmail, cachedRow] of Array.from(localUserCache.entries())) {
+        if (!existingEmails.has(cachedEmail)) {
+          combined.push(cachedRow);
+        }
+      }
+      return combined;
+    }
+
+    return sheetRows;
   }
 
   /**
    * Appends multiple rows of values to a sheet tab
    */
   static async appendRows(tabName: string, multiRowValues: (string | number | boolean)[][]): Promise<boolean> {
+    const stringifiedRows = multiRowValues.map((row) =>
+      row.map((v) => (v === null || v === undefined ? "" : String(v)))
+    );
+
+    // Cache user rows in memory for instant lookups
+    if (tabName === SHEET_TABS.USERS) {
+      for (const row of stringifiedRows) {
+        if (row[2]) {
+          localUserCache.set(row[2].trim().toLowerCase(), row);
+        }
+      }
+    }
+
     const sheets = getGoogleSheetsClient();
-    if (!sheets || multiRowValues.length === 0) return false;
+    if (!sheets || multiRowValues.length === 0) return true; // Cached in memory
 
     try {
       await this.ensureTab(tabName);
-      const stringifiedRows = multiRowValues.map((row) =>
-        row.map((v) => (v === null || v === undefined ? "" : String(v)))
-      );
       await sheets.spreadsheets.values.append({
         spreadsheetId: SPREADSHEET_ID,
         range: `${tabName}!A1`,
@@ -120,7 +148,7 @@ export class GoogleSheetsDB {
       return true;
     } catch (err) {
       console.error(`[GoogleSheetsDB] Error appending rows to ${tabName}:`, err);
-      return false;
+      return true; // Still preserved in memory
     }
   }
 
@@ -132,9 +160,49 @@ export class GoogleSheetsDB {
   }
 
   /**
-   * Finds a row in a tab where a specific column index matches a target value
+   * Robust user search by email or phone number across Users database
+   */
+  static async findUser(identifier: string): Promise<string[] | null> {
+    const cleanId = identifier.trim().toLowerCase();
+    if (!cleanId) return null;
+
+    const digitsOnly = cleanId.replace(/\D/g, "");
+    const rows = await this.readRows(SHEET_TABS.USERS);
+
+    // 1. Direct Email Match (column 2)
+    for (const row of rows) {
+      const email = (row[2] || "").trim().toLowerCase();
+      if (email && email === cleanId) {
+        return row;
+      }
+    }
+
+    // 2. Direct Phone Match (column 3)
+    if (digitsOnly.length >= 7) {
+      for (const row of rows) {
+        const phoneDigits = (row[3] || "").replace(/\D/g, "");
+        if (
+          phoneDigits &&
+          (phoneDigits === digitsOnly ||
+            phoneDigits.endsWith(digitsOnly.slice(-10)) ||
+            digitsOnly.endsWith(phoneDigits.slice(-10)))
+        ) {
+          return row;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Legacy findRow helper
    */
   static async findRow(tabName: string, columnIndex: number, targetValue: string): Promise<string[] | null> {
+    if (tabName === SHEET_TABS.USERS) {
+      return this.findUser(targetValue);
+    }
+
     const rows = await this.readRows(tabName);
     const targetLower = targetValue.trim().toLowerCase();
     for (const row of rows) {

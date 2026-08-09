@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     const cleanEmail = email.trim().toLowerCase();
 
     // 1. Check if user already exists in Google Sheets Users tab
-    const existing = await GoogleSheetsDB.findRow(SHEET_TABS.USERS, 2, cleanEmail);
+    const existing = await GoogleSheetsDB.findUser(cleanEmail);
     if (existing) {
       return apiError("An account with this email address already exists.", 409);
     }
