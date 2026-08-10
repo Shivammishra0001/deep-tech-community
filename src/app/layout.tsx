@@ -61,6 +61,15 @@ export const metadata: Metadata = {
     description: "Enterprise community platform for AI, Quantum, Cybersecurity, and Space Tech.",
     creator: "@deeptechcommunity",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.png",
+    apple: "/apple-icon.png",
+  },
 };
 
 const jsonLd = {
