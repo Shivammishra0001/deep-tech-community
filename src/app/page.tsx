@@ -48,7 +48,6 @@ export default function HomePage() {
     <div className="relative">
       {/* -------------------------------- 1. HERO (HOME) -------------------------------- */}
       <CinematicHero />
-      <ActivityTicker />
 
       {/* ------------------- 2. TECHNOLOGIES (PROMPT 05 REDESIGN) ------------------- */}
       <FrontiersExperience />
