@@ -313,7 +313,7 @@ export function Navbar() {
           <Logo />
 
           {/* CENTER: Primary Editorial Navigation Links */}
-          <nav className="hidden md:flex items-center gap-4 lg:gap-5" aria-label="Main Navigation">
+          <nav className="hidden md:flex items-center gap-3.5 lg:gap-4.5" aria-label="Main Navigation">
             {NAV_CENTER_ITEMS.map((item) => {
               const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
               return (
@@ -321,7 +321,7 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={cx(
-                    "relative py-1 px-1.5 font-sans text-[12px] font-medium uppercase tracking-[0.05em] transition-colors duration-150 select-none",
+                    "relative py-1 px-1 font-sans text-[12px] font-medium uppercase tracking-[0.03em] transition-colors duration-150 select-none",
                     isActive
                       ? "text-white"
                       : "text-neutral-400 hover:text-white"
@@ -329,7 +329,7 @@ export function Navbar() {
                 >
                   {item.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-1.5 right-1.5 h-[1px] bg-white" />
+                    <span className="absolute bottom-0 left-1 right-1 h-[1px] bg-white" />
                   )}
                 </Link>
               );
@@ -342,11 +342,11 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-1.5 px-2 py-1 font-sans text-[11px] font-medium text-neutral-400 hover:text-white transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-1.5 py-1 font-sans text-[11px] font-medium text-neutral-500 hover:text-neutral-200 transition-colors cursor-pointer"
               aria-label="Search platform"
             >
               <Search className="size-3.5" />
-              <span className="hidden lg:inline uppercase tracking-wider">
+              <span className="hidden lg:inline uppercase tracking-[0.03em]">
                 SEARCH
               </span>
             </button>

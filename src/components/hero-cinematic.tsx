@@ -301,7 +301,7 @@ export function CinematicHero() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[78vh] lg:min-h-[82vh] max-h-[820px] pt-12 sm:pt-14 lg:pt-16 pb-12 lg:pb-16 flex flex-col justify-start scroll-mt-20 border-b border-neutral-900 select-none"
+      className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[72vh] lg:min-h-[76vh] max-h-[780px] pt-5 sm:pt-6 lg:pt-8 pb-12 lg:pb-16 flex flex-col justify-start scroll-mt-20 border-b border-neutral-900 select-none"
     >
       {/* ----------------- ATMOSPHERIC LIGHTING & SUBTLE GRID ----------------- */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
