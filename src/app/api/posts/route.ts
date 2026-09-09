@@ -4,7 +4,7 @@ import { communityPosts } from "@/db/schema";
 import { listPosts } from "@/db/seed";
 
 const KINDS = new Set(["article", "question", "project", "achievement"]);
-const DOMAINS = new Set(["ai", "quantum", "cybersecurity", "space"]);
+const DOMAINS = new Set(["ai", "quantum", "cybersecurity", "governance"]);
 
 export async function GET(req: Request) {
   try {

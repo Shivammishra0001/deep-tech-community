@@ -13,8 +13,17 @@ const TECH_SLUGS: Record<string, DomainSlug> = {
   "artificial-intelligence": "ai",
   "quantum-computing": "quantum",
   cybersecurity: "cybersecurity",
-  "space-technology": "space",
+  "ai-governance": "governance",
 };
+
+export function generateStaticParams() {
+  return [
+    { slug: "artificial-intelligence" },
+    { slug: "quantum-computing" },
+    { slug: "cybersecurity" },
+    { slug: "ai-governance" },
+  ];
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;

@@ -1,4 +1,4 @@
-import { Brain, Atom, Shield, Rocket } from "lucide-react";
+import { Brain, Atom, Shield, Scale } from "lucide-react";
 import { DOMAIN_LIST, TICKER } from "@/data/core";
 import { cx } from "@/components/ui";
 
@@ -6,7 +6,7 @@ const DOMAIN_NODES = [
   { slug: "ai", name: "AI", icon: Brain, angle: 0, animClass: "animate-icon-ai" },
   { slug: "quantum", name: "QUANTUM", icon: Atom, angle: 90, animClass: "animate-icon-quantum" },
   { slug: "cybersecurity", name: "CYBERSECURITY", icon: Shield, angle: 180, animClass: "animate-icon-cyber" },
-  { slug: "space", name: "SPACE TECH", icon: Rocket, angle: 270, animClass: "animate-icon-space" },
+  { slug: "governance", name: "AI GOVERNANCE", icon: Scale, angle: 270, animClass: "animate-icon-governance" },
 ];
 
 /**

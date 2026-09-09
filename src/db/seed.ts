@@ -58,16 +58,16 @@ const SEED_POSTS: SeedPost[] = [
     ],
   },
   {
-    author: "Arun Subramaniam",
-    authorRole: "Ground Systems Engineer · Penang",
+    author: "Tomohiro Sato",
+    authorRole: "AI Governance Lead · Penang",
     kind: "project",
-    domain: "space",
-    title: "Open-sourcing my CubeSat telemetry dashboard",
-    body: "Built over the last two evenings-of-the-week: a lightweight dashboard that ingests CSP telemetry from our study satellite simulator, decodes frames, and renders power/thermal/comms state in real time. Deliberately boring stack — SQLite, a small API, server-rendered charts — because ground software should be debuggable at 2 a.m. Repo link in the project channel. PRs welcome, especially from anyone who has touched real flight software.",
-    tags: ["cubesat", "telemetry", "ground-segment"],
+    domain: "governance",
+    title: "Open-sourcing an automated model compliance & audit dashboard",
+    body: "Built over the last two weeks: an open-source evaluation dashboard that ingests automated model cards, logs feature attributions, and checks risk thresholds against EU AI Act standards. Deliberately clean stack — SQLite, a simple API, and server-rendered charts — because auditing software should be 100% transparent and reproducible. Repo link in the project channel. PRs welcome!",
+    tags: ["governance", "auditing", "compliance"],
     likes: 57,
     comments: [
-      { author: "Tomohiro Sato", body: "The 'boring stack' philosophy is exactly right for ground systems. Featuring this in the space track newsletter." },
+      { author: "Ananya Iyer", body: "Automated compliance logging is exactly what production teams need. Featuring this in our governance digest." },
     ],
   },
   {
@@ -112,15 +112,15 @@ const SEED_POSTS: SeedPost[] = [
   },
   {
     author: "Ananya Iyer",
-    authorRole: "EO Researcher · Bengaluru",
+    authorRole: "Governance Researcher · Bengaluru",
     kind: "project",
-    domain: "space",
-    title: "Turning 10 years of open EO data into one queryable time series",
-    body: "The chapter project from the satellite data study circle is live: a calibrated, cloud-optimized time series of our region's reservoir surface area from a decade of public imagery, with a reproducible pipeline anyone can fork. First finding already cited by a local research group studying drawdown patterns. Data work like this is the strongest proof that small teams can do real science with open archives.",
-    tags: ["earth-observation", "open-data", "pipeline"],
+    domain: "governance",
+    title: "Building an open benchmark suite for algorithmic decision-tree auditing",
+    body: "The chapter project from the AI safety study circle is live: a verifiable evaluation suite testing decision stability, attribution drift, and fairness boundaries across multi-agent workflows. First results presented at our regional policy roundtable. Open auditing is the strongest proof that builders can ensure human alignment.",
+    tags: ["ai-governance", "auditing", "decision-trees"],
     likes: 51,
     comments: [
-      { author: "Tomohiro Sato", body: "From pixels to decisions, exactly as the track intends. The reservoir finding deserves a full article — volunteer?" },
+      { author: "Tomohiro Sato", body: "Verifiable decision trees, exactly as the governance track intends. The findings deserve a full article — volunteer?" },
     ],
   },
 ];
@@ -129,76 +129,84 @@ let seeded = false;
 
 export async function ensureSeed() {
   if (seeded) return;
-  seeded = true;
   try {
     const existing = await db.select({ id: communityPosts.id }).from(communityPosts).limit(1);
-    if (existing.length > 0) return;
+    if (existing.length === 0) {
+      for (const p of SEED_POSTS) {
+        const [post] = await db
+          .insert(communityPosts)
+          .values({
+            author: p.author,
+            authorRole: p.authorRole,
+            kind: p.kind,
+            domain: p.domain,
+            title: p.title,
+            body: p.body,
+            tags: p.tags,
+            likes: p.likes,
+          })
+          .returning();
 
-    for (const p of SEED_POSTS) {
-      const [inserted] = await db
-        .insert(communityPosts)
-        .values({
-          author: p.author,
-          authorRole: p.authorRole,
-          kind: p.kind,
-          domain: p.domain,
-          title: p.title,
-          body: p.body,
-          tags: p.tags,
-          likes: p.likes,
-        })
-        .returning({ id: communityPosts.id });
-
-      if (p.comments.length > 0) {
-        await db.insert(postComments).values(
-          p.comments.map((c) => ({
-            postId: inserted.id,
-            author: c.author,
-            body: c.body,
-          })),
-        );
+        if (post && p.comments.length > 0) {
+          await db.insert(postComments).values(
+            p.comments.map((c) => ({
+              postId: post.id,
+              author: c.author,
+              body: c.body,
+            }))
+          );
+        }
       }
     }
+    seeded = true;
   } catch (err) {
-    // Table may not exist yet before drizzle push; fail soft.
-    seeded = false;
-    console.error("Seed skipped:", err instanceof Error ? err.message : err);
+    console.warn("DB seed skipped or failed (falling back to static seed data):", err instanceof Error ? err.message : err);
   }
 }
 
-export async function listPosts(kind?: string, domain?: string) {
-  await ensureSeed();
-  const conditions = [];
-  if (kind && kind !== "all") conditions.push(eq(communityPosts.kind, kind));
-  if (domain && domain !== "all") conditions.push(eq(communityPosts.domain, domain));
+export async function listPosts(kind = "all", domain = "all"): Promise<SeedPost[]> {
+  try {
+    let posts = await db.select().from(communityPosts);
+    if (posts.length === 0) {
+      await ensureSeed();
+      posts = await db.select().from(communityPosts);
+    }
+    if (posts.length === 0) {
+      return filterPosts(SEED_POSTS, kind, domain);
+    }
 
-  const rows = await db
-    .select({
-      id: communityPosts.id,
-      author: communityPosts.author,
-      authorRole: communityPosts.authorRole,
-      kind: communityPosts.kind,
-      domain: communityPosts.domain,
-      title: communityPosts.title,
-      body: communityPosts.body,
-      tags: communityPosts.tags,
-      likes: communityPosts.likes,
-      createdAt: communityPosts.createdAt,
-    })
-    .from(communityPosts)
-    .where(conditions.length ? and(...conditions) : undefined)
-    .orderBy(communityPosts.id);
+    const postIds = posts.map((p) => p.id);
+    const comments = postIds.length > 0 ? await db.select().from(postComments).where(inArray(postComments.postId, postIds)) : [];
 
-  const ids = rows.map((r) => r.id);
-  const comments =
-    ids.length > 0
-      ? await db.select({ id: postComments.id, postId: postComments.postId, author: postComments.author, body: postComments.body, createdAt: postComments.createdAt }).from(postComments).where(inArray(postComments.postId, ids))
-      : [];
+    const commentsByPost = new Map<number, { author: string; body: string }[]>();
+    for (const c of comments) {
+      const list = commentsByPost.get(c.postId) || [];
+      list.push({ author: c.author, body: c.body });
+      commentsByPost.set(c.postId, list);
+    }
 
-  return rows
-    .map((r) => ({
-      ...r,
-      comments: comments.filter((c) => c.postId === r.id),
-    }))
-    .reverse();
+    const mapped: SeedPost[] = posts.map((p) => ({
+      author: p.author,
+      authorRole: p.authorRole,
+      kind: p.kind,
+      domain: p.domain,
+      title: p.title,
+      body: p.body,
+      tags: p.tags,
+      likes: p.likes,
+      comments: commentsByPost.get(p.id) || [],
+    }));
+
+    return filterPosts(mapped, kind, domain);
+  } catch {
+    return filterPosts(SEED_POSTS, kind, domain);
+  }
+}
+
+function filterPosts(posts: SeedPost[], kind: string, domain: string): SeedPost[] {
+  return posts.filter((p) => {
+    if (kind !== "all" && p.kind !== kind) return false;
+    if (domain !== "all" && p.domain !== domain) return false;
+    return true;
+  });
 }

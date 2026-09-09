@@ -26,9 +26,8 @@ const CATEGORIES = [
   "AI / Machine Learning",
   "Quantum Computing",
   "Cybersecurity",
-  "Space Technology",
+  "AI Governance",
   "Cloud / Infrastructure",
-  "Blockchain / Web3",
   "Deep Tech Research",
   "Open Source / Developer Technology",
   "Emerging Technology",
@@ -83,7 +82,7 @@ export default function NewsPage() {
       ai: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
       quantum: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop",
       cybersecurity: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200&auto=format&fit=crop",
-      space: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
+      governance: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
     };
 
     const staticItems: NewsArticle[] = ARTICLES.map((a) => ({
@@ -97,15 +96,16 @@ export default function NewsPage() {
           ? "Quantum Computing"
           : a.domain === "cybersecurity"
           ? "Cybersecurity"
-          : "Space Technology",
-      source: "Deep Tech Society Research",
+          : "AI Governance",
+      source: "Deep Tech Research Circle",
       source_url: `/news/${a.slug}`,
-      image_url: defaultImages[a.domain] || defaultImages.ai,
-      image_source: "Unsplash / Deep Tech Society Archives",
-      license: "Unsplash License / Public Domain",
+      image_url: a.image || defaultImages[a.domain] || defaultImages.ai,
+      image_source: "Unsplash",
+      license: "Public / Editorial",
       published_at: a.date,
       featured: a.featured ? "true" : "false",
     }));
+
     setArticles(staticItems);
   }
 
@@ -118,10 +118,10 @@ export default function NewsPage() {
       if (res.ok && data.success) {
         await loadNews();
       } else {
-        setError(data.error || "Failed to refresh news feeds.");
+        setError(data.error || "Failed to trigger RSS refresh.");
       }
     } catch {
-      setError("Network error while syncing RSS feeds.");
+      setError("Network error triggering news refresh.");
     } finally {
       setRefreshing(false);
     }
@@ -136,7 +136,7 @@ export default function NewsPage() {
         (categoryFilter === "AI / Machine Learning" && a.category.toLowerCase().includes("ai")) ||
         (categoryFilter === "Quantum Computing" && a.category.toLowerCase().includes("quantum")) ||
         (categoryFilter === "Cybersecurity" && a.category.toLowerCase().includes("cyber")) ||
-        (categoryFilter === "Space Technology" && a.category.toLowerCase().includes("space"));
+        (categoryFilter === "AI Governance" && a.category.toLowerCase().includes("governance"));
 
       const matchesQuery =
         !q ||
@@ -156,9 +156,9 @@ export default function NewsPage() {
   return (
     <>
       <PageHero
-        eyebrow="AUTOMATED NEWS PIPELINE & RESEARCH"
-        title="Live Deep Tech Intelligence Briefings."
-        description="Automated real-time aggregation across AI, Quantum, Cybersecurity, Space Tech, and Emerging Infrastructure."
+        eyebrow="TECHNICAL RESEARCH NEWSLETTER"
+        title="Live Deep Tech Research & Analysis Digest."
+        description="Curated research dispatches, paper breakdowns, and technical analysis across AI, Quantum, Cybersecurity, and AI Governance."
       />
 
       <Container className="py-12">

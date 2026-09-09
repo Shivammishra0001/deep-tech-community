@@ -25,12 +25,12 @@ export default function HomePage() {
       excerpt: "Score final answers and reasoning steps independently — self-verification protocols cut false positives by 42% in complex multi-step tasks.",
     },
     {
-      author: "Arun Subramaniam",
-      role: "Ground Systems Architect · Penang",
+      author: "Tomohiro Sato",
+      role: "AI Governance Lead · Penang",
       kind: "Project",
-      domain: "space" as DomainSlug,
-      title: "Open-source telemetry pipeline for low-earth orbit CubeSats",
-      excerpt: "A lightweight, debuggable data stack built on SQLite and server-rendered dashboards designed for low-bandwidth satellite links.",
+      domain: "governance" as DomainSlug,
+      title: "Open-source automated model compliance & auditing dashboard",
+      excerpt: "A lightweight, debuggable data stack built on SQLite and server-rendered dashboards designed for EU AI Act compliance logging.",
     },
     {
       author: "Nurul Aisyah",
@@ -61,7 +61,7 @@ export default function HomePage() {
 
             {/* Description */}
             <p className="mt-6 max-w-2xl font-sans text-lg sm:text-xl font-normal leading-relaxed text-neutral-700 dark:text-neutral-300">
-              Deep Tech Community is a professional, member-governed network connecting 12,400+ students, engineers, researchers, founders, and executives across AI, Quantum Computing, Cybersecurity, and Space Technology.
+              Deep Tech Community is a professional, member-governed network connecting 12,400+ students, engineers, researchers, founders, and executives across Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.
             </p>
 
             {/* Two Action Buttons */}

@@ -180,7 +180,7 @@ export function Avatar({
       ? "ring-2 ring-blue-500/80 dark:ring-blue-400/80 shadow-[0_0_10px_rgba(59,130,246,0.35)]"
       : domain === "cybersecurity" || kind === "achievement"
       ? "ring-2 ring-purple-500/80 dark:ring-purple-400/80 shadow-[0_0_10px_rgba(168,85,247,0.35)]"
-      : domain === "space" || kind === "question"
+      : domain === "governance" || kind === "question"
       ? "ring-2 ring-amber-500/80 dark:ring-amber-400/80 shadow-[0_0_10px_rgba(245,158,11,0.35)]"
       : "ring-2 ring-neutral-400/70 dark:ring-neutral-600/70";
 

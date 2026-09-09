@@ -34,7 +34,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         "AI / Machine Learning": "ai",
         "Quantum Computing": "quantum",
         "Cybersecurity": "cybersecurity",
-        "Space Technology": "space",
+        "AI Governance": "governance",
       };
 
       article = {

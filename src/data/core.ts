@@ -1,8 +1,8 @@
-import { Brain, Atom, ShieldCheck, Rocket, type LucideIcon } from "lucide-react";
+import { Brain, Atom, ShieldCheck, Scale, type LucideIcon } from "lucide-react";
 
 /* ------------------------------- Domains ---------------------------------- */
 
-export type DomainSlug = "ai" | "quantum" | "cybersecurity" | "space";
+export type DomainSlug = "ai" | "quantum" | "cybersecurity" | "governance";
 
 export type Domain = {
   slug: DomainSlug;
@@ -69,25 +69,25 @@ export const DOMAINS: Record<DomainSlug, Domain> = {
     tint: "from-neutral-200/20 dark:from-neutral-800/30",
     animClass: "animate-icon-cyber",
   },
-  space: {
-    slug: "space",
-    name: "Space Technology",
-    short: "Space",
-    techSlug: "space-technology",
-    tagline: "Engineering humanity's off-world future",
+  governance: {
+    slug: "governance",
+    name: "AI Governance",
+    short: "Governance",
+    techSlug: "ai-governance",
+    tagline: "Frameworks, safety, and institutional alignment",
     description:
-      "Launch systems, satellite constellations, and deep-space science. Collaborate with engineers and scientists opening the space economy.",
-    icon: Rocket,
-    image: "https://images.unsplash.com/photo-1446776811953-b23d57b?q=80&w=1200&auto=format&fit=crop",
+      "Policy nodes, algorithmic risk management, decision structures, and responsible AI deployment — connecting ethicists, legal scholars, and engineers building safe frontier systems.",
+    icon: Scale,
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
     text: "text-neutral-900 dark:text-neutral-100",
     chip: "border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800/80 dark:text-neutral-100",
     dot: "bg-neutral-900 dark:bg-neutral-100",
     tint: "from-neutral-200/20 dark:from-neutral-800/30",
-    animClass: "animate-icon-space",
+    animClass: "animate-icon-governance",
   },
 };
 
-export const DOMAIN_LIST = [DOMAINS.ai, DOMAINS.quantum, DOMAINS.cybersecurity, DOMAINS.space];
+export const DOMAIN_LIST = [DOMAINS.ai, DOMAINS.quantum, DOMAINS.cybersecurity, DOMAINS.governance];
 
 /* --------------------------------- Stats ----------------------------------- */
 
@@ -106,7 +106,7 @@ export const TICKER = [
   "Deep Tech Summit 2026 — early registration is open",
   "Wei Ling T. published a roadmap for quantum error correction",
   "Kuala Lumpur chapter announced a hands-on SOC lab",
-  "Arun S. shared his CubeSat telemetry project",
+  "Arun S. published an AI risk assessment & auditing framework",
   "Webinar: Post-quantum migration — 400 seats filled",
   "Malaysia chapter crossed 1,100 members",
 ];
@@ -138,7 +138,7 @@ export const CHAPTERS: Chapter[] = [
     members: 4200,
     founded: "2023",
     blurb:
-      "Our largest chapter — a dense network of AI engineers, security researchers, and student builders across three metro hubs.",
+      "Our largest chapter — a dense network of AI engineers, security researchers, and governance builders across three metro hubs.",
     about: [
       "The India chapter is where our community began. What started as a 14-person meetup in Bengaluru now spans three cities and more than 4,200 members, from first-year students to principal engineers at global AI labs.",
       "Monthly rhythm: a hands-on workshop, a research reading group, and an open mic for project demos. Everything is recorded and shared with the global community.",
@@ -150,7 +150,7 @@ export const CHAPTERS: Chapter[] = [
     ],
     events: [
       { title: "Hands-on LLM Fine-Tuning Workshop", type: "Workshop", date: "Mar 14, 2026", city: "Bengaluru" },
-      { title: "AI Research Reading Group #21", type: "Meetup", date: "Mar 28, 2026", city: "Hyderabad" },
+      { title: "AI Governance & Policy Reading Group", type: "Meetup", date: "Mar 28, 2026", city: "Hyderabad" },
       { title: "Student Builder Demo Night", type: "Meetup", date: "Apr 11, 2026", city: "Delhi NCR" },
     ],
     updates: [
@@ -171,7 +171,7 @@ export const CHAPTERS: Chapter[] = [
       "Our APAC hub — founders, researchers, and policy-minded engineers meet where deep tech meets industry and government.",
     about: [
       "The Singapore chapter hosts our flagship annual summit and acts as the bridge between academic research and Southeast Asia's fast-moving deep tech industry.",
-      "Expect sharp conversations: lab tours, founder AMAs, and joint sessions with local research institutes working on quantum networking and space data.",
+      "Expect sharp conversations: lab tours, founder AMAs, and joint sessions with local research institutes working on quantum networking and AI governance.",
     ],
     leads: [
       { name: "Wei Ling Tan", role: "Chapter Lead" },
@@ -181,7 +181,7 @@ export const CHAPTERS: Chapter[] = [
     events: [
       { title: "Deep Tech Summit 2026", type: "Conference", date: "May 22–23, 2026", city: "Singapore" },
       { title: "Quantum Networking Lab Tour", type: "Meetup", date: "Apr 04, 2026", city: "Singapore" },
-      { title: "Founder AMA: Building in Space Tech", type: "Webinar", date: "Apr 18, 2026", city: "Online" },
+      { title: "Founder AMA: Governing Frontier AI Models", type: "Webinar", date: "Apr 18, 2026", city: "Online" },
     ],
     updates: [
       { date: "Feb 2026", text: "Signed a knowledge-sharing MOU with a national quantum research programme." },
@@ -198,10 +198,10 @@ export const CHAPTERS: Chapter[] = [
     members: 1100,
     founded: "2024",
     blurb:
-      "A fast-growing community of security practitioners and satellite-data enthusiasts, anchored in KL and Penang's hardware ecosystem.",
+      "A fast-growing community of security practitioners and AI safety researchers, anchored in KL and Penang.",
     about: [
       "The Malaysia chapter grew out of our cybersecurity study circles and now runs one of the community's most active hands-on labs — a monthly SOC simulation in Kuala Lumpur.",
-      "Penang's semiconductor and aerospace supply chain gives the chapter a unique edge in hardware-adjacent space technology topics.",
+      "Penang's semiconductor ecosystem gives the chapter a unique edge in hardware security and trustworthy AI systems.",
     ],
     leads: [
       { name: "Nurul Aisyah", role: "Chapter Lead · Kuala Lumpur" },
@@ -209,12 +209,12 @@ export const CHAPTERS: Chapter[] = [
     ],
     events: [
       { title: "Cyber Defense Circle: SOC Simulation", type: "Workshop", date: "Mar 21, 2026", city: "Kuala Lumpur" },
-      { title: "Satellite Data Pipelines Study Night", type: "Meetup", date: "Apr 02, 2026", city: "Penang" },
+      { title: "Algorithmic Risk Audit Study Night", type: "Meetup", date: "Apr 02, 2026", city: "Penang" },
       { title: "Intro to Threat Modeling", type: "Workshop", date: "Apr 25, 2026", city: "Kuala Lumpur" },
     ],
     updates: [
       { date: "Feb 2026", text: "Crossed 1,100 members — the fastest-growing chapter in the community." },
-      { date: "Jan 2026", text: "Launched the Penang hardware study circle with 60 founding members." },
+      { date: "Jan 2026", text: "Launched the Penang hardware security study circle with 60 founding members." },
       { date: "Dec 2025", text: "Co-hosted a cross-chapter CTF with the India chapter — 300 participants." },
     ],
   },
@@ -226,7 +226,7 @@ export const TEAM = [
   { name: "Elena Marchetti", role: "Executive Director", bio: "Former ML research lead. Believes communities are the best research instrument ever built." },
   { name: "Rahul Venkatesh", role: "Head of Programs", bio: "Quantum engineer turned educator. Runs the workshop and roadmap machinery." },
   { name: "Sarah Okafor", role: "Security Practice Lead", bio: "Red teamer and conference organiser. Keeps the community's standards sharp." },
-  { name: "Tomohiro Sato", role: "Space Programs Lead", bio: "Satellite systems engineer. Coordinates the space track and chapter space events." },
+  { name: "Tomohiro Sato", role: "AI Governance Lead", bio: "Policy researcher and engineer. Coordinates the AI governance track and ethics frameworks." },
   { name: "Wei Ling Tan", role: "APAC Chapters Lead", bio: "Builds the bridges between research institutes, founders, and members." },
   { name: "Ananya Iyer", role: "Community Operations", bio: "First chapter lead, now keeping the whole network running week after week." },
 ];
@@ -235,8 +235,8 @@ export const PARTNERS = [
   "QuantaForge Institute",
   "Helix Research Labs",
   "SentinelGrid Security",
-  "Meridian Aerospace",
-  "OrbitalWorks",
+  "Governance AI Lab",
+  "PolicyNodes Foundation",
   "Nova Computing Society",
 ];
 

@@ -31,7 +31,7 @@ const SOCIALS: { label: string; path: string }[] = [
 const NAV_ITEMS = [
   { label: "Home", href: "/", sectionId: "hero", icon: Compass },
   { label: "Technologies", href: "/technologies", sectionId: "technologies", icon: Cpu },
-  { label: "News", href: "/news", sectionId: "news", icon: Newspaper },
+  { label: "Newsletter", href: "/news", sectionId: "news", icon: Newspaper },
   { label: "Events", href: "/events", sectionId: "events", icon: Calendar },
   { label: "Community", href: "/community", sectionId: "community", icon: Users },
   { label: "Chapters", href: "/chapters", sectionId: "chapters", icon: MapPin },
@@ -425,7 +425,7 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-sm text-sm font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">
-            Enterprise-grade community platform for Artificial Intelligence, Quantum Computing, Cybersecurity, and Space Technology.
+            Enterprise-grade community platform for Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.
           </p>
           <div className="mt-5 flex gap-2.5">
             {SOCIALS.map(({ path, label }) => (
@@ -469,7 +469,7 @@ export function Footer() {
       <div className="border-t border-neutral-200 dark:border-neutral-800">
         <Container className="flex flex-wrap items-center justify-between gap-2 py-6 font-mono text-[11px] text-neutral-500 dark:text-neutral-400">
           <p>© 2026 Dyau Deep Tech Community. Handcrafted Enterprise Platform.</p>
-          <p>[ AI · QUANTUM · CYBER · SPACE ]</p>
+          <p>[ 01 AI · 02 QUANTUM · 03 CYBER · 04 AI GOVERNANCE ]</p>
         </Container>
       </div>
     </footer>
