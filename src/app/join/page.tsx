@@ -12,7 +12,7 @@ const ROLES = [
   "AI / Machine Learning Researcher",
   "Quantum Computing Specialist",
   "Cybersecurity Practitioner",
-  "Space Systems Engineer",
+  "AI Governance Specialist",
   "Founder / Enterprise Executive",
   "Educator / Technical Lead",
   "Deep Tech Enthusiast",
@@ -102,7 +102,7 @@ export default function JoinPage() {
         <div className="animate-rise">
           <Eyebrow>Society Membership</Eyebrow>
           <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-5xl">
-            Join 12,400+ Practitioners in Deep Tech.
+            Join Verified Practitioners in Deep Tech.
           </h1>
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
             Membership is open to students, developers, researchers, founders, educators, and technology leaders. Zero noise, high technical signal.

@@ -291,7 +291,7 @@ export default function LoginPage() {
                 Where Frontier Builders Engineer the Future.
               </h2>
               <p className="mt-3 font-sans text-sm leading-relaxed text-neutral-400 font-normal">
-                Member-governed access to technical roadmaps, paper breakdowns, and regional symposia across AI, Quantum, Cybersecurity, and Space Tech.
+                Member-governed access to technical roadmaps, paper breakdowns, and regional symposia across AI, Quantum, Cybersecurity, and AI Governance.
               </p>
             </div>
 

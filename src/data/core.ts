@@ -92,10 +92,10 @@ export const DOMAIN_LIST = [DOMAINS.ai, DOMAINS.quantum, DOMAINS.cybersecurity, 
 /* --------------------------------- Stats ----------------------------------- */
 
 export const STATS = [
-  { value: "12,400+", label: "Members worldwide" },
-  { value: "38", label: "Countries represented" },
-  { value: "120+", label: "Events held since 2023" },
-  { value: "4", label: "Deep tech domains" },
+  { value: "04", label: "Active Deep Tech Domains" },
+  { value: "03", label: "Regional Hubs & Chapters" },
+  { value: "100%", label: "Practitioner-Led Network" },
+  { value: "OPEN", label: "Research & Access" },
 ];
 
 /* ------------------------------ Activity ticker ---------------------------- */
@@ -107,8 +107,8 @@ export const TICKER = [
   "Wei Ling T. published a roadmap for quantum error correction",
   "Kuala Lumpur chapter announced a hands-on SOC lab",
   "Arun S. published an AI risk assessment & auditing framework",
-  "Webinar: Post-quantum migration — 400 seats filled",
-  "Malaysia chapter crossed 1,100 members",
+  "Webinar: Post-quantum migration session announced",
+  "Malaysia chapter expanded Penang hardware security circle",
 ];
 
 /* -------------------------------- Chapters --------------------------------- */
@@ -135,12 +135,12 @@ export const CHAPTERS: Chapter[] = [
     code: "IN",
     flag: "🇮🇳",
     city: "Bengaluru · Hyderabad · Delhi NCR",
-    members: 4200,
+    members: 0,
     founded: "2023",
     blurb:
       "Our largest chapter — a dense network of AI engineers, security researchers, and governance builders across three metro hubs.",
     about: [
-      "The India chapter is where our community began. What started as a 14-person meetup in Bengaluru now spans three cities and more than 4,200 members, from first-year students to principal engineers at global AI labs.",
+      "The India chapter is where our community began. What started as a 14-person meetup in Bengaluru now spans three cities, connecting student builders and principal engineers at global AI labs.",
       "Monthly rhythm: a hands-on workshop, a research reading group, and an open mic for project demos. Everything is recorded and shared with the global community.",
     ],
     leads: [
@@ -156,7 +156,7 @@ export const CHAPTERS: Chapter[] = [
     updates: [
       { date: "Feb 2026", text: "Partnered with two universities to run a semester-long quantum fundamentals track." },
       { date: "Jan 2026", text: "150 attendees at the Bengaluru CTF qualifier — team Sentinel took 2nd place nationally." },
-      { date: "Dec 2025", text: "Published 12 member articles in the global community feed in a single month." },
+      { date: "Dec 2025", text: "Published member articles in the global community feed in a single month." },
     ],
   },
   {
@@ -165,7 +165,7 @@ export const CHAPTERS: Chapter[] = [
     code: "SG",
     flag: "🇸🇬",
     city: "Singapore",
-    members: 1800,
+    members: 0,
     founded: "2024",
     blurb:
       "Our APAC hub — founders, researchers, and policy-minded engineers meet where deep tech meets industry and government.",
@@ -195,7 +195,7 @@ export const CHAPTERS: Chapter[] = [
     code: "MY",
     flag: "🇲🇾",
     city: "Kuala Lumpur · Penang",
-    members: 1100,
+    members: 0,
     founded: "2024",
     blurb:
       "A fast-growing community of security practitioners and AI safety researchers, anchored in KL and Penang.",
@@ -213,9 +213,9 @@ export const CHAPTERS: Chapter[] = [
       { title: "Intro to Threat Modeling", type: "Workshop", date: "Apr 25, 2026", city: "Kuala Lumpur" },
     ],
     updates: [
-      { date: "Feb 2026", text: "Crossed 1,100 members — the fastest-growing chapter in the community." },
-      { date: "Jan 2026", text: "Launched the Penang hardware security study circle with 60 founding members." },
-      { date: "Dec 2025", text: "Co-hosted a cross-chapter CTF with the India chapter — 300 participants." },
+      { date: "Feb 2026", text: "Expanded hardware security and SOC lab tracks across KL and Penang." },
+      { date: "Jan 2026", text: "Launched the Penang hardware security study circle." },
+      { date: "Dec 2025", text: "Co-hosted a cross-chapter CTF with the India chapter." },
     ],
   },
 ];

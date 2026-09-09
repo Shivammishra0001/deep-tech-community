@@ -72,7 +72,7 @@ export const TECH_PAGES: Record<DomainSlug, TechPage> = {
       { title: "Papers With Code", org: "Community", kind: "Index" },
     ],
     facts: [
-      { value: "4,800+", label: "AI track members" },
+      { value: "FOCUS", label: "Foundation models & reasoning" },
       { value: "32", label: "Tutorials & workshops" },
       { value: "120+", label: "Papers discussed" },
     ],
@@ -136,7 +136,7 @@ export const TECH_PAGES: Record<DomainSlug, TechPage> = {
       { title: "arXiv quant-ph daily digest", org: "Community", kind: "Index" },
     ],
     facts: [
-      { value: "2,100+", label: "Quantum track members" },
+      { value: "RESEARCH", label: "Qubits & error correction" },
       { value: "18", label: "Reading group sessions / yr" },
       { value: "6", label: "Hardware platforms studied" },
     ],
@@ -200,7 +200,7 @@ export const TECH_PAGES: Record<DomainSlug, TechPage> = {
       { title: "MITRE ATT&CK", org: "MITRE", kind: "Framework" },
     ],
     facts: [
-      { value: "3,600+", label: "Security members" },
+      { value: "PRACTICE", label: "Offense & defense labs" },
       { value: "24", label: "Labs & CTFs per year" },
       { value: "100%", label: "Ethics-code signers" },
     ],
@@ -264,7 +264,7 @@ export const TECH_PAGES: Record<DomainSlug, TechPage> = {
       { title: "ISO/IEC 42001 AI Management Standard", org: "ISO", kind: "Standard" },
     ],
     facts: [
-      { value: "2,400+", label: "Governance track members" },
+      { value: "ALIGNED", label: "Safety & policy frameworks" },
       { value: "14", label: "Policy whitepapers published" },
       { value: "100%", label: "Responsible AI practitioners" },
     ],

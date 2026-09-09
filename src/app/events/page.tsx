@@ -4,10 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, MapPin, Radio, Calendar, Clock } from "lucide-react";
 import { Container, PageHero, DomainBadge, Button, Card, Badge } from "@/components/ui";
-import { EVENTS, type EventType } from "@/data/events";
+import { EVENTS, isUpcomingEvent, type EventType } from "@/data/events";
 
 const FILTERS: { label: string; value: EventType | "all" }[] = [
-  { label: "All Events", value: "all" },
+  { label: "All Types", value: "all" },
   { label: "Conferences", value: "Conference" },
   { label: "Workshops", value: "Workshop" },
   { label: "Meetups", value: "Meetup" },
@@ -15,8 +15,14 @@ const FILTERS: { label: string; value: EventType | "all" }[] = [
 ];
 
 export default function EventsPage() {
+  const [timeTab, setTimeTab] = useState<"upcoming" | "past">("upcoming");
   const [filter, setFilter] = useState<EventType | "all">("all");
-  const filtered = filter === "all" ? EVENTS : EVENTS.filter((e) => e.type === filter);
+
+  const timeFiltered = EVENTS.filter((e) =>
+    timeTab === "upcoming" ? isUpcomingEvent(e.date) : !isUpcomingEvent(e.date)
+  );
+
+  const filtered = filter === "all" ? timeFiltered : timeFiltered.filter((e) => e.type === filter);
 
   return (
     <>
@@ -26,21 +32,51 @@ export default function EventsPage() {
         description="Practitioner gatherings across our four deep tech domains. Free registration for all verified members."
       />
       <Container className="py-16">
-        <div role="group" aria-label="Filter by event type" className="flex flex-wrap gap-2 border-b border-neutral-200/80 pb-4 dark:border-neutral-800/80">
-          {FILTERS.map((f) => (
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200/80 pb-4 dark:border-neutral-800/80">
+          <div className="flex gap-2">
             <Button
-              key={f.value}
-              onClick={() => setFilter(f.value)}
-              variant={filter === f.value ? "primary" : "ghost"}
+              onClick={() => setTimeTab("upcoming")}
+              variant={timeTab === "upcoming" ? "primary" : "ghost"}
               size="sm"
             >
-              {f.label}
+              Upcoming
             </Button>
-          ))}
+            <Button
+              onClick={() => setTimeTab("past")}
+              variant={timeTab === "past" ? "primary" : "ghost"}
+              size="sm"
+            >
+              Past Archive
+            </Button>
+          </div>
+
+          <div role="group" aria-label="Filter by event type" className="flex flex-wrap gap-1.5">
+            {FILTERS.map((f) => (
+              <Button
+                key={f.value}
+                onClick={() => setFilter(f.value)}
+                variant={filter === f.value ? "outline" : "ghost"}
+                size="sm"
+                className="font-mono text-xs"
+              >
+                {f.label}
+              </Button>
+            ))}
+          </div>
         </div>
 
         <div className="mt-8 space-y-5">
-          {filtered.map((e) => (
+          {filtered.length === 0 ? (
+            <Card className="text-center py-16">
+              <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+                NO UPCOMING EVENTS
+              </p>
+              <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+                New gatherings and technical sessions will appear here.
+              </p>
+            </Card>
+          ) : (
+            filtered.map((e) => (
             <Card key={e.slug} hover className="group p-6">
               <Link href={`/events/${e.slug}`} className="grid gap-6 sm:grid-cols-[110px_1fr_auto] sm:items-center">
                 {/* Date block */}
@@ -108,7 +144,8 @@ export default function EventsPage() {
                 </div>
               </Link>
             </Card>
-          ))}
+          ))
+        )}
         </div>
       </Container>
     </>

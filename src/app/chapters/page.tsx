@@ -78,7 +78,7 @@ export function RegionalMapSchematic() {
               INDIA [IN]
             </text>
             <text x="14" y="2" className="fill-neutral-500 font-mono text-[9px]">
-              4,200 Members
+              Active Chapter Node
             </text>
           </g>
 
@@ -91,7 +91,7 @@ export function RegionalMapSchematic() {
               MALAYSIA [MY]
             </text>
             <text x="12" y="4" className="fill-neutral-500 font-mono text-[9px]">
-              1,100 Members
+              Active Chapter Node
             </text>
           </g>
 
@@ -104,7 +104,7 @@ export function RegionalMapSchematic() {
               SINGAPORE [SG]
             </text>
             <text x="12" y="26" className="fill-neutral-500 font-mono text-[9px]">
-              1,800 Members
+              APAC Regional Hub
             </text>
           </g>
         </svg>
@@ -145,7 +145,7 @@ export default function ChaptersPage() {
                 <div className="mt-5 space-y-2 border-t border-neutral-100 pt-4 font-sans text-xs sm:text-sm font-medium text-neutral-700 dark:border-neutral-800 dark:text-neutral-300">
                   <p className="flex items-center gap-2">
                     <Users className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden />
-                    {c.members.toLocaleString()} Members · Est. {c.founded}
+                    Regional Chapter · Est. {c.founded}
                   </p>
                   <p className="flex items-center gap-2 truncate">
                     <Calendar className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden />

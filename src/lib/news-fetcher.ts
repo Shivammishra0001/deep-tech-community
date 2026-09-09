@@ -69,10 +69,9 @@ const CATEGORY_IMAGE_POOLS: Record<string, Array<{ url: string; source: string; 
     { url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop", source: "Unsplash (Jason Dent)", license: "Unsplash License" },
     { url: "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?q=80&w=1200&auto=format&fit=crop", source: "Unsplash (NVIDIA)", license: "Unsplash License" },
   ],
-  "Space Technology": [
-    { url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop", source: "Unsplash / NASA Goddard", license: "Public Domain / Unsplash License" },
-    { url: "https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=1200&auto=format&fit=crop", source: "Unsplash (SpaceX)", license: "Unsplash License" },
-    { url: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1200&auto=format&fit=crop", source: "Unsplash (NASA)", license: "Public Domain" },
+  "AI Governance": [
+    { url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop", source: "Unsplash", license: "Unsplash License" },
+    { url: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop", source: "Unsplash", license: "Unsplash License" },
   ],
   "Cloud / Infrastructure": [
     { url: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1200&auto=format&fit=crop", source: "Unsplash (Israel Palacio)", license: "Unsplash License" },
@@ -110,8 +109,8 @@ function categorizeText(title: string, content: string, defaultCat: string): str
   if (combined.includes("quantum") || combined.includes("qubit") || combined.includes("photonics")) {
     return "Quantum Computing";
   }
-  if (combined.includes("space") || combined.includes("nasa") || combined.includes("satellite") || combined.includes("orbit") || combined.includes("lunar")) {
-    return "Space Technology";
+  if (combined.includes("governance") || combined.includes("policy") || combined.includes("alignment") || combined.includes("safety") || combined.includes("audit")) {
+    return "AI Governance";
   }
   if (combined.includes("cyber") || combined.includes("security") || combined.includes("vulnerability") || combined.includes("malware") || combined.includes("zero trust")) {
     return "Cybersecurity";

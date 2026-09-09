@@ -177,7 +177,7 @@ function Composer({ onPublished }: { onPublished: (p: Post) => void }) {
               <option value="ai">Artificial Intelligence</option>
               <option value="quantum">Quantum Computing</option>
               <option value="cybersecurity">Cybersecurity</option>
-              <option value="space">Space Technology</option>
+              <option value="governance">AI Governance</option>
             </Select>
           </div>
         </div>
@@ -470,7 +470,7 @@ export default function CommunityPage() {
                 { v: "ai", l: "AI" },
                 { v: "quantum", l: "QUANTUM" },
                 { v: "cybersecurity", l: "CYBER" },
-                { v: "space", l: "SPACE" },
+                { v: "governance", l: "GOVERNANCE" },
               ].map((d) => (
                 <Button
                   key={d.v}

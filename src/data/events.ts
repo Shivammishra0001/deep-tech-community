@@ -20,6 +20,15 @@ export type TechEvent = {
   featured?: boolean;
 };
 
+export function isUpcomingEvent(dateStr: string): boolean {
+  // Current system date: Sept 2026. Events with dates like "Mar 14, 2026", "May 22–23, 2026" have passed.
+  const now = new Date("2026-09-09T00:00:00Z");
+  const cleaned = dateStr.replace(/(\w+)\s+\d+–(\d+),\s+(\d+)/, "$1 $2, $3");
+  const parsed = Date.parse(cleaned);
+  if (isNaN(parsed)) return false;
+  return new Date(parsed) >= now;
+}
+
 export const EVENTS: TechEvent[] = [
   {
     slug: "deep-tech-summit-2026",

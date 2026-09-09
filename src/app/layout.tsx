@@ -17,18 +17,18 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://globaldeeptech.society"),
   title: {
-    default: "Deep Tech Community — AI · Quantum · Cybersecurity · Space",
+    default: "Deep Tech Community — AI · Quantum · Cybersecurity · AI Governance",
     template: "%s | Deep Tech Community",
   },
   description:
-    "An enterprise-grade professional community platform connecting 12,400+ researchers, engineers, founders, and leaders across Artificial Intelligence, Quantum Computing, Cybersecurity, and Space Technology.",
+    "A practitioner community platform connecting researchers, engineers, founders, and leaders across Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.",
   keywords: [
     "Deep Tech",
     "Deep Tech Community",
     "Artificial Intelligence",
     "Quantum Computing",
     "Cybersecurity",
-    "Space Technology",
+    "AI Governance",
     "Research Community",
     "Engineering Roadmaps",
     "Technical Symposia",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Deep Tech Community — Enterprise Deep Tech Platform",
+    title: "Deep Tech Community — Frontier Tech Platform",
     description:
-      "Connecting engineers, scientists, and founders across AI, Quantum Computing, Cybersecurity, and Space Tech.",
+      "Connecting engineers, scientists, and founders across AI, Quantum Computing, Cybersecurity, and AI Governance.",
     url: "https://globaldeeptech.society",
     siteName: "Deep Tech Community",
     locale: "en_US",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Deep Tech Community",
-    description: "Enterprise community platform for AI, Quantum, Cybersecurity, and Space Tech.",
+    description: "Practitioner community platform for AI, Quantum, Cybersecurity, and AI Governance.",
     creator: "@deeptechcommunity",
   },
   icons: {
@@ -79,7 +79,7 @@ const jsonLd = {
   url: "https://globaldeeptech.society",
   logo: "https://globaldeeptech.society/logo.png",
   description:
-    "Enterprise-grade professional community platform for Artificial Intelligence, Quantum Computing, Cybersecurity, and Space Technology.",
+    "Practitioner community platform for Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.",
   sameAs: [
     "https://twitter.com",
     "https://linkedin.com",
@@ -88,7 +88,7 @@ const jsonLd = {
     "Artificial Intelligence",
     "Quantum Computing",
     "Cybersecurity",
-    "Space Technology",
+    "AI Governance",
   ],
 };
 

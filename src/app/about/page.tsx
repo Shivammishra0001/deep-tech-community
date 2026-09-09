@@ -25,7 +25,7 @@ export default function AboutPage() {
                 A Community, Not a Social Feed.
               </h1>
               <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-neutral-600 dark:text-neutral-400">
-                Deep Tech Community began in 2023 as a fourteen-person meetup in Bengaluru. It is now a 12,400-member enterprise network across 38 countries — member-run, free to join, and strictly focused on scientific and engineering rigor.
+                Deep Tech Community began in 2023 as a fourteen-person meetup in Bengaluru. It is now a practitioner-led network across regional hubs — member-run, free to join, and strictly focused on scientific and engineering rigor.
               </p>
             </div>
             <div className="relative overflow-hidden rounded-lg border border-neutral-300 dark:border-neutral-700">
@@ -100,7 +100,7 @@ export default function AboutPage() {
               text: "Chapters run in-person, in local time, with local organisers — connected to a worldwide network.",
               icon: Radio,
               animClass: "animate-icon-space",
-              badge: "38 CHAPTERS WORLDWIDE",
+              badge: "REGIONAL CHAPTERS",
             },
           ].map((p) => {
             const Icon = p.icon;
@@ -138,7 +138,7 @@ export default function AboutPage() {
           <SectionHeading
             eyebrow="Leadership & Operations"
             title="Core Team & Track Leads"
-            description="Supported by over 140 volunteer chapter organizers, lab leads, and peer reviewers worldwide."
+            description="Supported by volunteer chapter organizers, lab leads, and peer reviewers across our regional hubs."
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {TEAM.map((t) => (
