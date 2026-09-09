@@ -87,18 +87,18 @@ export function LogoSymbol({ className }: { className?: string }) {
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cx("group inline-flex items-center gap-3 select-none", className)}>
-      <span className="inline-flex size-9 items-center justify-center rounded-lg border border-neutral-300/80 bg-neutral-100 text-neutral-950 transition-all duration-300 group-hover:scale-105 dark:border-neutral-800 dark:bg-neutral-900 dark:text-white shadow-xs">
+    <Link href="/" className={cx("group inline-flex items-center gap-2.5 select-none", className)}>
+      <span className="inline-flex size-8 items-center justify-center rounded-md border border-neutral-300/80 bg-neutral-100 text-neutral-950 transition-colors duration-200 dark:border-neutral-800 dark:bg-neutral-900 dark:text-white">
         <LogoSymbol className="size-full" />
       </span>
       <div className="flex flex-col leading-none">
         <div className="flex items-center gap-1.5">
-          <span className="font-mono text-sm font-bold tracking-tight text-neutral-900 dark:text-white group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
+          <span className="font-sans text-sm font-semibold tracking-tight text-neutral-900 dark:text-white group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
             DTC
           </span>
-          <span className="size-1 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="size-1 rounded-full bg-emerald-500" />
         </div>
-        <span className="font-mono text-[9.5px] font-bold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">
+        <span className="font-sans text-[9px] font-medium uppercase tracking-[0.14em] text-neutral-500 dark:text-neutral-400 mt-0.5">
           DEEP TECH COMMUNITY
         </span>
       </div>
@@ -116,9 +116,9 @@ function ThemeToggle() {
     <button
       onClick={() => setTheme(dark ? "light" : "dark")}
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      className="grid size-8.5 place-items-center rounded-lg border border-neutral-300/80 text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-100 dark:hover:text-white shadow-xs cursor-pointer"
+      className="grid size-8 place-items-center rounded-md text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer"
     >
-      {dark ? <Sun className="size-4 text-amber-300" /> : <Moon className="size-4 text-neutral-800 dark:text-neutral-200" />}
+      {dark ? <Sun className="size-3.5" /> : <Moon className="size-3.5" />}
     </button>
   );
 }
@@ -163,16 +163,16 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-black/70 backdrop-blur-md"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm"
         />
 
         {/* Modal Window */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: -10 }}
+          initial={{ opacity: 0, scale: 0.98, y: -8 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: -10 }}
-          transition={{ duration: 0.2 }}
-          className="relative z-10 w-full max-w-xl overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-2xl dark:border-neutral-800 dark:bg-[#0a0a0a]"
+          exit={{ opacity: 0, scale: 0.98, y: -8 }}
+          transition={{ duration: 0.15 }}
+          className="relative z-10 w-full max-w-xl overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-xl dark:border-neutral-800 dark:bg-[#0a0a0a]"
         >
           {/* Search Input Box */}
           <div className="flex items-center border-b border-neutral-200 px-4 py-3 dark:border-neutral-800">
@@ -190,7 +190,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                 Clear
               </button>
             )}
-            <kbd className="ml-2 rounded border border-neutral-200 bg-neutral-100 px-1.5 py-0.5 font-mono text-[10px] text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">
+            <kbd className="ml-2 rounded border border-neutral-200 bg-neutral-100 px-1.5 py-0.5 font-sans text-[10px] text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">
               ESC
             </kbd>
           </div>
@@ -198,7 +198,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           {/* Search Results List */}
           <div className="max-h-80 overflow-y-auto p-2">
             {filtered.length === 0 ? (
-              <div className="p-8 text-center font-mono text-xs text-neutral-500 dark:text-neutral-400">
+              <div className="p-8 text-center font-sans text-xs text-neutral-500 dark:text-neutral-400">
                 No matching results found for &quot;{query}&quot;
               </div>
             ) : (
@@ -219,7 +219,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                           <p className="font-sans text-xs font-semibold text-neutral-900 dark:text-neutral-100">
                             {item.title}
                           </p>
-                          <p className="font-mono text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                          <p className="font-sans text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
                             {item.category}
                           </p>
                         </div>
@@ -233,8 +233,8 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           </div>
 
           {/* Footer info */}
-          <div className="border-t border-neutral-200 bg-neutral-50 px-4 py-2 font-mono text-[10px] text-neutral-500 dark:border-neutral-800 dark:bg-[#050505] dark:text-neutral-400 flex justify-between items-center">
-            <span>DEEP TECH COMMUNITY PLATFORM SEARCH</span>
+          <div className="border-t border-neutral-200 bg-neutral-50 px-4 py-2 font-sans text-[10px] text-neutral-500 dark:border-neutral-800 dark:bg-[#050505] dark:text-neutral-400 flex justify-between items-center">
+            <span>DEEP TECH COMMUNITY SEARCH</span>
             <span>PRESS ESC TO CLOSE</span>
           </div>
         </motion.div>
@@ -243,7 +243,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
   );
 }
 
-/** Premium Top Horizontal Navigation Header Component (PROMPT 03 Redesign) */
+/** Premium Editorial Header Component (PROMPT 04E Refinement) */
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -253,10 +253,10 @@ export function Navbar() {
 
   useEffect(() => setMobileOpen(false), [pathname]);
 
-  // Scroll listener for sticky header background opacity & border transition
+  // Scroll listener for sticky header
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -307,18 +307,18 @@ export function Navbar() {
     <>
       <header
         className={cx(
-          "sticky top-0 z-50 w-full transition-all duration-300",
+          "sticky top-0 z-50 w-full transition-all duration-200 border-b",
           scrolled
-            ? "border-b border-neutral-200/90 bg-white/95 backdrop-blur-xl shadow-xs py-3 dark:border-[#242424] dark:bg-[#050505]/95"
-            : "border-b border-neutral-200/40 bg-white/70 backdrop-blur-md py-4 dark:border-neutral-800/40 dark:bg-neutral-950/70"
+            ? "border-neutral-200/80 bg-white/95 py-2.5 dark:border-neutral-900 dark:bg-[#050505]/95 shadow-xs"
+            : "border-neutral-200/40 bg-white/90 py-3.5 dark:border-neutral-900/60 dark:bg-[#050505]/90"
         )}
       >
         <Container className="flex items-center justify-between gap-4">
           {/* LEFT: Brand Emblem & Label */}
           <Logo />
 
-          {/* CENTER: Primary Navigation Links */}
-          <nav className="hidden md:flex items-center gap-7 lg:gap-9" aria-label="Main Navigation">
+          {/* CENTER: Primary Editorial Navigation Links */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8" aria-label="Main Navigation">
             {NAV_CENTER_ITEMS.map((item) => {
               const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
               return (
@@ -326,54 +326,47 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={cx(
-                    "relative py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 select-none",
+                    "relative py-1 font-sans text-[12px] lg:text-[13px] font-medium uppercase tracking-[0.06em] transition-colors duration-150 select-none",
                     isActive
-                      ? "text-neutral-950 dark:text-white font-bold"
+                      ? "text-neutral-950 dark:text-white"
                       : "text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
                   )}
                 >
                   {item.label}
                   {isActive && (
-                    <motion.span
-                      layoutId="nav-active-line"
-                      className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-neutral-950 dark:bg-white rounded-full"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
+                    <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-neutral-950 dark:bg-white rounded-full" />
                   )}
                 </Link>
               );
             })}
           </nav>
 
-          {/* RIGHT: Actions (Search, Theme Toggle, Join) */}
-          <div className="flex items-center gap-2.5 sm:gap-3">
+          {/* RIGHT: Actions (Subtle Search, Theme, Strong JOIN) */}
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Search Trigger Button */}
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-2 rounded-lg border border-neutral-300/80 bg-neutral-100/80 px-2.5 py-1.5 text-neutral-600 transition-colors hover:border-neutral-400 hover:text-neutral-950 dark:border-neutral-800 dark:bg-neutral-900/80 dark:text-neutral-400 dark:hover:border-neutral-700 dark:hover:text-white cursor-pointer"
+              className="flex items-center gap-1.5 px-2 py-1 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer"
               aria-label="Search platform"
             >
               <Search className="size-3.5" />
-              <span className="hidden lg:inline font-mono text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-                Search
+              <span className="hidden lg:inline font-sans text-[11px] font-medium uppercase tracking-wider">
+                SEARCH
               </span>
-              <kbd className="hidden sm:inline-flex h-4.5 items-center rounded border border-neutral-300 bg-neutral-200 px-1 font-mono text-[9px] font-bold text-neutral-600 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400">
-                ⌘K
-              </kbd>
             </button>
 
             {/* Theme Toggle */}
             <ThemeToggle />
 
-            {/* User Auth or Minimal JOIN Button */}
+            {/* User Auth or Strong JOIN Button */}
             {user ? (
               <div className="flex items-center gap-2">
                 <Link
                   href="/admin"
-                  className="flex items-center gap-2 rounded-lg border border-neutral-300/80 bg-neutral-100 px-2.5 py-1.5 text-xs font-semibold text-neutral-900 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors"
+                  className="flex items-center gap-2 rounded-md border border-neutral-300/80 bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-900 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors"
                 >
-                  <span className="flex size-5 items-center justify-center rounded-full bg-neutral-900 font-mono text-[9px] font-bold text-white dark:bg-white dark:text-neutral-950">
+                  <span className="flex size-4.5 items-center justify-center rounded-full bg-neutral-900 font-sans text-[9px] font-bold text-white dark:bg-white dark:text-neutral-950">
                     {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
                   </span>
                   <span className="hidden sm:inline max-w-[90px] truncate">{user.name.split(" ")[0]}</span>
@@ -382,10 +375,10 @@ export function Navbar() {
             ) : (
               <Link
                 href="/join"
-                className="group inline-flex items-center gap-1.5 rounded-lg border border-neutral-900 bg-neutral-900 px-3.5 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-50 transition-all duration-200 hover:bg-neutral-800 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white shadow-xs cursor-pointer"
+                className="group inline-flex items-center gap-1.5 rounded-md bg-neutral-950 px-3.5 py-1.5 font-sans text-[12px] font-medium tracking-wide text-white transition-all duration-200 hover:bg-neutral-800 dark:bg-white dark:text-neutral-950 dark:hover:bg-neutral-200 cursor-pointer shadow-xs"
               >
                 <span>JOIN</span>
-                <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Link>
             )}
 
@@ -395,7 +388,7 @@ export function Navbar() {
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
-              className="grid size-8.5 place-items-center rounded-lg border border-neutral-300 text-neutral-700 md:hidden dark:border-neutral-800 dark:text-neutral-300 cursor-pointer"
+              className="grid size-8 place-items-center rounded-md border border-neutral-200 text-neutral-700 md:hidden dark:border-neutral-800 dark:text-neutral-300 cursor-pointer"
             >
               {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
             </button>
@@ -413,55 +406,48 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="sticky top-[57px] z-40 overflow-hidden border-b border-neutral-200 bg-white md:hidden dark:border-[#242424] dark:bg-[#050505]"
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="sticky top-[53px] z-40 overflow-hidden border-b border-neutral-200 bg-white md:hidden dark:border-neutral-900 dark:bg-[#050505]"
           >
-            <Container className="py-6 space-y-5">
-              <div className="grid gap-2">
+            <Container className="py-5 space-y-4">
+              <div className="grid gap-1">
                 {NAV_CENTER_ITEMS.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="flex items-center justify-between rounded-lg px-3 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-neutral-800 hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-200 dark:hover:bg-neutral-900 dark:hover:text-white"
+                    className="flex items-center justify-between rounded-md px-3 py-2 font-sans text-xs font-medium uppercase tracking-wider text-neutral-800 hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-200 dark:hover:bg-neutral-900 dark:hover:text-white"
                   >
                     <span>{item.label}</span>
-                    <ChevronRight className="size-4 text-neutral-400" />
+                    <ChevronRight className="size-3.5 text-neutral-400" />
                   </Link>
                 ))}
-                <Link
-                  href="/chapters"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-neutral-800 hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-200 dark:hover:bg-neutral-900 dark:hover:text-white"
-                >
-                  <span>CHAPTERS</span>
-                  <ChevronRight className="size-4 text-neutral-400" />
-                </Link>
               </div>
 
-              <div className="border-t border-neutral-200 pt-4 dark:border-neutral-800">
+              <div className="border-t border-neutral-200 pt-3 dark:border-neutral-900">
                 {user ? (
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <div className="flex size-8 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-white dark:bg-white dark:text-neutral-950">
+                      <div className="flex size-7 items-center justify-center rounded-full bg-neutral-900 font-sans text-xs font-semibold text-white dark:bg-white dark:text-neutral-950">
                         {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
                       </div>
                       <div>
-                        <p className="font-display text-xs font-bold text-neutral-900 dark:text-neutral-50">{user.name}</p>
-                        <p className="font-mono text-[10px] text-neutral-500 dark:text-neutral-400">{user.email}</p>
+                        <p className="font-sans text-xs font-semibold text-neutral-900 dark:text-neutral-50">{user.name}</p>
+                        <p className="font-sans text-[10px] text-neutral-500 dark:text-neutral-400">{user.email}</p>
                       </div>
                     </div>
                     <button
                       onClick={handleLogout}
-                      className="rounded-lg border border-red-300 px-3 py-1.5 font-mono text-xs font-bold text-red-600 dark:border-red-900/60 dark:text-red-400 cursor-pointer"
+                      className="rounded-md border border-red-300 px-2.5 py-1 font-sans text-xs font-medium text-red-600 dark:border-red-900/60 dark:text-red-400 cursor-pointer"
                     >
                       Sign Out
                     </button>
                   </div>
                 ) : (
                   <div className="flex gap-2">
-                    <Button href="/login" variant="outline" size="sm" className="flex-1 justify-center">
+                    <Button href="/login" variant="outline" size="sm" className="flex-1 justify-center font-sans text-xs font-medium">
                       Login
                     </Button>
-                    <Button href="/join" variant="primary" size="sm" className="flex-1 justify-center">
+                    <Button href="/join" variant="primary" size="sm" className="flex-1 justify-center font-sans text-xs font-medium">
                       Join Community →
                     </Button>
                   </div>
