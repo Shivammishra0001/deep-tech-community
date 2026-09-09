@@ -45,7 +45,7 @@ const SOCIALS: { label: string; path: string }[] = [
 ];
 
 const NAV_CENTER_ITEMS = [
-  { label: "FRONTIERS", href: "/technologies" },
+  { label: "TECHNOLOGIES", href: "/technologies" },
   { label: "NETWORK", href: "/community" },
   { label: "NEWSLETTER", href: "/news" },
   { label: "EVENTS", href: "/events" },
