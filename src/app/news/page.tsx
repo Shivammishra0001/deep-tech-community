@@ -7,6 +7,7 @@ import { Container, PageHero, Button, Badge } from "@/components/ui";
 import { ARTICLES } from "@/data/news";
 import { SafeImage } from "@/components/safe-image";
 import { NewsletterSubscribeCard } from "@/components/newsletter-card";
+import { RevealStagger, RevealItem } from "@/components/reveal";
 
 type NewsArticle = {
   id: string;
@@ -291,63 +292,64 @@ export default function NewsPage() {
           </div>
         ) : (
           /* News Grid */
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <RevealStagger className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredArticles.map((article) => (
-              <div
-                key={article.id}
-                className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-5 shadow-xs transition-all duration-300 hover:border-neutral-400 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/80 dark:hover:border-neutral-700"
-              >
-                <div>
-                  {/* Article Image */}
-                  <div className="relative mb-4 h-44 overflow-hidden rounded-xl bg-neutral-950">
-                    <img
-                      src={article.image_url}
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
-                      }}
-                      alt={article.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute left-2.5 top-2.5 rounded-md bg-neutral-950/80 px-2 py-0.5 font-mono text-[9px] font-bold text-neutral-200 backdrop-blur-md">
-                      {article.category}
+              <RevealItem key={article.id}>
+                <div
+                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-5 shadow-xs transition-all duration-300 hover:border-neutral-400 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/80 dark:hover:border-neutral-700"
+                >
+                  <div>
+                    {/* Article Image */}
+                    <div className="relative mb-4 h-44 overflow-hidden rounded-xl bg-neutral-950">
+                      <img
+                        src={article.image_url}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
+                        }}
+                        alt={article.title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute left-2.5 top-2.5 rounded-md bg-neutral-950/80 px-2 py-0.5 font-mono text-[9px] font-bold text-neutral-200 backdrop-blur-md">
+                        {article.category}
+                      </div>
                     </div>
+
+                    {/* Title & Metadata */}
+                    <div className="flex items-center gap-2 font-mono text-[11px] text-neutral-500 dark:text-neutral-400">
+                      <span>{article.source}</span>
+                      <span>•</span>
+                      <span>{new Date(article.published_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
+                    </div>
+
+                    <h3 className="mt-2.5 font-display text-base font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50 line-clamp-2 cursor-pointer">
+                      <Link href={`/news/${article.id}`}>{article.title}</Link>
+                    </h3>
+
+                    <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-600 dark:text-neutral-300 line-clamp-3">
+                      {article.summary}
+                    </p>
                   </div>
 
-                  {/* Title & Metadata */}
-                  <div className="flex items-center gap-2 font-mono text-[11px] text-neutral-500 dark:text-neutral-400">
-                    <span>{article.source}</span>
-                    <span>•</span>
-                    <span>{new Date(article.published_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
+                  {/* Footer Link & License Info */}
+                  <div className="mt-5 border-t border-neutral-100 pt-3 dark:border-neutral-800/80">
+                    <div className="mb-2 flex items-center justify-between font-mono text-[9px] text-neutral-400">
+                      <span className="truncate">Image: {article.image_source}</span>
+                      <span className="shrink-0">{article.license.includes("Public") ? "CC0 / Public Domain" : "Unsplash"}</span>
+                    </div>
+
+                    <a
+                      href={article.source_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-neutral-300 bg-neutral-50 py-2 font-mono text-xs font-bold text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-neutral-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-100 dark:hover:text-neutral-950"
+                    >
+                      Read Original Article <ExternalLink className="size-3.5" />
+                    </a>
                   </div>
-
-                  <h3 className="mt-2.5 font-display text-base font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50 line-clamp-2 cursor-pointer">
-                    <Link href={`/news/${article.id}`}>{article.title}</Link>
-                  </h3>
-
-                  <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-600 dark:text-neutral-300 line-clamp-3">
-                    {article.summary}
-                  </p>
                 </div>
-
-                {/* Footer Link & License Info */}
-                <div className="mt-5 border-t border-neutral-100 pt-3 dark:border-neutral-800/80">
-                  <div className="mb-2 flex items-center justify-between font-mono text-[9px] text-neutral-400">
-                    <span className="truncate">Image: {article.image_source}</span>
-                    <span className="shrink-0">{article.license.includes("Public") ? "CC0 / Public Domain" : "Unsplash"}</span>
-                  </div>
-
-                  <a
-                    href={article.source_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-neutral-300 bg-neutral-50 py-2 font-mono text-xs font-bold text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-neutral-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-100 dark:hover:text-neutral-950"
-                  >
-                    Read Original Article <ExternalLink className="size-3.5" />
-                  </a>
-                </div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         )}
       </Container>
     </>

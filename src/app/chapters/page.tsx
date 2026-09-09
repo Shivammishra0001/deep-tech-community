@@ -3,6 +3,7 @@ import { ArrowRight, MapPin, Users, Calendar } from "lucide-react";
 import { Container, PageHero, Avatar, Eyebrow, Card, Button, Badge } from "@/components/ui";
 import { CHAPTERS } from "@/data/core";
 import type { Metadata } from "next";
+import { RevealStagger, RevealItem, Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
   title: "Chapters | Deep Tech Society",
@@ -124,65 +125,69 @@ export default function ChaptersPage() {
       <Container className="py-16">
         <RegionalMapSchematic />
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <RevealStagger className="grid gap-6 lg:grid-cols-3">
           {CHAPTERS.map((c) => (
-            <Card key={c.slug} hover className="group flex flex-col justify-between">
-              <div>
-                <div className="flex items-start justify-between">
-                  <span className="text-3xl" role="img" aria-label={c.country}>
-                    {c.flag}
-                  </span>
-                  <Badge>[{c.code}]</Badge>
-                </div>
-                <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
-                  <Link href={`/chapters/${c.slug}`}>{c.country}</Link>
-                </h2>
-                <p className="mt-1.5 flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                  <MapPin className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden /> {c.city}
-                </p>
-                <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">{c.blurb}</p>
-
-                <div className="mt-5 space-y-2 border-t border-neutral-100 pt-4 font-sans text-xs sm:text-sm font-medium text-neutral-700 dark:border-neutral-800 dark:text-neutral-300">
-                  <p className="flex items-center gap-2">
-                    <Users className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden />
-                    Regional Chapter · Est. {c.founded}
+            <RevealItem key={c.slug}>
+              <Card hover className="group flex flex-col justify-between">
+                <div>
+                  <div className="flex items-start justify-between">
+                    <span className="text-3xl" role="img" aria-label={c.country}>
+                      {c.flag}
+                    </span>
+                    <Badge>[{c.code}]</Badge>
+                  </div>
+                  <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
+                    <Link href={`/chapters/${c.slug}`}>{c.country}</Link>
+                  </h2>
+                  <p className="mt-1.5 flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                    <MapPin className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden /> {c.city}
                   </p>
-                  <p className="flex items-center gap-2 truncate">
-                    <Calendar className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden />
-                    Next: {c.events[0]?.title}
-                  </p>
-                </div>
-              </div>
+                  <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">{c.blurb}</p>
 
-              <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4 dark:border-neutral-800">
-                <div className="flex -space-x-1.5">
-                  {c.leads.slice(0, 3).map((l) => (
-                    <Avatar key={l.name} name={l.name} className="size-7 text-[9px]" />
-                  ))}
+                  <div className="mt-5 space-y-2 border-t border-neutral-100 pt-4 font-sans text-xs sm:text-sm font-medium text-neutral-700 dark:border-neutral-800 dark:text-neutral-300">
+                    <p className="flex items-center gap-2">
+                      <Users className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden />
+                      Regional Chapter · Est. {c.founded}
+                    </p>
+                    <p className="flex items-center gap-2 truncate">
+                      <Calendar className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden />
+                      Next: {c.events[0]?.title}
+                    </p>
+                  </div>
                 </div>
-                <Button href={`/chapters/${c.slug}`} variant="ghost" size="sm">
-                  Visit <ArrowRight className="size-3" />
-                </Button>
-              </div>
-            </Card>
+
+                <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4 dark:border-neutral-800">
+                  <div className="flex -space-x-1.5">
+                    {c.leads.slice(0, 3).map((l) => (
+                      <Avatar key={l.name} name={l.name} className="size-7 text-[9px]" />
+                    ))}
+                  </div>
+                  <Button href={`/chapters/${c.slug}`} variant="ghost" size="sm">
+                    Visit <ArrowRight className="size-3" />
+                  </Button>
+                </div>
+              </Card>
+            </RevealItem>
           ))}
-        </div>
+        </RevealStagger>
 
         {/* Expandability note */}
-        <Card className="mt-12 grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
-          <div>
-            <Eyebrow>Expansion Protocols</Eyebrow>
-            <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
-              Establish a Chapter in Your City
-            </h2>
-            <p className="mt-2 max-w-xl text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
-              We expand deliberately — driven by committed lead organizers. If you can organize monthly technical labs and gather ten builders, we supply the infrastructure and global platform.
-            </p>
-          </div>
-          <Button href="/about#contact" variant="primary" size="md">
-            Propose Chapter
-          </Button>
-        </Card>
+        <Reveal delay={100} className="mt-12">
+          <Card className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div>
+              <Eyebrow>Expansion Protocols</Eyebrow>
+              <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+                Establish a Chapter in Your City
+              </h2>
+              <p className="mt-2 max-w-xl text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+                We expand deliberately — driven by committed lead organizers. If you can organize monthly technical labs and gather ten builders, we supply the infrastructure and global platform.
+              </p>
+            </div>
+            <Button href="/about#contact" variant="primary" size="md">
+              Propose Chapter
+            </Button>
+          </Card>
+        </Reveal>
       </Container>
     </>
   );

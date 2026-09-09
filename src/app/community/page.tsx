@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Container, PageHero, DomainBadge, Avatar, Tag, Input, Label, Select, Textarea, Button, Card, Badge, cx } from "@/components/ui";
 import type { DomainSlug } from "@/data/core";
+import { RevealStagger, RevealItem } from "@/components/reveal";
 
 type Comment = { id: number; author: string; body: string };
 type Post = {
@@ -486,7 +487,7 @@ export default function CommunityPage() {
           </div>
 
           {/* Feed */}
-          <div className="mt-6 space-y-4">
+          <RevealStagger className="mt-6 space-y-4">
             {posts === null ? (
               <div className="grid place-items-center py-20">
                 <Loader2 className="size-6 animate-spin text-neutral-400" />
@@ -496,9 +497,9 @@ export default function CommunityPage() {
                 <p className="font-mono text-xs text-neutral-400">No entries match the current filter criteria.</p>
               </Card>
             ) : (
-              visible.map((p) => <PostCard key={p.id} post={p} onUpdate={updatePost} />)
+              visible.map((p) => <RevealItem key={p.id}><PostCard post={p} onUpdate={updatePost} /></RevealItem>)
             )}
-          </div>
+          </RevealStagger>
         </div>
 
         {/* Sidebar */}

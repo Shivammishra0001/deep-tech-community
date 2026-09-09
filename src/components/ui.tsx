@@ -209,7 +209,13 @@ export function Card({
   children: ReactNode;
   className?: string;
   hover?: boolean;
-} & React.HTMLAttributes<HTMLDivElement>) {
+  id?: string;
+  onClick?: import("react").MouseEventHandler<HTMLDivElement>;
+  style?: import("react").CSSProperties;
+  "aria-label"?: string;
+  "data-testid"?: string;
+  role?: string;
+}) {
   return (
     <div
       className={cx(
@@ -459,3 +465,4 @@ export function PageHero({
     </section>
   );
 }
+

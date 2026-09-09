@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, MapPin, Radio, Calendar, Clock } from "lucide-react";
 import { Container, PageHero, DomainBadge, Button, Card, Badge } from "@/components/ui";
 import { EVENTS, isUpcomingEvent, type EventType } from "@/data/events";
+import { RevealStagger, RevealItem } from "@/components/reveal";
 
 const FILTERS: { label: string; value: EventType | "all" }[] = [
   { label: "All Types", value: "all" },
@@ -65,7 +66,7 @@ export default function EventsPage() {
           </div>
         </div>
 
-        <div className="mt-8 space-y-5">
+        <RevealStagger className="mt-8 space-y-5">
           {filtered.length === 0 ? (
             <Card className="text-center py-16">
               <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
@@ -77,7 +78,8 @@ export default function EventsPage() {
             </Card>
           ) : (
             filtered.map((e) => (
-            <Card key={e.slug} hover className="group p-6">
+            <RevealItem key={e.slug}>
+            <Card hover className="group p-6">
               <Link href={`/events/${e.slug}`} className="grid gap-6 sm:grid-cols-[110px_1fr_auto] sm:items-center">
                 {/* Date block */}
                 <div className="w-[110px] shrink-0 rounded-xl border border-neutral-300 bg-neutral-100 p-3.5 text-center shadow-sm dark:border-neutral-700 dark:bg-neutral-900">
@@ -144,9 +146,10 @@ export default function EventsPage() {
                 </div>
               </Link>
             </Card>
+            </RevealItem>
           ))
         )}
-        </div>
+        </RevealStagger>
       </Container>
     </>
   );
