@@ -4,7 +4,7 @@ import { Container, Eyebrow, SectionHeading, DomainBadge, Avatar, Button, Card, 
 import { ActivityTicker } from "@/components/orbits";
 import { CinematicHero } from "@/components/hero-cinematic";
 import { FrontiersExperience } from "@/components/frontiers-experience";
-import { Reveal, CountUp } from "@/components/reveal";
+import { Reveal, RevealHeading, RevealText, RevealVisual, RevealStagger, RevealItem, CountUp } from "@/components/reveal";
 import { DOMAIN_LIST, STATS, CHAPTERS } from "@/data/core";
 import { TECH_PAGES } from "@/data/technologies";
 import { ARTICLES } from "@/data/news";
@@ -55,17 +55,17 @@ export default function HomePage() {
       {/* ------------------- 3. NEWS ------------------- */}
       <section id="news" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
         <Container>
-          <Reveal>
+          <RevealHeading>
             <SectionHeading
               eyebrow="04 / NEWSLETTER"
               title="THE FRONTIER BRIEF"
               description="Research, technical perspectives and important developments across frontier technology."
               action={{ label: "All Briefings", href: "/news" }}
             />
-          </Reveal>
+          </RevealHeading>
 
           <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-            <Reveal delay={100}>
+            <RevealVisual delay={100}>
               <Card hover className="group flex h-full flex-col justify-between overflow-hidden p-0">
                 <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-900">
                   <SafeImage
@@ -99,11 +99,11 @@ export default function HomePage() {
                   </div>
                 </div>
               </Card>
-            </Reveal>
+            </RevealVisual>
 
-            <div className="flex flex-col gap-4">
-              {latestArticles.map((a, i) => (
-                <Reveal key={a.slug} delay={150 + i * 80}>
+            <RevealStagger className="flex flex-col gap-4" delay={150}>
+              {latestArticles.map((a) => (
+                <RevealItem key={a.slug}>
                   <Card hover className="group p-4 sm:p-5">
                     <div className="flex items-center gap-4">
                       {/* 64x64px Square Thumbnail Visual */}
@@ -135,9 +135,9 @@ export default function HomePage() {
                       </div>
                     </div>
                   </Card>
-                </Reveal>
+                </RevealItem>
               ))}
-            </div>
+            </RevealStagger>
           </div>
         </Container>
       </section>
@@ -145,19 +145,19 @@ export default function HomePage() {
       {/* ------------------- 4. EVENTS ------------------- */}
       <section id="events" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-50/70 dark:bg-neutral-900/40 scroll-mt-20">
         <Container>
-          <Reveal>
+          <RevealHeading>
             <SectionHeading
               eyebrow="03 — Symposia & Labs"
               title="Upcoming Gatherings & Workshops"
               description="Practitioner-led conferences, hands-on security labs, and research reading groups. Free for all verified members."
               action={{ label: "All Events", href: "/events" }}
             />
-          </Reveal>
+          </RevealHeading>
 
           {upcomingEvents.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-3">
-              {upcomingEvents.map((e, i) => (
-                <Reveal key={e.slug} delay={i * 100}>
+            <RevealStagger className="grid gap-6 md:grid-cols-3">
+              {upcomingEvents.map((e) => (
+                <RevealItem key={e.slug}>
                   <Card hover className="group flex h-full flex-col justify-between">
                     <div>
                       <div className="flex items-start justify-between gap-3">
@@ -191,18 +191,20 @@ export default function HomePage() {
                       </Button>
                     </div>
                   </Card>
-                </Reveal>
+                </RevealItem>
               ))}
-            </div>
+            </RevealStagger>
           ) : (
-            <div className="rounded-2xl border border-neutral-300/80 dark:border-neutral-800/80 bg-white/50 dark:bg-neutral-950/50 p-12 text-center backdrop-blur-md">
-              <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
-                NO UPCOMING EVENTS
-              </p>
-              <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-                New gatherings and technical sessions will appear here.
-              </p>
-            </div>
+            <RevealVisual>
+              <div className="rounded-2xl border border-neutral-300/80 dark:border-neutral-800/80 bg-white/50 dark:bg-neutral-950/50 p-12 text-center backdrop-blur-md">
+                <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+                  NO UPCOMING EVENTS
+                </p>
+                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+                  New gatherings and technical sessions will appear here.
+                </p>
+              </div>
+            </RevealVisual>
           )}
         </Container>
       </section>
@@ -210,18 +212,18 @@ export default function HomePage() {
       {/* ------------------- 5. COMMUNITY ------------------- */}
       <section id="community" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
         <Container>
-          <Reveal>
+          <RevealHeading>
             <SectionHeading
               eyebrow="04 — Member Knowledge Exchange"
               title="Featured Community Posts"
               description="Articles, open projects, and technical debriefs shared directly by verified community members."
               action={{ label: "Open Forum", href: "/community" }}
             />
-          </Reveal>
+          </RevealHeading>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {FEATURED_POSTS.map((p, i) => (
-              <Reveal key={p.title} delay={i * 100}>
+          <RevealStagger className="grid gap-6 md:grid-cols-3">
+            {FEATURED_POSTS.map((p) => (
+              <RevealItem key={p.title}>
                 <Card hover className="group flex h-full flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between">
@@ -245,27 +247,27 @@ export default function HomePage() {
                     <Badge>{p.kind}</Badge>
                   </div>
                 </Card>
-              </Reveal>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </Container>
       </section>
 
       {/* ------------------- 6. CHAPTERS ------------------- */}
       <section id="chapters" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-50/70 dark:bg-neutral-900/40 scroll-mt-20">
         <Container>
-          <Reveal>
+          <RevealHeading>
             <SectionHeading
               eyebrow="05 — Regional Hubs"
               title="Global Network, Regional Rooms"
               description="In-person meetups, hands-on SOC labs, and university reading groups run in local time zones by chapter leads."
               action={{ label: "All Chapters", href: "/chapters" }}
             />
-          </Reveal>
+          </RevealHeading>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {CHAPTERS.map((c, i) => (
-              <Reveal key={c.slug} delay={i * 100}>
+          <RevealStagger className="grid gap-6 md:grid-cols-3">
+            {CHAPTERS.map((c) => (
+              <RevealItem key={c.slug}>
                 <Card hover className="group flex h-full flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between gap-3">
@@ -289,16 +291,16 @@ export default function HomePage() {
                     </Button>
                   </div>
                 </Card>
-              </Reveal>
+              </RevealItem>
             ))}
-          </div>
+          </RevealStagger>
         </Container>
       </section>
 
       {/* ------------------- 7. ABOUT / CTA ------------------- */}
       <section id="about" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
         <Container>
-          <Reveal>
+          <RevealVisual>
             <div className="relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 p-10 text-center text-neutral-50 shadow-2xl sm:p-16">
               <Eyebrow className="text-neutral-300">Apply for Access</Eyebrow>
               <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-neutral-50">
@@ -330,7 +332,7 @@ export default function HomePage() {
                 Practitioner-led global deep tech network
               </div>
             </div>
-          </Reveal>
+          </RevealVisual>
         </Container>
       </section>
     </div>
