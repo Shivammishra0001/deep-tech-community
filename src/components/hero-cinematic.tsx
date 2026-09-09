@@ -301,7 +301,7 @@ export function CinematicHero() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[85vh] lg:min-h-[88vh] max-h-[920px] py-10 sm:py-14 lg:py-16 flex flex-col justify-center scroll-mt-20 border-b border-neutral-900 select-none"
+      className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[85vh] lg:min-h-[88vh] max-h-[880px] pt-24 sm:pt-28 lg:pt-32 pb-12 lg:pb-16 flex flex-col justify-center scroll-mt-20 border-b border-neutral-900 select-none"
     >
       {/* ----------------- ATMOSPHERIC LIGHTING & SUBTLE GRID ----------------- */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
@@ -326,16 +326,16 @@ export function CinematicHero() {
             01 / FRONTIER NETWORK
           </div>
 
-          {/* Refined Modern Grotesk Headline */}
-          <h1 className="mt-3.5 sm:mt-4 font-display text-[38px] sm:text-[48px] md:text-[56px] lg:text-[66px] xl:text-[76px] font-semibold leading-[0.98] tracking-[-0.03em] text-neutral-50 uppercase max-w-[780px]">
+          {/* Refined Modern Sans-Serif / Editorial Headline */}
+          <h1 className="mt-3.5 sm:mt-4 font-sans text-[34px] sm:text-[44px] md:text-[52px] lg:text-[58px] xl:text-[64px] font-semibold leading-[1.02] tracking-[-0.02em] text-neutral-50 uppercase max-w-[760px]">
             WHERE FRONTIER <br className="hidden sm:inline" />
             BUILDERS ENGINEER <br className="hidden sm:inline" />
-            <span className="text-neutral-400 font-normal">THE FUTURE.</span>
+            THE FUTURE.
           </h1>
 
-          {/* Exact Supporting Copy (Max 2 lines desktop) */}
+          {/* Exact Supporting Copy */}
           <p className="mt-4 sm:mt-5 max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px] font-normal leading-relaxed text-neutral-400">
-            A practitioner-led network connecting people building the next generation of frontier technology.
+            A practitioner-led network for engineers, researchers, founders and students building what comes next.
           </p>
 
           {/* Primary & Secondary CTAs */}
@@ -364,13 +364,13 @@ export function CinematicHero() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
-          className="lg:col-span-5 order-last lg:order-none relative aspect-square w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[460px] xl:max-w-[480px] mx-auto flex items-center justify-center"
+          className="lg:col-span-5 order-last lg:order-none relative aspect-square w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[500px] xl:max-w-[540px] mx-auto flex items-center justify-center"
         >
           {/* Subtle Outer Frame Halo */}
           <div className="absolute inset-0 rounded-full border border-neutral-800/40 bg-radial from-neutral-900/20 to-transparent pointer-events-none" />
 
           {/* Interactive 3D Canvas Visual Engine */}
-          <div className="relative size-full min-h-[320px] sm:min-h-[400px] lg:min-h-[440px]">
+          <div className="relative size-full min-h-[340px] sm:min-h-[420px] lg:min-h-[460px]">
             <CanvasAbstractVisual mousePos={mousePos} />
           </div>
         </motion.div>
