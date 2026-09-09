@@ -179,7 +179,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search frontiers, research briefs, events, pages..."
+              placeholder="Search technologies, research briefs, events, pages..."
               className="w-full bg-transparent font-sans text-sm text-neutral-50 placeholder-neutral-500 outline-none"
             />
             {query && (
