@@ -301,7 +301,7 @@ export function CinematicHero() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 py-12 sm:py-16 lg:py-20 flex flex-col justify-center scroll-mt-20 border-b border-neutral-900 select-none"
+      className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[85vh] lg:min-h-[88vh] max-h-[920px] py-10 sm:py-14 lg:py-16 flex flex-col justify-center scroll-mt-20 border-b border-neutral-900 select-none"
     >
       {/* ----------------- ATMOSPHERIC LIGHTING & SUBTLE GRID ----------------- */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
@@ -309,45 +309,48 @@ export function CinematicHero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f1f1f14_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f14_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
 
         {/* Restrained Cinematic Light Beam */}
-        <motion.div
-          style={{ x: lightBeamX }}
-          className="absolute -top-1/4 -right-1/4 h-[140%] w-[110%] bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.05)_0%,rgba(180,190,210,0.015)_45%,transparent_75%)] blur-3xl pointer-events-none"
-        />
+        <div className="absolute -top-1/4 -right-1/4 h-[120%] w-[100%] bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.04)_0%,rgba(180,190,210,0.01)_50%,transparent_75%)] blur-3xl pointer-events-none" />
       </div>
 
-      <Container className="relative z-10 grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] xl:grid-cols-[1.15fr_0.85fr]">
-        {/* ----------------- LEFT (~55%): HEADLINE, COPY & CTAS ----------------- */}
-        <motion.div style={{ y: headlineY }} className="flex flex-col items-start max-w-2xl">
-          {/* Technical Editorial Label */}
-          <div className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-neutral-400">
+      <Container className="relative z-10 grid items-center gap-10 lg:grid-cols-12">
+        {/* ----------------- LEFT (7 COLS ~58%): HEADLINE, COPY & CTAS ----------------- */}
+        <motion.div
+          style={{ y: headlineY }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="lg:col-span-7 flex flex-col items-start max-w-[780px]"
+        >
+          {/* Small Technical Label */}
+          <div className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-neutral-400">
             01 / FRONTIER NETWORK
           </div>
 
-          {/* Dominant Headline with 3-line balanced wrapping */}
-          <h1 className="mt-4 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[4.6rem] font-black leading-[1.02] tracking-[-0.035em] text-neutral-50 uppercase">
-            WHERE FRONTIER <br />
-            BUILDERS ENGINEER <br />
-            <span className="text-neutral-400">THE FUTURE.</span>
+          {/* Refined Modern Grotesk Headline */}
+          <h1 className="mt-3.5 sm:mt-4 font-display text-[38px] sm:text-[48px] md:text-[56px] lg:text-[66px] xl:text-[76px] font-semibold leading-[0.98] tracking-[-0.03em] text-neutral-50 uppercase max-w-[780px]">
+            WHERE FRONTIER <br className="hidden sm:inline" />
+            BUILDERS ENGINEER <br className="hidden sm:inline" />
+            <span className="text-neutral-400 font-normal">THE FUTURE.</span>
           </h1>
 
-          {/* Exact Supporting Copy */}
-          <p className="mt-4 max-w-lg font-sans text-sm sm:text-base lg:text-lg font-normal leading-relaxed text-neutral-400">
-            A practitioner-led network for engineers, researchers, founders and students building what comes next.
+          {/* Exact Supporting Copy (Max 2 lines desktop) */}
+          <p className="mt-4 sm:mt-5 max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px] font-normal leading-relaxed text-neutral-400">
+            A practitioner-led network connecting people building the next generation of frontier technology.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="mt-7 flex flex-wrap items-center gap-3.5">
+          {/* Primary & Secondary CTAs */}
+          <div className="mt-6 sm:mt-7 flex flex-wrap items-center gap-3.5">
             <Link
               href="/join"
-              className="group inline-flex items-center gap-2 rounded-lg border border-white bg-white px-5.5 py-3 font-mono text-xs font-bold uppercase tracking-[0.14em] text-neutral-950 transition-all duration-200 hover:bg-neutral-200 hover:border-neutral-200 shadow-md cursor-pointer"
+              className="group inline-flex items-center gap-2 rounded-lg border border-white/90 bg-neutral-100 px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-neutral-950 transition-all duration-200 hover:bg-white hover:border-white shadow-sm cursor-pointer"
             >
               <span>JOIN THE COMMUNITY</span>
-              <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
+              <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
 
             <Link
               href="/community"
-              className="group inline-flex items-center gap-2 rounded-lg border border-neutral-800 bg-transparent px-5 py-3 font-mono text-xs font-bold uppercase tracking-[0.14em] text-neutral-300 transition-all duration-200 hover:border-neutral-600 hover:text-white hover:bg-neutral-900/60 cursor-pointer"
+              className="group inline-flex items-center gap-2 rounded-lg border border-neutral-800 bg-transparent px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-neutral-300 transition-all duration-200 hover:border-neutral-700 hover:text-white hover:bg-neutral-900/50 cursor-pointer"
             >
               <span>EXPLORE THE NETWORK</span>
               <ChevronRight className="size-3.5 text-neutral-500 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-white" />
@@ -355,16 +358,19 @@ export function CinematicHero() {
           </div>
         </motion.div>
 
-        {/* ----------------- RIGHT (~45%): ABSTRACT SCIENTIFIC VISUAL ----------------- */}
+        {/* ----------------- RIGHT (5 COLS ~42%): ABSTRACT SCIENTIFIC VISUAL ----------------- */}
         <motion.div
           style={{ y: visualY }}
-          className="relative aspect-square w-full max-w-[480px] lg:max-w-[540px] xl:max-w-[580px] mx-auto flex items-center justify-center"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
+          className="lg:col-span-5 order-last lg:order-none relative aspect-square w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[460px] xl:max-w-[480px] mx-auto flex items-center justify-center"
         >
           {/* Subtle Outer Frame Halo */}
           <div className="absolute inset-0 rounded-full border border-neutral-800/40 bg-radial from-neutral-900/20 to-transparent pointer-events-none" />
 
           {/* Interactive 3D Canvas Visual Engine */}
-          <div className="relative size-full min-h-[360px] sm:min-h-[440px] lg:min-h-[500px]">
+          <div className="relative size-full min-h-[320px] sm:min-h-[400px] lg:min-h-[440px]">
             <CanvasAbstractVisual mousePos={mousePos} />
           </div>
         </motion.div>
