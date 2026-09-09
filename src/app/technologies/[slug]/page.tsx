@@ -6,6 +6,7 @@ import { DOMAINS, DOMAIN_LIST } from "@/data/core";
 import { TECH_PAGES } from "@/data/technologies";
 import { ARTICLES } from "@/data/news";
 import { EVENTS } from "@/data/events";
+import { GovernanceDiagram } from "@/components/governance-diagram";
 import type { DomainSlug } from "@/data/core";
 import type { Metadata } from "next";
 
@@ -145,6 +146,7 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
         </aside>
 
         <div className="min-w-0 space-y-16">
+
           {/* 1. Overview */}
           <section id="overview" className="scroll-mt-24">
             <SectionHeading eyebrow="01 — Track Overview" title={`Engineering ${d.name}`} />
@@ -153,6 +155,12 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
                 <p key={p.slice(0, 24)}>{p}</p>
               ))}
             </div>
+
+            {domain === "governance" && (
+              <div className="mt-8">
+                <GovernanceDiagram />
+              </div>
+            )}
           </section>
 
           {/* 2. Beginner Guide */}
