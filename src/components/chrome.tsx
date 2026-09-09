@@ -1,11 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
-import { motion } from "framer-motion";
-import { Menu, X, Sun, Moon, ArrowRight, Check, Compass, Cpu, Newspaper, Calendar, Users, MapPin, Info, ShieldCheck, LogOut, User as UserIcon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Menu,
+  X,
+  Sun,
+  Moon,
+  ArrowRight,
+  Search,
+  Cpu,
+  Users,
+  Newspaper,
+  Calendar,
+  Info,
+  MapPin,
+  LogOut,
+  ChevronRight,
+  ShieldCheck,
+  Zap,
+} from "lucide-react";
 import { Container, cx, Button, Input } from "@/components/ui";
 
 const SOCIALS: { label: string; path: string }[] = [
@@ -27,65 +44,65 @@ const SOCIALS: { label: string; path: string }[] = [
   },
 ];
 
-// Left vertical navigation items
-const NAV_ITEMS = [
-  { label: "Home", href: "/", sectionId: "hero", icon: Compass },
-  { label: "Technologies", href: "/technologies", sectionId: "technologies", icon: Cpu },
-  { label: "Newsletter", href: "/news", sectionId: "news", icon: Newspaper },
-  { label: "Events", href: "/events", sectionId: "events", icon: Calendar },
-  { label: "Community", href: "/community", sectionId: "community", icon: Users },
-  { label: "Chapters", href: "/chapters", sectionId: "chapters", icon: MapPin },
-  { label: "About", href: "/about", sectionId: "about", icon: Info },
-  { label: "Admin", href: "/admin", sectionId: "admin", icon: ShieldCheck },
+const NAV_CENTER_ITEMS = [
+  { label: "FRONTIERS", href: "/technologies" },
+  { label: "NETWORK", href: "/community" },
+  { label: "NEWSLETTER", href: "/news" },
+  { label: "EVENTS", href: "/events" },
+  { label: "ABOUT", href: "/about" },
+];
+
+const SEARCH_ITEMS = [
+  { category: "Frontiers", title: "Artificial Intelligence", href: "/technologies/artificial-intelligence", icon: Cpu },
+  { category: "Frontiers", title: "Quantum Computing", href: "/technologies/quantum-computing", icon: Zap },
+  { category: "Frontiers", title: "Cybersecurity", href: "/technologies/cybersecurity", icon: ShieldCheck },
+  { category: "Frontiers", title: "AI Governance", href: "/technologies/ai-governance", icon: Info },
+  { category: "Page", title: "Frontiers Overview", href: "/technologies", icon: Cpu },
+  { category: "Page", title: "Member Network", href: "/community", icon: Users },
+  { category: "Page", title: "Newsletter Briefings", href: "/news", icon: Newspaper },
+  { category: "Page", title: "Symposia & Events", href: "/events", icon: Calendar },
+  { category: "Page", title: "Regional Chapters", href: "/chapters", icon: MapPin },
+  { category: "Page", title: "About Deep Tech Community", href: "/about", icon: Info },
+  { category: "Action", title: "Join Community Application", href: "/join", icon: ArrowRight },
 ];
 
 export function LogoSymbol({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 100 100" fill="none" className={cx("size-9 shrink-0", className)} aria-hidden>
-      {/* Revolving Outer Orbital Ring & Cardinal Nodes */}
+    <svg viewBox="0 0 100 100" fill="none" className={cx("size-8 shrink-0", className)} aria-hidden>
       <g style={{ transformOrigin: "50px 50px" }} className="animate-[spin_22s_linear_infinite]">
-        {/* Outer 4 Arcs */}
-        <path d="M 58.5 16.5 A 35 35 0 0 1 83.5 41.5" className="stroke-neutral-900 dark:stroke-neutral-50" strokeWidth="3.5" strokeLinecap="round"/>
-        <path d="M 83.5 58.5 A 35 35 0 0 1 58.5 83.5" className="stroke-neutral-900 dark:stroke-neutral-50" strokeWidth="3.5" strokeLinecap="round"/>
-        <path d="M 41.5 83.5 A 35 35 0 0 1 16.5 58.5" className="stroke-neutral-900 dark:stroke-neutral-50" strokeWidth="3.5" strokeLinecap="round"/>
-        <path d="M 16.5 41.5 A 35 35 0 0 1 41.5 16.5" className="stroke-neutral-900 dark:stroke-neutral-50" strokeWidth="3.5" strokeLinecap="round"/>
-
-        {/* 4 Node Circles */}
-        <circle cx="50" cy="15" r="5" className="fill-neutral-900 dark:fill-neutral-50"/>
-        <circle cx="85" cy="50" r="5" className="fill-neutral-900 dark:fill-neutral-50"/>
-        <circle cx="50" cy="85" r="5" className="fill-neutral-900 dark:fill-neutral-50"/>
-        <circle cx="15" cy="50" r="5" className="fill-neutral-900 dark:fill-neutral-50"/>
+        <path d="M 58.5 16.5 A 35 35 0 0 1 83.5 41.5" className="stroke-current" strokeWidth="4" strokeLinecap="round" />
+        <path d="M 83.5 58.5 A 35 35 0 0 1 58.5 83.5" className="stroke-current" strokeWidth="4" strokeLinecap="round" />
+        <path d="M 41.5 83.5 A 35 35 0 0 1 16.5 58.5" className="stroke-current" strokeWidth="4" strokeLinecap="round" />
+        <path d="M 16.5 41.5 A 35 35 0 0 1 41.5 16.5" className="stroke-current" strokeWidth="4" strokeLinecap="round" />
+        <circle cx="50" cy="15" r="4.5" className="fill-current" />
+        <circle cx="85" cy="50" r="4.5" className="fill-current" />
+        <circle cx="50" cy="85" r="4.5" className="fill-current" />
+        <circle cx="15" cy="50" r="4.5" className="fill-current" />
       </g>
-
-      {/* Inner Diamond Lines */}
-      <path d="M 50 15 L 85 50 L 50 85 L 15 50 Z" className="stroke-neutral-900/80 dark:stroke-neutral-50/80" strokeWidth="2.2" strokeLinejoin="round"/>
-
-      {/* Center Core Circle with breathing pulse */}
-      <circle cx="50" cy="50" r="11" className="fill-neutral-900 dark:fill-neutral-50 animate-pulse"/>
+      <path d="M 50 15 L 85 50 L 50 85 L 15 50 Z" className="stroke-current opacity-60" strokeWidth="2" strokeLinejoin="round" />
+      <circle cx="50" cy="50" r="9" className="fill-current animate-pulse" />
     </svg>
   );
 }
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <motion.span
-      initial={{ opacity: 0, x: -6 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.4 }}
-      className={cx("group inline-flex items-center gap-3.5", className)}
-    >
-      <span className="inline-flex size-10 items-center justify-center rounded-xl border border-neutral-300 bg-neutral-100 p-1 shadow-sm transition-transform duration-300 group-hover:scale-105 dark:border-neutral-800 dark:bg-neutral-900">
+    <Link href="/" className={cx("group inline-flex items-center gap-3 select-none", className)}>
+      <span className="inline-flex size-9 items-center justify-center rounded-lg border border-neutral-300/80 bg-neutral-100 text-neutral-950 transition-all duration-300 group-hover:scale-105 dark:border-neutral-800 dark:bg-neutral-900 dark:text-white shadow-xs">
         <LogoSymbol className="size-full" />
       </span>
-      <span className="flex flex-col">
-        <span className="font-display text-base font-bold tracking-tight text-neutral-900 transition-colors group-hover:text-neutral-600 dark:text-neutral-50 dark:group-hover:text-neutral-300">
-          DEEP TECH
+      <div className="flex flex-col leading-none">
+        <div className="flex items-center gap-1.5">
+          <span className="font-mono text-sm font-bold tracking-tight text-neutral-900 dark:text-white group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors">
+            DTC
+          </span>
+          <span className="size-1 rounded-full bg-emerald-500 animate-pulse" />
+        </div>
+        <span className="font-mono text-[9.5px] font-bold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">
+          DEEP TECH COMMUNITY
         </span>
-        <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">
-          COMMUNITY
-        </span>
-      </span>
-    </motion.span>
+      </div>
+    </Link>
   );
 }
 
@@ -99,22 +116,166 @@ function ThemeToggle() {
     <button
       onClick={() => setTheme(dark ? "light" : "dark")}
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      className="grid size-8.5 place-items-center rounded-lg border border-neutral-300 text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-100 dark:hover:text-neutral-100 shadow-xs cursor-pointer"
+      className="grid size-8.5 place-items-center rounded-lg border border-neutral-300/80 text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-100 dark:hover:text-white shadow-xs cursor-pointer"
     >
       {dark ? <Sun className="size-4 text-amber-300" /> : <Moon className="size-4 text-neutral-800 dark:text-neutral-200" />}
     </button>
   );
 }
 
-/** Sticky Left-Side Vertical Navigation Component for Desktop & Responsive Header for Mobile */
-export function SidebarNav() {
+function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (isOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  const filtered = SEARCH_ITEMS.filter(
+    (item) =>
+      item.title.toLowerCase().includes(query.toLowerCase()) ||
+      item.category.toLowerCase().includes(query.toLowerCase())
+  );
+
+  const handleSelect = (href: string) => {
+    onClose();
+    router.push(href);
+  };
+
+  return (
+    <AnimatePresence>
+      <div className="fixed inset-0 z-[100] flex items-start justify-center pt-20 px-4 sm:px-6">
+        {/* Backdrop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="fixed inset-0 bg-black/70 backdrop-blur-md"
+        />
+
+        {/* Modal Window */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96, y: -10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.96, y: -10 }}
+          transition={{ duration: 0.2 }}
+          className="relative z-10 w-full max-w-xl overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-2xl dark:border-neutral-800 dark:bg-[#0a0a0a]"
+        >
+          {/* Search Input Box */}
+          <div className="flex items-center border-b border-neutral-200 px-4 py-3 dark:border-neutral-800">
+            <Search className="size-4 text-neutral-400 mr-3 shrink-0" />
+            <input
+              type="text"
+              autoFocus
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search frontiers, research briefs, events, pages..."
+              className="w-full bg-transparent font-sans text-sm text-neutral-900 placeholder-neutral-400 outline-none dark:text-neutral-50"
+            />
+            {query && (
+              <button onClick={() => setQuery("")} className="text-xs text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200">
+                Clear
+              </button>
+            )}
+            <kbd className="ml-2 rounded border border-neutral-200 bg-neutral-100 px-1.5 py-0.5 font-mono text-[10px] text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400">
+              ESC
+            </kbd>
+          </div>
+
+          {/* Search Results List */}
+          <div className="max-h-80 overflow-y-auto p-2">
+            {filtered.length === 0 ? (
+              <div className="p-8 text-center font-mono text-xs text-neutral-500 dark:text-neutral-400">
+                No matching results found for &quot;{query}&quot;
+              </div>
+            ) : (
+              <div className="space-y-1">
+                {filtered.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.href}
+                      onClick={() => handleSelect(item.href)}
+                      className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-900/80 cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="flex size-7 items-center justify-center rounded-md border border-neutral-200 bg-neutral-50 text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300">
+                          <Icon className="size-3.5" />
+                        </div>
+                        <div>
+                          <p className="font-sans text-xs font-semibold text-neutral-900 dark:text-neutral-100">
+                            {item.title}
+                          </p>
+                          <p className="font-mono text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                            {item.category}
+                          </p>
+                        </div>
+                      </div>
+                      <ChevronRight className="size-3.5 text-neutral-400" />
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Footer info */}
+          <div className="border-t border-neutral-200 bg-neutral-50 px-4 py-2 font-mono text-[10px] text-neutral-500 dark:border-neutral-800 dark:bg-[#050505] dark:text-neutral-400 flex justify-between items-center">
+            <span>DEEP TECH COMMUNITY PLATFORM SEARCH</span>
+            <span>PRESS ESC TO CLOSE</span>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+}
+
+/** Premium Top Horizontal Navigation Header Component (PROMPT 03 Redesign) */
+export function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("hero");
+  const [searchOpen, setSearchOpen] = useState(false);
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const pathname = usePathname();
 
   useEffect(() => setMobileOpen(false), [pathname]);
 
+  // Scroll listener for sticky header background opacity & border transition
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Keyboard shortcut listener for Cmd+K / Ctrl+K
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Auth user state sync
   useEffect(() => {
     const checkUser = () => {
       try {
@@ -142,201 +303,145 @@ export function SidebarNav() {
     window.location.href = "/login";
   };
 
-  // Scroll Spy with IntersectionObserver for rock-solid active tab switching
-  useEffect(() => {
-    if (pathname !== "/") return;
-
-    const sectionElements = NAV_ITEMS.map((item) => document.getElementById(item.sectionId)).filter(Boolean) as HTMLElement[];
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-20% 0px -40% 0px",
-        threshold: 0.15,
-      }
-    );
-
-    sectionElements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [pathname]);
-
   return (
     <>
-      {/* ----------------- DESKTOP STICKY LEFT VERTICAL FLOATING SIDEBAR ----------------- */}
-      <aside className="hidden xl:flex xl:sticky xl:top-4 xl:z-50 xl:my-4 xl:ml-5 xl:h-[calc(100vh-2rem)] xl:w-72 xl:flex-col xl:justify-between xl:rounded-2xl xl:border xl:border-neutral-200/90 xl:bg-white/90 xl:p-5 xl:shadow-[0_12px_40px_rgba(0,0,0,0.06)] xl:backdrop-blur-xl dark:xl:border-neutral-800/90 dark:xl:bg-neutral-950/90 dark:xl:shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
-        <div className="flex flex-col min-h-0">
-          {/* Brand Logo */}
-          <Link href="/" aria-label="Deep Tech Society — home" className="block mb-5 shrink-0">
-            <Logo />
-          </Link>
+      <header
+        className={cx(
+          "sticky top-0 z-50 w-full transition-all duration-300",
+          scrolled
+            ? "border-b border-neutral-200/90 bg-white/95 backdrop-blur-xl shadow-xs py-3 dark:border-[#242424] dark:bg-[#050505]/95"
+            : "border-b border-neutral-200/40 bg-white/70 backdrop-blur-md py-4 dark:border-neutral-800/40 dark:bg-neutral-950/70"
+        )}
+      >
+        <Container className="flex items-center justify-between gap-4">
+          {/* LEFT: Brand Emblem & Label */}
+          <Logo />
 
-          {/* Vertical Navigation Links with Framer Motion layoutId pill animation */}
-          <nav aria-label="Sidebar Primary" className="space-y-1 overflow-y-auto pr-1">
-            {NAV_ITEMS.map((item) => {
-              const Icon = item.icon;
-              const isPageActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-              const isSectionActive = pathname === "/" && activeSection === item.sectionId;
-              const active = isSectionActive || (pathname !== "/" && isPageActive);
-
+          {/* CENTER: Primary Navigation Links */}
+          <nav className="hidden md:flex items-center gap-7 lg:gap-9" aria-label="Main Navigation">
+            {NAV_CENTER_ITEMS.map((item) => {
+              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className="group relative block rounded-xl"
+                  className={cx(
+                    "relative py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 select-none",
+                    isActive
+                      ? "text-neutral-950 dark:text-white font-bold"
+                      : "text-neutral-600 hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-white"
+                  )}
                 >
-                  {/* Floating Active Solid Filled Background Pill */}
-                  {active && (
-                    <motion.div
-                      layoutId="sidebar-floating-active-pill"
-                      className="absolute inset-0 rounded-xl bg-neutral-950 shadow-[0_6px_25px_rgba(0,0,0,0.22)] dark:bg-white dark:shadow-[0_6px_28px_rgba(255,255,255,0.18)] z-0 scale-[1.02]"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                        mass: 0.8,
-                      }}
+                  {item.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-line"
+                      className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-neutral-950 dark:bg-white rounded-full"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
-
-                  <motion.div
-                    whileHover={{ x: 4, scale: 1.015 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={cx(
-                      "relative z-10 flex items-center justify-between px-3.5 py-2.5 font-sans text-sm transition-colors duration-200",
-                      active
-                        ? "text-neutral-50 dark:text-neutral-950 font-semibold"
-                        : "text-neutral-600 dark:text-neutral-400 font-medium hover:text-neutral-950 dark:hover:text-neutral-100"
-                    )}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Icon className={cx(
-                        "size-4 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3",
-                        active ? "text-neutral-50 dark:text-neutral-950" : "text-neutral-400 dark:text-neutral-500 group-hover:text-neutral-900 dark:group-hover:text-neutral-100"
-                      )} />
-                      <span className="tracking-tight font-sans text-sm font-semibold">{item.label}</span>
-                    </div>
-
-                    {/* Precise 6px Dot on Right Side */}
-                    {active && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="size-1.5 rounded-full bg-neutral-50 dark:bg-neutral-950 shadow-xs"
-                        aria-hidden
-                      />
-                    )}
-                  </motion.div>
                 </Link>
               );
             })}
           </nav>
-        </div>
 
-        {/* Sidebar Footer Controls */}
-        <div className="border-t border-neutral-200/80 pt-4 shrink-0 dark:border-neutral-800/80">
-          <div className="flex items-center justify-between mb-3">
-            <span className="font-mono text-[10px] uppercase font-bold tracking-wider text-neutral-400">Theme Mode</span>
+          {/* RIGHT: Actions (Search, Theme Toggle, Join) */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            {/* Search Trigger Button */}
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              className="flex items-center gap-2 rounded-lg border border-neutral-300/80 bg-neutral-100/80 px-2.5 py-1.5 text-neutral-600 transition-colors hover:border-neutral-400 hover:text-neutral-950 dark:border-neutral-800 dark:bg-neutral-900/80 dark:text-neutral-400 dark:hover:border-neutral-700 dark:hover:text-white cursor-pointer"
+              aria-label="Search platform"
+            >
+              <Search className="size-3.5" />
+              <span className="hidden lg:inline font-mono text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                Search
+              </span>
+              <kbd className="hidden sm:inline-flex h-4.5 items-center rounded border border-neutral-300 bg-neutral-200 px-1 font-mono text-[9px] font-bold text-neutral-600 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400">
+                ⌘K
+              </kbd>
+            </button>
+
+            {/* Theme Toggle */}
             <ThemeToggle />
-          </div>
 
-          {user ? (
-            <div className="grid gap-2">
-              <div className="rounded-xl border border-neutral-300 bg-neutral-100/90 p-2.5 dark:border-neutral-800 dark:bg-neutral-900/90 shadow-xs flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                  <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-xs">
-                    {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-display text-xs font-bold tracking-tight text-neutral-900 dark:text-neutral-50 truncate">
-                      {user.name || "Member"}
-                    </p>
-                    <p className="font-mono text-[10px] text-neutral-500 dark:text-neutral-400 truncate">
-                      {user.email}
-                    </p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  title="Sign Out"
-                  className="flex size-7.5 shrink-0 items-center justify-center rounded-lg border border-neutral-300 bg-white text-red-600 transition-colors hover:bg-red-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-red-400 dark:hover:bg-red-950/40 cursor-pointer"
-                >
-                  <LogOut className="size-3.5" />
-                </button>
-              </div>
-              <Button href="/join" variant="primary" size="sm" className="w-full justify-center">
-                Join Community
-              </Button>
-            </div>
-          ) : (
-            <div className="grid gap-2">
-              <Button href="/login" variant="outline" size="sm" className="w-full justify-center">
-                Login
-              </Button>
-              <Button href="/join" variant="primary" size="sm" className="w-full justify-center">
-                Join Community
-              </Button>
-            </div>
-          )}
-        </div>
-      </aside>
-
-      {/* ----------------- MOBILE / TABLET HEADER NAVIGATION ----------------- */}
-      <header className="sticky top-0 z-50 border-b border-neutral-200/90 bg-white/90 backdrop-blur-md xl:hidden dark:border-neutral-800/90 dark:bg-neutral-950/90">
-        <Container className="flex h-16 items-center justify-between gap-4">
-          <Link href="/" aria-label="Deep Tech Society — home" className="shrink-0">
-            <Logo />
-          </Link>
-
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
+            {/* User Auth or Minimal JOIN Button */}
             {user ? (
-              <div className="flex items-center gap-2 rounded-full border border-neutral-300 bg-neutral-100 p-1 dark:border-neutral-800 dark:bg-neutral-900">
-                <div className="flex size-7 items-center justify-center rounded-full bg-neutral-900 font-mono text-[10px] font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950">
-                  {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
-                </div>
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/admin"
+                  className="flex items-center gap-2 rounded-lg border border-neutral-300/80 bg-neutral-100 px-2.5 py-1.5 text-xs font-semibold text-neutral-900 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors"
+                >
+                  <span className="flex size-5 items-center justify-center rounded-full bg-neutral-900 font-mono text-[9px] font-bold text-white dark:bg-white dark:text-neutral-950">
+                    {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
+                  </span>
+                  <span className="hidden sm:inline max-w-[90px] truncate">{user.name.split(" ")[0]}</span>
+                </Link>
               </div>
             ) : (
-              <Button href="/join" variant="primary" size="sm" className="hidden sm:inline-flex">
-                Join Community
-              </Button>
+              <Link
+                href="/join"
+                className="group inline-flex items-center gap-1.5 rounded-lg border border-neutral-900 bg-neutral-900 px-3.5 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-50 transition-all duration-200 hover:bg-neutral-800 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white shadow-xs cursor-pointer"
+              >
+                <span>JOIN</span>
+                <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
             )}
+
+            {/* Mobile Navigation Drawer Toggle */}
             <button
+              type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
-              className="grid size-8 place-items-center rounded-md border border-neutral-300 text-neutral-700 dark:border-neutral-700 dark:text-neutral-300"
+              className="grid size-8.5 place-items-center rounded-lg border border-neutral-300 text-neutral-700 md:hidden dark:border-neutral-800 dark:text-neutral-300 cursor-pointer"
             >
               {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
             </button>
           </div>
         </Container>
+      </header>
 
-        {/* Mobile Slide-Out Menu */}
+      {/* Search Modal Dialog */}
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      {/* Mobile Full-Width Drawer */}
+      <AnimatePresence>
         {mobileOpen && (
-          <div className="border-t border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-950">
-            <Container className="grid gap-1 py-4">
-              {NAV_ITEMS.map((item) => (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="sticky top-[57px] z-40 overflow-hidden border-b border-neutral-200 bg-white md:hidden dark:border-[#242424] dark:bg-[#050505]"
+          >
+            <Container className="py-6 space-y-5">
+              <div className="grid gap-2">
+                {NAV_CENTER_ITEMS.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="flex items-center justify-between rounded-lg px-3 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-neutral-800 hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-200 dark:hover:bg-neutral-900 dark:hover:text-white"
+                  >
+                    <span>{item.label}</span>
+                    <ChevronRight className="size-4 text-neutral-400" />
+                  </Link>
+                ))}
                 <Link
-                  key={item.href}
-                  href={item.href}
-                  className="rounded-lg px-4 py-3 font-sans text-sm font-semibold text-neutral-800 hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-neutral-50"
+                  href="/chapters"
+                  className="flex items-center justify-between rounded-lg px-3 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-neutral-800 hover:bg-neutral-100 hover:text-neutral-950 dark:text-neutral-200 dark:hover:bg-neutral-900 dark:hover:text-white"
                 >
-                  {item.label}
+                  <span>CHAPTERS</span>
+                  <ChevronRight className="size-4 text-neutral-400" />
                 </Link>
-              ))}
-              <div className="mt-2 border-t border-neutral-200 pt-3 dark:border-neutral-800">
+              </div>
+
+              <div className="border-t border-neutral-200 pt-4 dark:border-neutral-800">
                 {user ? (
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="flex size-8 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950">
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex size-8 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-white dark:bg-white dark:text-neutral-950">
                         {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
                       </div>
                       <div>
@@ -346,29 +451,32 @@ export function SidebarNav() {
                     </div>
                     <button
                       onClick={handleLogout}
-                      className="rounded-lg border border-red-300 px-3 py-1.5 font-mono text-xs font-bold text-red-600 dark:border-red-800 dark:text-red-400"
+                      className="rounded-lg border border-red-300 px-3 py-1.5 font-mono text-xs font-bold text-red-600 dark:border-red-900/60 dark:text-red-400 cursor-pointer"
                     >
                       Sign Out
                     </button>
                   </div>
                 ) : (
                   <div className="flex gap-2">
-                    <Button href="/login" variant="outline" size="sm" className="flex-1">
+                    <Button href="/login" variant="outline" size="sm" className="flex-1 justify-center">
                       Login
                     </Button>
-                    <Button href="/join" variant="primary" size="sm" className="flex-1">
-                      Join Community
+                    <Button href="/join" variant="primary" size="sm" className="flex-1 justify-center">
+                      Join Community →
                     </Button>
                   </div>
                 )}
               </div>
             </Container>
-          </div>
+          </motion.div>
         )}
-      </header>
+      </AnimatePresence>
     </>
   );
 }
+
+/** Alias export to maintain backward compatibility */
+export const SidebarNav = Navbar;
 
 export function FooterNewsletter() {
   const [email, setEmail] = useState("");
@@ -387,12 +495,11 @@ export function FooterNewsletter() {
       });
     } catch {}
 
-    // Direct redirect to proper login/signup page with prefilled email
     router.push(`/login?email=${encodeURIComponent(targetEmail)}&mode=signup`);
   }
 
   return (
-    <div className="rounded-xl border border-neutral-300 bg-neutral-100/90 p-5 shadow-xs dark:border-neutral-800 dark:bg-neutral-900/90">
+    <div className="rounded-xl border border-neutral-300/80 bg-neutral-100/90 p-5 shadow-xs dark:border-neutral-800 dark:bg-neutral-900/90">
       <p className="font-display text-[15px] font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
         DEEP TECH BRIEFING
       </p>

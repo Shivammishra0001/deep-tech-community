@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { SidebarNav, Footer } from "@/components/chrome";
+import { Navbar, Footer } from "@/components/chrome";
 import { GlobalClickGlow } from "@/components/glow";
 
 export const viewport: Viewport = {
@@ -115,17 +115,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <ThemeProvider>
           <GlobalClickGlow />
-          <div className="flex min-h-screen flex-col xl:flex-row">
-            {/* Sticky Left-Side Vertical Navigation */}
-            <SidebarNav />
-
-            {/* Main Content Workspace */}
-            <div className="flex flex-1 flex-col min-w-0">
-              <main id="main" className="flex-1 min-w-0" tabIndex={-1}>
-                {children}
-              </main>
-              <Footer />
-            </div>
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            <main id="main" className="flex-1 min-w-0" tabIndex={-1}>
+              {children}
+            </main>
+            <Footer />
           </div>
         </ThemeProvider>
       </body>
