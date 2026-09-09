@@ -17,7 +17,7 @@ export default function TechnologiesPage() {
       <PageHero
         eyebrow="Deep Tech Taxonomy"
         title="Four Core Pillars of Engineering."
-        description="We focus strictly on four frontiers. Each domain contains technical roadmaps, open libraries, practitioner circles, and regional symposia."
+        description="We focus strictly on four technologies. Each domain contains technical roadmaps, open libraries, practitioner circles, and regional symposia."
       />
       <Container className="py-16">
         <div className="grid gap-6 md:grid-cols-2">

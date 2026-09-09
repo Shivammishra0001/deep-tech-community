@@ -246,10 +246,10 @@ export function FrontiersExperience() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/80 px-3.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-400">
               <span className="size-1.5 rounded-full bg-neutral-100" />
-              01 / FRONTIERS
+              01 / TECHNOLOGIES
             </div>
             <h2 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-neutral-50">
-              FOUR FRONTIERS
+              FOUR TECHNOLOGIES
             </h2>
           </div>
           <p className="max-w-md font-sans text-sm sm:text-base font-normal leading-relaxed text-neutral-400">

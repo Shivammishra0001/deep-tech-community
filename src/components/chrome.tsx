@@ -53,11 +53,11 @@ const NAV_CENTER_ITEMS = [
 ];
 
 const SEARCH_ITEMS = [
-  { category: "Frontiers", title: "Artificial Intelligence", href: "/technologies/artificial-intelligence", icon: Cpu },
-  { category: "Frontiers", title: "Quantum Computing", href: "/technologies/quantum-computing", icon: Zap },
-  { category: "Frontiers", title: "Cybersecurity", href: "/technologies/cybersecurity", icon: ShieldCheck },
-  { category: "Frontiers", title: "AI Governance", href: "/technologies/ai-governance", icon: Info },
-  { category: "Page", title: "Frontiers Overview", href: "/technologies", icon: Cpu },
+  { category: "Technologies", title: "Artificial Intelligence", href: "/technologies/artificial-intelligence", icon: Cpu },
+  { category: "Technologies", title: "Quantum Computing", href: "/technologies/quantum-computing", icon: Zap },
+  { category: "Technologies", title: "Cybersecurity", href: "/technologies/cybersecurity", icon: ShieldCheck },
+  { category: "Technologies", title: "AI Governance", href: "/technologies/ai-governance", icon: Info },
+  { category: "Page", title: "Technologies Overview", href: "/technologies", icon: Cpu },
   { category: "Page", title: "Member Network", href: "/community", icon: Users },
   { category: "Page", title: "Newsletter Briefings", href: "/news", icon: Newspaper },
   { category: "Page", title: "Symposia & Events", href: "/events", icon: Calendar },
@@ -539,7 +539,7 @@ export function Footer() {
             About Community
           </Link>
           <Link href="/technologies" className="font-semibold text-neutral-800 hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white">
-            Four Frontiers
+            Four Technologies
           </Link>
           <Link href="/events" className="font-semibold text-neutral-800 hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white">
             Symposia &amp; Labs
