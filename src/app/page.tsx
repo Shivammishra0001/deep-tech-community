@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, Calendar, MapPin, Layers, Cpu, Shield, BookOp
 import { Container, Eyebrow, SectionHeading, DomainBadge, Avatar, Button, Card, Badge, Tag, cx } from "@/components/ui";
 import { ActivityTicker } from "@/components/orbits";
 import { CinematicHero } from "@/components/hero-cinematic";
+import { FrontiersExperience } from "@/components/frontiers-experience";
 import { Reveal, CountUp } from "@/components/reveal";
 import { DOMAIN_LIST, STATS, CHAPTERS } from "@/data/core";
 import { TECH_PAGES } from "@/data/technologies";
@@ -49,53 +50,8 @@ export default function HomePage() {
       <CinematicHero />
       <ActivityTicker />
 
-      {/* ------------------- 2. TECHNOLOGIES ------------------- */}
-      <section id="technologies" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-50/70 dark:bg-neutral-900/40 scroll-mt-20">
-        <Container>
-          <Reveal>
-            <SectionHeading
-              eyebrow="01 — Deep Tech Taxonomy"
-              title="Four Frontiers. Zero Distractions."
-              description="We deliberately restrict our focus to four deep tech domains. Each track provides technical learning roadmaps, active research circles, and peer-reviewed code bases."
-              action={{ label: "View Taxonomy", href: "/technologies" }}
-            />
-          </Reveal>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {DOMAIN_LIST.map((d, i) => {
-              const Icon = d.icon;
-              const page = TECH_PAGES[d.slug];
-              return (
-                <Reveal key={d.slug} delay={i * 100}>
-                  <Card hover className="group flex h-full flex-col justify-between p-6">
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <span className="grid size-10 place-items-center rounded-md border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100">
-                          <Icon className={cx("size-5", d.animClass)} strokeWidth={1.8} />
-                        </span>
-                        <Badge>[{d.short}]</Badge>
-                      </div>
-
-                      <h3 className="mt-4 font-display text-xl font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
-                        <Link href={`/technologies/${d.techSlug}`}>{d.name}</Link>
-                      </h3>
-                      <p className="mt-1 font-sans text-sm font-semibold text-neutral-800 dark:text-neutral-200">{d.tagline}</p>
-                      <p className="mt-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">{d.description}</p>
-                    </div>
-
-                    <div className="mt-6 flex items-center justify-between border-t border-neutral-200/80 pt-4 font-mono text-xs dark:border-neutral-800">
-                      <span className="font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100">{page.facts[0].value} Members</span>
-                      <Button href={`/technologies/${d.techSlug}`} variant="ghost" size="sm">
-                        Roadmap <ArrowUpRight className="size-3.5" />
-                      </Button>
-                    </div>
-                  </Card>
-                </Reveal>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
+      {/* ------------------- 2. TECHNOLOGIES (PROMPT 05 REDESIGN) ------------------- */}
+      <FrontiersExperience />
 
       {/* ------------------- 3. NEWS ------------------- */}
       <section id="news" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
