@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Calendar, MapPin, Layers, Cpu, Shield, BookOpen, Users, MessageSquare, Newspaper, Globe } from "lucide-react";
 import { Container, Eyebrow, SectionHeading, DomainBadge, Avatar, Button, Card, Badge, Tag, cx } from "@/components/ui";
-import { HeroOrbits, ActivityTicker } from "@/components/orbits";
+import { ActivityTicker } from "@/components/orbits";
+import { CinematicHero } from "@/components/hero-cinematic";
 import { Reveal, CountUp } from "@/components/reveal";
 import { DOMAIN_LIST, STATS, CHAPTERS } from "@/data/core";
 import { TECH_PAGES } from "@/data/technologies";
@@ -45,89 +46,8 @@ export default function HomePage() {
   return (
     <div className="relative">
       {/* -------------------------------- 1. HERO (HOME) -------------------------------- */}
-      <section id="hero" className="relative overflow-hidden bg-white dark:bg-neutral-950 py-20 sm:py-28 lg:py-32 scroll-mt-20">
-        <Container className="relative grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="animate-rise">
-            {/* What is this platform? */}
-            <div className="inline-flex items-center gap-2 rounded-md border border-neutral-300 bg-neutral-100/90 px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-neutral-800 dark:border-neutral-700 dark:bg-neutral-900/90 dark:text-neutral-200">
-              <span className="size-2 rounded-full bg-neutral-900 dark:bg-neutral-100" aria-hidden />
-              Enterprise Deep Tech Community Platform
-            </div>
-
-            {/* Powerful Headline */}
-            <h1 className="mt-6 font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.04] tracking-[-0.035em] text-neutral-900 dark:text-neutral-50">
-              Where Frontier Builders Engineer the Future.
-            </h1>
-
-            {/* Description */}
-            <p className="mt-6 max-w-2xl font-sans text-lg sm:text-xl font-normal leading-relaxed text-neutral-700 dark:text-neutral-300">
-              Deep Tech Community is a professional, member-governed network connecting 12,400+ students, engineers, researchers, founders, and executives across Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.
-            </p>
-
-            {/* Two Action Buttons */}
-            <div className="mt-8 flex flex-wrap items-center gap-3.5">
-              <Button href="/join" variant="primary" size="lg">
-                Join Community
-                <ArrowRight className="size-4" aria-hidden />
-              </Button>
-              <Button href="/events" variant="outline" size="lg">
-                Explore Events
-              </Button>
-            </div>
-
-            {/* Lightweight Horizontal Stats Strip */}
-            <div className="mt-10 flex flex-wrap items-center gap-6 sm:gap-8 border-t border-neutral-200/80 pt-8 dark:border-neutral-800/80">
-              <div className="flex flex-col">
-                <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50">
-                  <CountUp end={12400} suffix="+" />
-                </span>
-                <span className="mt-1 font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-neutral-600 dark:text-neutral-400">
-                  Verified Members
-                </span>
-              </div>
-
-              <div className="hidden sm:block h-8 w-px bg-neutral-200/90 dark:bg-neutral-800/90" aria-hidden />
-
-              <div className="flex flex-col">
-                <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50">
-                  4
-                </span>
-                <span className="mt-1 font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-neutral-600 dark:text-neutral-400">
-                  Deep Tech Domains
-                </span>
-              </div>
-
-              <div className="hidden sm:block h-8 w-px bg-neutral-200/90 dark:bg-neutral-800/90" aria-hidden />
-
-              <div className="flex flex-col">
-                <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50">
-                  <CountUp end={3} />
-                </span>
-                <span className="mt-1 font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-neutral-600 dark:text-neutral-400">
-                  Regional Hubs
-                </span>
-              </div>
-
-              <div className="hidden sm:block h-8 w-px bg-neutral-200/90 dark:bg-neutral-800/90" aria-hidden />
-
-              <div className="flex flex-col">
-                <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50">
-                  <CountUp end={24} suffix="+" />
-                </span>
-                <span className="mt-1 font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-neutral-600 dark:text-neutral-400">
-                  Annual Symposia
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Revolving Orbital Graphic (Shifted Further Upward) */}
-          <HeroOrbits className="animate-rise lg:-mt-20 xl:-mt-28 relative z-10" />
-        </Container>
-
-        {/* Live Ticker Strip */}
-        <ActivityTicker />
-      </section>
+      <CinematicHero />
+      <ActivityTicker />
 
       {/* ------------------- 2. TECHNOLOGIES ------------------- */}
       <section id="technologies" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-50/70 dark:bg-neutral-900/40 scroll-mt-20">
