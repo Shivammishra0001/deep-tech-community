@@ -136,10 +136,10 @@ export default function ChaptersPage() {
                   <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
                     <Link href={`/chapters/${c.slug}`}>{c.country}</Link>
                   </h2>
-                  <p className="mt-1.5 flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                  <p className="mt-1.5 flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-200">
                     <MapPin className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden /> {c.city}
                   </p>
-                  <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">{c.blurb}</p>
+                  <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">{c.blurb}</p>
 
                   <div className="mt-5 space-y-2 border-t border-neutral-100 pt-4 font-sans text-xs sm:text-sm font-medium text-neutral-700 dark:border-neutral-800 dark:text-neutral-300">
                     <p className="flex items-center gap-2">

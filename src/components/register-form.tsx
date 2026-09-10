@@ -44,7 +44,7 @@ export function RegisterForm({ eventSlug, eventTitle }: { eventSlug: string; eve
         <p className="mt-3 font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">
           {state === "already" ? "Registration Exists" : "Registration Confirmed"}
         </p>
-        <p className="mt-1.5 text-xs text-neutral-600 dark:text-neutral-400">
+        <p className="mt-1.5 text-xs text-neutral-600 dark:text-neutral-300">
           {state === "already"
             ? "Your email is already registered for this symposium."
             : `A calendar invitation for “${eventTitle}” has been queued for ${email}.`}
@@ -92,9 +92,6 @@ export function RegisterForm({ eventSlug, eventTitle }: { eventSlug: string; eve
           "Register for Event"
         )}
       </Button>
-      <p className="text-center font-mono text-[10px] uppercase tracking-wider text-neutral-400">
-        Enterprise verification · Member access priority
-      </p>
     </form>
   );
 }

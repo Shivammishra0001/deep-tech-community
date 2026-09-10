@@ -249,7 +249,7 @@ export default function NewsPage() {
                 </div>
                 <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-200/80 pt-4 dark:border-neutral-800 font-mono text-xs">
                   <span className="text-neutral-500 truncate max-w-[200px]">
-                    Source: <strong className="text-neutral-700 dark:text-neutral-300">{featuredArticle.source}</strong>
+                    Source: <strong className="text-neutral-700 dark:text-neutral-200">{featuredArticle.source}</strong>
                   </span>
                   <a
                     href={featuredArticle.source_url}
@@ -274,7 +274,7 @@ export default function NewsPage() {
         ) : filteredArticles.length === 0 ? (
           /* Empty State */
           <div className="mt-16 rounded-2xl border border-dashed border-neutral-300 p-12 text-center dark:border-neutral-800">
-            <p className="font-mono text-sm font-bold text-neutral-700 dark:text-neutral-300">
+            <p className="font-mono text-sm font-bold text-neutral-700 dark:text-neutral-200">
               No news briefings found for "{query || categoryFilter}".
             </p>
             <p className="mt-1 font-sans text-xs text-neutral-500">
@@ -325,7 +325,7 @@ export default function NewsPage() {
                       <Link href={`/news/${article.id}`}>{article.title}</Link>
                     </h3>
 
-                    <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-600 dark:text-neutral-300 line-clamp-3">
+                    <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-600 dark:text-neutral-200 line-clamp-3">
                       {article.summary}
                     </p>
                   </div>

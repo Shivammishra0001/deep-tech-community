@@ -252,7 +252,7 @@ export function FrontiersExperience() {
               FOUR TECHNOLOGIES
             </h2>
           </div>
-          <p className="max-w-md font-sans text-sm sm:text-base font-normal leading-relaxed text-neutral-300">
+          <p className="max-w-md font-sans text-sm sm:text-base font-medium leading-relaxed text-neutral-300">
             Exploring the technologies shaping tomorrow. <br />
             Built by people, for people, at the frontier.
           </p>

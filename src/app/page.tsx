@@ -86,7 +86,7 @@ export default function HomePage() {
                     <h3 className="font-display text-xl font-bold leading-tight tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
                       <Link href={`/news/${featuredArticle.slug}`}>{featuredArticle.title}</Link>
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">
+                    <p className="mt-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">
                       {featuredArticle.excerpt}
                     </p>
                   </div>
@@ -124,12 +124,12 @@ export default function HomePage() {
                       <div className="flex flex-1 flex-col min-w-0">
                         <div className="flex items-center justify-between gap-2">
                           <DomainBadge domain={a.domain} />
-                          <span className="font-mono text-xs font-semibold text-neutral-500 dark:text-neutral-300">{a.date}</span>
+                          <span className="font-mono text-xs font-semibold text-neutral-400 dark:text-neutral-200">{a.date}</span>
                         </div>
                         <h4 className="mt-1.5 font-display text-sm sm:text-base font-bold leading-snug tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50 line-clamp-2">
                           <Link href={`/news/${a.slug}`}>{a.title}</Link>
                         </h4>
-                        <p className="mt-1 font-sans text-xs font-medium text-neutral-500 dark:text-neutral-300">
+                        <p className="mt-1 font-sans text-xs font-medium text-neutral-400 dark:text-neutral-200">
                           By {a.author} · {a.readingTime} min
                         </p>
                       </div>
@@ -197,7 +197,7 @@ export default function HomePage() {
           ) : (
             <RevealVisual>
               <div className="rounded-2xl border border-neutral-300/80 dark:border-neutral-800/80 bg-white/50 dark:bg-neutral-950/50 p-12 text-center backdrop-blur-md">
-                <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-300">
+                <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-200">
                   NO UPCOMING EVENTS
                 </p>
                 <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">
@@ -239,7 +239,7 @@ export default function HomePage() {
                     <h3 className="mt-4 font-display text-base font-bold leading-snug tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
                       <Link href="/community">{p.title}</Link>
                     </h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">{p.excerpt}</p>
+                    <p className="mt-2.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">{p.excerpt}</p>
                   </div>
 
                   <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4 dark:border-neutral-800">
@@ -281,8 +281,8 @@ export default function HomePage() {
                       </div>
                       <Badge className="font-sans text-xs font-semibold">Regional Hub</Badge>
                     </div>
-                    <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300">{c.city}</p>
-                    <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">{c.blurb}</p>
+                    <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-200">{c.city}</p>
+                    <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">{c.blurb}</p>
                   </div>
 
                   <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800">
@@ -306,7 +306,7 @@ export default function HomePage() {
               <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-neutral-50">
                 Join Frontier Builders Worldwide
               </h2>
-              <p className="mx-auto mt-4 max-w-xl font-sans text-base sm:text-lg leading-relaxed text-neutral-300 font-normal">
+              <p className="mx-auto mt-4 max-w-xl font-sans text-base sm:text-lg leading-relaxed text-neutral-300 font-medium">
                 Free membership for students, engineers, researchers, founders, and educators. Direct access to technical roadmaps, regional symposia, and active project channels.
               </p>
               

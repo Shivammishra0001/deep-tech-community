@@ -28,6 +28,7 @@ html {
 
 body {
   font-family: var(--font-sans);
+  font-weight: 400;
   background: var(--color-paper);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
@@ -37,7 +38,7 @@ body {
 
 .dark body {
   background: #050505;
-  color: #f2f2f2;
+  color: #ffffff;
 }
 
 :root {

@@ -137,7 +137,7 @@ export function NewsInteractiveCard({
           <h3 className="font-display text-lg sm:text-xl font-bold leading-snug tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
             <Link href={`/news/${slug}`}>{title}</Link>
           </h3>
-          <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">
+          <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">
             {summary}
           </p>
         </div>
@@ -241,7 +241,7 @@ export function NewsInteractiveCard({
                     <span className="font-display font-semibold text-neutral-900 dark:text-neutral-100">{c.author}</span>
                     <span className="font-mono text-[10px] text-neutral-400">{c.date}</span>
                   </div>
-                  <p className="mt-1 font-sans text-neutral-700 dark:text-neutral-300 font-normal leading-relaxed">{c.body}</p>
+                  <p className="mt-1 font-sans text-neutral-700 dark:text-neutral-200 font-medium leading-relaxed">{c.body}</p>
                 </div>
               ))}
             </div>
@@ -416,7 +416,7 @@ export function ArticleDetailPageActions({
                 </div>
                 <span className="font-mono text-[10px] text-neutral-400">{c.date}</span>
               </div>
-              <p className="mt-2 font-sans text-neutral-700 dark:text-neutral-300 font-normal leading-relaxed">{c.body}</p>
+              <p className="mt-2 font-sans text-neutral-700 dark:text-neutral-200 font-medium leading-relaxed">{c.body}</p>
             </div>
           ))}
         </div>

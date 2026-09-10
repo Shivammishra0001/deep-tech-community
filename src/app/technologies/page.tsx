@@ -34,7 +34,7 @@ export default function TechnologiesPage() {
                         <span className="grid size-10 place-items-center rounded-md border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100">
                           <Icon className="size-5" />
                         </span>
-                        <span className="font-mono text-xs font-semibold text-neutral-400">0{i + 1}</span>
+                        <span className="font-mono text-xs font-semibold text-neutral-300">0{i + 1}</span>
                       </div>
                       <Badge>[{d.short}]</Badge>
                     </div>
@@ -42,7 +42,7 @@ export default function TechnologiesPage() {
                     <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-100">
                       <Link href={`/technologies/${d.techSlug}`}>{d.name}</Link>
                     </h2>
-                    <p className="mt-1 font-mono text-xs text-neutral-400">{d.tagline}</p>
+                    <p className="mt-1 font-mono text-xs text-neutral-300">{d.tagline}</p>
                     <p className="mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">{d.description}</p>
                   </div>
 
@@ -51,7 +51,7 @@ export default function TechnologiesPage() {
                       {page.facts.map((f) => (
                         <div key={f.label} className="text-center first:pl-0 last:pr-0">
                           <p className="font-bold text-neutral-900 dark:text-neutral-100">{f.value}</p>
-                          <p className="mt-0.5 text-[10px] text-neutral-400">{f.label}</p>
+                          <p className="mt-0.5 text-[10px] text-neutral-300">{f.label}</p>
                         </div>
                       ))}
                     </div>

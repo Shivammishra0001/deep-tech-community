@@ -11,7 +11,7 @@ export default function PrivacyPage() {
     <>
       <PageHero eyebrow="Enterprise Governance" title="Privacy Policy" description="Direct, transparent data handling practices. Last updated January 2026." />
       <Container className="max-w-3xl py-16">
-        <Card className="space-y-8 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+        <Card className="space-y-8 text-sm leading-relaxed text-neutral-700 dark:text-neutral-200">
           <section>
             <h2 className="font-display text-lg font-semibold text-neutral-900 dark:text-neutral-100">1. Data Collection Scope</h2>
             <p className="mt-2">

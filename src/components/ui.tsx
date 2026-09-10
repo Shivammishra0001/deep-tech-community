@@ -52,7 +52,7 @@ export function SectionHeading({
         <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-4xl lg:text-[2.6rem] sm:leading-[1.12]">
           {title}
         </h2>
-        {description && <p className="mt-3.5 font-sans text-base sm:text-[17px] font-normal leading-relaxed text-neutral-700 dark:text-neutral-200">{description}</p>}
+        {description && <p className="mt-3.5 font-sans text-base sm:text-[17px] font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">{description}</p>}
       </div>
       {action && (
         <Link
@@ -370,7 +370,7 @@ export function CommunityCard({
               {flag}
             </span>
             <h3 className="font-display text-lg sm:text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-              {country} <span className="font-mono text-xs font-semibold text-neutral-500">[{code}]</span>
+              {country} <span className="font-mono text-xs font-semibold text-neutral-400">[{code}]</span>
             </h3>
           </div>
           <Badge className="font-sans text-xs font-semibold">{members.toLocaleString()} Members</Badge>
@@ -419,7 +419,7 @@ export function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
 
 export function Breadcrumbs({ items }: { items: { label: string; href?: string }[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 font-mono text-xs text-neutral-500">
+    <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 font-mono text-xs text-neutral-400">
       {items.map((item, idx) => (
         <span key={idx} className="flex items-center gap-2">
           {idx > 0 && <ChevronRight className="size-3 text-neutral-400" />}
@@ -458,7 +458,7 @@ export function PageHero({
           <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50">
             {title}
           </h1>
-          {description && <p className="mt-5 max-w-2xl font-sans text-lg sm:text-xl font-normal leading-relaxed text-neutral-700 dark:text-neutral-200">{description}</p>}
+          {description && <p className="mt-5 max-w-2xl font-sans text-lg sm:text-xl font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">{description}</p>}
           {children}
         </div>
       </Container>

@@ -334,7 +334,7 @@ export function CinematicHero() {
           </h1>
 
           {/* Exact Supporting Copy */}
-          <p className="mt-4 sm:mt-5 max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px] font-normal leading-relaxed text-neutral-300">
+          <p className="mt-4 sm:mt-5 max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px] font-medium leading-relaxed text-neutral-300">
             A practitioner-led network for engineers, researchers, founders and students building what comes next.
           </p>
 

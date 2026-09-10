@@ -333,7 +333,7 @@ export default function LoginPage() {
                 <h1 className="mt-5 font-display text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
                   Welcome to Deep Tech Community!
                 </h1>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">
+                <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">
                   Hello <strong className="text-neutral-900 dark:text-neutral-100">{fullName || loginIdentifier.split("@")[0] || email.split("@")[0] || "Member"}</strong>, you are signed in successfully.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">

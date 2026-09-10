@@ -68,7 +68,7 @@ export function HeroOrbits({ className }: { className?: string }) {
           <span className="font-mono text-lg font-extrabold tracking-widest text-neutral-900 dark:text-neutral-50">
             DTC
           </span>
-          <span className="mt-1 max-w-[105px] font-mono text-[8px] font-semibold uppercase leading-tight tracking-wider text-neutral-500 dark:text-neutral-400">
+          <span className="mt-1 max-w-[105px] font-mono text-[8px] font-semibold uppercase leading-tight tracking-wider text-neutral-500 dark:text-neutral-300">
             Advancing the Future Through Deep Tech
           </span>
         </div>
@@ -122,7 +122,7 @@ export function ActivityTicker() {
     <div className="ticker-paused relative overflow-hidden border-y border-neutral-200/80 bg-neutral-50/50 py-3.5 dark:border-neutral-800/80 dark:bg-neutral-950/50">
       <div className="animate-ticker flex w-max gap-8 whitespace-nowrap">
         {items.map((t, i) => (
-          <span key={i} className="inline-flex items-center gap-2.5 font-mono text-xs text-neutral-600 dark:text-neutral-400">
+          <span key={i} className="inline-flex items-center gap-2.5 font-mono text-xs text-neutral-600 dark:text-neutral-300">
             <span className="size-1 rounded-full bg-neutral-900 dark:bg-neutral-100" aria-hidden />
             {t}
           </span>

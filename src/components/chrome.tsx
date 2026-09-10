@@ -484,7 +484,7 @@ export function FooterNewsletter() {
       <p className="font-display text-[15px] font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
         DEEP TECH BRIEFING
       </p>
-      <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">
+      <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">
         Bi-weekly technical digests — open roadmaps, research highlights, and symposium schedules. No noise.
       </p>
 

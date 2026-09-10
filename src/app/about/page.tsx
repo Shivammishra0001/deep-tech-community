@@ -120,7 +120,7 @@ export default function AboutPage() {
                         <span className="grid size-11 place-items-center rounded-xl border border-neutral-300 bg-neutral-100 p-2.5 text-neutral-900 shadow-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-50 transition-transform group-hover:scale-105">
                           <Icon className={cx("size-5.5", p.animClass)} strokeWidth={1.8} />
                         </span>
-                        <span className="font-mono text-xs font-bold text-neutral-400 dark:text-neutral-500">{p.num}</span>
+                        <span className="font-mono text-xs font-bold text-neutral-300 dark:text-neutral-500">{p.num}</span>
                       </div>
                       <Badge className="font-mono text-[10px] font-bold uppercase tracking-wider text-neutral-800 dark:text-neutral-200 border-neutral-300 dark:border-neutral-700">
                         {p.badge}
@@ -194,7 +194,7 @@ export default function AboutPage() {
               <div>
                 <HandHeart className="size-6 text-neutral-300" aria-hidden />
                 <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight">Become a Track Volunteer</h2>
-                <p className="mt-3 text-xs leading-relaxed text-neutral-400">
+                <p className="mt-3 text-xs leading-relaxed text-neutral-300">
                   Every workshop, reading group, and paper summary is community-built. Roles open quarterly for event organizing, mentoring, reviewing, and chapter operations.
                 </p>
               </div>
