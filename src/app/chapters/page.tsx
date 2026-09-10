@@ -179,7 +179,7 @@ export default function ChaptersPage() {
               <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
                 Establish a Chapter in Your City
               </h2>
-              <p className="mt-2 max-w-xl text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <p className="mt-2 max-w-xl text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">
                 We expand deliberately — driven by committed lead organizers. If you can organize monthly technical labs and gather ten builders, we supply the infrastructure and global platform.
               </p>
             </div>

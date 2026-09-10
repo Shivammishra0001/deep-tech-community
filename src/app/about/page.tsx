@@ -25,7 +25,7 @@ export default function AboutPage() {
               <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-5xl">
                 A Community, Not a Social Feed.
               </h1>
-              <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-neutral-600 dark:text-neutral-300">
                 Deep Tech Community began in 2023 as a fourteen-person meetup in Bengaluru. It is now a practitioner-led network across regional hubs — member-run, free to join, and strictly focused on scientific and engineering rigor.
               </p>
             </div>
@@ -53,7 +53,7 @@ export default function AboutPage() {
             <p className="mt-3 font-display text-xl font-semibold leading-snug tracking-tight text-neutral-900 dark:text-neutral-100">
               Make deep tech knowledge accessible to anyone with the discipline to learn it.
             </p>
-            <p className="mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+            <p className="mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">
               We remove the three barriers that keep talented individuals out of hard technology: access to honest guidance, access to practitioners, and access to a room where rigorous questions are welcome.
             </p>
           </Card>
@@ -65,7 +65,7 @@ export default function AboutPage() {
             <p className="mt-3 font-display text-xl font-semibold leading-snug tracking-tight text-neutral-900 dark:text-neutral-100">
               A world where the next breakthrough is as likely to come from a study circle as from a well-funded lab.
             </p>
-            <p className="mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+            <p className="mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">
               Regional chapters in every technology hub, open technical libraries, and a seamless pipeline from first workshop to published paper — governed by members.
             </p>
           </Card>
@@ -130,7 +130,7 @@ export default function AboutPage() {
                     <h3 className="mt-5 font-display text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
                       {p.title}
                     </h3>
-                    <p className="mt-2.5 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400 sm:text-sm">
+                    <p className="mt-2.5 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300 sm:text-sm">
                       {p.text}
                     </p>
                   </div>
@@ -159,7 +159,7 @@ export default function AboutPage() {
                   <div className="min-w-0">
                     <p className="font-display text-sm font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">{t.name}</p>
                     <p className="font-mono text-[10px] font-medium uppercase tracking-wider text-neutral-500">{t.role}</p>
-                    <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">{t.bio}</p>
+                    <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">{t.bio}</p>
                   </div>
                 </Card>
               </RevealItem>
@@ -213,7 +213,7 @@ export default function AboutPage() {
               <ul className="mt-4 space-y-4 text-xs">
                 <li className="flex items-center gap-3">
                   <span className="grid size-9 place-items-center rounded-md border border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900">
-                    <Mail className="size-4 text-neutral-600 dark:text-neutral-400" aria-hidden />
+                    <Mail className="size-4 text-neutral-600 dark:text-neutral-300" aria-hidden />
                   </span>
                   <div>
                     <p className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">hello@globaldeeptech.society</p>
@@ -222,7 +222,7 @@ export default function AboutPage() {
                 </li>
                 <li className="flex items-center gap-3">
                   <span className="grid size-9 place-items-center rounded-md border border-neutral-200 bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900">
-                    <MapPin className="size-4 text-neutral-600 dark:text-neutral-400" aria-hidden />
+                    <MapPin className="size-4 text-neutral-600 dark:text-neutral-300" aria-hidden />
                   </span>
                   <div>
                     <p className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">Hubs: Bengaluru · Singapore · Kuala Lumpur</p>

@@ -322,7 +322,7 @@ export function CinematicHero() {
           className="lg:col-span-7 flex flex-col items-start max-w-[780px]"
         >
           {/* Small Technical Label */}
-          <div className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-neutral-400">
+          <div className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-neutral-300">
             01 / FRONTIER NETWORK
           </div>
 
@@ -334,7 +334,7 @@ export function CinematicHero() {
           </h1>
 
           {/* Exact Supporting Copy */}
-          <p className="mt-4 sm:mt-5 max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px] font-normal leading-relaxed text-neutral-400">
+          <p className="mt-4 sm:mt-5 max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px] font-normal leading-relaxed text-neutral-300">
             A practitioner-led network for engineers, researchers, founders and students building what comes next.
           </p>
 

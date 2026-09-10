@@ -252,7 +252,7 @@ export function FrontiersExperience() {
               FOUR TECHNOLOGIES
             </h2>
           </div>
-          <p className="max-w-md font-sans text-sm sm:text-base font-normal leading-relaxed text-neutral-400">
+          <p className="max-w-md font-sans text-sm sm:text-base font-normal leading-relaxed text-neutral-300">
             Exploring the technologies shaping tomorrow. <br />
             Built by people, for people, at the frontier.
           </p>
@@ -310,7 +310,7 @@ export function FrontiersExperience() {
                   <p className="font-sans text-xl font-semibold text-neutral-200">
                     {current.description}
                   </p>
-                  <p className="font-sans text-sm leading-relaxed text-neutral-400">
+                  <p className="font-sans text-sm leading-relaxed text-neutral-300">
                     {current.tagline}
                   </p>
                 </motion.div>
@@ -360,7 +360,7 @@ export function FrontiersExperience() {
             return (
               <div key={f.num} className="pt-10 first:pt-0 space-y-6">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-4xl font-black text-neutral-600">{f.num}</span>
+                  <span className="font-mono text-4xl font-black text-neutral-500">{f.num}</span>
                   <span className="grid size-9 place-items-center rounded-lg border border-neutral-800 bg-neutral-900 text-neutral-200">
                     <Icon className="size-4" />
                   </span>
@@ -373,15 +373,15 @@ export function FrontiersExperience() {
                   <p className="mt-2 font-sans text-base font-semibold text-neutral-200">
                     {f.description}
                   </p>
-                  <p className="mt-1 font-sans text-xs leading-relaxed text-neutral-400">
+                  <p className="mt-1 font-sans text-xs leading-relaxed text-neutral-300">
                     {f.tagline}
                   </p>
                 </div>
 
                 <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-950 flex items-center justify-center">
                   <div className="flex flex-col items-center gap-2 p-6 text-center">
-                    <Icon className="size-8 text-neutral-400 animate-pulse" />
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                    <Icon className="size-8 text-neutral-300 animate-pulse" />
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
                       {f.subtitle}
                     </span>
                   </div>
@@ -392,7 +392,7 @@ export function FrontiersExperience() {
                   className="group inline-flex w-full items-center justify-between rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-3 font-mono text-xs font-bold uppercase tracking-wider text-neutral-100 hover:border-neutral-600"
                 >
                   <span>EXPLORE {f.title} ROADMAP</span>
-                  <ArrowRight className="size-4 text-neutral-400 group-hover:translate-x-1" />
+                  <ArrowRight className="size-4 text-neutral-300 group-hover:translate-x-1" />
                 </Link>
               </div>
             );

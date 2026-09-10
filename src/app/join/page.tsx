@@ -104,7 +104,7 @@ export default function JoinPage() {
           <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-5xl">
             Join Verified Practitioners in Deep Tech.
           </h1>
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
             Membership is open to students, developers, researchers, founders, educators, and technology leaders. Zero noise, high technical signal.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -112,7 +112,7 @@ export default function JoinPage() {
               <Card key={p.title}>
                 <p className="font-mono text-xs text-neutral-400">0{i + 1}</p>
                 <h3 className="mt-2 font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{p.title}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">{p.text}</p>
+                <p className="mt-1 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">{p.text}</p>
               </Card>
             ))}
           </div>
@@ -128,7 +128,7 @@ export default function JoinPage() {
               <h2 className="mt-4 font-display text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
                 Application Received, {(name || user?.name || "Member").split(" ")[0]}
               </h2>
-              <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">
                 Invitation details have been sent to <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">{email || user?.email}</span>.
               </p>
               <div className="mt-6 flex justify-center gap-3">

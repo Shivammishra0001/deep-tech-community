@@ -316,7 +316,7 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
         <h3 className="mt-4 font-display text-base font-semibold leading-snug tracking-tight text-neutral-900 dark:text-neutral-100">
           {post.title}
         </h3>
-        <p className="mt-2.5 whitespace-pre-line text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">{post.body}</p>
+        <p className="mt-2.5 whitespace-pre-line text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">{post.body}</p>
 
         {post.image && (
           <div className="mt-4 overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-800 max-h-64">
@@ -378,7 +378,7 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
                   <Avatar name={c.author} className="size-6 text-[8px]" />
                   <div className="min-w-0 flex-1 rounded-md border border-neutral-200 bg-neutral-50 p-2.5 dark:border-neutral-800 dark:bg-neutral-950">
                     <p className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">{c.author}</p>
-                    <p className="mt-1 text-neutral-600 dark:text-neutral-400">{c.body}</p>
+                    <p className="mt-1 text-neutral-600 dark:text-neutral-300">{c.body}</p>
                   </div>
                 </li>
               ))}
@@ -506,7 +506,7 @@ export default function CommunityPage() {
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
           <Card>
             <p className="font-mono text-xs font-semibold uppercase tracking-wider text-neutral-400">Community Charter</p>
-            <ul className="mt-3 space-y-2.5 text-xs text-neutral-600 dark:text-neutral-400">
+            <ul className="mt-3 space-y-2.5 text-xs text-neutral-600 dark:text-neutral-300">
               <li>• Technical depth over hot takes.</li>
               <li>• Security research requires responsible disclosure.</li>
               <li>• Code snippets must include environment reproduction details.</li>

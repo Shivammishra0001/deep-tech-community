@@ -95,7 +95,7 @@ export function Logo({ className }: { className?: string }) {
         <span className="font-sans text-sm font-semibold tracking-tight text-white group-hover:text-neutral-300 transition-colors">
           DTC
         </span>
-        <span className="font-sans text-[9px] font-medium uppercase tracking-[0.12em] text-neutral-400 mt-0.5">
+        <span className="font-sans text-[9px] font-medium uppercase tracking-[0.12em] text-neutral-300 mt-0.5">
           DEEP TECH COMMUNITY
         </span>
       </div>
@@ -555,7 +555,7 @@ export function Footer() {
         <FooterNewsletter />
       </Container>
       <div className="border-t border-neutral-200 dark:border-neutral-800">
-        <Container className="flex flex-wrap items-center justify-between gap-2 py-6 font-mono text-[11px] text-neutral-500 dark:text-neutral-400">
+        <Container className="flex flex-wrap items-center justify-between gap-2 py-6 font-mono text-[11px] text-neutral-500 dark:text-neutral-300">
           <p>© 2026 Dyau Deep Tech Community. Handcrafted Enterprise Platform.</p>
           <p>[ 01 AI · 02 QUANTUM · 03 CYBER · 04 AI GOVERNANCE ]</p>
         </Container>

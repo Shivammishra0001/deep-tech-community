@@ -42,8 +42,8 @@ export default function TechnologiesPage() {
                     <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-100">
                       <Link href={`/technologies/${d.techSlug}`}>{d.name}</Link>
                     </h2>
-                    <p className="mt-1 font-mono text-xs text-neutral-500">{d.tagline}</p>
-                    <p className="mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">{d.description}</p>
+                    <p className="mt-1 font-mono text-xs text-neutral-400">{d.tagline}</p>
+                    <p className="mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">{d.description}</p>
                   </div>
 
                   <div>

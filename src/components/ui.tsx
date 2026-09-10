@@ -52,7 +52,7 @@ export function SectionHeading({
         <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-4xl lg:text-[2.6rem] sm:leading-[1.12]">
           {title}
         </h2>
-        {description && <p className="mt-3.5 font-sans text-base sm:text-[17px] font-normal leading-relaxed text-neutral-700 dark:text-neutral-300">{description}</p>}
+        {description && <p className="mt-3.5 font-sans text-base sm:text-[17px] font-normal leading-relaxed text-neutral-700 dark:text-neutral-200">{description}</p>}
       </div>
       {action && (
         <Link
@@ -282,7 +282,7 @@ export function ArticleCard({
           <h3 className="font-display text-lg sm:text-xl font-bold leading-snug tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
             <Link href={`/news/${slug}`}>{title}</Link>
           </h3>
-          <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">{summary}</p>
+          <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-200 font-normal">{summary}</p>
         </div>
 
         <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4 dark:border-neutral-800/60">
@@ -375,8 +375,8 @@ export function CommunityCard({
           </div>
           <Badge className="font-sans text-xs font-semibold">{members.toLocaleString()} Members</Badge>
         </div>
-        <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-300">{city}</p>
-        <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-300 font-normal">{blurb}</p>
+        <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-200">{city}</p>
+        <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-200 font-normal">{blurb}</p>
       </div>
       <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800/60">
         <Link
@@ -458,7 +458,7 @@ export function PageHero({
           <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50">
             {title}
           </h1>
-          {description && <p className="mt-5 max-w-2xl font-sans text-lg sm:text-xl font-normal leading-relaxed text-neutral-700 dark:text-neutral-300">{description}</p>}
+          {description && <p className="mt-5 max-w-2xl font-sans text-lg sm:text-xl font-normal leading-relaxed text-neutral-700 dark:text-neutral-200">{description}</p>}
           {children}
         </div>
       </Container>
