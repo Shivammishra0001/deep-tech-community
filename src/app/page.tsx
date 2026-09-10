@@ -115,7 +115,7 @@ export default function HomePage() {
                             className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="flex size-full items-center justify-center font-mono text-xs font-bold text-neutral-400">
+                          <div className="flex size-full items-center justify-center font-mono text-xs font-bold text-neutral-300">
                             DTS
                           </div>
                         )}
@@ -276,7 +276,7 @@ export default function HomePage() {
                           {c.flag}
                         </span>
                         <h3 className="font-display text-lg sm:text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-                          {c.country} <span className="font-mono text-xs font-semibold text-neutral-500">[{c.code}]</span>
+                          {c.country} <span className="font-mono text-xs font-semibold text-neutral-400">[{c.code}]</span>
                         </h3>
                       </div>
                       <Badge className="font-sans text-xs font-semibold">Regional Hub</Badge>
@@ -306,7 +306,7 @@ export default function HomePage() {
               <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-neutral-50">
                 Join Frontier Builders Worldwide
               </h2>
-              <p className="mx-auto mt-4 max-w-xl font-sans text-base sm:text-lg leading-relaxed text-neutral-300 font-medium">
+              <p className="mx-auto mt-4 max-w-xl font-sans text-base sm:text-lg leading-relaxed text-white font-medium">
                 Free membership for students, engineers, researchers, founders, and educators. Direct access to technical roadmaps, regional symposia, and active project channels.
               </p>
               
@@ -327,7 +327,7 @@ export default function HomePage() {
               </div>
 
               {/* Animated Live Member Counter */}
-              <div className="mt-6 flex items-center justify-center gap-2 font-sans text-xs font-semibold text-neutral-400">
+              <div className="mt-6 flex items-center justify-center gap-2 font-sans text-xs font-semibold text-neutral-300">
                 <span className="size-2 rounded-full bg-neutral-400 dark:bg-neutral-500 animate-pulse" aria-hidden />
                 Practitioner-led global deep tech network
               </div>

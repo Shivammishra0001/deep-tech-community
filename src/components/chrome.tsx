@@ -87,7 +87,7 @@ export function LogoSymbol({ className }: { className?: string }) {
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cx("group inline-flex items-center gap-2.5 select-none", className)}>
+    <Link href="/" className={cx("group inline-flex items-center gap-2.5", className)}>
       <span className="inline-flex size-7.5 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-white transition-colors duration-200">
         <LogoSymbol className="size-full" />
       </span>
@@ -95,7 +95,7 @@ export function Logo({ className }: { className?: string }) {
         <span className="font-sans text-sm font-semibold tracking-tight text-white group-hover:text-neutral-300 transition-colors">
           DTC
         </span>
-        <span className="font-sans text-[9px] font-medium uppercase tracking-[0.12em] text-neutral-300 mt-0.5">
+        <span className="font-sans text-[9px] font-medium uppercase tracking-[0.12em] text-white mt-0.5">
           DEEP TECH COMMUNITY
         </span>
       </div>
@@ -187,7 +187,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                 Clear
               </button>
             )}
-            <kbd className="ml-2 rounded border border-neutral-800 bg-neutral-900 px-1.5 py-0.5 font-sans text-[10px] text-neutral-400">
+            <kbd className="ml-2 rounded border border-neutral-800 bg-neutral-900 px-1.5 py-0.5 font-sans text-[10px] text-neutral-300">
               ESC
             </kbd>
           </div>
@@ -195,7 +195,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           {/* Search Results List */}
           <div className="max-h-80 overflow-y-auto p-2">
             {filtered.length === 0 ? (
-              <div className="p-8 text-center font-sans text-xs text-neutral-400">
+              <div className="p-8 text-center font-sans text-xs text-neutral-300">
                 No matching results found for &quot;{query}&quot;
               </div>
             ) : (
@@ -216,7 +216,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                           <p className="font-sans text-xs font-semibold text-neutral-100">
                             {item.title}
                           </p>
-                          <p className="font-sans text-[10px] uppercase tracking-wider text-neutral-400">
+                          <p className="font-sans text-[10px] uppercase tracking-wider text-neutral-300">
                             {item.category}
                           </p>
                         </div>
@@ -321,7 +321,7 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   className={cx(
-                    "relative py-1 px-1 font-sans text-[12px] font-medium uppercase tracking-[0.03em] transition-colors duration-150 select-none",
+                    "relative py-1 px-1 font-sans text-[12px] font-medium uppercase tracking-[0.03em] transition-colors duration-150",
                     isActive
                       ? "text-white"
                       : "text-neutral-400 hover:text-white"
@@ -427,7 +427,7 @@ export function Navbar() {
                       </div>
                       <div>
                         <p className="font-sans text-xs font-semibold text-neutral-50">{user.name}</p>
-                        <p className="font-sans text-[10px] text-neutral-400">{user.email}</p>
+                        <p className="font-sans text-[10px] text-neutral-300">{user.email}</p>
                       </div>
                     </div>
                     <button

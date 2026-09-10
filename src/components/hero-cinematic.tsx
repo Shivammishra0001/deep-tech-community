@@ -301,7 +301,7 @@ export function CinematicHero() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[72vh] lg:min-h-[76vh] max-h-[780px] pt-5 sm:pt-6 lg:pt-8 pb-12 lg:pb-16 flex flex-col justify-start scroll-mt-20 border-b border-neutral-900 select-none"
+      className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[72vh] lg:min-h-[76vh] max-h-[780px] pt-5 sm:pt-6 lg:pt-8 pb-12 lg:pb-16 flex flex-col justify-start scroll-mt-20 border-b border-neutral-900"
     >
       {/* ----------------- ATMOSPHERIC LIGHTING & SUBTLE GRID ----------------- */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
@@ -334,7 +334,7 @@ export function CinematicHero() {
           </h1>
 
           {/* Exact Supporting Copy */}
-          <p className="mt-4 sm:mt-5 max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px] font-medium leading-relaxed text-neutral-300">
+          <p className="mt-4 sm:mt-5 max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px] font-medium leading-relaxed text-white">
             A practitioner-led network for engineers, researchers, founders and students building what comes next.
           </p>
 

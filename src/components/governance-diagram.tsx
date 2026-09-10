@@ -29,7 +29,7 @@ export function GovernanceDiagram({ className }: { className?: string }) {
         <h3 className="mt-3 font-display text-xl sm:text-2xl font-bold tracking-tight text-white">
           Interconnected Policy Nodes & Verification Pipelines
         </h3>
-        <p className="mt-1 font-sans text-xs sm:text-sm text-neutral-300 max-w-xl">
+        <p className="mt-1 font-sans text-xs sm:text-sm text-white max-w-xl">
           Deterministic evaluation rules, automated model cards, and human-in-the-loop oversight designed for EU AI Act & NIST AI RMF compliance.
         </p>
       </div>
@@ -49,7 +49,7 @@ export function GovernanceDiagram({ className }: { className?: string }) {
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-neutral-400">
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-neutral-300">
                     {node.type}
                   </span>
                   <div className="grid size-7 place-items-center rounded-lg border border-neutral-700 bg-neutral-900 text-neutral-200 transition-colors group-hover:border-neutral-500 group-hover:text-white">
@@ -61,7 +61,7 @@ export function GovernanceDiagram({ className }: { className?: string }) {
                 </h4>
               </div>
 
-              <div className="mt-4 flex items-center justify-between border-t border-neutral-800/80 pt-3 font-mono text-[10px] text-neutral-400">
+              <div className="mt-4 flex items-center justify-between border-t border-neutral-800/80 pt-3 font-mono text-[10px] text-neutral-300">
                 <span>Node 0{i + 1}</span>
                 <span className="text-emerald-400/90 font-medium flex items-center gap-1">
                   <span className="size-1.5 rounded-full bg-emerald-400" /> Active Verification
@@ -82,7 +82,7 @@ export function GovernanceDiagram({ className }: { className?: string }) {
             <Network className="size-3.5 text-neutral-300" /> Multi-Agent Verification
           </span>
         </div>
-        <span className="text-neutral-400">ISO/IEC 42001 & NIST AI RMF Compliant</span>
+        <span className="text-white">ISO/IEC 42001 & NIST AI RMF Compliant</span>
       </div>
     </div>
   );

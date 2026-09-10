@@ -46,13 +46,13 @@ export function NewsletterSubscribeCard() {
       <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-xl">
           <div className="inline-flex items-center gap-2 rounded-md border border-neutral-800 bg-neutral-900 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-neutral-300">
-            <Mail className="size-3 text-neutral-300" />
+            <Mail className="size-3 text-white" />
             WEEKLY RESEARCH DISPATCH
           </div>
           <h3 className="mt-3 font-display text-xl sm:text-2xl font-bold tracking-tight text-white">
             Subscribe to the Deep Tech Research Digest
           </h3>
-          <p className="mt-1.5 font-sans text-sm font-medium text-neutral-300 leading-relaxed">
+          <p className="mt-1.5 font-sans text-sm font-medium text-white leading-relaxed">
             Curated paper breakdowns, technical safety frameworks, and practitioner insights delivered every Tuesday. Zero marketing fluff.
           </p>
         </div>

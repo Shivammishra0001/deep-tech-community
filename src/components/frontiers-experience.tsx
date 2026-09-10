@@ -239,12 +239,12 @@ export function FrontiersExperience() {
   const current = FRONTIERS[activeIndex];
 
   return (
-    <section id="technologies" className="relative bg-[#050505] text-neutral-50 scroll-mt-20 border-t border-neutral-900 select-none">
+    <section id="technologies" className="relative bg-[#050505] text-neutral-50 scroll-mt-20 border-t border-neutral-900">
       {/* ----------------- SECTION INTRO ----------------- */}
       <div className="border-b border-neutral-900 py-16 sm:py-20 bg-[#070707]">
         <Container className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/80 px-3.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-400">
+            <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/80 px-3.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-300">
               <span className="size-1.5 rounded-full bg-neutral-100" />
               01 / TECHNOLOGIES
             </div>
@@ -252,7 +252,7 @@ export function FrontiersExperience() {
               FOUR TECHNOLOGIES
             </h2>
           </div>
-          <p className="max-w-md font-sans text-sm sm:text-base font-medium leading-relaxed text-neutral-300">
+          <p className="max-w-md font-sans text-sm sm:text-base font-medium leading-relaxed text-white">
             Exploring the technologies shaping tomorrow. <br />
             Built by people, for people, at the frontier.
           </p>
@@ -310,7 +310,7 @@ export function FrontiersExperience() {
                   <p className="font-sans text-xl font-semibold text-white">
                     {current.description}
                   </p>
-                  <p className="font-sans text-sm leading-relaxed text-neutral-300">
+                  <p className="font-sans text-sm leading-relaxed text-white">
                     {current.tagline}
                   </p>
                 </motion.div>
@@ -360,8 +360,8 @@ export function FrontiersExperience() {
             return (
               <div key={f.num} className="pt-10 first:pt-0 space-y-6">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-4xl font-black text-neutral-500">{f.num}</span>
-                  <span className="grid size-9 place-items-center rounded-lg border border-neutral-800 bg-neutral-900 text-neutral-200">
+                  <span className="font-mono text-4xl font-black text-neutral-300">{f.num}</span>
+                  <span className="grid size-9 place-items-center rounded-lg border border-neutral-800 bg-neutral-900 text-white">
                     <Icon className="size-4" />
                   </span>
                 </div>
@@ -370,10 +370,10 @@ export function FrontiersExperience() {
                   <h3 className="font-display text-3xl font-black uppercase tracking-tight text-neutral-50">
                     {f.title}
                   </h3>
-                  <p className="mt-2 font-sans text-base font-semibold text-neutral-200">
+                  <p className="mt-2 font-sans text-base font-semibold text-white">
                     {f.description}
                   </p>
-                  <p className="mt-1 font-sans text-xs leading-relaxed text-neutral-300">
+                  <p className="mt-1 font-sans text-xs leading-relaxed text-white">
                     {f.tagline}
                   </p>
                 </div>
@@ -381,7 +381,7 @@ export function FrontiersExperience() {
                 <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-950 flex items-center justify-center">
                   <div className="flex flex-col items-center gap-2 p-6 text-center">
                     <Icon className="size-8 text-neutral-300 animate-pulse" />
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-300">
                       {f.subtitle}
                     </span>
                   </div>

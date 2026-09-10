@@ -84,7 +84,7 @@ export function Button({
   ...props
 }: BtnBase & (ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined }) | (BtnBase & { href: string })) {
   const styles = cx(
-    "btn-hover inline-flex items-center justify-center gap-2 rounded-lg font-sans text-xs sm:text-sm font-semibold tracking-tight transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:pointer-events-none select-none",
+    "btn-hover inline-flex items-center justify-center gap-2 rounded-lg font-sans text-xs sm:text-sm font-semibold tracking-tight transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:pointer-events-none",
     variant === "primary" &&
       "bg-neutral-900 text-neutral-50 hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white shadow-sm",
     variant === "secondary" &&
@@ -370,7 +370,7 @@ export function CommunityCard({
               {flag}
             </span>
             <h3 className="font-display text-lg sm:text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-              {country} <span className="font-mono text-xs font-semibold text-neutral-400">[{code}]</span>
+              {country} <span className="font-mono text-xs font-semibold text-neutral-300">[{code}]</span>
             </h3>
           </div>
           <Badge className="font-sans text-xs font-semibold">{members.toLocaleString()} Members</Badge>
@@ -419,7 +419,7 @@ export function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
 
 export function Breadcrumbs({ items }: { items: { label: string; href?: string }[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 font-mono text-xs text-neutral-400">
+    <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 font-mono text-xs text-neutral-300">
       {items.map((item, idx) => (
         <span key={idx} className="flex items-center gap-2">
           {idx > 0 && <ChevronRight className="size-3 text-neutral-400" />}
