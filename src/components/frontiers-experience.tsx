@@ -277,7 +277,7 @@ export function FrontiersExperience() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 15 }}
                   transition={{ duration: 0.25 }}
-                  className="font-mono text-7xl xl:text-8xl font-black text-neutral-700 tracking-tighter"
+                  className="font-mono text-7xl xl:text-8xl font-black text-white tracking-tighter"
                 >
                   {current.num}
                 </motion.div>
@@ -307,7 +307,7 @@ export function FrontiersExperience() {
                   transition={{ duration: 0.25, delay: 0.05 }}
                   className="mt-4 max-w-lg space-y-2"
                 >
-                  <p className="font-sans text-xl font-semibold text-neutral-200">
+                  <p className="font-sans text-xl font-semibold text-white">
                     {current.description}
                   </p>
                   <p className="font-sans text-sm leading-relaxed text-neutral-300">
@@ -320,10 +320,10 @@ export function FrontiersExperience() {
               <div className="mt-8">
                 <Link
                   href={current.href}
-                  className="group inline-flex items-center gap-2.5 rounded-lg border border-neutral-800 bg-neutral-900/80 px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-neutral-100 transition-all hover:border-neutral-500 hover:bg-neutral-800 cursor-pointer shadow-xs"
+                  className="group inline-flex items-center gap-2.5 rounded-lg border border-neutral-700 bg-neutral-900/80 px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white transition-all hover:border-neutral-500 hover:bg-neutral-800 cursor-pointer shadow-xs"
                 >
                   <span>EXPLORE {current.title} ROADMAP</span>
-                  <ArrowUpRight className="size-4 text-neutral-400 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
+                  <ArrowUpRight className="size-4 text-neutral-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
                 </Link>
               </div>
 
@@ -334,7 +334,7 @@ export function FrontiersExperience() {
                     key={f.num}
                     className={cx(
                       "h-1 rounded-full transition-all duration-300",
-                      i === activeIndex ? "w-10 bg-white" : "w-3 bg-neutral-800"
+                      i === activeIndex ? "w-10 bg-white" : "w-3 bg-neutral-600"
                     )}
                   />
                 ))}

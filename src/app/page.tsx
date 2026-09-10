@@ -124,12 +124,12 @@ export default function HomePage() {
                       <div className="flex flex-1 flex-col min-w-0">
                         <div className="flex items-center justify-between gap-2">
                           <DomainBadge domain={a.domain} />
-                          <span className="font-mono text-xs font-semibold text-neutral-500 dark:text-neutral-400">{a.date}</span>
+                          <span className="font-mono text-xs font-semibold text-neutral-500 dark:text-neutral-300">{a.date}</span>
                         </div>
                         <h4 className="mt-1.5 font-display text-sm sm:text-base font-bold leading-snug tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50 line-clamp-2">
                           <Link href={`/news/${a.slug}`}>{a.title}</Link>
                         </h4>
-                        <p className="mt-1 font-sans text-xs font-medium text-neutral-500 dark:text-neutral-400">
+                        <p className="mt-1 font-sans text-xs font-medium text-neutral-500 dark:text-neutral-300">
                           By {a.author} · {a.readingTime} min
                         </p>
                       </div>
@@ -197,10 +197,10 @@ export default function HomePage() {
           ) : (
             <RevealVisual>
               <div className="rounded-2xl border border-neutral-300/80 dark:border-neutral-800/80 bg-white/50 dark:bg-neutral-950/50 p-12 text-center backdrop-blur-md">
-                <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+                <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-300">
                   NO UPCOMING EVENTS
                 </p>
-                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">
                   New gatherings and technical sessions will appear here.
                 </p>
               </div>

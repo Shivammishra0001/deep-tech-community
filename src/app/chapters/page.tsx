@@ -18,14 +18,11 @@ export function RegionalMapSchematic() {
       {/* Top Header Badge */}
       <div className="flex items-center justify-between mb-4 relative z-10">
         <div className="flex items-center gap-2">
-          <span className="size-2 rounded-full bg-neutral-400 dark:bg-neutral-500 animate-pulse" />
-          <span className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-300">
+          <span className="size-2 rounded-full bg-neutral-400 dark:bg-neutral-300 animate-pulse" />
+          <span className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-200">
             REGIONAL NETWORK SCHEMATIC · APAC NODES
           </span>
         </div>
-        <span className="font-mono text-[10px] font-semibold text-neutral-400 uppercase hidden sm:inline">
-          LAT 1.3521° N — 20.5937° N
-        </span>
       </div>
 
       {/* Geometric SVG Schematic Map */}

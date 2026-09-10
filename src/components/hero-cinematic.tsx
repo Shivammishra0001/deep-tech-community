@@ -322,7 +322,7 @@ export function CinematicHero() {
           className="lg:col-span-7 flex flex-col items-start max-w-[780px]"
         >
           {/* Small Technical Label */}
-          <div className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-neutral-300">
+          <div className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-white">
             01 / FRONTIER NETWORK
           </div>
 
