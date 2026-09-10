@@ -347,9 +347,6 @@ export function FrontiersExperience() {
               <div className="relative size-full min-h-[380px]">
                 <FrontiersCanvasVisual activeIndex={activeIndex} progress={rawProgress} />
               </div>
-              <div className="absolute bottom-3 right-4 rounded-md border border-neutral-800/80 bg-neutral-950/90 px-2.5 py-1 font-mono text-[9.5px] font-bold uppercase tracking-widest text-neutral-400 backdrop-blur-md">
-                STATE 0{activeIndex + 1} · {current.title}_STATE
-              </div>
             </div>
           </Container>
         </div>
