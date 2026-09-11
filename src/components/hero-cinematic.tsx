@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { Container } from "@/components/ui";
+import { StaggeredText } from "@/components/staggered-text";
 
 const AeroShards = dynamic(() => import("@/components/AeroShards"), {
   ssr: false,
@@ -91,16 +92,29 @@ export function CinematicHero() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="flex flex-col items-start max-w-[880px]"
         >
-          {/* Refined Modern Editorial Headline */}
+          {/* Refined Modern Editorial Headline with Staggered Text */}
           <h1 className="font-sans text-[36px] sm:text-[48px] md:text-[58px] lg:text-[68px] xl:text-[76px] font-semibold leading-[1.02] tracking-[-0.03em] text-neutral-50 uppercase max-w-[860px]">
-            WHERE FRONTIER <br className="hidden sm:inline" />
-            BUILDERS ENGINEER <br className="hidden sm:inline" />
-            THE FUTURE.
+            <StaggeredText
+              text="WHERE FRONTIER BUILDERS ENGINEER THE FUTURE."
+              segmentBy="Words"
+              staggerDirection="Forward"
+              direction="Top"
+              duration="0.65s"
+              staggerDelay="0.04s"
+            />
           </h1>
 
           {/* Exact Supporting Copy */}
           <p className="mt-5 sm:mt-7 max-w-[620px] font-sans text-base sm:text-lg lg:text-[19px] font-medium leading-relaxed text-neutral-200">
-            A practitioner-led network for engineers, researchers, founders and students building what comes next.
+            <StaggeredText
+              text="A practitioner-led network for engineers, researchers, founders and students building what comes next."
+              segmentBy="Words"
+              staggerDirection="Forward"
+              direction="Top"
+              duration="0.5s"
+              initialDelay="0.15s"
+              staggerDelay="0.015s"
+            />
           </p>
 
           {/* Primary & Secondary CTAs */}

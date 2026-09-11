@@ -2,6 +2,9 @@ import Link from "next/link";
 import type { ReactNode, ButtonHTMLAttributes, InputHTMLAttributes, TextareaHTMLAttributes, SelectHTMLAttributes } from "react";
 import { ArrowRight, Calendar, MapPin, ArrowUpRight, Clock, User, ChevronRight } from "lucide-react";
 import { DOMAINS, type DomainSlug } from "@/data/core";
+import { StaggeredText } from "@/components/staggered-text";
+
+export { StaggeredText };
 
 export function cx(...parts: Array<string | false | null | undefined>) {
   return parts.filter(Boolean).join(" ");
@@ -45,7 +48,14 @@ export function SectionHeading({
     <div className={cx("mb-10 flex flex-wrap items-end justify-between gap-x-8 gap-y-4 border-b border-neutral-200/80 pb-6 dark:border-neutral-800/80", className)}>
       <div className="max-w-2xl">
         <h2 className="font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-4xl lg:text-[2.6rem] sm:leading-[1.12]">
-          {title}
+          <StaggeredText
+            text={title}
+            segmentBy="Words"
+            staggerDirection="Forward"
+            direction="Top"
+            duration="0.55s"
+            staggerDelay="0.025s"
+          />
         </h2>
         {description && <p className="mt-3 font-sans text-base sm:text-[17px] font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">{description}</p>}
       </div>
@@ -448,11 +458,30 @@ export function PageHero({
     <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
       <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
       <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
-        <div className="max-w-3xl animate-rise">
+        <div className="max-w-3xl">
           <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-50">
-            {title}
+            <StaggeredText
+              text={title}
+              segmentBy="Words"
+              staggerDirection="Forward"
+              direction="Top"
+              duration="0.6s"
+              staggerDelay="0.03s"
+            />
           </h1>
-          {description && <p className="mt-3 sm:mt-3.5 max-w-2xl font-sans text-base sm:text-lg font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">{description}</p>}
+          {description && (
+            <p className="mt-3 sm:mt-3.5 max-w-2xl font-sans text-base sm:text-lg font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">
+              <StaggeredText
+                text={description}
+                segmentBy="Words"
+                staggerDirection="Forward"
+                direction="Top"
+                duration="0.5s"
+                initialDelay="0.1s"
+                staggerDelay="0.015s"
+              />
+            </p>
+          )}
           {children}
         </div>
       </Container>
