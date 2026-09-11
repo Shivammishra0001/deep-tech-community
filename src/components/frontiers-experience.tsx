@@ -240,24 +240,6 @@ export function FrontiersExperience() {
 
   return (
     <section id="technologies" className="relative bg-[#050505] text-neutral-50 scroll-mt-20 border-t border-neutral-900">
-      {/* ----------------- SECTION INTRO ----------------- */}
-      <div className="border-b border-neutral-900 py-16 sm:py-20 bg-[#070707]">
-        <Container className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/80 px-3.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-300">
-              <span className="size-1.5 rounded-full bg-neutral-100" />
-              01 / TECHNOLOGIES
-            </div>
-            <h2 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-neutral-50">
-              FOUR TECHNOLOGIES
-            </h2>
-          </div>
-          <p className="max-w-md font-sans text-sm sm:text-base font-medium leading-relaxed text-white">
-            Exploring the technologies shaping tomorrow. <br />
-            Built by people, for people, at the frontier.
-          </p>
-        </Container>
-      </div>
 
       {/* ----------------- DESKTOP PINNED SCROLL EXPERIENCE (lg+) ----------------- */}
       <div ref={containerRef} className="hidden lg:block relative h-[360vh]">
@@ -268,7 +250,19 @@ export function FrontiersExperience() {
 
           <Container className="relative z-10 grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             {/* LEFT: TEXT CONTENT & DOMAIN INDICATOR */}
-            <div className="flex flex-col items-start min-h-[380px] justify-center">
+            <div className="flex flex-col items-start justify-center">
+
+              {/* Section Label + Heading — always visible above domain */}
+              <div className="mb-6">
+                <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/80 px-3.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-300">
+                  <span className="size-1.5 rounded-full bg-neutral-100" />
+                  01 / TECHNOLOGIES
+                </div>
+                <h2 className="mt-3 font-display text-3xl xl:text-4xl font-black uppercase tracking-tight text-white">
+                  FOUR TECHNOLOGIES
+                </h2>
+              </div>
+
               {/* Very Large Monospace Domain Number */}
               <AnimatePresence mode="wait">
                 <motion.div
@@ -355,6 +349,18 @@ export function FrontiersExperience() {
       {/* ----------------- MOBILE VERTICAL EDITORIAL STACK (< lg) ----------------- */}
       <div className="lg:hidden">
         <Container className="py-12 space-y-12 divide-y divide-neutral-900">
+
+          {/* Section heading — mobile */}
+          <div className="pb-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/80 px-3.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-300">
+              <span className="size-1.5 rounded-full bg-neutral-100" />
+              01 / TECHNOLOGIES
+            </div>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">
+              FOUR TECHNOLOGIES
+            </h2>
+          </div>
+
           {FRONTIERS.map((f) => {
             const Icon = f.icon;
             return (
