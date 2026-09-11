@@ -2,9 +2,14 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { Container } from "@/components/ui";
+
+const AeroShards = dynamic(() => import("@/components/AeroShards"), {
+  ssr: false,
+});
 
 /**
  * 3D Vertex Projection helper for the abstract deep tech visual structure
@@ -303,13 +308,42 @@ export function CinematicHero() {
       onMouseLeave={handleMouseLeave}
       className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[72vh] lg:min-h-[76vh] max-h-[780px] pt-5 sm:pt-6 lg:pt-8 pb-12 lg:pb-16 flex flex-col justify-start scroll-mt-20 border-b border-neutral-900"
     >
-      {/* ----------------- ATMOSPHERIC LIGHTING & SUBTLE GRID ----------------- */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
-        {/* Hairline Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f1f1f14_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f14_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
+      {/* ----------------- AEROSHARDS WEBGPU BACKGROUND & ATMOSPHERE ----------------- */}
+      <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden>
+        <AeroShards
+          backgroundColor="#050505"
+          shardColor="#5b5d61"
+          accentColor="#ffffff"
+          placement="full"
+          flow="stream"
+          material="pearl"
+          detail="balanced"
+          effect="none"
+          scale={1}
+          spread={1}
+          depth={1}
+          speed={1}
+          spin={1}
+          interaction="repel"
+          density={1.5}
+          shardSize={1.1}
+          stretch={1}
+          turbulence={1}
+          glow={1}
+          edgeSoftness={2}
+          bloom={0.5}
+          grain={0.05}
+          chromaticAberration={0.0075}
+          transitionDuration={1}
+          interactionRadius={1.5}
+          interactionStrength={0.5}
+          rippleIntensity={1}
+          holdToGather={true}
+        />
 
-        {/* Restrained Cinematic Light Beam */}
-        <div className="absolute -top-1/4 -right-1/4 h-[120%] w-[100%] bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.04)_0%,rgba(180,190,210,0.01)_50%,transparent_75%)] blur-3xl pointer-events-none" />
+        {/* Hairline Grid & Vignette for Contrast & Text Readability */}
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#1f1f1f14_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f14_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,rgba(5,5,5,0.15)_0%,rgba(5,5,5,0.8)_100%)]" />
       </div>
 
       <Container className="relative z-10 grid items-center gap-10 lg:grid-cols-12">
