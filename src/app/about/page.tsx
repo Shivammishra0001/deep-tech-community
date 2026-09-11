@@ -179,7 +179,7 @@ export default function AboutPage() {
         <RevealHeading>
           <SectionHeading
             eyebrow="Community Values"
-            title="Four Operating Principles"
+            title="Operating Principles"
             description="The shared commitments that guide our technical discussions, documentation, and events."
           />
         </RevealHeading>
