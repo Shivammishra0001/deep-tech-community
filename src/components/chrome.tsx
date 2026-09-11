@@ -513,7 +513,7 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-sm text-sm font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">
-            Enterprise-grade community platform for Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.
+            Open practitioner community platform for Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.
           </p>
           <div className="mt-5 flex gap-2.5">
             {SOCIALS.map(({ path, label }) => (

@@ -157,7 +157,7 @@ function Composer({ onPublished }: { onPublished: (p: Post) => void }) {
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           <div>
             <Label htmlFor="c-name">Full Name</Label>
-            <Input id="c-name" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Dr. Elena Marchetti" />
+            <Input id="c-name" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Full Name" />
           </div>
           <div>
             <Label htmlFor="c-role">Role / Institution</Label>
