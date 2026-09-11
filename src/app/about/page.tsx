@@ -87,7 +87,7 @@ export default function AboutPage() {
                 A Community, Not a Social Feed.
               </h1>
               <p className="mt-3 sm:mt-3.5 max-w-xl font-sans text-[15px] sm:text-[16px] font-medium leading-relaxed text-neutral-700 dark:text-neutral-200">
-                Deep Tech Community is an open, practitioner-led platform connecting engineers, scientists, and builders across four core technology frontiers. We exist to exchange deep technical insights, review research, and collaborate without noise.
+                Deep Tech Community is an open, practitioner-led platform connecting engineers, scientists, and builders across core technology frontiers. We exist to exchange deep technical insights, review research, and collaborate without noise.
               </p>
             </div>
             <RevealVisual delay={150}>
@@ -125,20 +125,20 @@ export default function AboutPage() {
                 An open ecosystem where frontier breakthroughs are built and understood collaboratively.
               </h3>
               <p className="mt-3 font-sans text-sm font-medium leading-relaxed text-neutral-600 dark:text-neutral-300">
-                A connected global network with regional study circles, open technical libraries, and transparent knowledge sharing across all four core domains.
+                A connected global network with regional study circles, open technical libraries, and transparent knowledge sharing across core domains.
               </p>
             </Card>
           </RevealItem>
         </RevealStagger>
       </Container>
 
-      {/* 3. Four Core Technologies */}
+      {/* 3. Technologies We Focus On */}
       <Container className="py-8 sm:py-10 border-t border-neutral-200/80 dark:border-neutral-800/80">
         <RevealHeading>
           <SectionHeading
             eyebrow="Core Domains"
-            title="Four Technologies We Focus On"
-            description="Our discussions, reading groups, and technical roadmaps are strictly organized around four frontier pillars."
+            title="Technologies We Focus On"
+            description="Our discussions, reading groups, and technical roadmaps are strictly organized around frontier technology pillars."
           />
         </RevealHeading>
         <RevealStagger className="grid gap-5 sm:grid-cols-2">

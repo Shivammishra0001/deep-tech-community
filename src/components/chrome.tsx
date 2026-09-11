@@ -539,7 +539,7 @@ export function Footer() {
             About Community
           </Link>
           <Link href="/technologies" className="font-semibold text-neutral-800 hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white">
-            Four Technologies
+            Technologies
           </Link>
           <Link href="/events" className="font-semibold text-neutral-800 hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white">
             Symposia &amp; Labs

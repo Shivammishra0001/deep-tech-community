@@ -9,7 +9,7 @@ import { RevealStagger, RevealItem } from "@/components/reveal";
 export const metadata: Metadata = {
   title: "Technologies | Deep Tech Society",
   description:
-    "Our four deep tech domains — artificial intelligence, quantum computing, cybersecurity, and space technology — each with a learning roadmap, resources, and an active community.",
+    "Our deep tech domains — artificial intelligence, quantum computing, cybersecurity, and AI governance — each with a learning roadmap, resources, and an active community.",
 };
 
 export default function TechnologiesPage() {
@@ -17,8 +17,8 @@ export default function TechnologiesPage() {
     <>
       <PageHero
         eyebrow="Deep Tech Taxonomy"
-        title="Four Core Pillars of Engineering."
-        description="We focus strictly on four technologies. Each domain contains technical roadmaps, open libraries, practitioner circles, and regional symposia."
+        title="Core Pillars of Engineering."
+        description="We focus strictly on frontier technologies. Each domain contains technical roadmaps, open libraries, practitioner circles, and regional symposia."
       />
       <Container className="py-8 sm:py-10">
         <RevealStagger className="grid gap-6 md:grid-cols-2">

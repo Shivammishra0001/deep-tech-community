@@ -30,7 +30,7 @@ export default function EventsPage() {
       <PageHero
         eyebrow="Technical Symposia"
         title="Conferences, Workshops & Code Labs."
-        description="Practitioner gatherings across our four deep tech domains. Free registration for all verified members."
+        description="Practitioner gatherings across our deep tech domains. Free registration for all verified members."
       />
       <Container className="py-8 sm:py-10">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200/80 pb-4 dark:border-neutral-800/80">

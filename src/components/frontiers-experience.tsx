@@ -246,7 +246,7 @@ export function FrontiersExperience() {
         <Container className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white">
-              FOUR TECHNOLOGIES
+              TECHNOLOGIES
             </h2>
           </div>
           <p className="max-w-sm font-sans text-sm sm:text-base font-medium leading-relaxed text-neutral-300">
