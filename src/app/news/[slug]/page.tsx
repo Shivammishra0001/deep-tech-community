@@ -85,7 +85,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       {/* Banner */}
       <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
         <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
-        <Container className="relative py-16 sm:py-20">
+        <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="max-w-3xl animate-rise">
             <Link
               href="/news"
@@ -93,16 +93,16 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             >
               <ArrowLeft className="size-3.5" aria-hidden /> All Briefings
             </Link>
-            <div className="mt-4 flex items-center gap-3">
+            <div className="mt-3 flex items-center gap-3">
               <DomainBadge domain={article.domain} />
               <span className="inline-flex items-center gap-1.5 font-mono text-xs text-neutral-500">
                 <Clock className="size-3.5" aria-hidden /> {article.readingTime} min read
               </span>
             </div>
-            <h1 className="mt-4 font-display text-3xl font-semibold leading-[1.12] tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl">
+            <h1 className="mt-2.5 sm:mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-semibold leading-[1.12] tracking-tight text-neutral-900 dark:text-neutral-100">
               {article.title}
             </h1>
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-4 sm:mt-5 flex items-center gap-3">
               <Avatar name={article.author} className="size-9 font-bold" />
               <div>
                 <p className="font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{article.author}</p>
@@ -116,7 +116,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* Body */}
-      <Container className="py-16">
+      <Container className="py-8 sm:py-10">
         <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
           <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-none">
             {article.image && (

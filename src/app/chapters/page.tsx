@@ -119,7 +119,7 @@ export default function ChaptersPage() {
         title="Regional Research & Engineering Hubs."
         description="Chapters operate in-person in local time zones, led by regional organizers. Network hubs maintain local research autonomy while connecting to global technical roadmaps."
       />
-      <Container className="py-16">
+      <Container className="py-8 sm:py-10">
         <RegionalMapSchematic />
 
         <RevealStagger className="grid gap-6 lg:grid-cols-3">

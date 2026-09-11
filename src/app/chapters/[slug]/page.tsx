@@ -39,7 +39,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
       {/* Header Banner */}
       <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
         <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
-        <Container className="relative py-16 sm:py-20">
+        <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="animate-rise">
             <Link
               href="/chapters"
@@ -47,15 +47,15 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
             >
               <ArrowLeft className="size-3.5" aria-hidden /> Return to Regional Chapters
             </Link>
-            <div className="mt-6 flex flex-wrap items-center gap-5">
-              <span className="text-5xl" role="img" aria-label={ch.country}>
+            <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-5">
+              <span className="text-4xl sm:text-5xl" role="img" aria-label={ch.country}>
                 {ch.flag}
               </span>
               <div>
-                <h1 className="font-display text-4xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-5xl">
+                <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
                   {ch.country} Chapter
                 </h1>
-                <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-neutral-500">
+                <p className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-neutral-500">
                   <span className="inline-flex items-center gap-1.5">
                     <MapPin className="size-3.5" aria-hidden /> {ch.city}
                   </span>
@@ -70,7 +70,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
         </Container>
       </section>
 
-      <Container className="grid gap-12 py-16 lg:grid-cols-[1fr_340px]">
+      <Container className="grid gap-12 py-8 sm:py-10 lg:grid-cols-[1fr_340px]">
         <div className="min-w-0 space-y-12">
           {/* 1. Overview */}
           <section id="overview">

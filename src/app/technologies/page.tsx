@@ -20,7 +20,7 @@ export default function TechnologiesPage() {
         title="Four Core Pillars of Engineering."
         description="We focus strictly on four technologies. Each domain contains technical roadmaps, open libraries, practitioner circles, and regional symposia."
       />
-      <Container className="py-16">
+      <Container className="py-8 sm:py-10">
         <RevealStagger className="grid gap-6 md:grid-cols-2">
           {DOMAIN_LIST.map((d, i) => {
             const Icon = d.icon;

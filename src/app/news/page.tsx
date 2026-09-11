@@ -163,7 +163,7 @@ export default function NewsPage() {
         description="Curated research dispatches, paper breakdowns, and technical analysis across AI, Quantum, Cybersecurity, and AI Governance."
       />
 
-      <Container className="py-12 space-y-10">
+      <Container className="py-8 sm:py-10 space-y-8">
         <NewsletterSubscribeCard />
 
         {/* Top Control Bar: Search & Admin Manual Refresh */}

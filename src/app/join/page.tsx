@@ -97,14 +97,14 @@ export default function JoinPage() {
   return (
     <section className="relative overflow-hidden">
       <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
-      <Container className="relative grid gap-12 py-20 lg:grid-cols-[1fr_480px]">
+      <Container className="relative grid gap-12 pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8 lg:grid-cols-[1fr_480px]">
         {/* Left: pitch */}
         <div className="animate-rise">
           <Eyebrow>Society Membership</Eyebrow>
-          <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-5xl">
+          <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-50">
             Join Verified Practitioners in Deep Tech.
           </h1>
-          <p className="mt-5 max-w-xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-200">
+          <p className="mt-3 sm:mt-3.5 max-w-xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-200">
             Membership is open to students, developers, researchers, founders, educators, and technology leaders. Zero noise, high technical signal.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">

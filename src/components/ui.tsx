@@ -452,13 +452,13 @@ export function PageHero({
   return (
     <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
       <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
-      <Container className="relative py-10 sm:py-12 lg:py-14">
+      <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
         <div className="max-w-3xl animate-rise">
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50">
+          <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-50">
             {title}
           </h1>
-          {description && <p className="mt-5 max-w-2xl font-sans text-lg sm:text-xl font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">{description}</p>}
+          {description && <p className="mt-3 sm:mt-3.5 max-w-2xl font-sans text-base sm:text-lg font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">{description}</p>}
           {children}
         </div>
       </Container>

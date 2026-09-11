@@ -93,7 +93,7 @@ export default function ResourcesPage() {
         title="Technical Learning Hub."
         description="Comprehensive literature, canonical papers, open-source tooling, and technical roadmaps verified by track leads."
       />
-      <Container className="space-y-12 py-16">
+      <Container className="space-y-8 py-8 sm:py-10">
         {/* Roadmaps */}
         <section>
           <div className="mb-6 flex items-center justify-between border-b border-neutral-200/80 pb-3 dark:border-neutral-800/80">

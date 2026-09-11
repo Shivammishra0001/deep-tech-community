@@ -18,14 +18,14 @@ export default function AboutPage() {
       {/* Opening statement */}
       <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
         <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
-        <Container className="relative py-20 sm:py-24">
+        <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="animate-rise">
               <Eyebrow>About the Community</Eyebrow>
-              <h1 className="mt-4 font-display text-4xl font-semibold leading-[1.08] tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-5xl">
+              <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-50">
                 A Community, Not a Social Feed.
               </h1>
-              <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-neutral-600 dark:text-neutral-300">
+              <p className="mt-3 sm:mt-3.5 max-w-xl text-[15px] sm:text-[16px] leading-relaxed text-neutral-600 dark:text-neutral-300">
                 Deep Tech Community began in 2023 as a fourteen-person meetup in Bengaluru. It is now a practitioner-led network across regional hubs — member-run, free to join, and strictly focused on scientific and engineering rigor.
               </p>
             </div>
@@ -46,7 +46,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & vision */}
-      <RevealStagger className="grid gap-6 py-16 md:grid-cols-2 mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
+      <RevealStagger className="grid gap-6 py-10 sm:py-12 md:grid-cols-2 mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
         <RevealItem>
           <Card>
             <Eyebrow>Mission</Eyebrow>

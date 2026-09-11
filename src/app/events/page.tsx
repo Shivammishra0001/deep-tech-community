@@ -32,7 +32,7 @@ export default function EventsPage() {
         title="Conferences, Workshops & Code Labs."
         description="Practitioner gatherings across our four deep tech domains. Free registration for all verified members."
       />
-      <Container className="py-16">
+      <Container className="py-8 sm:py-10">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200/80 pb-4 dark:border-neutral-800/80">
           <div className="flex gap-2">
             <Button

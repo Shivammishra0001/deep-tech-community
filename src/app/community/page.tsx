@@ -441,7 +441,7 @@ export default function CommunityPage() {
         title="Practitioner Knowledge Exchange."
         description="Write technical articles, upload diagrams, share open projects, post achievements, ask domain queries, and engage in peer discussions."
       />
-      <Container className="grid gap-8 py-16 lg:grid-cols-[1fr_300px]">
+      <Container className="grid gap-8 py-8 sm:py-10 lg:grid-cols-[1fr_300px]">
         <div className="min-w-0">
           <Composer
             onPublished={(p) => {

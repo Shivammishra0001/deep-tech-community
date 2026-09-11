@@ -24,7 +24,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
       {/* 1. Banner */}
       <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
         <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
-        <Container className="relative py-16 sm:py-20">
+        <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="max-w-3xl animate-rise">
             <Link
               href="/events"
@@ -32,17 +32,17 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
             >
               <ArrowLeft className="size-3.5" aria-hidden /> Return to All Events
             </Link>
-            <div className="mt-4 flex flex-wrap items-center gap-2">
+            <div className="mt-3 flex flex-wrap items-center gap-2">
               <Badge>{ev.type}</Badge>
               <Badge>{ev.format}</Badge>
               {ev.domains.map((dm) => (
                 <DomainBadge key={dm} domain={dm} />
               ))}
             </div>
-            <h1 className="mt-4 font-display text-3xl font-semibold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-5xl">
+            <h1 className="mt-2.5 sm:mt-3 font-display text-3xl font-semibold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl lg:text-5xl">
               {ev.title}
             </h1>
-            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-neutral-500">
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-neutral-500">
               <span className="inline-flex items-center gap-2">
                 <Calendar className="size-3.5" aria-hidden /> {ev.date}
               </span>
@@ -57,7 +57,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
         </Container>
       </section>
 
-      <Container className="grid gap-12 py-16 lg:grid-cols-[1fr_360px]">
+      <Container className="grid gap-12 py-8 sm:py-10 lg:grid-cols-[1fr_360px]">
         {/* Main Content */}
         <div className="min-w-0 space-y-12">
           {/* Abstract */}
