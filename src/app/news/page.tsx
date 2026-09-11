@@ -330,13 +330,8 @@ export default function NewsPage() {
                     </p>
                   </div>
 
-                  {/* Footer Link & License Info */}
+                  {/* Footer Link */}
                   <div className="mt-5 border-t border-neutral-100 pt-3 dark:border-neutral-800/80">
-                    <div className="mb-2 flex items-center justify-between font-mono text-[9px] text-neutral-400">
-                      <span className="truncate">Image: {article.image_source}</span>
-                      <span className="shrink-0">{article.license.includes("Public") ? "CC0 / Public Domain" : "Unsplash"}</span>
-                    </div>
-
                     <a
                       href={article.source_url}
                       target="_blank"
