@@ -321,13 +321,8 @@ export function CinematicHero() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="lg:col-span-7 flex flex-col items-start max-w-[780px]"
         >
-          {/* Small Technical Label */}
-          <div className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-white">
-            01 / FRONTIER NETWORK
-          </div>
-
           {/* Refined Modern Sans-Serif / Editorial Headline */}
-          <h1 className="mt-3.5 sm:mt-4 font-sans text-[34px] sm:text-[44px] md:text-[52px] lg:text-[58px] xl:text-[64px] font-semibold leading-[1.02] tracking-[-0.02em] text-neutral-50 uppercase max-w-[760px]">
+          <h1 className="font-sans text-[34px] sm:text-[44px] md:text-[52px] lg:text-[58px] xl:text-[64px] font-semibold leading-[1.02] tracking-[-0.02em] text-neutral-50 uppercase max-w-[760px]">
             WHERE FRONTIER <br className="hidden sm:inline" />
             BUILDERS ENGINEER <br className="hidden sm:inline" />
             THE FUTURE.

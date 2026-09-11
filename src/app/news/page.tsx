@@ -166,9 +166,6 @@ export default function NewsPage() {
         {/* Top Control Bar: Search & Admin Manual Refresh */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-neutral-200/80 pb-6 dark:border-neutral-800/80">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge className="font-mono text-[10px] uppercase font-bold tracking-wider">
-              AUTO-UPDATED EVERY 30 MIN
-            </Badge>
             <button
               onClick={handleRefreshNews}
               disabled={refreshing}

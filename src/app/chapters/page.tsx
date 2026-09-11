@@ -20,7 +20,7 @@ export function RegionalMapSchematic() {
         <div className="flex items-center gap-2">
           <span className="size-2 rounded-full bg-neutral-400 dark:bg-neutral-300 animate-pulse" />
           <span className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-200">
-            REGIONAL NETWORK SCHEMATIC · APAC NODES
+            REGIONAL NETWORK NODES
           </span>
         </div>
       </div>
@@ -172,7 +172,7 @@ export default function ChaptersPage() {
         <Reveal delay={100} className="mt-12">
           <Card className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
             <div>
-              <Eyebrow>Expansion Protocols</Eyebrow>
+              <Eyebrow>Start a Chapter</Eyebrow>
               <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
                 Establish a Chapter in Your City
               </h2>

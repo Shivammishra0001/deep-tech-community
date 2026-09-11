@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <PageHero eyebrow="Enterprise Governance" title="Privacy Policy" description="Direct, transparent data handling practices. Last updated January 2026." />
+      <PageHero eyebrow="Community Governance" title="Privacy Policy" description="Direct, transparent data handling practices. Last updated January 2026." />
       <Container className="max-w-3xl py-8 sm:py-10">
         <Card className="space-y-8 text-sm leading-relaxed text-neutral-700 dark:text-neutral-200">
           <section>

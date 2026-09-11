@@ -53,11 +53,11 @@ export default function HomePage() {
       <FrontiersExperience />
 
       {/* ------------------- 3. NEWS ------------------- */}
-      <section id="news" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
+      <section id="news" className="relative py-16 sm:py-20 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
         <Container>
           <RevealHeading>
             <SectionHeading
-              eyebrow="04 / NEWSLETTER"
+              eyebrow="NEWSLETTER"
               title="THE FRONTIER BRIEF"
               description="Research, technical perspectives and important developments across frontier technology."
               action={{ label: "All Briefings", href: "/news" }}
@@ -143,11 +143,11 @@ export default function HomePage() {
       </section>
 
       {/* ------------------- 4. EVENTS ------------------- */}
-      <section id="events" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-50/70 dark:bg-neutral-900/40 scroll-mt-20">
+      <section id="events" className="relative py-16 sm:py-20 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-50/70 dark:bg-neutral-900/40 scroll-mt-20">
         <Container>
           <RevealHeading>
             <SectionHeading
-              eyebrow="03 — Symposia & Labs"
+              eyebrow="Symposia & Labs"
               title="Upcoming Gatherings & Workshops"
               description="Practitioner-led conferences, hands-on security labs, and research reading groups. Free for all verified members."
               action={{ label: "All Events", href: "/events" }}
@@ -210,11 +210,11 @@ export default function HomePage() {
       </section>
 
       {/* ------------------- 5. COMMUNITY ------------------- */}
-      <section id="community" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
+      <section id="community" className="relative py-16 sm:py-20 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
         <Container>
           <RevealHeading>
             <SectionHeading
-              eyebrow="04 — Member Knowledge Exchange"
+              eyebrow="Community Forum"
               title="Featured Community Posts"
               description="Articles, open projects, and technical debriefs shared directly by verified community members."
               action={{ label: "Open Forum", href: "/community" }}
@@ -254,11 +254,11 @@ export default function HomePage() {
       </section>
 
       {/* ------------------- 6. CHAPTERS ------------------- */}
-      <section id="chapters" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-50/70 dark:bg-neutral-900/40 scroll-mt-20">
+      <section id="chapters" className="relative py-16 sm:py-20 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-50/70 dark:bg-neutral-900/40 scroll-mt-20">
         <Container>
           <RevealHeading>
             <SectionHeading
-              eyebrow="05 — Regional Hubs"
+              eyebrow="Regional Chapters"
               title="Global Network, Regional Rooms"
               description="In-person meetups, hands-on SOC labs, and university reading groups run in local time zones by chapter leads."
               action={{ label: "All Chapters", href: "/chapters" }}

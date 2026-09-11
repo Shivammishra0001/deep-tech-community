@@ -242,14 +242,10 @@ export function FrontiersExperience() {
     <section id="technologies" className="relative bg-[#050505] text-white scroll-mt-20 border-t border-neutral-900">
 
       {/* ── SECTION HEADER ── */}
-      <div className="border-b border-neutral-900 bg-[#070707] py-14 sm:py-16">
+      <div className="border-b border-neutral-900 bg-[#070707] py-10 sm:py-12">
         <Container className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/80 px-3.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-300">
-              <span className="size-1.5 rounded-full bg-white animate-pulse" />
-              01 / TECHNOLOGIES
-            </div>
-            <h2 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white">
               FOUR TECHNOLOGIES
             </h2>
           </div>
