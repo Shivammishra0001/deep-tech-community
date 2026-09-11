@@ -334,21 +334,21 @@ export function CinematicHero() {
           </p>
 
           {/* Primary & Secondary CTAs */}
-          <div className="mt-6 sm:mt-7 flex flex-wrap items-center gap-3.5">
+          <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="/join"
-              className="group inline-flex items-center gap-2 rounded-lg border border-white/90 bg-neutral-100 px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-neutral-950 transition-all duration-200 hover:bg-white hover:border-white shadow-sm cursor-pointer"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-white px-6 sm:px-7 py-3 sm:py-3.5 font-sans text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-950 transition-all duration-200 hover:bg-neutral-200 shadow-md hover:shadow-lg active:scale-[0.98] cursor-pointer"
             >
               <span>JOIN THE COMMUNITY</span>
-              <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+              <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
 
             <Link
               href="/community"
-              className="group inline-flex items-center gap-2 rounded-lg border border-neutral-800 bg-transparent px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-neutral-300 transition-all duration-200 hover:border-neutral-700 hover:text-white hover:bg-neutral-900/50 cursor-pointer"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-xl border border-neutral-700 bg-neutral-900/60 backdrop-blur-sm px-6 sm:px-7 py-3 sm:py-3.5 font-sans text-xs sm:text-sm font-bold uppercase tracking-wider text-white transition-all duration-200 hover:border-neutral-400 hover:bg-neutral-800/80 active:scale-[0.98] cursor-pointer"
             >
               <span>EXPLORE THE NETWORK</span>
-              <ChevronRight className="size-3.5 text-neutral-500 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-white" />
+              <ChevronRight className="size-4 text-neutral-400 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-white" />
             </Link>
           </div>
         </motion.div>
