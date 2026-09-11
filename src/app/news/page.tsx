@@ -193,7 +193,7 @@ export default function NewsPage() {
         </div>
 
         {/* Category Pill Filters */}
-        <div className="mt-4 flex flex-wrap gap-2 overflow-x-auto pb-2">
+        <div className="flex flex-wrap gap-2 overflow-x-auto pb-2">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
@@ -211,14 +211,14 @@ export default function NewsPage() {
 
         {/* Error Banner */}
         {error && (
-          <div role="alert" className="mt-6 rounded-xl border border-red-300 bg-red-50 p-4 text-xs font-semibold text-red-900 dark:border-red-900 dark:bg-red-950 dark:text-red-200 flex items-center gap-2">
+          <div role="alert" className="rounded-xl border border-red-300 bg-red-50 p-4 text-xs font-semibold text-red-900 dark:border-red-900 dark:bg-red-950 dark:text-red-200 flex items-center gap-2">
             <AlertCircle className="size-4 shrink-0" /> {error}
           </div>
         )}
 
         {/* Featured News Hero Card */}
         {featuredArticle && categoryFilter === "All Categories" && !query && (
-          <div className="mt-8 overflow-hidden rounded-2xl border border-neutral-300 bg-white shadow-lg dark:border-neutral-800 dark:bg-neutral-900/90">
+          <div className="overflow-hidden rounded-2xl border border-neutral-300 bg-white shadow-lg dark:border-neutral-800 dark:bg-neutral-900/90">
             <div className="grid md:grid-cols-2">
               <div className="relative h-64 md:h-auto overflow-hidden bg-neutral-950">
                 <SafeImage
@@ -289,7 +289,7 @@ export default function NewsPage() {
           </div>
         ) : (
           /* News Grid */
-          <RevealStagger className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <RevealStagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredArticles.map((article) => (
               <RevealItem key={article.id}>
                 <div
