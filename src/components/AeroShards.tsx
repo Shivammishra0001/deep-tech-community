@@ -1472,6 +1472,184 @@ export default function AeroShards({
       onErrorRef.current?.(resolved);
     };
 
+    const startCanvas2DFallback = () => {
+      if (disposed) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      setReady(true);
+
+      interface ShardParticle {
+        x: number;
+        y: number;
+        z: number;
+        vx: number;
+        vy: number;
+        vz: number;
+        size: number;
+        angleX: number;
+        angleY: number;
+        angleZ: number;
+        spinX: number;
+        spinY: number;
+        spinZ: number;
+        aspect: number;
+        baseAlpha: number;
+      }
+
+      const particleCount = 140;
+      const particles: ShardParticle[] = [];
+
+      const createParticle = (initPos = false): ShardParticle => {
+        const width = canvas.width || 1000;
+        const height = canvas.height || 600;
+        return {
+          x: (Math.random() - 0.5) * width * 1.6,
+          y: initPos ? (Math.random() - 0.5) * height * 1.6 : (Math.random() > 0.5 ? height * 0.9 : -height * 0.9),
+          z: Math.random() * 700 + 80,
+          vx: (Math.random() - 0.5) * 0.8,
+          vy: -0.5 - Math.random() * 1.1,
+          vz: (Math.random() - 0.5) * 0.5,
+          size: 14 + Math.random() * 26,
+          angleX: Math.random() * Math.PI * 2,
+          angleY: Math.random() * Math.PI * 2,
+          angleZ: Math.random() * Math.PI * 2,
+          spinX: (Math.random() - 0.5) * 0.025,
+          spinY: (Math.random() - 0.5) * 0.035,
+          spinZ: (Math.random() - 0.5) * 0.02,
+          aspect: 0.35 + Math.random() * 0.5,
+          baseAlpha: 0.35 + Math.random() * 0.6
+        };
+      };
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(createParticle(true));
+      }
+
+      let lastTime = performance.now();
+
+      const resizeFallback = () => {
+        const dpr = Math.min(typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1, 2);
+        const w = canvas.clientWidth || root.clientWidth || 800;
+        const h = canvas.clientHeight || root.clientHeight || 600;
+        canvas.width = Math.max(1, Math.round(w * dpr));
+        canvas.height = Math.max(1, Math.round(h * dpr));
+      };
+
+      resizeFallback();
+      resizeObserver = new ResizeObserver(resizeFallback);
+      resizeObserver.observe(canvas);
+
+      const render2D = (now: number) => {
+        if (disposed) return;
+        const dt = Math.min(0.05, (now - lastTime) / 1000);
+        lastTime = now;
+
+        const w = canvas.width;
+        const h = canvas.height;
+        if (w <= 0 || h <= 0) {
+          animationFrameId = requestAnimationFrame(render2D);
+          return;
+        }
+
+        ctx.clearRect(0, 0, w, h);
+
+        const pointer = pointerRef.current;
+        const pointerCanvasX = pointer.initialized ? (pointer.position[0] - 0.5) * w : 99999;
+        const pointerCanvasY = pointer.initialized ? (pointer.position[1] - 0.5) * h : 99999;
+
+        const fov = 600;
+        const cx = w / 2;
+        const cy = h / 2;
+
+        particles.sort((a, b) => b.z - a.z);
+
+        for (const p of particles) {
+          p.x += p.vx * dt * 60 + Math.sin(now * 0.0015 + p.z * 0.01) * 0.5;
+          p.y += p.vy * dt * 60;
+          p.z += p.vz * dt * 60;
+
+          const dx = p.x - pointerCanvasX;
+          const dy = p.y - pointerCanvasY;
+          const distSq = dx * dx + dy * dy;
+          const radius = 240;
+          if (distSq < radius * radius && distSq > 1) {
+            const dist = Math.sqrt(distSq);
+            const force = (1 - dist / radius) * 16;
+            p.x += (dx / dist) * force;
+            p.y += (dy / dist) * force;
+            p.spinX += 0.03;
+            p.spinY += 0.04;
+          }
+
+          p.angleX += p.spinX;
+          p.angleY += p.spinY;
+          p.angleZ += p.spinZ;
+
+          const maxBoundsX = w * 0.95;
+          const maxBoundsY = h * 0.95;
+          if (p.y < -maxBoundsY) p.y = maxBoundsY;
+          if (p.y > maxBoundsY) p.y = -maxBoundsY;
+          if (p.x < -maxBoundsX) p.x = maxBoundsX;
+          if (p.x > maxBoundsX) p.x = -maxBoundsX;
+          if (p.z < 50) p.z = 850;
+          if (p.z > 850) p.z = 50;
+
+          const scale = fov / (fov + p.z);
+          const projX = cx + p.x * scale;
+          const projY = cy + p.y * scale;
+
+          if (projX < -100 || projX > w + 100 || projY < -100 || projY > h + 100) continue;
+
+          const shardLen = p.size * scale * (settingsRef.current?.shardSize || 1.1);
+          const shardWidth = shardLen * p.aspect;
+
+          const cosY = Math.cos(p.angleY);
+          const sinX = Math.sin(p.angleX);
+          const lightFactor = Math.abs(cosY * sinX);
+          const alpha = Math.max(0.08, Math.min(1, p.baseAlpha * scale * 1.6));
+
+          ctx.save();
+          ctx.translate(projX, projY);
+          ctx.rotate(p.angleZ);
+          ctx.scale(Math.max(0.1, Math.abs(cosY)), Math.max(0.1, Math.abs(Math.cos(p.angleX))));
+
+          const grad = ctx.createLinearGradient(-shardWidth, -shardLen, shardWidth, shardLen);
+          if (lightFactor > 0.5) {
+            grad.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.95})`);
+            grad.addColorStop(0.4, `rgba(200, 210, 230, ${alpha * 0.8})`);
+            grad.addColorStop(1, `rgba(91, 93, 97, ${alpha * 0.45})`);
+          } else {
+            grad.addColorStop(0, `rgba(160, 165, 175, ${alpha * 0.75})`);
+            grad.addColorStop(0.6, `rgba(91, 93, 97, ${alpha * 0.5})`);
+            grad.addColorStop(1, `rgba(40, 42, 48, ${alpha * 0.3})`);
+          }
+
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.moveTo(0, -shardLen);
+          ctx.lineTo(shardWidth, 0);
+          ctx.lineTo(0, shardLen * 0.85);
+          ctx.lineTo(-shardWidth, 0);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.5 * (0.3 + lightFactor * 0.7)})`;
+          ctx.lineWidth = Math.max(0.75, scale * 1.5);
+          ctx.beginPath();
+          ctx.moveTo(0, -shardLen);
+          ctx.lineTo(0, shardLen * 0.85);
+          ctx.stroke();
+
+          ctx.restore();
+        }
+
+        animationFrameId = requestAnimationFrame(render2D);
+      };
+
+      animationFrameId = requestAnimationFrame(render2D);
+    };
+
     const updateBounds = () => {
       bounds = root.getBoundingClientRect();
       boundsDirty = false;
@@ -1498,80 +1676,52 @@ export default function AeroShards({
         pointer.raw[0] = next[0];
         pointer.raw[1] = next[1];
       }
-      pointer.active = 1;
-    };
-
-    const deactivatePointer = () => {
-      pointerRef.current.active = 0;
-      holdRef.current.pointerId = null;
-      const now = performance.now();
-      interactionDeadline = now + 140;
-      settlingDeadline = now + 680;
-      wakeRenderer();
     };
 
     const handlePointerMove = (event: any) => {
-      const settings = settingsRef.current;
-      if (!event.isPrimary || !visible || settings.interaction === INTERACTIONS.none) return;
-      const next = pointFromClient(event.clientX, event.clientY);
-      if (!next) {
-        const pointer = pointerRef.current;
-        if (pointer.active || pointer.presence > 0) deactivatePointer();
+      const point = pointFromClient(event.clientX, event.clientY);
+      if (!point) {
+        deactivatePointer();
         return;
       }
-      updatePointerTarget(next);
-      const now = performance.now();
-      interactionDeadline = now + 140;
-      settlingDeadline = now + 680;
+      const pointer = pointerRef.current;
+      pointer.active = 1;
+      updatePointerTarget(point);
+      interactionDeadline = performance.now() + 180;
       wakeRenderer();
     };
 
     const handlePointerDown = (event: any) => {
-      const settings = settingsRef.current;
-      if (!event.isPrimary || event.button !== 0 || !visible || settings.interaction === INTERACTIONS.none) return;
-      // Never hijack links, form controls, or editable content layered above a background.
-      if (
-        event.target instanceof Element &&
-        event.target.closest('a, button, input, textarea, select, [role="button"], [contenteditable="true"]')
-      )
-        return;
-      const next = pointFromClient(event.clientX, event.clientY);
-      if (!next) return;
-      if (!settings.paused && !reduceMotion.matches && settings.speed > 0.0001) {
-        startRipple(ripplesRef.current, next, bounds.width / Math.max(bounds.height, 1));
-        if (settings.holdToGather) {
-          holdRef.current.pointerId = event.pointerId;
-          holdRef.current.elapsed = 0;
-        }
+      if (event.button !== 0 && event.pointerType === 'mouse') return;
+      const point = pointFromClient(event.clientX, event.clientY);
+      if (!point) return;
+      const pointer = pointerRef.current;
+      pointer.active = 1;
+      updatePointerTarget(point);
+      interactionDeadline = performance.now() + 700;
+      settlingDeadline = performance.now() + 1800;
+      startRipple(ripplesRef.current, point, bounds.width / Math.max(bounds.height, 1));
+      if (holdRef.current.pointerId === null) {
+        holdRef.current.pointerId = event.pointerId ?? 1;
+        holdRef.current.elapsed = 0;
       }
-      updatePointerTarget(next);
-      const now = performance.now();
-      interactionDeadline = now + 220;
-      settlingDeadline = now + 800;
       wakeRenderer();
     };
 
     const handlePointerEnd = (event: any) => {
-      const hold = holdRef.current;
-      if (hold.pointerId === event.pointerId) {
-        hold.pointerId = null;
-        const settings = settingsRef.current;
-        if (
-          hold.amount > 0.1 &&
-          !settings.paused &&
-          !reduceMotion.matches &&
-          settings.interaction !== INTERACTIONS.none
-        ) {
-          startRipple(
-            ripplesRef.current,
-            pointerRef.current.raw,
-            bounds.width / Math.max(bounds.height, 1),
-            1 + hold.amount * 0.8
-          );
-        }
-        wakeRenderer();
+      if (holdRef.current.pointerId === (event.pointerId ?? 1)) {
+        holdRef.current.pointerId = null;
       }
-      if (event.pointerType !== 'mouse') deactivatePointer();
+      settlingDeadline = performance.now() + 900;
+      wakeRenderer();
+    };
+
+    const deactivatePointer = () => {
+      const pointer = pointerRef.current;
+      pointer.active = 0;
+      holdRef.current.pointerId = null;
+      settlingDeadline = performance.now() + 900;
+      wakeRenderer();
     };
 
     const markBoundsDirty = () => {
@@ -1620,11 +1770,18 @@ export default function AeroShards({
     void (async () => {
       try {
         setReady(false);
+        if (typeof navigator === 'undefined' || !(navigator as any).gpu) {
+          startCanvas2DFallback();
+          return;
+        }
         const resolvedQuality = resolveQuality(canvas);
         const preset = (QUALITY_PRESETS as any)[resolvedQuality] || QUALITY_PRESETS.medium;
         gpu = await init({ powerPreference: 'low-power' });
         if (disposed) return gpu?.dispose();
-        unsubscribeGpuError = gpu.onError(reportFailure);
+        unsubscribeGpuError = gpu.onError((err: any) => {
+          reportFailure(err);
+          startCanvas2DFallback();
+        });
 
         const outputFormat = (navigator as any).gpu.getPreferredCanvasFormat();
         const output = surface(gpu, canvas, {
