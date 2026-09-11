@@ -6,7 +6,6 @@ import { Search, ExternalLink, RefreshCw, Loader2, Calendar, ShieldCheck, Tag, A
 import { Container, PageHero, Button, Badge } from "@/components/ui";
 import { ARTICLES } from "@/data/news";
 import { SafeImage } from "@/components/safe-image";
-import { NewsletterSubscribeCard } from "@/components/newsletter-card";
 import { RevealStagger, RevealItem } from "@/components/reveal";
 
 type NewsArticle = {
@@ -163,9 +162,7 @@ export default function NewsPage() {
         description="Curated research dispatches, paper breakdowns, and technical analysis across AI, Quantum, Cybersecurity, and AI Governance."
       />
 
-      <Container className="py-8 sm:py-10 space-y-8">
-        <NewsletterSubscribeCard />
-
+      <Container className="py-6 sm:py-8 space-y-6">
         {/* Top Control Bar: Search & Admin Manual Refresh */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-neutral-200/80 pb-6 dark:border-neutral-800/80">
           <div className="flex flex-wrap items-center gap-2">
