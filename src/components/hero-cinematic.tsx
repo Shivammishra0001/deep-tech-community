@@ -80,20 +80,20 @@ export function CinematicHero() {
           holdToGather={true}
         />
 
-        {/* Subtle Gradient Fog for Clean Contrast */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_120%_100%_at_20%_50%,rgba(5,5,5,0.75)_0%,rgba(5,5,5,0.4)_50%,transparent_100%)]" />
+        {/* Subtle Central Gradient Fog for Clean Contrast */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_90%_at_50%_50%,rgba(5,5,5,0.8)_0%,rgba(5,5,5,0.45)_50%,rgba(5,5,5,0.85)_100%)]" />
       </div>
 
-      <Container className="relative z-10 py-24 sm:py-32 lg:py-36">
+      <Container className="relative z-10 py-20 sm:py-28 lg:py-32 flex flex-col items-center justify-center text-center">
         <motion.div
           style={{ y: headlineY }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex flex-col items-start max-w-[880px]"
+          className="flex flex-col items-center text-center max-w-[940px] mx-auto"
         >
-          {/* Refined Modern Editorial Headline with Staggered Text */}
-          <h1 className="font-sans text-[36px] sm:text-[48px] md:text-[58px] lg:text-[68px] xl:text-[76px] font-semibold leading-[1.02] tracking-[-0.03em] text-neutral-50 uppercase max-w-[860px]">
+          {/* Refined Modern Editorial Headline with Staggered Text - Centered */}
+          <h1 className="font-sans text-[36px] sm:text-[50px] md:text-[62px] lg:text-[72px] xl:text-[80px] font-semibold leading-[1.02] tracking-[-0.03em] text-neutral-50 uppercase max-w-[920px] text-center">
             <StaggeredText
               text="WHERE FRONTIER BUILDERS ENGINEER THE FUTURE."
               segmentBy="Words"
@@ -101,11 +101,12 @@ export function CinematicHero() {
               direction="Top"
               duration="0.65s"
               staggerDelay="0.04s"
+              className="text-center"
             />
           </h1>
 
-          {/* Exact Supporting Copy */}
-          <p className="mt-5 sm:mt-7 max-w-[620px] font-sans text-base sm:text-lg lg:text-[19px] font-medium leading-relaxed text-neutral-200">
+          {/* Exact Supporting Copy - Centered */}
+          <p className="mt-5 sm:mt-7 max-w-[660px] font-sans text-base sm:text-lg lg:text-[19px] font-medium leading-relaxed text-neutral-200 text-center mx-auto">
             <StaggeredText
               text="A practitioner-led network for engineers, researchers, founders and students building what comes next."
               segmentBy="Words"
@@ -114,11 +115,12 @@ export function CinematicHero() {
               duration="0.5s"
               initialDelay="0.15s"
               staggerDelay="0.015s"
+              className="text-center"
             />
           </p>
 
-          {/* Primary & Secondary CTAs */}
-          <div className="mt-8 sm:mt-12 flex flex-wrap items-center gap-4 sm:gap-5">
+          {/* Primary & Secondary CTAs - Centered */}
+          <div className="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-4 sm:gap-5">
             <Link
               href="/join"
               className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-white px-7 sm:px-9 py-3.5 sm:py-4 font-sans text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-950 transition-all duration-200 hover:bg-neutral-200 shadow-lg hover:shadow-xl active:scale-[0.98] cursor-pointer"
