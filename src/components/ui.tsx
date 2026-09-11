@@ -24,12 +24,8 @@ export function Skeleton({ className }: { className?: string }) {
 
 /* -------------------------------- Typography ------------------------------- */
 
-export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
-  return (
-    <p className={cx("font-mono text-xs font-bold uppercase tracking-[0.2em] text-neutral-800 dark:text-neutral-200", className)}>
-      {children}
-    </p>
-  );
+export function Eyebrow({ children, className }: { children?: ReactNode; className?: string }) {
+  return null;
 }
 
 export function SectionHeading({
@@ -39,20 +35,19 @@ export function SectionHeading({
   action,
   className,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
   action?: { label: string; href: string };
   className?: string;
 }) {
   return (
-    <div className={cx("mb-12 flex flex-wrap items-end justify-between gap-x-8 gap-y-4 border-b border-neutral-200/80 pb-6 dark:border-neutral-800/80", className)}>
+    <div className={cx("mb-10 flex flex-wrap items-end justify-between gap-x-8 gap-y-4 border-b border-neutral-200/80 pb-6 dark:border-neutral-800/80", className)}>
       <div className="max-w-2xl">
-        <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-4xl lg:text-[2.6rem] sm:leading-[1.12]">
+        <h2 className="font-display text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 sm:text-4xl lg:text-[2.6rem] sm:leading-[1.12]">
           {title}
         </h2>
-        {description && <p className="mt-3.5 font-sans text-base sm:text-[17px] font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">{description}</p>}
+        {description && <p className="mt-3 font-sans text-base sm:text-[17px] font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">{description}</p>}
       </div>
       {action && (
         <Link
@@ -444,7 +439,7 @@ export function PageHero({
   description,
   children,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
   children?: ReactNode;
@@ -454,8 +449,7 @@ export function PageHero({
       <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
       <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
         <div className="max-w-3xl animate-rise">
-          <Eyebrow>{eyebrow}</Eyebrow>
-          <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-50">
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-50">
             {title}
           </h1>
           {description && <p className="mt-3 sm:mt-3.5 max-w-2xl font-sans text-base sm:text-lg font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">{description}</p>}

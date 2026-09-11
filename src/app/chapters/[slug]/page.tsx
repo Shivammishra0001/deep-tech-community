@@ -52,15 +52,12 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
                 {ch.flag}
               </span>
               <div>
-                <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+                <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
                   {ch.country} Chapter
                 </h1>
-                <p className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-neutral-500">
+                <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-sans text-sm font-semibold text-neutral-700 dark:text-neutral-200">
                   <span className="inline-flex items-center gap-1.5">
                     <MapPin className="size-3.5" aria-hidden /> {ch.city}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <Users className="size-3.5" aria-hidden /> {ch.members.toLocaleString()} Members
                   </span>
                   <span>Est. {ch.founded}</span>
                 </p>

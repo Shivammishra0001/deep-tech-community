@@ -276,10 +276,9 @@ export default function HomePage() {
                           {c.flag}
                         </span>
                         <h3 className="font-display text-lg sm:text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-                          {c.country} <span className="font-mono text-xs font-semibold text-neutral-400">[{c.code}]</span>
+                          {c.country}
                         </h3>
                       </div>
-                      <Badge className="font-sans text-xs font-semibold">Regional Hub</Badge>
                     </div>
                     <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-200">{c.city}</p>
                     <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">{c.blurb}</p>

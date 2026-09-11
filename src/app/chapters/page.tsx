@@ -131,7 +131,6 @@ export default function ChaptersPage() {
                     <span className="text-3xl" role="img" aria-label={c.country}>
                       {c.flag}
                     </span>
-                    <Badge>[{c.code}]</Badge>
                   </div>
                   <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
                     <Link href={`/chapters/${c.slug}`}>{c.country}</Link>

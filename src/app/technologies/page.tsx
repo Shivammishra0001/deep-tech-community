@@ -30,20 +30,16 @@ export default function TechnologiesPage() {
                 <Card hover className="group flex flex-col justify-between p-6">
                   <div>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="grid size-10 place-items-center rounded-md border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100">
-                          <Icon className="size-5" />
-                        </span>
-                        <span className="font-mono text-xs font-semibold text-neutral-300">0{i + 1}</span>
-                      </div>
-                      <Badge>[{d.short}]</Badge>
+                      <span className="grid size-10 place-items-center rounded-lg border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100">
+                        <Icon className="size-5" />
+                      </span>
                     </div>
 
-                    <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-100">
+                    <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
                       <Link href={`/technologies/${d.techSlug}`}>{d.name}</Link>
                     </h2>
-                    <p className="mt-1 font-mono text-xs text-neutral-300">{d.tagline}</p>
-                    <p className="mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">{d.description}</p>
+                    <p className="mt-1.5 font-sans text-sm font-semibold text-neutral-700 dark:text-neutral-200">{d.tagline}</p>
+                    <p className="mt-3 font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{d.description}</p>
                   </div>
 
                   <div>

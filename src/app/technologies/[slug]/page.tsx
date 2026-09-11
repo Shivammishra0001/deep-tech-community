@@ -100,15 +100,12 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
         <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="max-w-3xl animate-rise">
-            <div className="flex items-center gap-3">
-              <span className="grid size-10 place-items-center rounded-md border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100">
-                <Icon className="size-5" />
-              </span>
-              <Eyebrow>Technology Track</Eyebrow>
-            </div>
-            <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50">{d.name}</h1>
-            <p className="mt-1.5 font-mono text-xs uppercase tracking-wider text-neutral-500">{d.tagline}</p>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">{page.overview[0]}</p>
+            <span className="grid size-10 place-items-center rounded-lg border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100">
+              <Icon className="size-5" />
+            </span>
+            <h1 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">{d.name}</h1>
+            <p className="mt-2 font-sans text-sm font-semibold text-neutral-700 dark:text-neutral-200">{d.tagline}</p>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{page.overview[0]}</p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Button href="/join" variant="primary" size="md">
                 Join Track
