@@ -239,172 +239,77 @@ export function FrontiersExperience() {
   const current = FRONTIERS[activeIndex];
 
   return (
-    <section id="technologies" className="relative bg-[#050505] text-neutral-50 scroll-mt-20 border-t border-neutral-900">
+    <section id="technologies" className="relative bg-[#050505] text-white scroll-mt-20 border-t border-neutral-900">
 
-      {/* ----------------- DESKTOP PINNED SCROLL EXPERIENCE (lg+) ----------------- */}
-      <div ref={containerRef} className="hidden lg:block relative h-[360vh]">
-        {/* Sticky viewport container */}
-        <div className="sticky top-0 flex h-screen w-full items-center overflow-hidden">
-          {/* Subtle Background Grid */}
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#1f1f1f14_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f14_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-
-          <Container className="relative z-10 grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-            {/* LEFT: TEXT CONTENT & DOMAIN INDICATOR */}
-            <div className="flex flex-col items-start justify-center">
-
-              {/* Section Label + Heading — always visible above domain */}
-              <div className="mb-6">
-                <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/80 px-3.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-300">
-                  <span className="size-1.5 rounded-full bg-neutral-100" />
-                  01 / TECHNOLOGIES
-                </div>
-                <h2 className="mt-3 font-display text-3xl xl:text-4xl font-black uppercase tracking-tight text-white">
-                  FOUR TECHNOLOGIES
-                </h2>
-              </div>
-
-              {/* Very Large Monospace Domain Number */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={current.num}
-                  initial={{ opacity: 0, y: -15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 15 }}
-                  transition={{ duration: 0.25 }}
-                  className="font-mono text-7xl xl:text-8xl font-black text-white tracking-tighter"
-                >
-                  {current.num}
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Large Sans-Serif Domain Title */}
-              <AnimatePresence mode="wait">
-                <motion.h3
-                  key={current.title}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.28 }}
-                  className="mt-2 font-display text-5xl xl:text-6xl font-black uppercase tracking-tight text-neutral-50"
-                >
-                  {current.title}
-                </motion.h3>
-              </AnimatePresence>
-
-              {/* Domain Description */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={current.description}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25, delay: 0.05 }}
-                  className="mt-4 max-w-lg space-y-2"
-                >
-                  <p className="font-sans text-xl font-semibold text-white">
-                    {current.description}
-                  </p>
-                  <p className="font-sans text-sm leading-relaxed text-white">
-                    {current.tagline}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Explore Link */}
-              <div className="mt-8">
-                <Link
-                  href={current.href}
-                  className="group inline-flex items-center gap-2.5 rounded-lg border border-neutral-700 bg-neutral-900/80 px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white transition-all hover:border-neutral-500 hover:bg-neutral-800 cursor-pointer shadow-xs"
-                >
-                  <span>EXPLORE {current.title} ROADMAP</span>
-                  <ArrowUpRight className="size-4 text-neutral-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
-                </Link>
-              </div>
-
-              {/* Step Progress Indicators */}
-              <div className="mt-12 flex items-center gap-3">
-                {FRONTIERS.map((f, i) => (
-                  <div
-                    key={f.num}
-                    className={cx(
-                      "h-1 rounded-full transition-all duration-300",
-                      i === activeIndex ? "w-10 bg-white" : "w-3 bg-neutral-600"
-                    )}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* RIGHT: CONTINUOUS MORPHING 3D CANVAS VISUAL */}
-            <div className="relative aspect-square w-full max-w-[460px] xl:max-w-[500px] mx-auto flex items-center justify-center">
-              <div className="absolute inset-0 rounded-full border border-neutral-800/60 bg-neutral-950/40 pointer-events-none" />
-              <div className="relative size-full min-h-[380px]">
-                <FrontiersCanvasVisual activeIndex={activeIndex} progress={rawProgress} />
-              </div>
-            </div>
-          </Container>
-        </div>
-      </div>
-
-      {/* ----------------- MOBILE VERTICAL EDITORIAL STACK (< lg) ----------------- */}
-      <div className="lg:hidden">
-        <Container className="py-12 space-y-12 divide-y divide-neutral-900">
-
-          {/* Section heading — mobile */}
-          <div className="pb-8">
+      {/* ── SECTION HEADER ── */}
+      <div className="border-b border-neutral-900 bg-[#070707] py-14 sm:py-16">
+        <Container className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/80 px-3.5 py-1 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-neutral-300">
-              <span className="size-1.5 rounded-full bg-neutral-100" />
+              <span className="size-1.5 rounded-full bg-white animate-pulse" />
               01 / TECHNOLOGIES
             </div>
-            <h2 className="mt-3 font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-white">
+            <h2 className="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white">
               FOUR TECHNOLOGIES
             </h2>
           </div>
+          <p className="max-w-sm font-sans text-sm sm:text-base font-medium leading-relaxed text-neutral-300">
+            Exploring the technologies shaping tomorrow.
+            Built by people, for people, at the frontier.
+          </p>
+        </Container>
+      </div>
 
-          {FRONTIERS.map((f) => {
+      {/* ── FOUR TECHNOLOGY CARDS GRID ── */}
+      <Container className="py-14 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-neutral-900 border border-neutral-900 rounded-2xl overflow-hidden">
+          {FRONTIERS.map((f, i) => {
             const Icon = f.icon;
             return (
-              <div key={f.num} className="pt-10 first:pt-0 space-y-6">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-4xl font-black text-neutral-300">{f.num}</span>
-                  <span className="grid size-9 place-items-center rounded-lg border border-neutral-800 bg-neutral-900 text-white">
-                    <Icon className="size-4" />
+              <motion.div
+                key={f.num}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group relative flex flex-col justify-between bg-[#0A0A0A] p-8 sm:p-10 hover:bg-[#111111] transition-colors duration-300"
+              >
+                {/* Number + Icon row */}
+                <div className="flex items-start justify-between">
+                  <span className="font-mono text-5xl sm:text-6xl font-black text-white leading-none tracking-tighter">
+                    {f.num}
+                  </span>
+                  <span className="grid size-10 place-items-center rounded-xl border border-neutral-800 bg-neutral-900 text-white group-hover:border-neutral-600 transition-colors">
+                    <Icon className="size-5" />
                   </span>
                 </div>
 
-                <div>
-                  <h3 className="font-display text-3xl font-black uppercase tracking-tight text-neutral-50">
+                {/* Title + description */}
+                <div className="mt-6">
+                  <h3 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
                     {f.title}
                   </h3>
                   <p className="mt-2 font-sans text-base font-semibold text-white">
                     {f.description}
                   </p>
-                  <p className="mt-1 font-sans text-xs leading-relaxed text-white">
+                  <p className="mt-2 font-sans text-sm leading-relaxed text-neutral-300">
                     {f.tagline}
                   </p>
                 </div>
 
-                <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-950 flex items-center justify-center">
-                  <div className="flex flex-col items-center gap-2 p-6 text-center">
-                    <Icon className="size-8 text-neutral-300 animate-pulse" />
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-300">
-                      {f.subtitle}
-                    </span>
-                  </div>
-                </div>
-
+                {/* Explore link */}
                 <Link
                   href={f.href}
-                  className="group inline-flex w-full items-center justify-between rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-3 font-mono text-xs font-bold uppercase tracking-wider text-neutral-100 hover:border-neutral-600"
+                  className="mt-8 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-white border-b border-neutral-700 pb-0.5 hover:border-white transition-colors w-fit"
                 >
-                  <span>EXPLORE {f.title} ROADMAP</span>
-                  <ArrowRight className="size-4 text-neutral-300 group-hover:translate-x-1" />
+                  Explore {f.title}
+                  <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Link>
-              </div>
+              </motion.div>
             );
           })}
-        </Container>
-      </div>
+        </div>
+      </Container>
     </section>
   );
 }
