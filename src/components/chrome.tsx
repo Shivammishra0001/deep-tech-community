@@ -3,13 +3,10 @@
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
-  Sun,
-  Moon,
   ArrowRight,
   Search,
   Cpu,
@@ -100,23 +97,6 @@ export function Logo({ className }: { className?: string }) {
         </span>
       </div>
     </Link>
-  );
-}
-
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  const dark = mounted ? theme === "dark" : true;
-  return (
-    <button
-      onClick={() => setTheme(dark ? "light" : "dark")}
-      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      className="grid size-7 place-items-center rounded-md text-neutral-400 hover:text-white transition-colors cursor-pointer"
-    >
-      {dark ? <Sun className="size-3.5" /> : <Moon className="size-3.5" />}
-    </button>
   );
 }
 
@@ -350,9 +330,6 @@ export function Navbar() {
                 SEARCH
               </span>
             </button>
-
-            {/* Theme Toggle */}
-            <ThemeToggle />
 
             {/* User Auth or Clean White JOIN Button */}
             {user ? (

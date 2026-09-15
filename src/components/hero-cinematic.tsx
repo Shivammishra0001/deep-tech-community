@@ -8,7 +8,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import { Container } from "@/components/ui";
 import { StaggeredText } from "@/components/staggered-text";
 
-const AeroShards = dynamic(() => import("@/components/AeroShards"), {
+const GhostFibers = dynamic(() => import("@/components/GhostFibers"), {
   ssr: false,
 });
 
@@ -47,37 +47,33 @@ export function CinematicHero() {
       onMouseLeave={handleMouseLeave}
       className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[88vh] lg:min-h-[92vh] flex flex-col justify-center items-center scroll-mt-20 pt-16 sm:pt-20 pb-16 sm:pb-20"
     >
-      {/* ----------------- AEROSHARDS BACKGROUND VISUAL ----------------- */}
+      {/* ----------------- GHOSTFIBERS BACKGROUND VISUAL ----------------- */}
       <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-        <AeroShards
-          backgroundColor="#050505"
-          shardColor="#896abd"
-          accentColor="#ffffff"
-          placement="full"
-          flow="stream"
-          material="pearl"
-          detail="balanced"
-          effect="none"
-          scale={1.15}
-          spread={1}
-          depth={1}
-          speed={1.1}
-          spin={1}
-          interaction="repel"
-          density={1.5}
-          shardSize={1.2}
-          stretch={1}
-          turbulence={1}
-          glow={1.2}
-          edgeSoftness={1.5}
-          bloom={0.5}
-          grain={0.03}
-          chromaticAberration={0.0075}
-          transitionDuration={1}
-          interactionRadius={1.5}
-          interactionStrength={0.5}
-          rippleIntensity={1}
-          holdToGather={true}
+        <GhostFibers
+          lineColor="#896abd"
+          glowColor="#3437A0"
+          speed={0.2}
+          scale={2}
+          rotation={0}
+          rotationSpeed={0.25}
+          layers={4}
+          waveAmplitude={0.015}
+          waveFrequency={3}
+          waveSpeed={0.15}
+          layerSpeed={0.08}
+          twist={0.1}
+          twistFrequency={5}
+          twistSpeed={1.2}
+          lineFrequency={5}
+          lineSpacing={2}
+          lineSharpness={16}
+          glowFalloff={10}
+          glowIntensity={1.6}
+          brightness={2.2}
+          blueBoost={1.25}
+          vignette={0.8}
+          grain={0.05}
+          dpr={1}
         />
 
         {/* Soft Radial Ambient Fog for Clean Readability */}
