@@ -18,7 +18,11 @@ async function main() {
   }
 
   try {
-    const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID || "1-cq6hWzG5ztFqugUEuccPBSYIzdeChxr6rAMlW3HgzI";
+    const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID;
+    if (!spreadsheetId) {
+      console.error("GOOGLE_SHEETS_SPREADSHEET_ID is not set. Configure it in .env.local first.");
+      return;
+    }
     const meta = await sheets.spreadsheets.get({ spreadsheetId });
     console.log("Spreadsheet Title:", meta.data.properties?.title);
     console.log("Existing Sheet Tabs in Google Sheets:");

@@ -1,6 +1,18 @@
 import { getGoogleSheetsClient } from "./google-services";
 
-const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_SPREADSHEET_ID || "1-cq6hWzG5ztFqugUEuccPBSYIzdeChxr6rAMlW3HgzI";
+/**
+ * Resolved from the environment only. There is no in-code fallback: a hardcoded
+ * spreadsheet id is a deployment detail that does not belong in version control.
+ * When unset, every operation below degrades exactly as it already does when the
+ * Google client is unavailable.
+ */
+function getSpreadsheetId(): string | null {
+  const id = process.env.GOOGLE_SHEETS_SPREADSHEET_ID?.trim();
+  return id ? id : null;
+}
+
+/** Column index of the password hash in the Users tab (see SHEET_HEADERS below). */
+const USERS_PASSWORD_COLUMN = 6;
 
 export const SHEET_TABS = {
   MEMBERSHIPS: "Memberships",
@@ -36,7 +48,8 @@ export class GoogleSheetsDB {
     }
 
     const sheets = getGoogleSheetsClient();
-    if (!sheets) return false;
+    const SPREADSHEET_ID = getSpreadsheetId();
+    if (!sheets || !SPREADSHEET_ID) return false;
 
     try {
       // 1. Fetch spreadsheet metadata to check if tab exists
@@ -92,9 +105,10 @@ export class GoogleSheetsDB {
    */
   static async readRows(tabName: string): Promise<string[][]> {
     const sheets = getGoogleSheetsClient();
+    const SPREADSHEET_ID = getSpreadsheetId();
     let sheetRows: string[][] = [];
 
-    if (sheets) {
+    if (sheets && SPREADSHEET_ID) {
       try {
         await this.ensureTab(tabName);
         const res = await sheets.spreadsheets.values.get({
@@ -140,7 +154,8 @@ export class GoogleSheetsDB {
     }
 
     const sheets = getGoogleSheetsClient();
-    if (!sheets || multiRowValues.length === 0) return true; // Cached in memory
+    const SPREADSHEET_ID = getSpreadsheetId();
+    if (!sheets || !SPREADSHEET_ID || multiRowValues.length === 0) return true; // Cached in memory
 
     try {
       await this.ensureTab(tabName);
@@ -200,6 +215,61 @@ export class GoogleSheetsDB {
     }
 
     return null;
+  }
+
+  /**
+   * Replaces the stored password credential for a user, matched on email address.
+   *
+   * Used to transparently upgrade legacy plaintext records to a real hash the first
+   * time a member signs in after the hashing migration. Best-effort: a failure here
+   * must never block an otherwise-valid login, so it reports success/failure rather
+   * than throwing.
+   */
+  static async updateUserPasswordHash(email: string, passwordHash: string): Promise<boolean> {
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || !passwordHash) return false;
+
+    // Keep the in-memory cache consistent even when Sheets is unavailable.
+    const cachedRow = localUserCache.get(cleanEmail);
+    if (cachedRow) {
+      const updated = [...cachedRow];
+      updated[USERS_PASSWORD_COLUMN] = passwordHash;
+      localUserCache.set(cleanEmail, updated);
+    }
+
+    const sheets = getGoogleSheetsClient();
+    const SPREADSHEET_ID = getSpreadsheetId();
+    if (!sheets || !SPREADSHEET_ID) return false;
+
+    try {
+      await this.ensureTab(SHEET_TABS.USERS);
+
+      // Read the raw sheet (not the cache-merged view) so row indices stay accurate.
+      const res = await sheets.spreadsheets.values.get({
+        spreadsheetId: SPREADSHEET_ID,
+        range: `'${SHEET_TABS.USERS}'!A2:Z10000`,
+      });
+      const rows: string[][] = res.data.values || [];
+
+      const rowIndex = rows.findIndex((row) => (row[2] || "").trim().toLowerCase() === cleanEmail);
+      if (rowIndex === -1) return false;
+
+      // +2 converts a 0-based offset within A2:… into a 1-based sheet row number.
+      const sheetRow = rowIndex + 2;
+      const columnLetter = String.fromCharCode("A".charCodeAt(0) + USERS_PASSWORD_COLUMN);
+
+      await sheets.spreadsheets.values.update({
+        spreadsheetId: SPREADSHEET_ID,
+        range: `'${SHEET_TABS.USERS}'!${columnLetter}${sheetRow}`,
+        valueInputOption: "RAW",
+        requestBody: { values: [[passwordHash]] },
+      });
+
+      return true;
+    } catch (err) {
+      console.error("[GoogleSheetsDB] Failed to update stored password hash:", err);
+      return false;
+    }
   }
 
   /**

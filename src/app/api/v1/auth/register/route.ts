@@ -3,6 +3,8 @@ import { apiError, apiSuccess } from "@/lib/response";
 import { signAccessToken, signRefreshToken } from "@/lib/jwt";
 import { getRolePermissions } from "@/lib/rbac";
 import { GoogleSheetsDB, SHEET_TABS } from "@/lib/google-sheets-db";
+import { hashPassword } from "@/lib/password";
+import { randomBytes } from "crypto";
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,7 +28,7 @@ export async function POST(request: NextRequest) {
     }
 
     const user = {
-      id: "usr_" + Math.random().toString(36).substring(2, 10),
+      id: "usr_" + randomBytes(8).toString("hex"),
       fullName: fullName.trim(),
       email: cleanEmail,
       phoneNumber: phoneNumber ? phoneNumber.trim() : "",
@@ -37,7 +39,10 @@ export async function POST(request: NextRequest) {
       createdAt: new Date().toISOString(),
     };
 
-    // 2. Append User to Google Sheets Users Tab
+    // 2. Append User to Google Sheets Users Tab.
+    //    The password is scrypt-hashed with a per-user random salt; the plaintext
+    //    is never written to storage or logs.
+    const passwordHash = await hashPassword(password);
     const userRow = [
       user.id,
       user.fullName,
@@ -45,7 +50,7 @@ export async function POST(request: NextRequest) {
       user.phoneNumber,
       user.countryCode,
       user.role,
-      "HASHED_PWD_" + password, // Password stored securely on server
+      passwordHash,
       user.createdAt,
     ];
     await GoogleSheetsDB.appendRow(SHEET_TABS.USERS, userRow);

@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 
 import { GoogleSheetsDB, SHEET_TABS } from "../src/lib/google-sheets-db";
+import { hashPassword } from "../src/lib/password";
 
 async function testAppend() {
   console.log("Testing appendRow to Users...");
@@ -13,7 +14,7 @@ async function testAppend() {
     "9876543210",
     "91",
     "MEMBER",
-    "HASHED_PWD_test",
+    await hashPassword(`test-${timestamp}`),
     new Date().toISOString(),
   ]);
   console.log("Users append result:", res1);

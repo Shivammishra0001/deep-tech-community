@@ -2,7 +2,8 @@ import { type NextRequest } from "next/server";
 import { apiError, apiSuccess } from "@/lib/response";
 import { signAccessToken, signRefreshToken } from "@/lib/jwt";
 import { getRolePermissions } from "@/lib/rbac";
-import { GoogleSheetsDB, SHEET_TABS } from "@/lib/google-sheets-db";
+import { GoogleSheetsDB } from "@/lib/google-sheets-db";
+import { hashPassword, verifyPassword } from "@/lib/password";
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,8 +23,17 @@ export async function POST(request: NextRequest) {
       return apiError("No account found with this email or phone number.", 404);
     }
 
-    const storedPassword = userRow[6] || "";
-    if (storedPassword && storedPassword !== password && storedPassword !== "HASHED_PWD_" + password) {
+    const storedCredential = userRow[6] || "";
+
+    // A record with no stored credential must never authenticate. The previous
+    // implementation skipped the comparison entirely when this cell was blank,
+    // which allowed sign-in to such an account with any password.
+    if (!storedCredential.trim()) {
+      return apiError("Incorrect password. Please check your credentials and try again.", 401);
+    }
+
+    const { valid, needsRehash } = await verifyPassword(password, storedCredential);
+    if (!valid) {
       return apiError("Incorrect password. Please check your credentials and try again.", 401);
     }
 
@@ -37,6 +47,17 @@ export async function POST(request: NextRequest) {
       status: "ACTIVE" as const,
       tokenVersion: 1,
     };
+
+    // Transparently migrate legacy plaintext / `HASHED_PWD_` records to a real
+    // scrypt hash now that we have verified the password. Best-effort: a storage
+    // failure here must not fail an otherwise-valid login.
+    if (needsRehash) {
+      try {
+        await GoogleSheetsDB.updateUserPasswordHash(user.email, await hashPassword(password));
+      } catch (rehashErr) {
+        console.error("[auth/login] Password rehash failed:", rehashErr);
+      }
+    }
 
     const permissions = getRolePermissions(user.role);
     const accessToken = await signAccessToken({
