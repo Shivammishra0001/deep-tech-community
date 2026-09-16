@@ -170,7 +170,7 @@ export function Navbar() {
       >
         <HeaderBrand />
 
-        <nav className="hidden items-center gap-7 md:flex lg:gap-9" aria-label="Main">
+        <nav className="hidden items-center gap-7 lg:flex lg:gap-9" aria-label="Main">
           {NAV_ITEMS.map((item) => {
             const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
@@ -200,7 +200,7 @@ export function Navbar() {
           {user ? (
             <Link
               href="/admin"
-              className="hidden h-9 items-center gap-2.5 rounded-lg border border-border px-3 font-sans text-[12px] font-medium text-body transition-colors duration-200 hover:border-border-strong hover:text-primary md:inline-flex"
+              className="hidden h-9 items-center gap-2.5 rounded-lg border border-border px-3 font-sans text-[12px] font-medium text-body transition-colors duration-200 hover:border-border-strong hover:text-primary lg:inline-flex"
             >
               <span className="grid size-5 place-items-center rounded-full bg-primary font-sans text-[9px] font-bold text-background">
                 {initials(user.name)}
@@ -208,7 +208,7 @@ export function Navbar() {
               <span className="max-w-[96px] truncate">{user.name.split(" ")[0]}</span>
             </Link>
           ) : (
-            <span className="hidden md:block">
+            <span className="hidden lg:block">
               <JoinCta />
             </span>
           )}
@@ -219,7 +219,7 @@ export function Navbar() {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
-            className="grid size-10 place-items-center rounded-lg border border-border text-body transition-colors duration-200 hover:border-border-strong hover:text-primary md:hidden"
+            className="grid size-10 place-items-center rounded-lg border border-border text-body transition-colors duration-200 hover:border-border-strong hover:text-primary lg:hidden"
           >
             {mobileOpen ? <X className="size-4.5" /> : <Menu className="size-4.5" />}
           </button>
@@ -237,7 +237,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-border bg-background md:hidden"
+            className="overflow-hidden border-t border-border bg-background lg:hidden"
           >
             <Container className="py-4">
               <nav className="grid" aria-label="Mobile">

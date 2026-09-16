@@ -3,7 +3,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui";
 import { StaggeredText } from "@/components/staggered-text";
 
@@ -14,14 +14,27 @@ const GhostFibers = dynamic(() => import("@/components/GhostFibers"), {
 export function CinematicHero() {
   const shouldReduceMotion = useReducedMotion();
 
-  // Scroll Parallax hooks
+  // Slow parallax drift on the content while the hero scrolls away.
   const { scrollY } = useScroll();
-  const headlineY = useTransform(scrollY, [0, 600], [0, shouldReduceMotion ? 0 : -30]);
+  const contentY = useTransform(scrollY, [0, 600], [0, shouldReduceMotion ? 0 : -28]);
+
+  // Secondary copy fades in as one block rather than word by word — the
+  // per-word reveal is reserved for the headline so the entrance has a
+  // single focal point.
+  const fadeUp = {
+    initial: { opacity: 0, y: shouldReduceMotion ? 0 : 12 },
+    animate: { opacity: 1, y: 0 },
+  };
 
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden bg-background text-primary min-h-[88vh] lg:min-h-[92vh] flex flex-col justify-center items-center scroll-mt-20 pt-16 sm:pt-20 pb-16 sm:pb-20"
+      className="relative w-full overflow-hidden bg-background text-primary scroll-mt-20
+                 flex items-center
+                 min-h-[620px] py-24
+                 sm:min-h-[680px]
+                 lg:min-h-[760px] lg:py-28
+                 xl:min-h-[820px]"
     >
       {/* ----------------- GHOSTFIBERS BACKGROUND VISUAL ----------------- */}
       <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
@@ -54,61 +67,88 @@ export function CinematicHero() {
 
         {/* Soft Radial Ambient Fog for Clean Readability */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_90%_at_50%_50%,rgba(5,5,5,0.75)_0%,rgba(5,5,5,0.4)_50%,rgba(5,5,5,0.85)_100%)]" />
+
+        {/* Small screens: the copy spans the full width, so darken evenly. */}
+        <div className="pointer-events-none absolute inset-0 md:hidden bg-[linear-gradient(180deg,rgba(5,5,5,0.55)_0%,rgba(5,5,5,0.68)_55%,rgba(5,5,5,0.82)_100%)]" />
+
+        {/* From tablet up the type sits in a left column, so weight the scrim
+            left and leave the fibers visible in the open space beside it. */}
+        <div className="pointer-events-none absolute inset-0 hidden md:block bg-[linear-gradient(90deg,rgba(5,5,5,0.78)_0%,rgba(5,5,5,0.55)_38%,rgba(5,5,5,0.12)_72%,rgba(5,5,5,0)_100%)]" />
+
+        {/* Hairline seam into the next section. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-border" />
       </div>
 
-      <Container className="relative z-10 flex flex-col items-center justify-center text-center">
-        <motion.div
-          style={{ y: headlineY }}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex flex-col items-center text-center max-w-[860px] mx-auto"
-        >
-          {/* Refined 64–72px Desktop Headline with Medium/Regular Weight */}
-          <h1 className="font-sans text-[34px] sm:text-[46px] md:text-[56px] lg:text-[66px] xl:text-[70px] font-medium leading-[1.08] tracking-[-0.025em] text-primary uppercase max-w-[820px] text-center">
+      <Container className="relative z-10">
+        <motion.div style={{ y: contentY }} className="max-w-[820px]">
+          {/* Eyebrow */}
+          <motion.p
+            {...fadeUp}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.28em] text-muted"
+          >
+            01 / FRONTIER NETWORK
+          </motion.p>
+
+          {/* Headline — 64-72px at desktop, medium weight, held to a column
+              width that breaks it across three lines instead of filling the
+              viewport. */}
+          <h1
+            className="mt-6 sm:mt-7 max-w-[560px] md:max-w-[680px] lg:max-w-[760px] font-sans uppercase text-primary
+                       text-[clamp(2.25rem,7.4vw,2.75rem)]
+                       sm:text-[clamp(2.75rem,6.2vw,3.5rem)]
+                       lg:text-[clamp(3.5rem,5vw,4.125rem)]
+                       xl:text-[4.5rem]
+                       font-medium leading-[1.12] sm:leading-[1.08] lg:leading-[1.06]
+                       tracking-[-0.015em] lg:tracking-[-0.022em]"
+          >
             <StaggeredText
               text="WHERE FRONTIER BUILDERS ENGINEER THE FUTURE."
               segmentBy="Words"
               staggerDirection="Forward"
               direction="Top"
-              duration="0.65s"
-              staggerDelay="0.04s"
-              className="text-center"
+              duration="0.7s"
+              staggerDelay="0.045s"
             />
           </h1>
 
-          {/* Exact Supporting Paragraph with Balanced Breathing Space */}
-          <p className="mt-6 sm:mt-7 max-w-[580px] font-sans text-[15px] sm:text-base lg:text-[18px] font-normal leading-relaxed text-body-soft text-center mx-auto">
-            <StaggeredText
-              text="A practitioner-led network for engineers, researchers, founders and students building what comes next."
-              segmentBy="Words"
-              staggerDirection="Forward"
-              direction="Top"
-              duration="0.5s"
-              initialDelay="0.15s"
-              staggerDelay="0.015s"
-              className="text-center"
-            />
-          </p>
+          {/* Supporting paragraph — secondary tone, narrow measure. */}
+          <motion.p
+            {...fadeUp}
+            transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.35, ease: "easeOut" }}
+            className="mt-7 lg:mt-8 max-w-[520px] font-sans text-[15px] sm:text-base lg:text-[17px]
+                       font-normal leading-[1.65] text-secondary"
+          >
+            A practitioner-led network for engineers, researchers, founders and students building
+            what comes next.
+          </motion.p>
 
-          {/* Clean, Premium CTA Buttons */}
-          <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-5">
+          {/* Calls to action */}
+          <motion.div
+            {...fadeUp}
+            transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.5, ease: "easeOut" }}
+            className="mt-10 lg:mt-12 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4"
+          >
             <Link
               href="/join"
-              className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-white px-7 sm:px-8 py-3.5 sm:py-4 font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider text-on-inverted transition-all duration-200 hover:bg-neutral-200 shadow-md hover:shadow-lg active:scale-[0.98] cursor-pointer"
+              className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg bg-primary px-7
+                         font-sans text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] text-background
+                         transition-colors duration-200 hover:bg-white"
             >
-              <span>JOIN THE COMMUNITY</span>
+              JOIN THE COMMUNITY
               <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
 
             <Link
               href="/community"
-              className="group inline-flex items-center justify-center gap-2.5 rounded-xl border border-border-strong bg-card/60 backdrop-blur-md px-7 sm:px-8 py-3.5 sm:py-4 font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary transition-all duration-200 hover:border-neutral-400 hover:bg-elevated/80 active:scale-[0.98] cursor-pointer"
+              className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg border border-border px-7
+                         font-sans text-[12px] sm:text-[13px] font-medium uppercase tracking-[0.1em] text-secondary
+                         transition-colors duration-200 hover:border-border-strong hover:text-primary"
             >
-              <span>EXPLORE THE NETWORK</span>
-              <ChevronRight className="size-4 text-secondary transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-primary" />
+              EXPLORE THE NETWORK
+              <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
-          </div>
+          </motion.div>
         </motion.div>
       </Container>
     </section>
