@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, Search, Cpu, Users, Newspaper, Calendar, Info, MapPin, ChevronRight, ShieldCheck, Zap } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { Container, cx, Button, Input } from "@/components/ui";
 
-const NAV_CENTER_ITEMS = [
+const NAV_ITEMS = [
   { label: "TECHNOLOGIES", href: "/technologies" },
   { label: "NETWORK", href: "/community" },
   { label: "NEWSLETTER", href: "/news" },
@@ -15,24 +15,13 @@ const NAV_CENTER_ITEMS = [
   { label: "ABOUT", href: "/about" },
 ];
 
-const SEARCH_ITEMS = [
-  { category: "Technologies", title: "Artificial Intelligence", href: "/technologies/artificial-intelligence", icon: Cpu },
-  { category: "Technologies", title: "Quantum Computing", href: "/technologies/quantum-computing", icon: Zap },
-  { category: "Technologies", title: "Cybersecurity", href: "/technologies/cybersecurity", icon: ShieldCheck },
-  { category: "Technologies", title: "AI Governance", href: "/technologies/ai-governance", icon: Info },
-  { category: "Page", title: "Technologies Overview", href: "/technologies", icon: Cpu },
-  { category: "Page", title: "Member Network", href: "/community", icon: Users },
-  { category: "Page", title: "Newsletter Briefings", href: "/news", icon: Newspaper },
-  { category: "Page", title: "Symposia & Events", href: "/events", icon: Calendar },
-  { category: "Page", title: "Regional Chapters", href: "/chapters", icon: MapPin },
-  { category: "Page", title: "About Deep Tech Community", href: "/about", icon: Info },
-  { category: "Action", title: "Join Community Application", href: "/join", icon: ArrowRight },
-];
-
-export function LogoSymbol({ className }: { className?: string }) {
+export function LogoSymbol({ className, animated = true }: { className?: string; animated?: boolean }) {
   return (
     <svg viewBox="0 0 100 100" fill="none" className={cx("size-8 shrink-0", className)} aria-hidden>
-      <g style={{ transformOrigin: "50px 50px" }} className="animate-[spin_22s_linear_infinite]">
+      <g
+        style={{ transformOrigin: "50px 50px" }}
+        className={cx(animated && "animate-[spin_22s_linear_infinite]")}
+      >
         <path d="M 58.5 16.5 A 35 35 0 0 1 83.5 41.5" className="stroke-current" strokeWidth="4" strokeLinecap="round" />
         <path d="M 83.5 58.5 A 35 35 0 0 1 58.5 83.5" className="stroke-current" strokeWidth="4" strokeLinecap="round" />
         <path d="M 41.5 83.5 A 35 35 0 0 1 16.5 58.5" className="stroke-current" strokeWidth="4" strokeLinecap="round" />
@@ -43,11 +32,12 @@ export function LogoSymbol({ className }: { className?: string }) {
         <circle cx="15" cy="50" r="4.5" className="fill-current" />
       </g>
       <path d="M 50 15 L 85 50 L 50 85 L 15 50 Z" className="stroke-current opacity-60" strokeWidth="2" strokeLinejoin="round" />
-      <circle cx="50" cy="50" r="9" className="fill-current animate-pulse" />
+      <circle cx="50" cy="50" r="9" className={cx("fill-current", animated && "animate-pulse")} />
     </svg>
   );
 }
 
+/** Brand lockup used outside the header (footer, login). Unchanged. */
 export function Logo({ className }: { className?: string }) {
   return (
     <Link href="/" className={cx("group inline-flex items-center gap-2.5", className)}>
@@ -66,168 +56,89 @@ export function Logo({ className }: { className?: string }) {
   );
 }
 
-function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [query, setQuery] = useState("");
-  const router = useRouter();
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    if (isOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
-    };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
-  const filtered = SEARCH_ITEMS.filter(
-    (item) =>
-      item.title.toLowerCase().includes(query.toLowerCase()) ||
-      item.category.toLowerCase().includes(query.toLowerCase())
-  );
-
-  const handleSelect = (href: string) => {
-    onClose();
-    router.push(href);
-  };
-
+/**
+ * Header brand lockup.
+ *
+ * "DTC" carries the weight; the full name sits under it at a smaller size and
+ * lower contrast so the two read as one mark rather than two equal labels. The
+ * symbol is static here — a permanently spinning mark fights the calm the rest
+ * of the header is going for.
+ */
+function HeaderBrand() {
   return (
-    <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-start justify-center pt-20 px-4 sm:px-6">
-        {/* Backdrop */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-          className="fixed inset-0 bg-black/80"
-        />
-
-        {/* Modal Window */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98, y: -8 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.98, y: -8 }}
-          transition={{ duration: 0.15 }}
-          className="relative z-10 w-full max-w-xl overflow-hidden rounded-lg border border-border bg-surface"
-        >
-          {/* Search Input Box */}
-          <div className="flex items-center border-b border-border px-4 py-3">
-            <Search className="size-4 text-secondary mr-3 shrink-0" />
-            <input
-              type="text"
-              autoFocus
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search technologies, research briefs, events, pages..."
-              className="w-full bg-transparent font-sans text-sm text-primary placeholder-neutral-500 outline-none"
-            />
-            {query && (
-              <button onClick={() => setQuery("")} className="text-xs text-secondary hover:text-body">
-                Clear
-              </button>
-            )}
-            <kbd className="ml-2 rounded border border-border bg-card px-1.5 py-0.5 font-sans text-[10px] text-body-soft">
-              ESC
-            </kbd>
-          </div>
-
-          {/* Search Results List */}
-          <div className="max-h-80 overflow-y-auto p-2">
-            {filtered.length === 0 ? (
-              <div className="p-8 text-center font-sans text-xs text-body-soft">
-                No matching results found for &quot;{query}&quot;
-              </div>
-            ) : (
-              <div className="space-y-1">
-                {filtered.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <button
-                      key={item.href}
-                      onClick={() => handleSelect(item.href)}
-                      className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left transition-colors hover:bg-card cursor-pointer"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="flex size-7 items-center justify-center rounded border border-border bg-card text-body-soft">
-                          <Icon className="size-3.5" />
-                        </div>
-                        <div>
-                          <p className="font-sans text-xs font-semibold text-primary">
-                            {item.title}
-                          </p>
-                          <p className="font-sans text-[10px] uppercase tracking-wider text-body-soft">
-                            {item.category}
-                          </p>
-                        </div>
-                      </div>
-                      <ChevronRight className="size-3.5 text-muted" />
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* Footer info */}
-          <div className="border-t border-border bg-background px-4 py-2 font-sans text-[10px] text-secondary flex justify-between items-center">
-            <span>DEEP TECH COMMUNITY SEARCH</span>
-            <span>PRESS ESC TO CLOSE</span>
-          </div>
-        </motion.div>
-      </div>
-    </AnimatePresence>
+    <Link
+      href="/"
+      className="group inline-flex shrink-0 items-center gap-3 rounded-sm"
+      aria-label="Deep Tech Community — home"
+    >
+      <LogoSymbol animated={false} className="size-7 text-primary transition-opacity duration-200 group-hover:opacity-80" />
+      <span className="flex flex-col leading-none">
+        <span className="font-sans text-[15px] font-semibold leading-none tracking-[-0.01em] text-primary">
+          DTC
+        </span>
+        <span className="mt-[5px] font-sans text-[9px] font-medium uppercase leading-none tracking-[0.18em] text-muted transition-colors duration-200 group-hover:text-secondary">
+          Deep Tech Community
+        </span>
+      </span>
+    </Link>
   );
 }
 
-/** Refined Minimal Editorial Header Component */
+function JoinCta({ size = "sm", className }: { size?: "sm" | "md"; className?: string }) {
+  return (
+    <Link
+      href="/join"
+      className={cx(
+        "group inline-flex items-center justify-center gap-2 rounded-lg bg-primary",
+        size === "sm" ? "h-9 px-4" : "h-10 px-5",
+        "font-sans text-[12px] font-semibold uppercase tracking-[0.08em] text-background",
+        "transition-colors duration-200 hover:bg-white",
+        className,
+      )}
+    >
+      JOIN
+      <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
+    </Link>
+  );
+}
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const pathname = usePathname();
 
   useEffect(() => setMobileOpen(false), [pathname]);
 
-  // Scroll listener for sticky header
+  // Condenses the header once the page has moved off the top.
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 15);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 15);
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Keyboard shortcut listener for Cmd+K / Ctrl+K
+  // Escape closes the mobile panel; body scroll is locked while it is open.
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setSearchOpen((prev) => !prev);
-      }
+    if (!mobileOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+    window.addEventListener("keydown", onKeyDown);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileOpen]);
 
   // Auth user state sync
   useEffect(() => {
     const checkUser = () => {
       try {
         const stored = localStorage.getItem("dts_user");
-        if (stored) {
-          setUser(JSON.parse(stored));
-        } else {
-          setUser(null);
-        }
+        setUser(stored ? JSON.parse(stored) : null);
       } catch {
         setUser(null);
       }
@@ -246,148 +157,137 @@ export function Navbar() {
     window.location.href = "/login";
   };
 
+  const initials = (name: string) =>
+    name ? name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U";
+
   return (
-    <>
-      <header
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/85 backdrop-blur-xl">
+      <Container
         className={cx(
-          "sticky top-0 z-50 w-full transition-all duration-200 border-b border-neutral-900 bg-background",
-          scrolled ? "py-2 sm:py-2.5" : "py-2.5 sm:py-3"
+          "flex items-center justify-between gap-6 transition-[height] duration-300 ease-out",
+          scrolled ? "h-[60px]" : "h-[72px]",
         )}
       >
-        <Container className="flex items-center justify-between gap-4">
-          {/* LEFT: Brand Emblem & Label */}
-          <Logo />
+        <HeaderBrand />
 
-          {/* CENTER: Primary Editorial Navigation Links */}
-          <nav className="hidden md:flex items-center gap-3.5 lg:gap-4.5" aria-label="Main Navigation">
-            {NAV_CENTER_ITEMS.map((item) => {
-              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cx(
-                    "relative py-1 px-1 font-sans text-[12px] font-medium uppercase tracking-[0.03em] transition-colors duration-150",
-                    isActive
-                      ? "text-primary"
-                      : "text-secondary hover:text-primary"
-                  )}
-                >
-                  {item.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-1 right-1 h-[1px] bg-white" />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* RIGHT: Actions (Subtle Search, Theme, Clean White JOIN Button) */}
-          <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* Search Trigger Button */}
-            <button
-              type="button"
-              onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-1 px-1.5 py-1 font-sans text-[11px] font-medium text-muted hover:text-body transition-colors cursor-pointer"
-              aria-label="Search platform"
-            >
-              <Search className="size-3.5" />
-              <span className="hidden lg:inline uppercase tracking-[0.03em]">
-                SEARCH
-              </span>
-            </button>
-
-            {/* User Auth or Clean White JOIN Button */}
-            {user ? (
-              <div className="flex items-center gap-2">
-                <Link
-                  href="/admin"
-                  className="flex items-center gap-2 rounded-md border border-border bg-card px-2.5 py-1 text-xs font-medium text-primary hover:bg-elevated transition-colors"
-                >
-                  <span className="flex size-4.5 items-center justify-center rounded-full bg-white font-sans text-[9px] font-bold text-on-inverted">
-                    {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
-                  </span>
-                  <span className="hidden sm:inline max-w-[90px] truncate">{user.name.split(" ")[0]}</span>
-                </Link>
-              </div>
-            ) : (
+        <nav className="hidden items-center gap-7 md:flex lg:gap-9" aria-label="Main">
+          {NAV_ITEMS.map((item) => {
+            const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
               <Link
-                href="/join"
-                className="group inline-flex items-center gap-1 rounded-md bg-white px-3 py-1 font-sans text-[12px] font-medium tracking-wide text-on-inverted transition-colors duration-150 hover:bg-neutral-200 cursor-pointer shadow-xs"
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                className={cx(
+                  "relative py-1 font-sans text-[12px] font-medium uppercase tracking-[0.12em] transition-colors duration-200",
+                  isActive ? "text-primary" : "text-secondary hover:text-primary",
+                )}
               >
-                <span>JOIN</span>
-                <ArrowRight className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
+                {item.label}
+                <span
+                  className={cx(
+                    "pointer-events-none absolute -bottom-px left-0 right-0 h-px bg-primary transition-opacity duration-200",
+                    isActive ? "opacity-100" : "opacity-0",
+                  )}
+                  aria-hidden
+                />
               </Link>
-            )}
+            );
+          })}
+        </nav>
 
-            {/* Mobile Navigation Drawer Toggle */}
-            <button
-              type="button"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
-              className="grid size-7.5 place-items-center rounded-md border border-border text-body-soft md:hidden cursor-pointer"
+        <div className="flex shrink-0 items-center gap-2.5">
+          {user ? (
+            <Link
+              href="/admin"
+              className="hidden h-9 items-center gap-2.5 rounded-lg border border-border px-3 font-sans text-[12px] font-medium text-body transition-colors duration-200 hover:border-border-strong hover:text-primary md:inline-flex"
             >
-              {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
-            </button>
-          </div>
-        </Container>
-      </header>
+              <span className="grid size-5 place-items-center rounded-full bg-primary font-sans text-[9px] font-bold text-background">
+                {initials(user.name)}
+              </span>
+              <span className="max-w-[96px] truncate">{user.name.split(" ")[0]}</span>
+            </Link>
+          ) : (
+            <span className="hidden md:block">
+              <JoinCta />
+            </span>
+          )}
 
-      {/* Search Modal Dialog */}
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+          <button
+            type="button"
+            onClick={() => setMobileOpen((open) => !open)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+            className="grid size-10 place-items-center rounded-lg border border-border text-body transition-colors duration-200 hover:border-border-strong hover:text-primary md:hidden"
+          >
+            {mobileOpen ? <X className="size-4.5" /> : <Menu className="size-4.5" />}
+          </button>
+        </div>
+      </Container>
 
-      {/* Mobile Full-Width Drawer */}
-      <AnimatePresence>
+      {/* Mobile panel. Rendered inside the sticky header so it always sits
+          flush beneath the bar, whatever height the bar currently has. */}
+      <AnimatePresence initial={false}>
         {mobileOpen && (
           <motion.div
+            id="mobile-nav"
+            key="mobile-nav"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="sticky top-[49px] z-40 overflow-hidden border-b border-neutral-900 bg-background md:hidden"
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden border-t border-border bg-background md:hidden"
           >
-            <Container className="py-4 space-y-3">
-              <div className="grid gap-1">
-                {NAV_CENTER_ITEMS.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="flex items-center justify-between rounded-md px-3 py-2 font-sans text-xs font-medium uppercase tracking-wider text-body-soft hover:bg-card hover:text-primary"
-                  >
-                    <span>{item.label}</span>
-                    <ChevronRight className="size-3.5 text-muted" />
-                  </Link>
-                ))}
-              </div>
-
-              <div className="border-t border-neutral-900 pt-3">
-                {user ? (
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                      <div className="flex size-7 items-center justify-center rounded-full bg-white font-sans text-xs font-semibold text-on-inverted">
-                        {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
-                      </div>
-                      <div>
-                        <p className="font-sans text-xs font-semibold text-primary">{user.name}</p>
-                        <p className="font-sans text-[10px] text-body-soft">{user.email}</p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={handleLogout}
-                      className="rounded-md border border-red-900/60 px-2.5 py-1 font-sans text-xs font-medium text-red-400 cursor-pointer"
+            <Container className="py-4">
+              <nav className="grid" aria-label="Mobile">
+                {NAV_ITEMS.map((item) => {
+                  const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cx(
+                        "flex h-12 items-center font-sans text-[13px] font-medium uppercase tracking-[0.12em] transition-colors duration-200",
+                        isActive ? "text-primary" : "text-secondary hover:text-primary",
+                      )}
                     >
-                      Sign Out
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+
+              <div className="mt-4 border-t border-border pt-4">
+                {user ? (
+                  <div className="flex items-center justify-between gap-4">
+                    <Link href="/admin" className="flex min-w-0 items-center gap-3">
+                      <span className="grid size-8 shrink-0 place-items-center rounded-full bg-primary font-sans text-[11px] font-bold text-background">
+                        {initials(user.name)}
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block truncate font-sans text-[13px] font-medium text-primary">{user.name}</span>
+                        <span className="block truncate font-sans text-[11px] text-muted">{user.email}</span>
+                      </span>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="h-9 shrink-0 rounded-lg border border-border px-3 font-sans text-[12px] font-medium text-body transition-colors duration-200 hover:border-border-strong hover:text-primary"
+                    >
+                      Sign out
                     </button>
                   </div>
                 ) : (
-                  <div className="flex gap-2">
-                    <Button href="/login" variant="outline" size="sm" className="flex-1 justify-center font-sans text-xs font-medium">
-                      Login
-                    </Button>
-                    <Button href="/join" variant="primary" size="sm" className="flex-1 justify-center font-sans text-xs font-medium bg-white text-on-inverted hover:bg-neutral-200">
-                      Join Community →
-                    </Button>
+                  <div className="flex items-center gap-2.5">
+                    <Link
+                      href="/login"
+                      className="inline-flex h-10 flex-1 items-center justify-center rounded-lg border border-border font-sans text-[12px] font-medium uppercase tracking-[0.08em] text-body transition-colors duration-200 hover:border-border-strong hover:text-primary"
+                    >
+                      Log in
+                    </Link>
+                    <JoinCta size="md" className="flex-1" />
                   </div>
                 )}
               </div>
@@ -395,12 +295,9 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }
-
-/** Alias export to maintain backward compatibility */
-export const SidebarNav = Navbar;
 
 export function FooterNewsletter() {
   const [email, setEmail] = useState("");
