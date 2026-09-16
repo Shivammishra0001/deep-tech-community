@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
   // Map Google Sheets rows to post objects
   let posts = rows.map((r) => ({
     id: r[0] || "post_1",
-    author: r[1] || "Dr. Elena Marchetti",
+    author: r[1] || "Community Member",
     authorRole: "Practitioner",
     domain: r[3] || "quantum",
     kind: r[4] || "ARTICLE",
@@ -23,22 +23,6 @@ export async function GET(request: NextRequest) {
     createdAt: r[9] || new Date().toISOString(),
   }));
 
-  if (posts.length === 0) {
-    posts = [
-      {
-        id: "post_sample_1",
-        author: "Dr. Elena Marchetti",
-        authorRole: "Quantum Hardware Lead · Zurich",
-        kind: "ARTICLE",
-        domain: "quantum",
-        title: "Superconducting qubit coherence times extended by 3x using niobium capping",
-        body: "Surface dielectric loss remains the primary bottleneck for 2D transmon lifetime...",
-        tags: ["Quantum", "Superconducting", "Materials"],
-        likeCount: 42,
-        createdAt: new Date().toISOString(),
-      },
-    ];
-  }
 
   if (domain && domain !== "all") {
     posts = posts.filter((p) => p.domain.toLowerCase() === domain.toLowerCase());

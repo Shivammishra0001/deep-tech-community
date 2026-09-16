@@ -279,20 +279,7 @@ export function ArticleDetailPageActions({
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [comments, setComments] = useState<NewsComment[]>([
-    {
-      id: "c1",
-      author: "Elena Marchetti",
-      body: "Fascinating analysis. The empirical benchmarks on post-quantum lattice verification align with our lab results.",
-      date: "Yesterday",
-    },
-    {
-      id: "c2",
-      author: "Vikram Shah",
-      body: "Will this architecture scale to multi-node clusters without memory bottlenecking?",
-      date: "3 hours ago",
-    },
-  ]);
+  const [comments, setComments] = useState<NewsComment[]>([]);
   const [newComment, setNewComment] = useState("");
 
   function handleLike() {

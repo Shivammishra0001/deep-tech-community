@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { Container, DomainBadge, SectionHeading, Card, Button, Badge, Avatar } from "@/components/ui";
+import { Container, DomainBadge, SectionHeading, Card, Button, Badge } from "@/components/ui";
 import { DOMAINS } from "@/data/core";
 import { TECH_PAGES } from "@/data/technologies";
 import { ARTICLES } from "@/data/news";
@@ -61,38 +61,6 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
   const latestNews = domainNews.slice(0, 2);
   const domainEvents = EVENTS.filter((e) => e.domains.includes(domain));
 
-  const COMMUNITY_ARTICLES = [
-    {
-      author: "Priya Natarajan",
-      role: "ML Researcher · Bengaluru",
-      title: `Practical Lessons in Evaluating ${d.short} Models`,
-      excerpt: `Key takeaways from our chapter's monthly ${d.short} reading group and evaluation benchmarks.`,
-      readTime: "6 min read",
-    },
-    {
-      author: "Wei Ling Tan",
-      role: "APAC Track Lead · Singapore",
-      title: `Building Open Infrastructures for ${d.short}`,
-      excerpt: `How open-source tooling is changing how regional research labs collaborate on ${d.short}.`,
-      readTime: "8 min read",
-    },
-  ];
-
-  const INDUSTRY_UPDATES = [
-    {
-      title: `Global Standards Alignment for ${d.name}`,
-      date: "Feb 2026",
-      source: "ISO / IEEE Joint Technical Group",
-      blurb: `New standards finalized for interoperability, evaluation metrics, and security benchmarks in ${d.short}.`,
-    },
-    {
-      title: `Enterprise Adoption Trends in ${d.short}`,
-      date: "Jan 2026",
-      source: "Deep Tech Industry Consortium",
-      blurb: `Survey across 400+ technology leaders reveals accelerated transition from pilot labs to production systems.`,
-    },
-  ];
-
   return (
     <>
       {/* Header Banner */}
@@ -113,14 +81,6 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
                 View Roadmap
               </Button>
             </div>
-          </div>
-          <div className="mt-12 grid max-w-xl grid-cols-3 gap-4">
-            {page.facts.map((f) => (
-              <Card key={f.label} className="p-4 text-center">
-                <p className="font-display text-lg font-bold text-primary">{f.value}</p>
-                <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-secondary">{f.label}</p>
-              </Card>
-            ))}
           </div>
         </Container>
       </section>
@@ -218,44 +178,31 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
               title="Latest News"
               action={{ label: "All Briefings", href: "/news" }}
             />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {latestNews.map((a) => (
-                <Card key={a.slug} hover className="group">
-                  <DomainBadge domain={a.domain} />
-                  <h3 className="mt-3 font-display text-base font-semibold group-hover:underline text-primary">
-                    <Link href={`/news/${a.slug}`}>{a.title}</Link>
-                  </h3>
-                  <p className="mt-2 text-xs text-secondary">{a.excerpt}</p>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          {/* 5. Industry Updates */}
-          <section id="industry-updates" className="scroll-mt-24">
-            <SectionHeading
-              eyebrow="05 — Market & Standards"
-              title="Industry Updates"
-              description="Key shifts, corporate R&D milestones, and technical standards."
-            />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {INDUSTRY_UPDATES.map((u) => (
-                <Card key={u.title}>
-                  <div className="flex items-center justify-between font-mono text-[10px] text-secondary">
-                    <span>{u.source}</span>
-                    <span>{u.date}</span>
-                  </div>
-                  <h3 className="mt-2 font-display text-sm font-semibold text-primary">{u.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-secondary">{u.blurb}</p>
-                </Card>
-              ))}
-            </div>
+            {latestNews.length > 0 ? (
+              <div className="grid gap-4 sm:grid-cols-2">
+                {latestNews.map((a) => (
+                  <Card key={a.slug} hover className="group">
+                    <DomainBadge domain={a.domain} />
+                    <h3 className="mt-3 font-display text-base font-semibold group-hover:underline text-primary">
+                      <Link href={`/news/${a.slug}`}>{a.title}</Link>
+                    </h3>
+                    <p className="mt-2 text-xs text-secondary">{a.excerpt}</p>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <Card className="p-8 text-center">
+                <p className="font-mono text-xs text-secondary">
+                  No briefings published in this domain yet.
+                </p>
+              </Card>
+            )}
           </section>
 
           {/* 6. Research Papers */}
           <section id="papers" className="scroll-mt-24">
             <SectionHeading
-              eyebrow="06 — Literature"
+              eyebrow="05 — Literature"
               title="Research Papers"
               description="Foundational publications analyzed in active research reading groups."
             />
@@ -275,54 +222,46 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
           {/* 7. Tutorials */}
           <section id="tutorials" className="scroll-mt-24">
             <SectionHeading
-              eyebrow="07 — Hands-on"
+              eyebrow="06 — Hands-on"
               title="Tutorials & Code Labs"
               description="Practitioner-led guides and reproducible notebooks."
             />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {page.tutorials.map((t) => (
-                <Card key={t.title} hover>
-                  <div className="flex items-center justify-between font-mono text-[10px]">
-                    <Badge>{t.level}</Badge>
-                    <span className="text-secondary">{t.duration}</span>
-                  </div>
-                  <h3 className="mt-3 font-display text-sm font-semibold text-primary">{t.title}</h3>
-                  <p className="mt-1 font-mono text-xs text-muted">By {t.author}</p>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          {/* 8. Community Articles */}
-          <section id="community-articles" className="scroll-mt-24">
-            <SectionHeading
-              eyebrow="08 — Peer Contributions"
-              title="Community Articles"
-              description="Articles published directly by members in this domain circle."
-              action={{ label: "Community Feed", href: "/community" }}
-            />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {COMMUNITY_ARTICLES.map((ca) => (
-                <Card key={ca.title} hover>
-                  <div className="flex items-center gap-2">
-                    <Avatar name={ca.author} className="size-6 text-[8px]" />
-                    <span className="font-mono text-xs font-semibold text-primary">{ca.author}</span>
-                  </div>
-                  <h3 className="mt-3 font-display text-sm font-semibold text-primary">{ca.title}</h3>
-                  <p className="mt-1 text-xs text-secondary">{ca.excerpt}</p>
-                  <p className="mt-3 font-mono text-[10px] text-secondary">{ca.readTime}</p>
-                </Card>
-              ))}
-            </div>
+            {page.tutorials.length > 0 ? (
+              <div className="grid gap-4 sm:grid-cols-2">
+                {page.tutorials.map((t) => (
+                  <Card key={t.title} hover>
+                    <div className="flex items-center justify-between font-mono text-[10px]">
+                      <Badge>{t.level}</Badge>
+                      <span className="text-secondary">{t.duration}</span>
+                    </div>
+                    <h3 className="mt-3 font-display text-sm font-semibold text-primary">{t.title}</h3>
+                    <p className="mt-1 font-mono text-xs text-muted">By {t.author}</p>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <Card className="p-8 text-center">
+                <p className="font-mono text-xs text-secondary">
+                  No tutorials published in this domain yet.
+                </p>
+              </Card>
+            )}
           </section>
 
           {/* 9. Upcoming Events */}
           <section id="events" className="scroll-mt-24">
             <SectionHeading
-              eyebrow="09 — Calendar"
+              eyebrow="07 — Calendar"
               title="Upcoming Events"
               action={{ label: "All Events", href: "/events" }}
             />
+            {domainEvents.length === 0 ? (
+              <Card className="p-8 text-center">
+                <p className="font-mono text-xs text-secondary">
+                  No upcoming events scheduled in this domain.
+                </p>
+              </Card>
+            ) : (
             <Card className="p-0 divide-y divide-border">
               {domainEvents.map((e) => (
                 <div key={e.slug} className="p-4 flex items-center justify-between">
@@ -339,6 +278,7 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
                 </div>
               ))}
             </Card>
+            )}
           </section>
         </div>
       </Container>

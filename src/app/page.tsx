@@ -5,42 +5,16 @@ import { CinematicHero } from "@/components/hero-cinematic";
 import { FrontiersExperience } from "@/components/frontiers-experience";
 import { RevealHeading, RevealVisual, RevealStagger, RevealItem } from "@/components/reveal";
 import { CHAPTERS } from "@/data/core";
-import { ARTICLES } from "@/data/news";
+import { ARTICLES, type Article } from "@/data/news";
 import { EVENTS, isUpcomingEvent } from "@/data/events";
 import { SafeImage } from "@/components/safe-image";
-import type { DomainSlug } from "@/data/core";
 
 export default function HomePage() {
-  const featuredArticle = ARTICLES.find((a) => a.featured) ?? ARTICLES[0];
-  const latestArticles = ARTICLES.filter((a) => a.slug !== featuredArticle.slug).slice(0, 3);
+  const featuredArticle: Article | undefined = ARTICLES.find((a) => a.featured) ?? ARTICLES[0];
+  const latestArticles = featuredArticle
+    ? ARTICLES.filter((a) => a.slug !== featuredArticle.slug).slice(0, 3)
+    : [];
   const upcomingEvents = EVENTS.filter((e) => isUpcomingEvent(e.date));
-
-  const FEATURED_POSTS = [
-    {
-      author: "Priya Natarajan",
-      role: "ML Research Engineer · Bengaluru",
-      kind: "Article",
-      domain: "ai" as DomainSlug,
-      title: "Evaluating reasoning traces in LLMs without falling for convincing errors",
-      excerpt: "Score final answers and reasoning steps independently — self-verification protocols cut false positives by 42% in complex multi-step tasks.",
-    },
-    {
-      author: "Tomohiro Sato",
-      role: "AI Governance Lead · Penang",
-      kind: "Project",
-      domain: "governance" as DomainSlug,
-      title: "Open-source automated model compliance & auditing dashboard",
-      excerpt: "A lightweight, debuggable data stack built on SQLite and server-rendered dashboards designed for EU AI Act compliance logging.",
-    },
-    {
-      author: "Nurul Aisyah",
-      role: "Security Lead · Kuala Lumpur",
-      kind: "Achievement",
-      domain: "cybersecurity" as DomainSlug,
-      title: "SOC Simulation playbook now open for all regional chapter leads",
-      excerpt: "Lab specs, adversary simulation scripts, scoring rubrics, and debrief frameworks ready for execution across local chapters.",
-    },
-  ];
 
   return (
     <div className="relative">
@@ -55,88 +29,100 @@ export default function HomePage() {
         <Container>
           <RevealHeading>
             <SectionHeading
-              eyebrow="NEWSLETTER"
-              title="THE FRONTIER BRIEF"
+              title="Newsletter"
               description="Research, technical perspectives and important developments across frontier technology."
               action={{ label: "All Briefings", href: "/news" }}
             />
           </RevealHeading>
 
-          <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-            <RevealVisual delay={100}>
-              <Card hover className="group flex h-full flex-col justify-between overflow-hidden p-0">
-                <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border/80 bg-card">
-                  <SafeImage
-                    src={featuredArticle.image}
-                    alt={featuredArticle.title}
-                    className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                    <DomainBadge domain={featuredArticle.domain} />
-                    <span className="rounded-md border border-border-strong bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
-                      {featuredArticle.date}
-                    </span>
-                  </div>
-                </div>
-                <div className="flex flex-1 flex-col justify-between p-6">
-                  <div>
-                    <h3 className="font-display text-xl font-bold leading-tight tracking-tight group-hover:underline text-primary">
-                      <Link href={`/news/${featuredArticle.slug}`}>{featuredArticle.title}</Link>
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-body font-medium">
-                      {featuredArticle.excerpt}
-                    </p>
-                  </div>
-                  <div className="mt-6 flex items-center justify-between border-t pt-4 font-sans text-xs font-semibold border-border text-body">
-                    <div className="flex items-center gap-2">
-                      <Avatar name={featuredArticle.author} className="size-7 text-xs font-bold" />
-                      <span className="font-semibold text-primary">{featuredArticle.author}</span>
+          {featuredArticle ? (
+            <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+              <RevealVisual delay={100}>
+                <Card hover className="group flex h-full flex-col justify-between overflow-hidden p-0">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border/80 bg-card">
+                    <SafeImage
+                      src={featuredArticle.image}
+                      alt={featuredArticle.title}
+                      className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" />
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                      <DomainBadge domain={featuredArticle.domain} />
+                      <span className="rounded-md border border-border-strong bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
+                        {featuredArticle.date}
+                      </span>
                     </div>
-                    <span className="text-body font-semibold">{featuredArticle.readingTime} min read</span>
                   </div>
-                </div>
-              </Card>
-            </RevealVisual>
-
-            <RevealStagger className="flex flex-col gap-4" delay={150}>
-              {latestArticles.map((a) => (
-                <RevealItem key={a.slug}>
-                  <Card hover className="group p-4 sm:p-5">
-                    <div className="flex items-center gap-4">
-                      {/* 64x64px Square Thumbnail Visual */}
-                      <div className="relative size-16 shrink-0 overflow-hidden rounded-lg border border-border/90 bg-card shadow-xs">
-                        {a.image ? (
-                          <SafeImage
-                            src={a.image}
-                            alt={a.title}
-                            className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
-                          />
-                        ) : (
-                          <div className="flex size-full items-center justify-center font-mono text-xs font-bold text-body-soft">
-                            DTS
-                          </div>
-                        )}
+                  <div className="flex flex-1 flex-col justify-between p-6">
+                    <div>
+                      <h3 className="font-display text-xl font-bold leading-tight tracking-tight group-hover:underline text-primary">
+                        <Link href={`/news/${featuredArticle.slug}`}>{featuredArticle.title}</Link>
+                      </h3>
+                      <p className="mt-3 text-sm leading-relaxed text-body font-medium">
+                        {featuredArticle.excerpt}
+                      </p>
+                    </div>
+                    <div className="mt-6 flex items-center justify-between border-t pt-4 font-sans text-xs font-semibold border-border text-body">
+                      <div className="flex items-center gap-2">
+                        <Avatar name={featuredArticle.author} className="size-7 text-xs font-bold" />
+                        <span className="font-semibold text-primary">{featuredArticle.author}</span>
                       </div>
+                      <span className="text-body font-semibold">{featuredArticle.readingTime} min read</span>
+                    </div>
+                  </div>
+                </Card>
+              </RevealVisual>
 
-                      <div className="flex flex-1 flex-col min-w-0">
-                        <div className="flex items-center justify-between gap-2">
-                          <DomainBadge domain={a.domain} />
-                          <span className="font-mono text-xs font-semibold text-body">{a.date}</span>
+              <RevealStagger className="flex flex-col gap-4" delay={150}>
+                {latestArticles.map((a) => (
+                  <RevealItem key={a.slug}>
+                    <Card hover className="group p-4 sm:p-5">
+                      <div className="flex items-center gap-4">
+                        {/* 64x64px Square Thumbnail Visual */}
+                        <div className="relative size-16 shrink-0 overflow-hidden rounded-lg border border-border/90 bg-card shadow-xs">
+                          {a.image ? (
+                            <SafeImage
+                              src={a.image}
+                              alt={a.title}
+                              className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+                          ) : (
+                            <div className="flex size-full items-center justify-center font-mono text-xs font-bold text-body-soft">
+                              DTS
+                            </div>
+                          )}
                         </div>
-                        <h4 className="mt-1.5 font-display text-sm sm:text-base font-bold leading-snug tracking-tight group-hover:underline text-primary line-clamp-2">
-                          <Link href={`/news/${a.slug}`}>{a.title}</Link>
-                        </h4>
-                        <p className="mt-1 font-sans text-xs font-medium text-body">
-                          By {a.author} · {a.readingTime} min
-                        </p>
+
+                        <div className="flex flex-1 flex-col min-w-0">
+                          <div className="flex items-center justify-between gap-2">
+                            <DomainBadge domain={a.domain} />
+                            <span className="font-mono text-xs font-semibold text-body">{a.date}</span>
+                          </div>
+                          <h4 className="mt-1.5 font-display text-sm sm:text-base font-bold leading-snug tracking-tight group-hover:underline text-primary line-clamp-2">
+                            <Link href={`/news/${a.slug}`}>{a.title}</Link>
+                          </h4>
+                          <p className="mt-1 font-sans text-xs font-medium text-body">
+                            By {a.author} · {a.readingTime} min
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </Card>
-                </RevealItem>
-              ))}
-            </RevealStagger>
-          </div>
+                    </Card>
+                  </RevealItem>
+                ))}
+              </RevealStagger>
+            </div>
+          ) : (
+            <RevealVisual>
+              <div className="rounded-2xl border border-border/80 bg-surface/50 p-12 text-center backdrop-blur-md">
+                <p className="font-mono text-xs font-bold uppercase tracking-widest text-body">
+                  NOTHING PUBLISHED YET
+                </p>
+                <p className="mt-2 text-sm text-body-soft">
+                  Research notes and technical briefings will appear here as they are published.
+                </p>
+              </div>
+            </RevealVisual>
+          )}
         </Container>
       </section>
 
@@ -147,7 +133,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="Symposia & Labs"
               title="Upcoming Gatherings & Workshops"
-              description="Practitioner-led conferences, hands-on security labs, and research reading groups. Free for all verified members."
+              description="Practitioner-led conferences, hands-on security labs, and research reading groups."
               action={{ label: "All Events", href: "/events" }}
             />
           </RevealHeading>
@@ -213,41 +199,22 @@ export default function HomePage() {
           <RevealHeading>
             <SectionHeading
               eyebrow="Community Forum"
-              title="Featured Community Posts"
-              description="Articles, open projects, and technical debriefs shared directly by verified community members."
+              title="Community Posts"
+              description="Articles, open projects, and technical debriefs shared directly by community members."
               action={{ label: "Open Forum", href: "/community" }}
             />
           </RevealHeading>
 
-          <RevealStagger className="grid gap-6 md:grid-cols-3">
-            {FEATURED_POSTS.map((p) => (
-              <RevealItem key={p.title}>
-                <Card hover className="group flex h-full flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2.5">
-                        <Avatar name={p.author} className="size-8 text-xs font-bold" />
-                        <div>
-                          <p className="font-display text-sm font-bold text-primary">{p.author}</p>
-                          <p className="font-mono text-xs font-semibold text-body">{p.role}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <h3 className="mt-4 font-display text-base font-bold leading-snug tracking-tight group-hover:underline text-primary">
-                      <Link href="/community">{p.title}</Link>
-                    </h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-body font-medium">{p.excerpt}</p>
-                  </div>
-
-                  <div className="mt-6 flex items-center justify-between border-t pt-4 border-border">
-                    <DomainBadge domain={p.domain} />
-                    <Badge>{p.kind}</Badge>
-                  </div>
-                </Card>
-              </RevealItem>
-            ))}
-          </RevealStagger>
+          <RevealVisual>
+            <div className="rounded-2xl border border-border/80 bg-surface/50 p-12 text-center backdrop-blur-md">
+              <p className="font-mono text-xs font-bold uppercase tracking-widest text-body">
+                NO COMMUNITY POSTS YET
+              </p>
+              <p className="mt-2 text-sm text-body-soft">
+                Articles, open projects and technical debriefs shared by members will appear here.
+              </p>
+            </div>
+          </RevealVisual>
         </Container>
       </section>
 
@@ -258,7 +225,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="Regional Chapters"
               title="Global Network, Regional Rooms"
-              description="In-person meetups, hands-on SOC labs, and university reading groups run in local time zones by chapter leads."
+              description="Regional chapters connect members in their own cities and time zones."
               action={{ label: "All Chapters", href: "/chapters" }}
             />
           </RevealHeading>
@@ -315,19 +282,11 @@ export default function HomePage() {
                   Join Community
                   <ArrowRight className="size-4" />
                 </Link>
-                <Link
-                  href="/about"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/40 bg-card/90 text-primary hover:bg-elevated hover:border-white px-6.5 h-12.5 font-sans text-sm sm:text-base font-bold shadow-sm transition-all duration-200 active:scale-95"
-                >
-                  View Membership Tiers
-                </Link>
               </div>
 
-              {/* Animated Live Member Counter */}
-              <div className="mt-6 flex items-center justify-center gap-2 font-sans text-xs font-semibold text-body-soft">
-                <span className="size-2 rounded-full bg-neutral-500 animate-pulse" aria-hidden />
+              <p className="mt-6 font-sans text-xs font-semibold text-body-soft">
                 Practitioner-led global deep tech network
-              </div>
+              </p>
             </div>
           </RevealVisual>
         </Container>

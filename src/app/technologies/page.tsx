@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container, PageHero, Card, Button } from "@/components/ui";
 import { DOMAIN_LIST } from "@/data/core";
-import { TECH_PAGES } from "@/data/technologies";
 import type { Metadata } from "next";
 import { RevealStagger, RevealItem } from "@/components/reveal";
 
@@ -24,7 +23,6 @@ export default function TechnologiesPage() {
         <RevealStagger className="grid gap-6 md:grid-cols-2">
           {DOMAIN_LIST.map((d, i) => {
             const Icon = d.icon;
-            const page = TECH_PAGES[d.slug];
             return (
               <RevealItem key={d.slug}>
                 <Card hover className="group flex flex-col justify-between p-6">
@@ -43,15 +41,6 @@ export default function TechnologiesPage() {
                   </div>
 
                   <div>
-                    <div className="mt-6 grid grid-cols-3 divide-x border-t pt-4 font-mono text-xs divide-border border-border/80">
-                      {page.facts.map((f) => (
-                        <div key={f.label} className="text-center first:pl-0 last:pr-0">
-                          <p className="font-bold text-primary">{f.value}</p>
-                          <p className="mt-0.5 text-[10px] text-body-soft">{f.label}</p>
-                        </div>
-                      ))}
-                    </div>
-
                     <div className="mt-6 pt-4 border-t border-border">
                       <Button href={`/technologies/${d.techSlug}`} variant="outline" size="sm" className="w-full">
                         Explore Roadmap <ArrowUpRight className="size-3.5" />

@@ -298,20 +298,6 @@ export default function LoginPage() {
               <HeroOrbits className="max-w-[280px] lg:max-w-[320px]" />
             </div>
 
-            <div className="relative z-10 border-t border-border/80 pt-6">
-              <p className="font-sans text-xs sm:text-sm italic leading-relaxed text-body-soft">
-                &ldquo;Direct peer access to quantum researchers and SOC playbooks transformed how our team deploys frontier infrastructure.&rdquo;
-              </p>
-              <div className="mt-3 flex items-center gap-2.5">
-                <div className="size-7 rounded-full bg-elevated border border-border-strong flex items-center justify-center font-mono text-xs font-bold text-primary">
-                  EM
-                </div>
-                <div>
-                  <p className="font-display text-xs font-bold text-body">Dr. Elena Marchetti</p>
-                  <p className="font-mono text-[10px] text-secondary">Quantum Information Lead · Milan</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* ---------------- RIGHT PANEL (Direct Email & Password Form) ---------------- */}

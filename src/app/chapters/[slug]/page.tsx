@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Calendar, MapPin } from "lucide-react";
-import { Container, Avatar, Eyebrow, SectionHeading, Card, Button, Badge } from "@/components/ui";
+import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
+import { Container, Eyebrow, Card, Button } from "@/components/ui";
 import { CHAPTERS } from "@/data/core";
 import type { Metadata } from "next";
 
@@ -18,21 +18,6 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
   if (!ch) notFound();
 
   const others = CHAPTERS.filter((c) => c.slug !== ch.slug);
-
-  const meetups = [
-    {
-      title: `${ch.country} Monthly Paper Reading Group`,
-      rhythm: "Every 2nd Saturday",
-      location: ch.city.split("·")[0].trim(),
-      desc: "Peer discussion analyzing one canonical deep tech paper per session.",
-    },
-    {
-      title: `${ch.country} Hands-on Engineering Lab`,
-      rhythm: "Monthly",
-      location: ch.city.split("·")[0].trim(),
-      desc: "Interactive code labs, SOC simulations, and telemetry pipeline workshops.",
-    },
-  ];
 
   return (
     <>
@@ -70,7 +55,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
         <div className="min-w-0 space-y-12">
           {/* 1. Overview */}
           <section id="overview">
-            <Eyebrow>01 — Chapter Overview</Eyebrow>
+            <Eyebrow>Chapter Overview</Eyebrow>
             <div className="mt-4 space-y-4 text-sm leading-relaxed text-body-soft">
               {ch.about.map((p) => (
                 <p key={p.slice(0, 32)}>{p}</p>
@@ -78,72 +63,6 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
             </div>
           </section>
 
-          {/* 2. Scheduled Events */}
-          <section id="events">
-            <SectionHeading eyebrow="02 — Symposia" title="Regional Events" action={{ label: "All Events", href: "/events" }} />
-            <Card className="p-0 overflow-hidden">
-              <ul className="divide-y divide-border/80">
-                {ch.events.map((e) => (
-                  <li key={e.title} className="flex flex-wrap items-center gap-x-5 gap-y-2 p-4 sm:p-5">
-                    <span className="flex w-28 shrink-0 items-center gap-2 font-mono text-xs text-muted">
-                      <Calendar className="size-3.5 shrink-0" aria-hidden /> {e.date}
-                    </span>
-                    <span className="min-w-0 flex-1 font-display text-sm font-semibold text-primary">
-                      {e.title}
-                    </span>
-                    <Badge>{e.type}</Badge>
-                    <span className="font-mono text-xs text-secondary">{e.city}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          </section>
-
-          {/* 3. Regular Meetups */}
-          <section id="meetups">
-            <SectionHeading eyebrow="03 — Rhythm" title="Local Study Circles &amp; Meetups" />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {meetups.map((m) => (
-                <Card key={m.title}>
-                  <div className="flex items-center justify-between font-mono text-[10px]">
-                    <Badge>{m.rhythm}</Badge>
-                    <span className="text-secondary">{m.location}</span>
-                  </div>
-                  <h3 className="mt-3 font-display text-sm font-semibold text-primary">{m.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-secondary">{m.desc}</p>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          {/* 4. Organizers */}
-          <section id="organizers">
-            <SectionHeading eyebrow="04 — Leadership" title="Chapter Organizers &amp; Leads" />
-            <div className="grid gap-4 sm:grid-cols-2">
-              {ch.leads.map((l) => (
-                <Card key={l.name} className="flex items-center gap-3.5">
-                  <Avatar name={l.name} className="size-10" />
-                  <div className="min-w-0">
-                    <p className="font-display text-sm font-semibold tracking-tight text-primary">{l.name}</p>
-                    <p className="font-mono text-[11px] text-muted">{l.role}</p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          {/* 5. Updates */}
-          <section id="updates">
-            <SectionHeading eyebrow="05 — Milestones" title="Chapter Activity Log &amp; Updates" />
-            <ol className="space-y-4 font-mono text-xs">
-              {ch.updates.map((u) => (
-                <li key={u.date} className="flex items-start gap-4 rounded-md border p-4 border-border bg-card">
-                  <span className="w-20 shrink-0 font-bold text-primary">{u.date}</span>
-                  <p className="font-sans text-xs text-body-soft">{u.text}</p>
-                </li>
-              ))}
-            </ol>
-          </section>
         </div>
 
         {/* Sidebar */}
@@ -153,7 +72,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
               Join {ch.country} Chapter
             </p>
             <p className="mt-2 text-xs leading-relaxed text-secondary">
-              Select “{ch.country}” as your primary region when applying to receive direct access to local study circles and lab invitations.
+              Select “{ch.country}” as your primary region when applying to be connected with this chapter.
             </p>
             <div className="mt-4">
               <Button href="/join" variant="primary" size="md" className="w-full">
@@ -177,7 +96,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
                     <span>{o.flag}</span>
                     <span>{o.country}</span>
                   </span>
-                  <span className="font-mono text-[10px] text-secondary">{o.members} Members</span>
+                  <ArrowRight className="size-3 text-muted transition-transform group-hover:translate-x-0.5" />
                 </Link>
               ))}
             </div>

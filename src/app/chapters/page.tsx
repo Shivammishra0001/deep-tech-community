@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, MapPin, Users, Calendar } from "lucide-react";
-import { Container, PageHero, Avatar, Eyebrow, Card, Button } from "@/components/ui";
+import { ArrowRight, MapPin, Users } from "lucide-react";
+import { Container, PageHero, Eyebrow, Card, Button } from "@/components/ui";
 import { CHAPTERS } from "@/data/core";
 import type { Metadata } from "next";
 import { RevealStagger, RevealItem, Reveal } from "@/components/reveal";
@@ -145,19 +145,10 @@ export default function ChaptersPage() {
                       <Users className="size-4 text-primary" aria-hidden />
                       Regional Chapter · Est. {c.founded}
                     </p>
-                    <p className="flex items-center gap-2 truncate">
-                      <Calendar className="size-4 text-primary" aria-hidden />
-                      Next: {c.events[0]?.title}
-                    </p>
                   </div>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between border-t pt-4 border-border">
-                  <div className="flex -space-x-1.5">
-                    {c.leads.slice(0, 3).map((l) => (
-                      <Avatar key={l.name} name={l.name} className="size-7 text-[9px]" />
-                    ))}
-                  </div>
+                <div className="mt-6 flex items-center justify-end border-t pt-4 border-border">
                   <Button href={`/chapters/${c.slug}`} variant="ghost" size="sm">
                     Visit <ArrowRight className="size-3" />
                   </Button>

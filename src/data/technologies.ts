@@ -7,9 +7,9 @@ export type TechPage = {
   beginnerGuide: { title: string; text: string }[];
   roadmap: { phase: string; title: string; duration: string; items: string[] }[];
   papers: { title: string; authors: string; venue: string; year: string }[];
+  /** Empty until real, attributable sessions exist. */
   tutorials: { title: string; level: "Beginner" | "Intermediate" | "Advanced"; duration: string; author: string }[];
   resources: { title: string; org: string; kind: string }[];
-  facts: { value: string; label: string }[];
 };
 
 export const TECH_PAGES: Record<DomainSlug, TechPage> = {
@@ -59,22 +59,12 @@ export const TECH_PAGES: Record<DomainSlug, TechPage> = {
       { title: "Constitutional AI: Harmlessness from AI Feedback", authors: "Bai et al.", venue: "arXiv", year: "2022" },
       { title: "Chain-of-Thought Prompting Elicits Reasoning", authors: "Wei et al.", venue: "NeurIPS", year: "2022" },
     ],
-    tutorials: [
-      { title: "Your first fine-tune: a practical walkthrough", level: "Intermediate", duration: "90 min", author: "Elena Marchetti" },
-      { title: "Evaluation done right: beyond accuracy", level: "Intermediate", duration: "75 min", author: "Priya Natarajan" },
-      { title: "From notebook to production inference", level: "Advanced", duration: "2 hrs", author: "James Okoro" },
-      { title: "Neural networks, explained with one spreadsheet", level: "Beginner", duration: "45 min", author: "Rahul Venkatesh" },
-    ],
+    tutorials: [],
     resources: [
       { title: "Deep Learning (Goodfellow, Bengio, Courville)", org: "MIT Press", kind: "Book" },
       { title: "CS231n / CS224n lecture series", org: "Stanford", kind: "Course" },
       { title: "Hugging Face documentation", org: "Hugging Face", kind: "Docs" },
       { title: "Papers With Code", org: "Community", kind: "Index" },
-    ],
-    facts: [
-      { value: "FOCUS", label: "Foundation models & reasoning" },
-      { value: "32", label: "Tutorials & workshops" },
-      { value: "120+", label: "Papers discussed" },
     ],
   },
   quantum: {
@@ -123,22 +113,12 @@ export const TECH_PAGES: Record<DomainSlug, TechPage> = {
       { title: "Quantum supremacy using a programmable processor", authors: "Arute et al.", venue: "Nature", year: "2019" },
       { title: "Realizing repeated quantum error correction", authors: "Krinner et al.", venue: "Nature", year: "2022" },
     ],
-    tutorials: [
-      { title: "Entanglement, demystified in 40 minutes", level: "Beginner", duration: "40 min", author: "Rahul Venkatesh" },
-      { title: "Your first circuit on a real QPU", level: "Beginner", duration: "60 min", author: "Wei Ling Tan" },
-      { title: "Surface codes without tears", level: "Advanced", duration: "2 hrs", author: "Dr. Mira Kovács" },
-      { title: "Benchmarking quantum hardware honestly", level: "Intermediate", duration: "80 min", author: "Yusof Rahman" },
-    ],
+    tutorials: [],
     resources: [
       { title: "Quantum Computation and Quantum Information", org: "Nielsen & Chuang", kind: "Book" },
       { title: "Qiskit textbook & documentation", org: "IBM", kind: "Docs" },
       { title: "Quantum Country (Nielsen/Matuschak)", org: "Independent", kind: "Interactive" },
       { title: "arXiv quant-ph daily digest", org: "Community", kind: "Index" },
-    ],
-    facts: [
-      { value: "RESEARCH", label: "Qubits & error correction" },
-      { value: "18", label: "Reading group sessions / yr" },
-      { value: "6", label: "Hardware platforms studied" },
     ],
   },
   cybersecurity: {
@@ -187,22 +167,12 @@ export const TECH_PAGES: Record<DomainSlug, TechPage> = {
       { title: "SoK: (State of) The Art of War on Offensive Security", authors: "Happe et al.", venue: "IEEE S&P", year: "2019" },
       { title: "CRYSTALS-Kyber specification", authors: "Avanzi et al.", venue: "NIST PQC", year: "2021" },
     ],
-    tutorials: [
-      { title: "Packet-level networking from zero", level: "Beginner", duration: "70 min", author: "Sarah Okafor" },
-      { title: "Threat modeling a real product", level: "Intermediate", duration: "90 min", author: "Marcus Reid" },
-      { title: "Building detection rules that survive", level: "Advanced", duration: "100 min", author: "Nurul Aisyah" },
-      { title: "Post-quantum migration checklist", level: "Intermediate", duration: "60 min", author: "Devan Kumar" },
-    ],
+    tutorials: [],
     resources: [
       { title: "The Web Application Hacker's Handbook", org: "Wiley", kind: "Book" },
       { title: "OWASP testing guide", org: "OWASP", kind: "Docs" },
       { title: "OverTheWire & HackTheBox", org: "Community", kind: "Labs" },
       { title: "MITRE ATT&CK", org: "MITRE", kind: "Framework" },
-    ],
-    facts: [
-      { value: "PRACTICE", label: "Offense & defense labs" },
-      { value: "24", label: "Labs & CTFs per year" },
-      { value: "100%", label: "Ethics-code signers" },
     ],
   },
   governance: {
@@ -251,22 +221,12 @@ export const TECH_PAGES: Record<DomainSlug, TechPage> = {
       { title: "Auditing Algorithms: Research Methods for Detecting Bias", authors: "Sandvig et al.", venue: "ICA Conference", year: "2014" },
       { title: "Model Cards for Model Reporting", authors: "Mitchell et al.", venue: "FAT* Conference", year: "2019" },
     ],
-    tutorials: [
-      { title: "Implementing NIST AI RMF in production", level: "Beginner", duration: "75 min", author: "Tomohiro Sato" },
-      { title: "Automated model red-teaming walkthrough", level: "Intermediate", duration: "90 min", author: "Elena Marchetti" },
-      { title: "Building verifiable model cards & audit trails", level: "Intermediate", duration: "60 min", author: "Wei Ling Tan" },
-      { title: "EU AI Act compliance checklist for engineering teams", level: "Advanced", duration: "2 hrs", author: "Tomohiro Sato" },
-    ],
+    tutorials: [],
     resources: [
       { title: "NIST AI Risk Management Framework", org: "NIST", kind: "Framework" },
       { title: "OECD AI Principles Observatory", org: "OECD", kind: "Policy" },
       { title: "AI Safety Institute Benchmark Repository", org: "AISI", kind: "Tools" },
       { title: "ISO/IEC 42001 AI Management Standard", org: "ISO", kind: "Standard" },
-    ],
-    facts: [
-      { value: "ALIGNED", label: "Safety & policy frameworks" },
-      { value: "14", label: "Policy whitepapers published" },
-      { value: "100%", label: "Responsible AI practitioners" },
     ],
   },
 };

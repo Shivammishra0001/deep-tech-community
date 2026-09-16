@@ -1,5 +1,4 @@
 import { Brain, Atom, Shield, Scale } from "lucide-react";
-import { TICKER } from "@/data/core";
 import { cx } from "@/components/ui";
 
 const DOMAIN_NODES = [
@@ -111,25 +110,6 @@ export function HeroOrbits({ className }: { className?: string }) {
       {/* Orbiting Ambient Micro-Nodes */}
       <span className="animate-pulse-node absolute left-[12%] top-[30%] size-1 rounded-full bg-inverted" />
       <span className="animate-pulse-node absolute right-[18%] bottom-[28%] size-1 rounded-full bg-neutral-400" style={{ animationDelay: "1.2s" }} />
-    </div>
-  );
-}
-
-/** Seamless activity ticker strip. */
-export function ActivityTicker() {
-  const items = [...TICKER, ...TICKER];
-  return (
-    <div className="ticker-paused relative overflow-hidden border-y py-3.5 border-border/80 bg-surface/50">
-      <div className="animate-ticker flex w-max gap-8 whitespace-nowrap">
-        {items.map((t, i) => (
-          <span key={i} className="inline-flex items-center gap-2.5 font-mono text-xs text-body-soft">
-            <span className="size-1 rounded-full bg-inverted" aria-hidden />
-            {t}
-          </span>
-        ))}
-      </div>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r to-transparent from-surface" aria-hidden />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l to-transparent from-surface" aria-hidden />
     </div>
   );
 }

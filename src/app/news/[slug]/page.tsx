@@ -180,7 +180,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <Card>
               <p className="font-display text-sm font-semibold text-primary">Subscribe to Briefings</p>
               <p className="mt-1.5 text-xs text-secondary">
-                Monthly technical digest delivered to verified members.
+                Technical digests from across the community.
               </p>
               <div className="mt-4">
                 <Button href="/join" variant="primary" size="sm" className="w-full">
