@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Container, Eyebrow, SectionHeading, Button, Card } from "@/components/ui";
+import { ArrowRight } from "lucide-react";
+import { Container, Eyebrow, SectionHeading } from "@/components/ui";
 import { CinematicHero } from "@/components/hero-cinematic";
 import { FrontiersExperience } from "@/components/frontiers-experience";
 import { NewsletterSection } from "@/components/newsletter-section";
 import { EventsSection } from "@/components/events-section";
-import { RevealHeading, RevealVisual, RevealStagger, RevealItem } from "@/components/reveal";
-import { CHAPTERS } from "@/data/core";
+import { ChaptersSection } from "@/components/chapters-section";
+import { RevealHeading, RevealVisual } from "@/components/reveal";
 
 export default function HomePage() {
   return (
@@ -49,47 +49,7 @@ export default function HomePage() {
       </section>
 
       {/* ------------------- 6. CHAPTERS ------------------- */}
-      <section id="chapters" className="relative py-16 sm:py-20 border-t border-border/90 bg-card/40 scroll-mt-20">
-        <Container>
-          <RevealHeading>
-            <SectionHeading
-              eyebrow="Regional Chapters"
-              title="Global Network, Regional Rooms"
-              description="Regional chapters connect members in their own cities and time zones."
-              action={{ label: "All Chapters", href: "/chapters" }}
-            />
-          </RevealHeading>
-
-          <RevealStagger className="grid gap-6 md:grid-cols-3">
-            {CHAPTERS.map((c) => (
-              <RevealItem key={c.slug}>
-                <Card hover className="group flex h-full flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xl" role="img" aria-label={c.country}>
-                          {c.flag}
-                        </span>
-                        <h3 className="font-display text-lg sm:text-xl font-bold tracking-tight text-primary">
-                          {c.country}
-                        </h3>
-                      </div>
-                    </div>
-                    <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-body">{c.city}</p>
-                    <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-body font-medium">{c.blurb}</p>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-border">
-                    <Button href={`/chapters/${c.slug}`} variant="outline" size="sm" className="w-full font-sans font-semibold text-xs sm:text-sm">
-                      Explore Chapter <ArrowUpRight className="size-3.5" />
-                    </Button>
-                  </div>
-                </Card>
-              </RevealItem>
-            ))}
-          </RevealStagger>
-        </Container>
-      </section>
+      <ChaptersSection />
 
       {/* ------------------- 7. ABOUT / CTA ------------------- */}
       <section id="about" className="relative py-20 sm:py-28 border-t border-border/90 bg-surface scroll-mt-20">
