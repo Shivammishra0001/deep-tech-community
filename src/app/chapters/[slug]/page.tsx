@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const ch = CHAPTERS.find((c) => c.slug === slug);
   if (!ch) return { title: "Chapter Not Found" };
-  return { title: `${ch.country} Chapter | Deep Tech Society`, description: `Deep Tech Society ${ch.country} chapter — ${ch.blurb}` };
+  return { title: `${ch.country} Chapter | Deep Tech Community`, description: `Deep Tech Community ${ch.country} chapter — ${ch.blurb}` };
 }
 
 export default async function ChapterPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -72,11 +72,11 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
               Join {ch.country} Chapter
             </p>
             <p className="mt-2 text-xs leading-relaxed text-secondary">
-              Select “{ch.country}” as your primary region when applying to be connected with this chapter.
+              Select “{ch.country}” as your primary region when you join to be connected with this chapter.
             </p>
             <div className="mt-4">
               <Button href="/join" variant="primary" size="md" className="w-full">
-                Apply for Chapter Seat <ArrowRight className="size-3.5" />
+                Join the Community <ArrowRight className="size-3.5" />
               </Button>
             </div>
           </Card>

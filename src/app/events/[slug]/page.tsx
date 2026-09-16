@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const ev = EVENTS.find((e) => e.slug === slug);
   if (!ev) return { title: "Event Not Found" };
-  return { title: `${ev.title} | Deep Tech Society`, description: `${ev.title} — ${ev.date}, ${ev.venue}. ${ev.description[0].slice(0, 140)}…` };
+  return { title: `${ev.title} | Deep Tech Community`, description: `${ev.title} — ${ev.date}, ${ev.venue}. ${ev.description[0].slice(0, 140)}…` };
 }
 
 export default async function EventDetailPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -4,37 +4,31 @@ import { DOMAIN_LIST } from "@/data/core";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Resources | Deep Tech Society",
+  title: "Resources | Deep Tech Community",
   description:
-    "The Deep Tech Society learning hub — roadmaps, free courses, research papers, books, tools, cheat sheets, documentation, and recommended sites, curated by track mentors.",
+    "The Deep Tech Community learning hub — open courses, canonical papers, technical texts and developer tools for AI, quantum computing, cybersecurity and AI governance.",
 };
 
 const COURSES = [
   { title: "CS231n: Deep Learning for Computer Vision", org: "Stanford", duration: "~40 hrs", level: "Intermediate" },
-  { title: "Introduction to Quantum Information", org: "QuantaForge Institute", duration: "~25 hrs", level: "Beginner" },
-  { title: "Practical Ethical Hacking Fundamentals", org: "Community Lab Series", duration: "~30 hrs", level: "Beginner" },
-  { title: "Spacecraft Dynamics & Control", org: "Open Courseware", duration: "~35 hrs", level: "Advanced" },
 ];
 
 const PAPERS = [
   { title: "Attention Is All You Need", meta: "Vaswani et al. · NeurIPS 2017", domain: "AI" },
   { title: "Surface Code Quantum Error Correction", meta: "Fowler et al. · PRA 2012", domain: "Quantum" },
   { title: "CRYSTALS-Kyber Specification", meta: "Avanzi et al. · NIST PQC 2021", domain: "Cyber" },
-  { title: "CubeSat Design Specification Rev 14", meta: "Cal Poly · 2020", domain: "Space" },
 ];
 
 const BOOKS = [
   { title: "Deep Learning", meta: "Goodfellow, Bengio & Courville" },
   { title: "Quantum Computation and Quantum Information", meta: "Nielsen & Chuang" },
   { title: "The Web Application Hacker's Handbook", meta: "Stuttard & Pinto" },
-  { title: "Spacecraft Systems Engineering", meta: "Fortescue, Swinerd & Stark" },
 ];
 
 const TOOLS = [
   { title: "Qiskit", meta: "Quantum circuit SDK & simulators" },
   { title: "PyTorch", meta: "Deep learning framework" },
   { title: "Wireshark", meta: "Network protocol analysis" },
-  { title: "SatNOGS", meta: "Open satellite ground station network" },
 ];
 
 function ResourceList({
@@ -80,7 +74,7 @@ export default function ResourcesPage() {
       <PageHero
         eyebrow="Curated Literature"
         title="Technical Learning Hub."
-        description="Comprehensive literature, canonical papers, open-source tooling, and technical roadmaps verified by track leads."
+        description="Canonical papers, technical texts and open-source tooling for AI, quantum computing, cybersecurity and AI governance."
       />
       <Container className="space-y-8 py-8 sm:py-10">
         {/* Roadmaps */}
@@ -128,7 +122,7 @@ export default function ResourcesPage() {
             items={PAPERS.map((p) => ({ title: p.title, meta: `${p.meta} · ${p.domain}` }))}
           />
           <ResourceList icon={BookMarked} title="Technical Texts" note="Recommended textbooks" items={BOOKS} />
-          <ResourceList icon={Terminal} title="Developer Tools" note="Verified open-source SDKs" items={TOOLS} />
+          <ResourceList icon={Terminal} title="Developer Tools" note="Open-source SDKs" items={TOOLS} />
         </div>
       </Container>
     </>

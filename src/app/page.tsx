@@ -266,12 +266,12 @@ export default function HomePage() {
         <Container>
           <RevealVisual>
             <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-10 text-center text-primary shadow-2xl sm:p-16">
-              <Eyebrow className="text-body-soft">Apply for Access</Eyebrow>
+              <Eyebrow className="text-body-soft">Open Membership</Eyebrow>
               <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-primary">
                 Join Frontier Builders Worldwide
               </h2>
               <p className="mx-auto mt-4 max-w-xl font-sans text-base sm:text-lg leading-relaxed text-primary font-medium">
-                Free membership for students, engineers, researchers, founders, and educators. Direct access to technical roadmaps, regional symposia, and active project channels.
+                Membership is free and open to students, engineers, researchers, founders, and educators. Direct access to technical roadmaps, regional symposia, and active project channels.
               </p>
               
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5 relative z-10">

@@ -16,9 +16,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const article = ARTICLES.find((a) => a.slug === slug);
   if (article) {
-    return { title: `${article.title} | Deep Tech Society`, description: article.excerpt };
+    return { title: `${article.title} | Deep Tech Community`, description: article.excerpt };
   }
-  return { title: "Briefing | Deep Tech Society", description: "Technical briefing and research analysis." };
+  return { title: "Briefing | Deep Tech Community", description: "Technical briefing and research analysis." };
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -47,7 +47,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           `Source publication: ${dbMatch.source}. Original technical report available at: ${dbMatch.source_url}`,
         ],
         author: dbMatch.source,
-        authorRole: "Verified Feed Partner",
+        authorRole: "Source publication",
         date: new Date(dbMatch.published_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
         readingTime: 4,
         tags: [dbMatch.category.toLowerCase().replace(/\s+/g, "-")],

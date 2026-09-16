@@ -98,9 +98,9 @@ export default function JoinPage() {
       <Container className="relative grid gap-12 pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8 lg:grid-cols-[1fr_480px]">
         {/* Left: pitch */}
         <div className="animate-rise">
-          <Eyebrow>Society Membership</Eyebrow>
+          <Eyebrow>Open Membership</Eyebrow>
           <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-primary">
-            Join Verified Practitioners in Deep Tech.
+            Join Practitioners in Deep Tech.
           </h1>
           <p className="mt-3 sm:mt-3.5 max-w-xl text-sm leading-relaxed text-body">
             Membership is open to students, developers, researchers, founders, educators, and technology leaders. Zero noise, high technical signal.
@@ -139,7 +139,7 @@ export default function JoinPage() {
             <Card className="p-8">
               <div className="flex items-center justify-between border-b pb-4 border-border">
                 <div>
-                  <h2 className="font-display text-xl font-semibold text-primary">Membership Application</h2>
+                  <h2 className="font-display text-xl font-semibold text-primary">Membership Signup</h2>
                   <p className="mt-0.5 text-xs text-muted">Free, member-governed, enterprise-grade.</p>
                 </div>
                 {user && (

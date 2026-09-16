@@ -31,8 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const domain = TECH_SLUGS[slug];
   if (!domain) return { title: "Technology Not Found" };
   return {
-    title: `${DOMAINS[domain].name} | Deep Tech Society`,
-    description: `${DOMAINS[domain].name} track at Deep Tech Society — overview, beginner guide, learning roadmap, research papers, tutorials, news, and events.`,
+    title: `${DOMAINS[domain].name} | Deep Tech Community`,
+    description: `${DOMAINS[domain].name} track at Deep Tech Community — overview, beginner guide, learning roadmap, research papers, tutorials, news, and events.`,
   };
 }
 

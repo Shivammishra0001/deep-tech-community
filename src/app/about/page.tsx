@@ -226,7 +226,7 @@ export default function AboutPage() {
               </div>
               <div className="mt-6">
                 <Button href="/join" variant="primary" size="md" className="text-on-inverted font-bold">
-                  Apply for Membership <ArrowRight className="size-3.5" />
+                  Join the Community <ArrowRight className="size-3.5" />
                 </Button>
               </div>
             </div>

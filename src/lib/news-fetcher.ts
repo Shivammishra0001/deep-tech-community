@@ -19,11 +19,6 @@ export type NewsItem = {
 // Curated legal RSS feeds for Deep Tech categories
 const RSS_SOURCES = [
   {
-    name: "NASA Breaking News",
-    url: "https://www.nasa.gov/news-release/feed/",
-    defaultCategory: "Space Technology",
-  },
-  {
     name: "MIT Technology Review",
     url: "https://www.technologyreview.com/feed/",
     defaultCategory: "AI / Machine Learning",
@@ -312,7 +307,7 @@ export async function getPublishedNews(): Promise<NewsItem[]> {
         title: title || "Deep Tech Update",
         summary: summary || "",
         category: category || "Emerging Technology",
-        source: source || "Deep Tech Society",
+        source: source || "Deep Tech Community",
         source_url: source_url || "#",
         image_url: cleanImageUrl,
         image_source: image_source || uniqueImg.source,

@@ -513,24 +513,6 @@ export default function CommunityPage() {
               <li>• Respectful peer review across all career levels.</li>
             </ul>
           </Card>
-
-          <Card>
-            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-secondary">Weekly Metrics</p>
-            <dl className="mt-3 space-y-2 font-mono text-xs">
-              <div className="flex justify-between">
-                <dt className="text-muted">Publications</dt>
-                <dd className="font-bold text-primary">47</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-muted">Resolved Q&amp;As</dt>
-                <dd className="font-bold text-primary">31</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-muted">Open Releases</dt>
-                <dd className="font-bold text-primary">9</dd>
-              </div>
-            </dl>
-          </Card>
         </aside>
       </Container>
     </>

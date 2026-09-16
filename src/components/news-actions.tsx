@@ -35,15 +35,8 @@ export function NewsInteractiveCard({
   summary,
   readTime,
   image,
-  initialLikes = 24,
-  initialComments = [
-    {
-      id: "c1",
-      author: "Dr. Aris Thorne",
-      body: "Exceptional breakdown of the hardware architecture trade-offs.",
-      date: "2 hours ago",
-    },
-  ],
+  initialLikes = 0,
+  initialComments = [],
 }: NewsArticleInteractiveProps) {
   const [likes, setLikes] = useState(initialLikes);
   const [isLiked, setIsLiked] = useState(false);
@@ -269,7 +262,7 @@ export function NewsInteractiveCard({
 export function ArticleDetailPageActions({
   title,
   slug,
-  initialLikes = 48,
+  initialLikes = 0,
 }: {
   title: string;
   slug: string;

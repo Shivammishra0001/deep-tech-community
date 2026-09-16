@@ -13,7 +13,7 @@ const DOMAIN_NODES = [
  * - Single master orbit rotation container guarantees 100% zero drift & zero card overlapping
  * - Central dark DTS core with "ADVANCING THE FUTURE THROUGH DEEP TECH"
  * - Concentric hairline guide rings (solid & dashed)
- * - 4 square domain cards (AI, QUANTUM, CYBERSECURITY, SPACE TECH) spaced 90° apart with generous room
+ * - 4 square domain cards (AI, QUANTUM, CYBERSECURITY, AI GOVERNANCE) spaced 90° apart with generous room
  * - PERFECT UPRIGHT ALIGNMENT: Cards remain 100% upright & readable while orbiting
  * - Glowing white comet trail sparks traveling along concentric rings
  */

@@ -4,9 +4,9 @@ export async function GET() {
   const openApiSpec = {
     openapi: "3.0.3",
     info: {
-      title: "Deep Tech Society REST API",
+      title: "Deep Tech Community REST API",
       version: "1.0.0",
-      description: "Production-ready backend API for Deep Tech Society platform.",
+      description: "Production-ready backend API for Deep Tech Community platform.",
     },
     servers: [
       {

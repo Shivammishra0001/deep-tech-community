@@ -43,21 +43,7 @@ export default function AdminDashboardPage() {
       setMetrics(data.data);
     } catch {
       setLoading(false);
-      // Fallback mock metrics for preview
-      setMetrics({
-        totalMembers: 12400,
-        activeChapters: 38,
-        upcomingEvents: 14,
-        publishedBriefings: 42,
-        systemStatus: "HEALTHY",
-        dbConnection: "CONNECTED",
-        cacheHitRate: "99.4%",
-        recentSignups: [
-          { id: "u1", name: "Dr. Elena Marchetti", domain: "Quantum", date: "10 mins ago" },
-          { id: "u2", name: "Aris Thorne", domain: "AI", date: "25 mins ago" },
-          { id: "u3", name: "Sophia Lin", domain: "Cybersecurity", date: "1 hour ago" },
-        ],
-      });
+      setError("Could not reach the admin API. No metrics to display.");
     }
   }
 
@@ -80,7 +66,7 @@ export default function AdminDashboardPage() {
         <PageHero
           eyebrow="SYSTEM TELEMETRY & GOVERNANCE"
           title="Admin Control Center"
-          description="Global operations, chapter management, RBAC authorization, and API v1 backend telemetry for Deep Tech Society."
+          description="Global operations, chapter management, RBAC authorization, and API v1 backend telemetry for Deep Tech Community."
         />
 
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-b pb-6 border-border">
@@ -176,11 +162,11 @@ export default function AdminDashboardPage() {
               </div>
               <div className="flex items-center justify-between py-2 border-b border-neutral-850">
                 <span className="text-muted">PostgreSQL Connection Pool</span>
-                <span className="font-medium text-primary">{metrics?.dbConnection || "CONNECTED"}</span>
+                <span className="font-medium text-primary">{metrics?.dbConnection ?? "—"}</span>
               </div>
               <div className="flex items-center justify-between py-2">
                 <span className="text-muted">Redis Cache Hit Ratio</span>
-                <span className="font-medium text-primary">{metrics?.cacheHitRate || "99.4%"}</span>
+                <span className="font-medium text-primary">{metrics?.cacheHitRate ?? "—"}</span>
               </div>
             </div>
           </Card>
@@ -189,8 +175,11 @@ export default function AdminDashboardPage() {
             <h3 className="font-semibold text-lg flex items-center gap-2 text-primary">
               <ShieldCheck className="size-5" /> Recent Member Registrations
             </h3>
+            {!metrics?.recentSignups?.length ? (
+              <p className="mt-4 font-mono text-xs text-secondary">No registrations to display.</p>
+            ) : (
             <div className="mt-4 divide-y divide-neutral-850">
-              {metrics?.recentSignups.map((signup) => (
+              {metrics.recentSignups.map((signup) => (
                 <div key={signup.id} className="py-3 flex items-center justify-between">
                   <div>
                     <p className="font-medium text-sm text-primary">{signup.name}</p>
@@ -200,6 +189,7 @@ export default function AdminDashboardPage() {
                 </div>
               ))}
             </div>
+            )}
           </Card>
         </div>
       </Container>

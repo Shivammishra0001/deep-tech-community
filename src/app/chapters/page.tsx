@@ -6,9 +6,9 @@ import type { Metadata } from "next";
 import { RevealStagger, RevealItem, Reveal } from "@/components/reveal";
 
 export const metadata: Metadata = {
-  title: "Chapters | Deep Tech Society",
+  title: "Chapters | Deep Tech Community",
   description:
-    "Deep Tech Society local chapters — India, Singapore, and Malaysia. In-person meetups, workshops, and study circles run by local organizers.",
+    "Deep Tech Community regional chapters — India, Singapore and Malaysia.",
 };
 
 export function RegionalMapSchematic() {

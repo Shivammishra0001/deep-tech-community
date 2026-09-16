@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import { RevealStagger, RevealItem } from "@/components/reveal";
 
 export const metadata: Metadata = {
-  title: "Technologies | Deep Tech Society",
+  title: "Technologies | Deep Tech Community",
   description:
     "Our deep tech domains — artificial intelligence, quantum computing, cybersecurity, and AI governance — each with a learning roadmap, resources, and an active community.",
 };
