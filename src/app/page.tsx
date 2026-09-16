@@ -1,16 +1,14 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Calendar, MapPin } from "lucide-react";
-import { Container, Eyebrow, SectionHeading, DomainBadge, Button, Card, Badge } from "@/components/ui";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { Container, Eyebrow, SectionHeading, Button, Card } from "@/components/ui";
 import { CinematicHero } from "@/components/hero-cinematic";
 import { FrontiersExperience } from "@/components/frontiers-experience";
 import { NewsletterSection } from "@/components/newsletter-section";
+import { EventsSection } from "@/components/events-section";
 import { RevealHeading, RevealVisual, RevealStagger, RevealItem } from "@/components/reveal";
 import { CHAPTERS } from "@/data/core";
-import { EVENTS, isUpcomingEvent } from "@/data/events";
 
 export default function HomePage() {
-  const upcomingEvents = EVENTS.filter((e) => isUpcomingEvent(e.date));
-
   return (
     <div className="relative">
       {/* -------------------------------- 1. HERO (HOME) -------------------------------- */}
@@ -23,71 +21,7 @@ export default function HomePage() {
       <NewsletterSection />
 
       {/* ------------------- 4. EVENTS ------------------- */}
-      <section id="events" className="relative py-16 sm:py-20 border-t border-border/90 bg-card/40 scroll-mt-20">
-        <Container>
-          <RevealHeading>
-            <SectionHeading
-              eyebrow="Symposia & Labs"
-              title="Upcoming Gatherings & Workshops"
-              description="Practitioner-led conferences, hands-on security labs, and research reading groups."
-              action={{ label: "All Events", href: "/events" }}
-            />
-          </RevealHeading>
-
-          {upcomingEvents.length > 0 ? (
-            <RevealStagger className="grid gap-6 md:grid-cols-3">
-              {upcomingEvents.map((e) => (
-                <RevealItem key={e.slug}>
-                  <Card hover className="group flex h-full flex-col justify-between">
-                    <div>
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="w-20 shrink-0 rounded-xl border p-2.5 text-center shadow-sm border-border-strong bg-card">
-                          <p className="font-mono text-xs font-bold uppercase tracking-wider text-primary">{e.date.split(" ")[0]}</p>
-                          <p className="mt-0.5 font-display text-2xl font-extrabold text-primary">{e.date.split(" ")[1]?.replace(",", "")}</p>
-                        </div>
-                        <Badge className="font-semibold text-xs text-primary border-border-strong">{e.type}</Badge>
-                      </div>
-                      <h3 className="mt-4 font-display text-base font-bold leading-snug tracking-tight group-hover:underline text-primary">
-                        <Link href={`/events/${e.slug}`}>{e.title}</Link>
-                      </h3>
-                      <div className="mt-3.5 space-y-1.5 font-sans text-xs font-semibold text-body">
-                        <p className="flex items-center gap-2">
-                          <Calendar className="size-4 text-primary" /> {e.date} · {e.time}
-                        </p>
-                        <p className="flex items-center gap-2">
-                          <MapPin className="size-4 text-primary" /> {e.venue}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 flex items-center justify-between border-t pt-4 border-border">
-                      <div className="flex gap-1">
-                        {e.domains.slice(0, 2).map((dm) => (
-                          <DomainBadge key={dm} domain={dm} />
-                        ))}
-                      </div>
-                      <Button href={`/events/${e.slug}`} variant="ghost" size="sm">
-                        Details <ArrowRight className="size-3" />
-                      </Button>
-                    </div>
-                  </Card>
-                </RevealItem>
-              ))}
-            </RevealStagger>
-          ) : (
-            <RevealVisual>
-              <div className="rounded-2xl border border-border/80 bg-surface/50 p-12 text-center backdrop-blur-md">
-                <p className="font-mono text-xs font-bold uppercase tracking-widest text-body">
-                  NO UPCOMING EVENTS
-                </p>
-                <p className="mt-2 text-sm text-body-soft">
-                  New gatherings and technical sessions will appear here.
-                </p>
-              </div>
-            </RevealVisual>
-          )}
-        </Container>
-      </section>
+      <EventsSection />
 
       {/* ------------------- 5. COMMUNITY ------------------- */}
       <section id="community" className="relative py-16 sm:py-20 border-t border-border/90 bg-surface scroll-mt-20">
