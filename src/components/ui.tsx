@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cn } from "@/lib/cn";
 import type { ReactNode, ButtonHTMLAttributes, InputHTMLAttributes, TextareaHTMLAttributes, SelectHTMLAttributes } from "react";
 import { ArrowRight, Calendar, MapPin, ArrowUpRight, Clock, User, ChevronRight } from "lucide-react";
 import { DOMAINS, type DomainSlug } from "@/data/core";
@@ -6,20 +7,21 @@ import { StaggeredText } from "@/components/staggered-text";
 
 export { StaggeredText };
 
-export function cx(...parts: Array<string | false | null | undefined>) {
-  return parts.filter(Boolean).join(" ");
-}
+export { cn };
+
+/** Retained alias so existing call sites keep working; identical to `cn`. */
+export const cx = cn;
 
 /* ---------------------------------- Layout --------------------------------- */
 
 export function Container({ className, children }: { className?: string; children: ReactNode }) {
-  return <div className={cx("mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12", className)}>{children}</div>;
+  return <div className={cn("mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12", className)}>{children}</div>;
 }
 
 export function Skeleton({ className }: { className?: string }) {
   return (
     <div
-      className={cx("animate-skeleton rounded-lg bg-elevated/80", className)}
+      className={cn("animate-skeleton rounded-lg bg-elevated/80", className)}
       aria-hidden
     />
   );
@@ -28,7 +30,12 @@ export function Skeleton({ className }: { className?: string }) {
 /* -------------------------------- Typography ------------------------------- */
 
 export function Eyebrow({ children, className }: { children?: ReactNode; className?: string }) {
-  return null;
+  if (!children) return null;
+  return (
+    <p className={cn("font-mono text-xs font-bold uppercase tracking-[0.2em] text-body", className)}>
+      {children}
+    </p>
+  );
 }
 
 export function SectionHeading({
@@ -45,7 +52,7 @@ export function SectionHeading({
   className?: string;
 }) {
   return (
-    <div className={cx("mb-10 flex flex-wrap items-end justify-between gap-x-8 gap-y-4 border-b pb-6 border-border/80", className)}>
+    <div className={cn("mb-10 flex flex-wrap items-end justify-between gap-x-8 gap-y-4 border-b pb-6 border-border/80", className)}>
       <div className="max-w-2xl">
         <h2 className="font-display text-3xl font-bold tracking-tight text-primary sm:text-4xl lg:text-[2.6rem] sm:leading-[1.12]">
           <StaggeredText
@@ -88,7 +95,7 @@ export function Button({
   children,
   ...props
 }: BtnBase & (ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined }) | (BtnBase & { href: string })) {
-  const styles = cx(
+  const styles = cn(
     "btn-hover inline-flex items-center justify-center gap-2 rounded-lg font-sans text-xs sm:text-sm font-semibold tracking-tight transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:pointer-events-none",
     variant === "primary" &&
       "bg-inverted text-on-inverted hover:bg-white shadow-sm",
@@ -126,7 +133,7 @@ export function DomainBadge({ domain, className }: { domain: DomainSlug; classNa
   const d = DOMAINS[domain];
   return (
     <span
-      className={cx(
+      className={cn(
         "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-wider border-border-strong bg-elevated text-primary shadow-xs",
         className,
       )}
@@ -140,7 +147,7 @@ export function DomainBadge({ domain, className }: { domain: DomainSlug; classNa
 export function Badge({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <span
-      className={cx(
+      className={cn(
         "inline-flex items-center rounded-md border px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-wider border-border-strong bg-elevated text-primary shadow-xs",
         className,
       )}
@@ -192,7 +199,7 @@ export function Avatar({
   return (
     <span
       aria-hidden
-      className={cx(
+      className={cn(
         "inline-flex size-8 shrink-0 items-center justify-center rounded-full border font-mono text-[10px] font-bold border-border-strong bg-inverted text-on-inverted transition-all duration-200",
         ringClass,
         className,
@@ -223,7 +230,7 @@ export function Card({
 }) {
   return (
     <div
-      className={cx(
+      className={cn(
         "rounded-2xl border p-6 sm:p-7 shadow-sm border-border/90 bg-card/90",
         hover && "card-hover cursor-pointer",
         className,
@@ -409,15 +416,15 @@ const fieldCls =
   "w-full rounded-lg border px-4 py-3 text-sm sm:text-base transition-colors focus:outline-none focus:ring-1 border-border-strong bg-surface text-primary placeholder:text-muted focus:border-inverted focus:ring-inverted font-sans";
 
 export function Input(props: InputHTMLAttributes<HTMLInputElement>) {
-  return <input suppressHydrationWarning {...props} className={cx(fieldCls, props.className)} />;
+  return <input suppressHydrationWarning {...props} className={cn(fieldCls, props.className)} />;
 }
 
 export function Textarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return <textarea suppressHydrationWarning {...props} className={cx(fieldCls, "resize-y", props.className)} />;
+  return <textarea suppressHydrationWarning {...props} className={cn(fieldCls, "resize-y", props.className)} />;
 }
 
 export function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
-  return <select suppressHydrationWarning {...props} className={cx(fieldCls, "appearance-none", props.className)} />;
+  return <select suppressHydrationWarning {...props} className={cn(fieldCls, "appearance-none", props.className)} />;
 }
 
 /* -------------------------------- Navigation Helpers ---------------------- */

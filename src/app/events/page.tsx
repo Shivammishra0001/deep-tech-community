@@ -100,7 +100,7 @@ export default function EventsPage() {
                       {e.format}
                     </span>
                     {e.featured && (
-                      <Badge className="text-on-inverted! font-bold">
+                      <Badge className="font-bold">
                         Flagship
                       </Badge>
                     )}

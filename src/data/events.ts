@@ -21,12 +21,18 @@ export type TechEvent = {
 };
 
 export function isUpcomingEvent(dateStr: string): boolean {
-  // Current system date: Sept 2026. Events with dates like "Mar 14, 2026", "May 22–23, 2026" have passed.
-  const now = new Date("2026-09-09T00:00:00Z");
-  const cleaned = dateStr.replace(/(\w+)\s+\d+–(\d+),\s+(\d+)/, "$1 $2, $3");
+  // A date range ("May 22–23, 2026") collapses to its LAST day, so a multi-day
+  // event stays "upcoming" until it has finished. Handles both the en dash used
+  // in the data and a plain hyphen.
+  const cleaned = dateStr.replace(/(\w+)\s+\d+\s*[–-]\s*(\d+),\s*(\d+)/, "$1 $2, $3");
   const parsed = Date.parse(cleaned);
-  if (isNaN(parsed)) return false;
-  return new Date(parsed) >= now;
+  if (Number.isNaN(parsed)) return false;
+
+  // Compare against the start of today so an event happening today still counts
+  // as upcoming for the whole day.
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+  return parsed >= startOfToday.getTime();
 }
 
 export const EVENTS: TechEvent[] = [
