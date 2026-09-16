@@ -1,15 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui";
+import { HeroBackdrop } from "@/components/hero-backdrop";
 import { StaggeredText } from "@/components/staggered-text";
-
-const GhostFibers = dynamic(() => import("@/components/GhostFibers"), {
-  ssr: false,
-});
 
 export function CinematicHero() {
   const shouldReduceMotion = useReducedMotion();
@@ -36,48 +32,7 @@ export function CinematicHero() {
                  lg:min-h-[760px] lg:py-28
                  xl:min-h-[820px]"
     >
-      {/* ----------------- GHOSTFIBERS BACKGROUND VISUAL ----------------- */}
-      <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-        <GhostFibers
-          lineColor="#896abd"
-          glowColor="#3437A0"
-          speed={0.2}
-          scale={2}
-          rotation={0}
-          rotationSpeed={0.25}
-          layers={4}
-          waveAmplitude={0.015}
-          waveFrequency={3}
-          waveSpeed={0.15}
-          layerSpeed={0.08}
-          twist={0.1}
-          twistFrequency={5}
-          twistSpeed={1.2}
-          lineFrequency={5}
-          lineSpacing={2}
-          lineSharpness={16}
-          glowFalloff={10}
-          glowIntensity={1.6}
-          brightness={2.2}
-          blueBoost={1.25}
-          vignette={0.8}
-          grain={0.05}
-          dpr={1}
-        />
-
-        {/* Soft Radial Ambient Fog for Clean Readability */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_90%_at_50%_50%,rgba(5,5,5,0.75)_0%,rgba(5,5,5,0.4)_50%,rgba(5,5,5,0.85)_100%)]" />
-
-        {/* Small screens: the copy spans the full width, so darken evenly. */}
-        <div className="pointer-events-none absolute inset-0 md:hidden bg-[linear-gradient(180deg,rgba(5,5,5,0.55)_0%,rgba(5,5,5,0.68)_55%,rgba(5,5,5,0.82)_100%)]" />
-
-        {/* From tablet up the type sits in a left column, so weight the scrim
-            left and leave the fibers visible in the open space beside it. */}
-        <div className="pointer-events-none absolute inset-0 hidden md:block bg-[linear-gradient(90deg,rgba(5,5,5,0.78)_0%,rgba(5,5,5,0.55)_38%,rgba(5,5,5,0.12)_72%,rgba(5,5,5,0)_100%)]" />
-
-        {/* Hairline seam into the next section. */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-border" />
-      </div>
+      <HeroBackdrop />
 
       <Container className="relative z-10">
         <motion.div style={{ y: contentY }} className="max-w-[820px]">
