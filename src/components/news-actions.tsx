@@ -119,7 +119,7 @@ export function NewsInteractiveCard({
           <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" />
           <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
             <DomainBadge domain={domain} />
-            <span className="rounded-md border border-neutral-700 bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
+            <span className="rounded-md border border-border-strong bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
               {date}
             </span>
           </div>
@@ -131,25 +131,25 @@ export function NewsInteractiveCard({
           {!image && (
             <div className="mb-3 flex items-center justify-between gap-2">
               <DomainBadge domain={domain} />
-              <span className="font-mono text-xs font-semibold text-neutral-200">{date}</span>
+              <span className="font-mono text-xs font-semibold text-body">{date}</span>
             </div>
           )}
           <h3 className="font-display text-lg sm:text-xl font-bold leading-snug tracking-tight group-hover:underline text-primary">
             <Link href={`/news/${slug}`}>{title}</Link>
           </h3>
-          <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-200 font-medium">
+          <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-body font-medium">
             {summary}
           </p>
         </div>
 
         {/* Author & Read Time */}
         <div className="mt-6 flex items-center justify-between border-t pt-4 border-border/60">
-          <div className="flex items-center gap-2 font-sans text-xs sm:text-sm font-semibold text-neutral-200">
+          <div className="flex items-center gap-2 font-sans text-xs sm:text-sm font-semibold text-body">
             <User className="size-4 text-primary" />
             <span>{author}</span>
           </div>
           {readTime && (
-            <span className="flex items-center gap-1 font-sans text-xs sm:text-sm font-semibold text-neutral-200">
+            <span className="flex items-center gap-1 font-sans text-xs sm:text-sm font-semibold text-body">
               <Clock className="size-4 text-primary" />
               {readTime}
             </span>
@@ -166,7 +166,7 @@ export function NewsInteractiveCard({
                 "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all duration-200 cursor-pointer",
                 isLiked
                   ? "bg-rose-950/60 text-rose-400"
-                  : "text-secondary hover:bg-neutral-800 hover:text-primary"
+                  : "text-secondary hover:bg-elevated hover:text-primary"
               )}
               title={isLiked ? "Unlike" : "Like article"}
             >
@@ -184,8 +184,8 @@ export function NewsInteractiveCard({
               className={cx(
                 "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all duration-200 cursor-pointer",
                 showComments
-                  ? "bg-neutral-800 text-primary"
-                  : "text-secondary hover:bg-neutral-800 hover:text-primary"
+                  ? "bg-elevated text-primary"
+                  : "text-secondary hover:bg-elevated hover:text-primary"
               )}
               title="View & add comments"
             >
@@ -198,7 +198,7 @@ export function NewsInteractiveCard({
             {/* Share Button */}
             <button
               onClick={handleShare}
-              className="relative inline-flex items-center gap-1 rounded-lg p-1.5 text-secondary hover:bg-neutral-800 hover:text-primary transition-colors cursor-pointer"
+              className="relative inline-flex items-center gap-1 rounded-lg p-1.5 text-secondary hover:bg-elevated hover:text-primary transition-colors cursor-pointer"
               title="Share article link"
             >
               {copied ? <Check className="size-4 text-emerald-400" /> : <Share2 className="size-4" />}
@@ -211,7 +211,7 @@ export function NewsInteractiveCard({
                 "inline-flex items-center gap-1 rounded-lg p-1.5 transition-colors cursor-pointer",
                 isSaved
                   ? "text-primary"
-                  : "text-secondary hover:bg-neutral-800 hover:text-primary"
+                  : "text-secondary hover:bg-elevated hover:text-primary"
               )}
               title={isSaved ? "Saved to bookmarks" : "Save article"}
             >
@@ -241,7 +241,7 @@ export function NewsInteractiveCard({
                     <span className="font-display font-semibold text-primary">{c.author}</span>
                     <span className="font-mono text-[10px] text-secondary">{c.date}</span>
                   </div>
-                  <p className="mt-1 font-sans text-neutral-200 font-medium leading-relaxed">{c.body}</p>
+                  <p className="mt-1 font-sans text-body font-medium leading-relaxed">{c.body}</p>
                 </div>
               ))}
             </div>
@@ -351,7 +351,7 @@ export function ArticleDetailPageActions({
               "inline-flex items-center gap-2 rounded-lg border px-4 py-2 font-mono text-xs font-semibold transition-all duration-200 cursor-pointer",
               isLiked
                 ? "border-rose-900 bg-rose-950/60 text-rose-400"
-                : "border-neutral-700 bg-surface text-neutral-200 hover:bg-card"
+                : "border-border-strong bg-surface text-body hover:bg-card"
             )}
           >
             <Heart className={cx("size-4", isLiked && "fill-current text-rose-400")} />
@@ -364,8 +364,8 @@ export function ArticleDetailPageActions({
             className={cx(
               "inline-flex items-center gap-2 rounded-lg border px-4 py-2 font-mono text-xs font-semibold transition-all duration-200 cursor-pointer",
               isSaved
-                ? "border-neutral-100 bg-neutral-100 text-neutral-950"
-                : "border-neutral-700 bg-surface text-neutral-200 hover:bg-card"
+                ? "border-inverted bg-inverted text-on-inverted"
+                : "border-border-strong bg-surface text-body hover:bg-card"
             )}
           >
             <Bookmark className={cx("size-4", isSaved && "fill-current")} />
@@ -376,7 +376,7 @@ export function ArticleDetailPageActions({
         {/* Share */}
         <button
           onClick={handleShare}
-          className="inline-flex items-center gap-2 rounded-lg border px-4 py-2 font-mono text-xs font-semibold border-neutral-700 bg-surface text-neutral-200 hover:bg-card transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 rounded-lg border px-4 py-2 font-mono text-xs font-semibold border-border-strong bg-surface text-body hover:bg-card transition-colors cursor-pointer"
         >
           {copied ? <Check className="size-4 text-emerald-400" /> : <Share2 className="size-4" />}
           <span>{copied ? "Link Copied!" : "Share Article"}</span>
@@ -416,7 +416,7 @@ export function ArticleDetailPageActions({
                 </div>
                 <span className="font-mono text-[10px] text-secondary">{c.date}</span>
               </div>
-              <p className="mt-2 font-sans text-neutral-200 font-medium leading-relaxed">{c.body}</p>
+              <p className="mt-2 font-sans text-body font-medium leading-relaxed">{c.body}</p>
             </div>
           ))}
         </div>

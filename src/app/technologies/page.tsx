@@ -30,7 +30,7 @@ export default function TechnologiesPage() {
                 <Card hover className="group flex flex-col justify-between p-6">
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="grid size-10 place-items-center rounded-lg border border-neutral-700 bg-neutral-800 text-primary">
+                      <span className="grid size-10 place-items-center rounded-lg border border-border-strong bg-elevated text-primary">
                         <Icon className="size-5" />
                       </span>
                     </div>
@@ -38,8 +38,8 @@ export default function TechnologiesPage() {
                     <h2 className="mt-4 font-display text-2xl font-bold tracking-tight group-hover:underline text-primary">
                       <Link href={`/technologies/${d.techSlug}`}>{d.name}</Link>
                     </h2>
-                    <p className="mt-1.5 font-sans text-sm font-semibold text-neutral-200">{d.tagline}</p>
-                    <p className="mt-3 font-sans text-sm leading-relaxed text-neutral-300">{d.description}</p>
+                    <p className="mt-1.5 font-sans text-sm font-semibold text-body">{d.tagline}</p>
+                    <p className="mt-3 font-sans text-sm leading-relaxed text-body-soft">{d.description}</p>
                   </div>
 
                   <div>
@@ -47,7 +47,7 @@ export default function TechnologiesPage() {
                       {page.facts.map((f) => (
                         <div key={f.label} className="text-center first:pl-0 last:pr-0">
                           <p className="font-bold text-primary">{f.value}</p>
-                          <p className="mt-0.5 text-[10px] text-neutral-300">{f.label}</p>
+                          <p className="mt-0.5 text-[10px] text-body-soft">{f.label}</p>
                         </div>
                       ))}
                     </div>

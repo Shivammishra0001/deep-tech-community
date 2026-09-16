@@ -99,12 +99,12 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
       <section className="relative overflow-hidden border-b border-border/80">
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="max-w-3xl animate-rise">
-            <span className="grid size-10 place-items-center rounded-lg border border-neutral-700 bg-neutral-800 text-primary">
+            <span className="grid size-10 place-items-center rounded-lg border border-border-strong bg-elevated text-primary">
               <Icon className="size-5" />
             </span>
             <h1 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">{d.name}</h1>
-            <p className="mt-2 font-sans text-sm font-semibold text-neutral-200">{d.tagline}</p>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-300">{page.overview[0]}</p>
+            <p className="mt-2 font-sans text-sm font-semibold text-body">{d.tagline}</p>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-body-soft">{page.overview[0]}</p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Button href="/join" variant="primary" size="md">
                 Join Track
@@ -146,7 +146,7 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
           {/* 1. Overview */}
           <section id="overview" className="scroll-mt-24">
             <SectionHeading eyebrow="01 — Track Overview" title={`Engineering ${d.name}`} />
-            <div className="space-y-4 text-sm leading-relaxed text-neutral-300">
+            <div className="space-y-4 text-sm leading-relaxed text-body-soft">
               {page.overview.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>
               ))}
@@ -169,7 +169,7 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
             <div className="space-y-3">
               {page.beginnerGuide.map((step, i) => (
                 <Card key={step.title} className="flex gap-4">
-                  <span className="grid size-7 shrink-0 place-items-center rounded-sm font-mono text-xs font-bold bg-neutral-100 text-neutral-950">
+                  <span className="grid size-7 shrink-0 place-items-center rounded-sm font-mono text-xs font-bold bg-inverted text-on-inverted">
                     {i + 1}
                   </span>
                   <div>

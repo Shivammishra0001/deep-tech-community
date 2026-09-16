@@ -16,9 +16,19 @@
   --color-surface:    #0A0A0A;  /* section bands sitting on the background    */
   --color-card:       #111111;  /* raised panels and cards                    */
   --color-border:     #242424;  /* hairlines, dividers, card outlines         */
-  --color-primary:    #F2F2F2;  /* primary text, and inverted-button fills    */
+  --color-primary:    #F2F2F2;  /* primary text: headings, emphasis           */
   --color-secondary:  #A0A0A0;  /* secondary text                             */
   --color-muted:      #6F6F6F;  /* muted text, placeholders, timestamps       */
+
+  /* Steps the three-tone scale above does not cover. Each is exactly the
+     colour that already rendered here, so adding them changed nothing on
+     screen -- they only give the remaining utilities a name.                  */
+  --color-elevated:      #262626;  /* chips/inputs sitting above a card     */
+  --color-border-strong: #404040;  /* interactive + emphasised borders      */
+  --color-body:          #E5E5E5;  /* body copy                             */
+  --color-body-soft:     #D4D4D4;  /* secondary body copy                   */
+  --color-inverted:      #F5F5F5;  /* light fills: primary buttons, avatars */
+  --color-on-inverted:   #0A0A0A;  /* text sitting on those light fills     */
 
   --shadow-hairline: 0 0 0 1px rgb(255 255 255 / 0.08);
   --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);

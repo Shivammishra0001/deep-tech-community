@@ -78,7 +78,7 @@ export function CinematicHero() {
           </h1>
 
           {/* Exact Supporting Paragraph with Balanced Breathing Space */}
-          <p className="mt-6 sm:mt-7 max-w-[580px] font-sans text-[15px] sm:text-base lg:text-[18px] font-normal leading-relaxed text-neutral-300 text-center mx-auto">
+          <p className="mt-6 sm:mt-7 max-w-[580px] font-sans text-[15px] sm:text-base lg:text-[18px] font-normal leading-relaxed text-body-soft text-center mx-auto">
             <StaggeredText
               text="A practitioner-led network for engineers, researchers, founders and students building what comes next."
               segmentBy="Words"
@@ -95,7 +95,7 @@ export function CinematicHero() {
           <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-5">
             <Link
               href="/join"
-              className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-white px-7 sm:px-8 py-3.5 sm:py-4 font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider text-neutral-950 transition-all duration-200 hover:bg-neutral-200 shadow-md hover:shadow-lg active:scale-[0.98] cursor-pointer"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-xl bg-white px-7 sm:px-8 py-3.5 sm:py-4 font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider text-on-inverted transition-all duration-200 hover:bg-neutral-200 shadow-md hover:shadow-lg active:scale-[0.98] cursor-pointer"
             >
               <span>JOIN THE COMMUNITY</span>
               <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -103,7 +103,7 @@ export function CinematicHero() {
 
             <Link
               href="/community"
-              className="group inline-flex items-center justify-center gap-2.5 rounded-xl border border-neutral-700 bg-card/60 backdrop-blur-md px-7 sm:px-8 py-3.5 sm:py-4 font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary transition-all duration-200 hover:border-neutral-400 hover:bg-neutral-800/80 active:scale-[0.98] cursor-pointer"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-xl border border-border-strong bg-card/60 backdrop-blur-md px-7 sm:px-8 py-3.5 sm:py-4 font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary transition-all duration-200 hover:border-neutral-400 hover:bg-elevated/80 active:scale-[0.98] cursor-pointer"
             >
               <span>EXPLORE THE NETWORK</span>
               <ChevronRight className="size-4 text-secondary transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-primary" />

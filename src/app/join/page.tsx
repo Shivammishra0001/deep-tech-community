@@ -102,7 +102,7 @@ export default function JoinPage() {
           <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-primary">
             Join Verified Practitioners in Deep Tech.
           </h1>
-          <p className="mt-3 sm:mt-3.5 max-w-xl text-sm leading-relaxed text-neutral-200">
+          <p className="mt-3 sm:mt-3.5 max-w-xl text-sm leading-relaxed text-body">
             Membership is open to students, developers, researchers, founders, educators, and technology leaders. Zero noise, high technical signal.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -110,7 +110,7 @@ export default function JoinPage() {
               <Card key={p.title}>
                 <p className="font-mono text-xs text-secondary">0{i + 1}</p>
                 <h3 className="mt-2 font-display text-sm font-semibold text-primary">{p.title}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-neutral-200">{p.text}</p>
+                <p className="mt-1 text-xs leading-relaxed text-body">{p.text}</p>
               </Card>
             ))}
           </div>
@@ -120,13 +120,13 @@ export default function JoinPage() {
         <div className="lg:sticky lg:top-24 lg:self-start">
           {state === "done" ? (
             <Card className="text-center p-8">
-              <span className="mx-auto grid size-12 place-items-center rounded-full border border-neutral-100 bg-neutral-100 text-neutral-950">
+              <span className="mx-auto grid size-12 place-items-center rounded-full border border-inverted bg-inverted text-on-inverted">
                 <Check className="size-5" aria-hidden />
               </span>
               <h2 className="mt-4 font-display text-2xl font-semibold text-primary">
                 Application Received, {(name || user?.name || "Member").split(" ")[0]}
               </h2>
-              <p className="mt-2 text-xs leading-relaxed text-neutral-200">
+              <p className="mt-2 text-xs leading-relaxed text-body">
                 Invitation details have been sent to <span className="font-mono font-semibold text-primary">{email || user?.email}</span>.
               </p>
               <div className="mt-6 flex justify-center gap-3">

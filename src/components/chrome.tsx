@@ -74,7 +74,7 @@ export function Logo({ className }: { className?: string }) {
         <LogoSymbol className="size-full" />
       </span>
       <div className="flex flex-col leading-none">
-        <span className="font-sans text-sm font-semibold tracking-tight text-primary group-hover:text-neutral-300 transition-colors">
+        <span className="font-sans text-sm font-semibold tracking-tight text-primary group-hover:text-body-soft transition-colors">
           DTC
         </span>
         <span className="font-sans text-[9px] font-medium uppercase tracking-[0.12em] text-primary mt-0.5">
@@ -148,11 +148,11 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               className="w-full bg-transparent font-sans text-sm text-primary placeholder-neutral-500 outline-none"
             />
             {query && (
-              <button onClick={() => setQuery("")} className="text-xs text-secondary hover:text-neutral-200">
+              <button onClick={() => setQuery("")} className="text-xs text-secondary hover:text-body">
                 Clear
               </button>
             )}
-            <kbd className="ml-2 rounded border border-border bg-card px-1.5 py-0.5 font-sans text-[10px] text-neutral-300">
+            <kbd className="ml-2 rounded border border-border bg-card px-1.5 py-0.5 font-sans text-[10px] text-body-soft">
               ESC
             </kbd>
           </div>
@@ -160,7 +160,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           {/* Search Results List */}
           <div className="max-h-80 overflow-y-auto p-2">
             {filtered.length === 0 ? (
-              <div className="p-8 text-center font-sans text-xs text-neutral-300">
+              <div className="p-8 text-center font-sans text-xs text-body-soft">
                 No matching results found for &quot;{query}&quot;
               </div>
             ) : (
@@ -174,14 +174,14 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                       className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left transition-colors hover:bg-card cursor-pointer"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="flex size-7 items-center justify-center rounded border border-border bg-card text-neutral-300">
+                        <div className="flex size-7 items-center justify-center rounded border border-border bg-card text-body-soft">
                           <Icon className="size-3.5" />
                         </div>
                         <div>
                           <p className="font-sans text-xs font-semibold text-primary">
                             {item.title}
                           </p>
-                          <p className="font-sans text-[10px] uppercase tracking-wider text-neutral-300">
+                          <p className="font-sans text-[10px] uppercase tracking-wider text-body-soft">
                             {item.category}
                           </p>
                         </div>
@@ -307,7 +307,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-1 px-1.5 py-1 font-sans text-[11px] font-medium text-muted hover:text-neutral-200 transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-1.5 py-1 font-sans text-[11px] font-medium text-muted hover:text-body transition-colors cursor-pointer"
               aria-label="Search platform"
             >
               <Search className="size-3.5" />
@@ -321,9 +321,9 @@ export function Navbar() {
               <div className="flex items-center gap-2">
                 <Link
                   href="/admin"
-                  className="flex items-center gap-2 rounded-md border border-border bg-card px-2.5 py-1 text-xs font-medium text-primary hover:bg-neutral-800 transition-colors"
+                  className="flex items-center gap-2 rounded-md border border-border bg-card px-2.5 py-1 text-xs font-medium text-primary hover:bg-elevated transition-colors"
                 >
-                  <span className="flex size-4.5 items-center justify-center rounded-full bg-white font-sans text-[9px] font-bold text-neutral-950">
+                  <span className="flex size-4.5 items-center justify-center rounded-full bg-white font-sans text-[9px] font-bold text-on-inverted">
                     {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
                   </span>
                   <span className="hidden sm:inline max-w-[90px] truncate">{user.name.split(" ")[0]}</span>
@@ -332,7 +332,7 @@ export function Navbar() {
             ) : (
               <Link
                 href="/join"
-                className="group inline-flex items-center gap-1 rounded-md bg-white px-3 py-1 font-sans text-[12px] font-medium tracking-wide text-neutral-950 transition-colors duration-150 hover:bg-neutral-200 cursor-pointer shadow-xs"
+                className="group inline-flex items-center gap-1 rounded-md bg-white px-3 py-1 font-sans text-[12px] font-medium tracking-wide text-on-inverted transition-colors duration-150 hover:bg-neutral-200 cursor-pointer shadow-xs"
               >
                 <span>JOIN</span>
                 <ArrowRight className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
@@ -345,7 +345,7 @@ export function Navbar() {
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
-              className="grid size-7.5 place-items-center rounded-md border border-border text-neutral-300 md:hidden cursor-pointer"
+              className="grid size-7.5 place-items-center rounded-md border border-border text-body-soft md:hidden cursor-pointer"
             >
               {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
             </button>
@@ -372,7 +372,7 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="flex items-center justify-between rounded-md px-3 py-2 font-sans text-xs font-medium uppercase tracking-wider text-neutral-300 hover:bg-card hover:text-primary"
+                    className="flex items-center justify-between rounded-md px-3 py-2 font-sans text-xs font-medium uppercase tracking-wider text-body-soft hover:bg-card hover:text-primary"
                   >
                     <span>{item.label}</span>
                     <ChevronRight className="size-3.5 text-muted" />
@@ -384,12 +384,12 @@ export function Navbar() {
                 {user ? (
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <div className="flex size-7 items-center justify-center rounded-full bg-white font-sans text-xs font-semibold text-neutral-950">
+                      <div className="flex size-7 items-center justify-center rounded-full bg-white font-sans text-xs font-semibold text-on-inverted">
                         {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
                       </div>
                       <div>
                         <p className="font-sans text-xs font-semibold text-primary">{user.name}</p>
-                        <p className="font-sans text-[10px] text-neutral-300">{user.email}</p>
+                        <p className="font-sans text-[10px] text-body-soft">{user.email}</p>
                       </div>
                     </div>
                     <button
@@ -404,7 +404,7 @@ export function Navbar() {
                     <Button href="/login" variant="outline" size="sm" className="flex-1 justify-center font-sans text-xs font-medium">
                       Login
                     </Button>
-                    <Button href="/join" variant="primary" size="sm" className="flex-1 justify-center font-sans text-xs font-medium bg-white text-neutral-950 hover:bg-neutral-200">
+                    <Button href="/join" variant="primary" size="sm" className="flex-1 justify-center font-sans text-xs font-medium bg-white text-on-inverted hover:bg-neutral-200">
                       Join Community →
                     </Button>
                   </div>
@@ -446,7 +446,7 @@ export function FooterNewsletter() {
       <p className="font-display text-[15px] font-bold tracking-tight text-primary">
         DEEP TECH BRIEFING
       </p>
-      <p className="mt-2 text-sm leading-relaxed text-neutral-200 font-medium">
+      <p className="mt-2 text-sm leading-relaxed text-body font-medium">
         Bi-weekly technical digests — open roadmaps, research highlights, and symposium schedules. No noise.
       </p>
 
@@ -474,7 +474,7 @@ export function Footer() {
       <Container className="grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1.6fr]">
         <div>
           <Logo />
-          <p className="mt-4 max-w-sm text-sm font-medium leading-relaxed text-neutral-200">
+          <p className="mt-4 max-w-sm text-sm font-medium leading-relaxed text-body">
             Open practitioner community platform for Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.
           </p>
           <div className="mt-5 flex gap-2.5">
@@ -483,7 +483,7 @@ export function Footer() {
                 key={label}
                 href="#"
                 aria-label={label}
-                className="grid size-9 place-items-center rounded-lg border transition-colors border-neutral-700 bg-card text-neutral-200 hover:border-neutral-100 hover:text-primary"
+                className="grid size-9 place-items-center rounded-lg border transition-colors border-border-strong bg-card text-body hover:border-inverted hover:text-primary"
               >
                 <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden>
                   <path d={path} />
@@ -497,19 +497,19 @@ export function Footer() {
           <p className="mb-1 font-sans text-xs font-bold uppercase tracking-widest text-primary">
             SITES
           </p>
-          <Link href="/about" className="font-semibold text-neutral-200 hover:text-primary">
+          <Link href="/about" className="font-semibold text-body hover:text-primary">
             About Community
           </Link>
-          <Link href="/technologies" className="font-semibold text-neutral-200 hover:text-primary">
+          <Link href="/technologies" className="font-semibold text-body hover:text-primary">
             Technologies
           </Link>
-          <Link href="/events" className="font-semibold text-neutral-200 hover:text-primary">
+          <Link href="/events" className="font-semibold text-body hover:text-primary">
             Symposia &amp; Labs
           </Link>
-          <Link href="/community" className="font-semibold text-neutral-200 hover:text-primary">
+          <Link href="/community" className="font-semibold text-body hover:text-primary">
             Member Forum
           </Link>
-          <Link href="/chapters" className="font-semibold text-neutral-200 hover:text-primary">
+          <Link href="/chapters" className="font-semibold text-body hover:text-primary">
             Regional Chapters
           </Link>
         </nav>
@@ -517,7 +517,7 @@ export function Footer() {
         <FooterNewsletter />
       </Container>
       <div className="border-t border-border">
-        <Container className="flex flex-wrap items-center justify-between gap-2 py-6 font-mono text-[11px] text-neutral-300">
+        <Container className="flex flex-wrap items-center justify-between gap-2 py-6 font-mono text-[11px] text-body-soft">
           <p>© 2026 Dyau Deep Tech Community. Handcrafted Enterprise Platform.</p>
           <p>[ 01 AI · 02 QUANTUM · 03 CYBER · 04 AI GOVERNANCE ]</p>
         </Container>

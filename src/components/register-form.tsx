@@ -38,13 +38,13 @@ export function RegisterForm({ eventSlug, eventTitle }: { eventSlug: string; eve
   if (state === "done" || state === "already") {
     return (
       <Card className="text-center">
-        <span className="mx-auto grid size-10 place-items-center rounded-full border border-neutral-100 bg-neutral-100 text-neutral-950">
+        <span className="mx-auto grid size-10 place-items-center rounded-full border border-inverted bg-inverted text-on-inverted">
           <Check className="size-4" aria-hidden />
         </span>
         <p className="mt-3 font-display text-sm font-semibold text-primary">
           {state === "already" ? "Registration Exists" : "Registration Confirmed"}
         </p>
-        <p className="mt-1.5 text-xs text-neutral-300">
+        <p className="mt-1.5 text-xs text-body-soft">
           {state === "already"
             ? "Your email is already registered for this symposium."
             : `A calendar invitation for “${eventTitle}” has been queued for ${email}.`}

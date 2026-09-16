@@ -19,7 +19,7 @@ export function Container({ className, children }: { className?: string; childre
 export function Skeleton({ className }: { className?: string }) {
   return (
     <div
-      className={cx("animate-skeleton rounded-lg bg-neutral-800/80", className)}
+      className={cx("animate-skeleton rounded-lg bg-elevated/80", className)}
       aria-hidden
     />
   );
@@ -57,12 +57,12 @@ export function SectionHeading({
             staggerDelay="0.025s"
           />
         </h2>
-        {description && <p className="mt-3 font-sans text-base sm:text-[17px] font-medium leading-relaxed text-neutral-200">{description}</p>}
+        {description && <p className="mt-3 font-sans text-base sm:text-[17px] font-medium leading-relaxed text-body">{description}</p>}
       </div>
       {action && (
         <Link
           href={action.href}
-          className="link-arrow group inline-flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold tracking-wide text-primary hover:text-neutral-300"
+          className="link-arrow group inline-flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold tracking-wide text-primary hover:text-body-soft"
         >
           {action.label}
           <ArrowRight className="size-3.5" aria-hidden />
@@ -91,13 +91,13 @@ export function Button({
   const styles = cx(
     "btn-hover inline-flex items-center justify-center gap-2 rounded-lg font-sans text-xs sm:text-sm font-semibold tracking-tight transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:pointer-events-none",
     variant === "primary" &&
-      "bg-neutral-100 text-neutral-950 hover:bg-white shadow-sm",
+      "bg-inverted text-on-inverted hover:bg-white shadow-sm",
     variant === "secondary" &&
-      "bg-neutral-800 text-primary hover:bg-neutral-700",
+      "bg-elevated text-primary hover:bg-neutral-700",
     variant === "outline" &&
-      "border bg-transparent border-neutral-700 text-primary hover:bg-neutral-800",
+      "border bg-transparent border-border-strong text-primary hover:bg-elevated",
     variant === "ghost" &&
-      "text-neutral-300 hover:bg-neutral-800 hover:text-primary",
+      "text-body-soft hover:bg-elevated hover:text-primary",
     size === "sm" && "h-8.5 px-3 text-[11px]",
     size === "md" && "h-10.5 px-4.5 text-xs sm:text-sm",
     size === "lg" && "h-12.5 px-6.5 text-sm sm:text-base font-bold",
@@ -127,11 +127,11 @@ export function DomainBadge({ domain, className }: { domain: DomainSlug; classNa
   return (
     <span
       className={cx(
-        "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-wider border-neutral-700 bg-neutral-800 text-primary shadow-xs",
+        "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-wider border-border-strong bg-elevated text-primary shadow-xs",
         className,
       )}
     >
-      <span className="size-1.5 rounded-full bg-neutral-100" aria-hidden />
+      <span className="size-1.5 rounded-full bg-inverted" aria-hidden />
       [{d.short}]
     </span>
   );
@@ -141,7 +141,7 @@ export function Badge({ children, className }: { children: ReactNode; className?
   return (
     <span
       className={cx(
-        "inline-flex items-center rounded-md border px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-wider border-neutral-700 bg-neutral-800 text-primary shadow-xs",
+        "inline-flex items-center rounded-md border px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-wider border-border-strong bg-elevated text-primary shadow-xs",
         className,
       )}
     >
@@ -152,7 +152,7 @@ export function Badge({ children, className }: { children: ReactNode; className?
 
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-md border px-2.5 py-1 font-mono text-xs font-semibold border-neutral-700 bg-neutral-800 text-neutral-200">
+    <span className="inline-flex items-center rounded-md border px-2.5 py-1 font-mono text-xs font-semibold border-border-strong bg-elevated text-body">
       #{children}
     </span>
   );
@@ -193,7 +193,7 @@ export function Avatar({
     <span
       aria-hidden
       className={cx(
-        "inline-flex size-8 shrink-0 items-center justify-center rounded-full border font-mono text-[10px] font-bold border-neutral-700 bg-neutral-100 text-neutral-950 transition-all duration-200",
+        "inline-flex size-8 shrink-0 items-center justify-center rounded-full border font-mono text-[10px] font-bold border-border-strong bg-inverted text-on-inverted transition-all duration-200",
         ringClass,
         className,
       )}
@@ -269,7 +269,7 @@ export function ArticleCard({
           <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" />
           <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
             <DomainBadge domain={domain} />
-            <span className="rounded-md border border-neutral-700 bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
+            <span className="rounded-md border border-border-strong bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
               {date}
             </span>
           </div>
@@ -281,22 +281,22 @@ export function ArticleCard({
           {!image && (
             <div className="mb-3 flex items-center justify-between gap-2">
               <DomainBadge domain={domain} />
-              <span className="font-mono text-xs font-semibold text-neutral-200">{date}</span>
+              <span className="font-mono text-xs font-semibold text-body">{date}</span>
             </div>
           )}
           <h3 className="font-display text-lg sm:text-xl font-bold leading-snug tracking-tight group-hover:underline text-primary">
             <Link href={`/news/${slug}`}>{title}</Link>
           </h3>
-          <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-200 font-normal">{summary}</p>
+          <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-body font-normal">{summary}</p>
         </div>
 
         <div className="mt-6 flex items-center justify-between border-t pt-4 border-border/60">
-          <div className="flex items-center gap-2 font-sans text-xs sm:text-sm font-semibold text-neutral-200">
+          <div className="flex items-center gap-2 font-sans text-xs sm:text-sm font-semibold text-body">
             <User className="size-4 text-primary" />
             <span>{author}</span>
           </div>
           {readTime && (
-            <span className="flex items-center gap-1 font-sans text-xs sm:text-sm font-semibold text-neutral-200">
+            <span className="flex items-center gap-1 font-sans text-xs sm:text-sm font-semibold text-body">
               <Clock className="size-4 text-primary" />
               {readTime}
             </span>
@@ -334,7 +334,7 @@ export function EventCard({
           <Link href={`/events/${slug}`}>{title}</Link>
         </h3>
       </div>
-      <div className="mt-6 space-y-2 border-t pt-4 font-sans text-xs sm:text-sm font-semibold border-border/60 text-neutral-200">
+      <div className="mt-6 space-y-2 border-t pt-4 font-sans text-xs sm:text-sm font-semibold border-border/60 text-body">
         <div className="flex items-center gap-2">
           <Calendar className="size-4 text-primary" />
           <span>{date}</span>
@@ -375,13 +375,13 @@ export function CommunityCard({
               {flag}
             </span>
             <h3 className="font-display text-lg sm:text-xl font-bold tracking-tight text-primary">
-              {country} <span className="font-mono text-xs font-semibold text-neutral-300">[{code}]</span>
+              {country} <span className="font-mono text-xs font-semibold text-body-soft">[{code}]</span>
             </h3>
           </div>
           <Badge className="font-sans text-xs font-semibold">{members.toLocaleString()} Members</Badge>
         </div>
-        <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-neutral-200">{city}</p>
-        <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-200 font-normal">{blurb}</p>
+        <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-body">{city}</p>
+        <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-body font-normal">{blurb}</p>
       </div>
       <div className="mt-6 pt-4 border-t border-border/60">
         <Link
@@ -399,14 +399,14 @@ export function CommunityCard({
 
 export function Label({ htmlFor, children }: { htmlFor: string; children: ReactNode }) {
   return (
-    <label htmlFor={htmlFor} className="mb-1.5 block font-mono text-xs font-semibold uppercase tracking-wider text-neutral-200">
+    <label htmlFor={htmlFor} className="mb-1.5 block font-mono text-xs font-semibold uppercase tracking-wider text-body">
       {children}
     </label>
   );
 }
 
 const fieldCls =
-  "w-full rounded-lg border px-4 py-3 text-sm sm:text-base transition-colors focus:outline-none focus:ring-1 border-neutral-700 bg-surface text-primary placeholder:text-muted focus:border-neutral-100 focus:ring-neutral-100 font-sans";
+  "w-full rounded-lg border px-4 py-3 text-sm sm:text-base transition-colors focus:outline-none focus:ring-1 border-border-strong bg-surface text-primary placeholder:text-muted focus:border-inverted focus:ring-inverted font-sans";
 
 export function Input(props: InputHTMLAttributes<HTMLInputElement>) {
   return <input suppressHydrationWarning {...props} className={cx(fieldCls, props.className)} />;
@@ -424,7 +424,7 @@ export function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
 
 export function Breadcrumbs({ items }: { items: { label: string; href?: string }[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 font-mono text-xs text-neutral-300">
+    <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 font-mono text-xs text-body-soft">
       {items.map((item, idx) => (
         <span key={idx} className="flex items-center gap-2">
           {idx > 0 && <ChevronRight className="size-3 text-secondary" />}
@@ -469,7 +469,7 @@ export function PageHero({
             />
           </h1>
           {description && (
-            <p className="mt-3 sm:mt-3.5 max-w-2xl font-sans text-base sm:text-lg font-medium leading-relaxed text-neutral-200">
+            <p className="mt-3 sm:mt-3.5 max-w-2xl font-sans text-base sm:text-lg font-medium leading-relaxed text-body">
               <StaggeredText
                 text={description}
                 segmentBy="Words"

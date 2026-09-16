@@ -42,7 +42,7 @@ function FieldWithIcon({
   icon?: any;
 }) {
   return (
-    <div className="group relative flex h-11 w-full items-center rounded-lg border border-neutral-700 bg-surface transition-colors focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-100 overflow-hidden">
+    <div className="group relative flex h-11 w-full items-center rounded-lg border border-border-strong bg-surface transition-colors focus-within:border-inverted focus-within:ring-1 focus-within:ring-inverted overflow-hidden">
       {Icon && (
         <div className="flex size-10 shrink-0 items-center justify-center text-secondary pointer-events-none select-none">
           <Icon className="size-4" />
@@ -82,7 +82,7 @@ function PasswordFieldWithIcon({
   const [show, setShow] = useState(false);
 
   return (
-    <div className="group relative flex h-11 w-full items-center rounded-lg border border-neutral-700 bg-surface transition-colors focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-100 overflow-hidden">
+    <div className="group relative flex h-11 w-full items-center rounded-lg border border-border-strong bg-surface transition-colors focus-within:border-inverted focus-within:ring-1 focus-within:ring-inverted overflow-hidden">
       <div className="flex size-10 shrink-0 items-center justify-center text-secondary pointer-events-none select-none">
         <Lock className="size-4" />
       </div>
@@ -281,7 +281,7 @@ export default function LoginPage() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-96 rounded-full bg-white/5 blur-3xl pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-300">
+              <div className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-body-soft">
                 <span className="size-1.5 rounded-full bg-neutral-500 animate-pulse" />
                 ENTERPRISE MEMBER PORTAL
               </div>
@@ -299,15 +299,15 @@ export default function LoginPage() {
             </div>
 
             <div className="relative z-10 border-t border-border/80 pt-6">
-              <p className="font-sans text-xs sm:text-sm italic leading-relaxed text-neutral-300">
+              <p className="font-sans text-xs sm:text-sm italic leading-relaxed text-body-soft">
                 &ldquo;Direct peer access to quantum researchers and SOC playbooks transformed how our team deploys frontier infrastructure.&rdquo;
               </p>
               <div className="mt-3 flex items-center gap-2.5">
-                <div className="size-7 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center font-mono text-xs font-bold text-primary">
+                <div className="size-7 rounded-full bg-elevated border border-border-strong flex items-center justify-center font-mono text-xs font-bold text-primary">
                   EM
                 </div>
                 <div>
-                  <p className="font-display text-xs font-bold text-neutral-200">Dr. Elena Marchetti</p>
+                  <p className="font-display text-xs font-bold text-body">Dr. Elena Marchetti</p>
                   <p className="font-mono text-[10px] text-secondary">Quantum Information Lead · Milan</p>
                 </div>
               </div>
@@ -326,13 +326,13 @@ export default function LoginPage() {
             {/* DONE / LOGGED IN SUCCESS */}
             {step === "done" && (
               <div className="mt-8 text-center">
-                <span className="mx-auto grid size-14 place-items-center rounded-2xl border shadow-sm border-neutral-700 bg-neutral-800 text-primary">
+                <span className="mx-auto grid size-14 place-items-center rounded-2xl border shadow-sm border-border-strong bg-elevated text-primary">
                   <Check className="size-7" aria-hidden />
                 </span>
                 <h1 className="mt-5 font-display text-2xl font-bold tracking-tight text-primary">
                   Welcome to Deep Tech Community!
                 </h1>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-200 font-medium">
+                <p className="mt-2 text-sm leading-relaxed text-body font-medium">
                   Hello <strong className="text-primary">{fullName || loginIdentifier.split("@")[0] || email.split("@")[0] || "Member"}</strong>, you are signed in successfully.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -350,7 +350,7 @@ export default function LoginPage() {
               <div className="mt-6">
                 {/* Redirect Banner Notice */}
                 {redirectPath && (
-                  <div className="mb-6 rounded-xl border p-3.5 text-xs border-neutral-700 bg-surface text-neutral-200 flex items-center gap-2">
+                  <div className="mb-6 rounded-xl border p-3.5 text-xs border-border-strong bg-surface text-body flex items-center gap-2">
                     <AlertCircle className="size-4 shrink-0" />
                     <span>Please log in or create an account first to complete your membership application.</span>
                   </div>
@@ -369,7 +369,7 @@ export default function LoginPage() {
                     className={cx(
                       "rounded-lg py-2 font-display text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5",
                       mode === "login"
-                        ? "bg-neutral-100 text-neutral-950 shadow-sm"
+                        ? "bg-inverted text-on-inverted shadow-sm"
                         : "text-secondary hover:text-primary"
                     )}
                   >
@@ -386,7 +386,7 @@ export default function LoginPage() {
                     className={cx(
                       "rounded-lg py-2 font-display text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5",
                       mode === "signup"
-                        ? "bg-neutral-100 text-neutral-950 shadow-sm"
+                        ? "bg-inverted text-on-inverted shadow-sm"
                         : "text-secondary hover:text-primary"
                     )}
                   >
@@ -429,7 +429,7 @@ export default function LoginPage() {
 
                 {/* Account Not Found Banner */}
                 {accountNotFound && (
-                  <div role="alert" className="mt-4 rounded-xl border p-4 text-xs border-border bg-surface text-neutral-200">
+                  <div role="alert" className="mt-4 rounded-xl border p-4 text-xs border-border bg-surface text-body">
                     <p className="font-bold flex items-center gap-1.5">
                       <AlertCircle className="size-4 shrink-0" /> Account Not Found
                     </p>
@@ -442,7 +442,7 @@ export default function LoginPage() {
                         setError("");
                         setAccountNotFound(false);
                       }}
-                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-bold border-neutral-700 bg-neutral-800 text-primary hover:underline cursor-pointer"
+                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-bold border-border-strong bg-elevated text-primary hover:underline cursor-pointer"
                     >
                       Create an account now <ArrowRight className="size-3.5" />
                     </button>
@@ -528,7 +528,7 @@ export default function LoginPage() {
                         <select
                           value={countryCode}
                           onChange={(e) => setCountryCode(e.target.value)}
-                          className="h-11 rounded-lg border border-neutral-700 bg-surface px-2.5 font-mono text-xs font-bold text-primary shrink-0 outline-none"
+                          className="h-11 rounded-lg border border-border-strong bg-surface px-2.5 font-mono text-xs font-bold text-primary shrink-0 outline-none"
                         >
                           {COUNTRY_CODES.map((c) => (
                             <option key={c.code} value={c.code}>

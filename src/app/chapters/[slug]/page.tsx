@@ -54,7 +54,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
                 <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
                   {ch.country} Chapter
                 </h1>
-                <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-sans text-sm font-semibold text-neutral-200">
+                <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-sans text-sm font-semibold text-body">
                   <span className="inline-flex items-center gap-1.5">
                     <MapPin className="size-3.5" aria-hidden /> {ch.city}
                   </span>
@@ -71,7 +71,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
           {/* 1. Overview */}
           <section id="overview">
             <Eyebrow>01 — Chapter Overview</Eyebrow>
-            <div className="mt-4 space-y-4 text-sm leading-relaxed text-neutral-300">
+            <div className="mt-4 space-y-4 text-sm leading-relaxed text-body-soft">
               {ch.about.map((p) => (
                 <p key={p.slice(0, 32)}>{p}</p>
               ))}
@@ -139,7 +139,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
               {ch.updates.map((u) => (
                 <li key={u.date} className="flex items-start gap-4 rounded-md border p-4 border-border bg-card">
                   <span className="w-20 shrink-0 font-bold text-primary">{u.date}</span>
-                  <p className="font-sans text-xs text-neutral-300">{u.text}</p>
+                  <p className="font-sans text-xs text-body-soft">{u.text}</p>
                 </li>
               ))}
             </ol>
@@ -171,7 +171,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
                 <Link
                   key={o.slug}
                   href={`/chapters/${o.slug}`}
-                  className="group flex items-center justify-between rounded-md p-2 hover:bg-neutral-800"
+                  className="group flex items-center justify-between rounded-md p-2 hover:bg-elevated"
                 >
                   <span className="flex items-center gap-2 font-mono text-xs text-primary">
                     <span>{o.flag}</span>

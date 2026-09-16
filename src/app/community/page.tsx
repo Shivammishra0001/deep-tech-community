@@ -201,7 +201,7 @@ function Composer({ onPublished }: { onPublished: (p: Post) => void }) {
                 placeholder="https://... (or choose file below)"
               />
               <div className="flex items-center gap-2">
-                <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-xs font-semibold border-neutral-700 bg-neutral-800 text-neutral-200 hover:bg-neutral-700">
+                <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-xs font-semibold border-border-strong bg-elevated text-body hover:bg-neutral-700">
                   <ImageIcon className="size-3.5" />
                   <span>Upload Local Image</span>
                   <input type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
@@ -220,10 +220,10 @@ function Composer({ onPublished }: { onPublished: (p: Post) => void }) {
 
             {/* Live Image Preview Box */}
             {image && (
-              <div className="relative mt-3 aspect-[16/9] w-full overflow-hidden rounded-md border bg-card border-neutral-700">
+              <div className="relative mt-3 aspect-[16/9] w-full overflow-hidden rounded-md border bg-card border-border-strong">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={image} alt="Preview" className="size-full object-cover" />
-                <span className="absolute bottom-2 left-2 rounded-sm bg-surface/80 px-2 py-0.5 font-mono text-[10px] text-neutral-300 backdrop-blur-md">
+                <span className="absolute bottom-2 left-2 rounded-sm bg-surface/80 px-2 py-0.5 font-mono text-[10px] text-body-soft backdrop-blur-md">
                   Image Attached
                 </span>
               </div>
@@ -316,7 +316,7 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
         <h3 className="mt-4 font-display text-base font-semibold leading-snug tracking-tight text-primary">
           {post.title}
         </h3>
-        <p className="mt-2.5 whitespace-pre-line text-xs leading-relaxed text-neutral-300">{post.body}</p>
+        <p className="mt-2.5 whitespace-pre-line text-xs leading-relaxed text-body-soft">{post.body}</p>
 
         {post.image && (
           <div className="mt-4 overflow-hidden rounded-md border border-border max-h-64">
@@ -378,7 +378,7 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
                   <Avatar name={c.author} className="size-6 text-[8px]" />
                   <div className="min-w-0 flex-1 rounded-md border p-2.5 border-border bg-surface">
                     <p className="font-mono font-semibold text-primary">{c.author}</p>
-                    <p className="mt-1 text-neutral-300">{c.body}</p>
+                    <p className="mt-1 text-body-soft">{c.body}</p>
                   </div>
                 </li>
               ))}
@@ -506,7 +506,7 @@ export default function CommunityPage() {
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
           <Card>
             <p className="font-mono text-xs font-semibold uppercase tracking-wider text-secondary">Community Charter</p>
-            <ul className="mt-3 space-y-2.5 text-xs text-neutral-300">
+            <ul className="mt-3 space-y-2.5 text-xs text-body-soft">
               <li>• Technical depth over hot takes.</li>
               <li>• Security research requires responsible disclosure.</li>
               <li>• Code snippets must include environment reproduction details.</li>

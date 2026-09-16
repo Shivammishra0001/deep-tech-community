@@ -82,7 +82,7 @@ export default function EventsPage() {
             <Card hover className="group p-6">
               <Link href={`/events/${e.slug}`} className="grid gap-6 sm:grid-cols-[110px_1fr_auto] sm:items-center">
                 {/* Date block */}
-                <div className="w-[110px] shrink-0 rounded-xl border p-3.5 text-center shadow-sm border-neutral-700 bg-card">
+                <div className="w-[110px] shrink-0 rounded-xl border p-3.5 text-center shadow-sm border-border-strong bg-card">
                   <p className="font-mono text-xs font-bold uppercase tracking-wider text-primary">
                     {e.date.split(" ")[0]}
                   </p>
@@ -94,13 +94,13 @@ export default function EventsPage() {
                 {/* Content */}
                 <div className="min-w-0 space-y-2.5">
                   <div className="flex flex-wrap items-center gap-2">
-                    <Badge className="font-semibold text-xs text-primary border-neutral-700">{e.type}</Badge>
-                    <span className="inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-wider border-neutral-700 bg-neutral-800 text-primary">
+                    <Badge className="font-semibold text-xs text-primary border-border-strong">{e.type}</Badge>
+                    <span className="inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-wider border-border-strong bg-elevated text-primary">
                       {e.format === "Online" ? <Radio className="size-3.5 text-primary" aria-hidden /> : <MapPin className="size-3.5 text-primary" aria-hidden />}
                       {e.format}
                     </span>
                     {e.featured && (
-                      <Badge className="border-neutral-100 bg-neutral-100 text-neutral-950! font-bold">
+                      <Badge className="text-on-inverted! font-bold">
                         Flagship
                       </Badge>
                     )}
@@ -111,7 +111,7 @@ export default function EventsPage() {
                   </h2>
 
                   {/* High contrast Date, Time & Venue */}
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-sm font-semibold text-neutral-200">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-sans text-sm font-semibold text-body">
                     <span className="flex items-center gap-2">
                       <Calendar className="size-4 text-primary" />
                       {e.date}
@@ -137,10 +137,10 @@ export default function EventsPage() {
 
                 {/* CTA & Price */}
                 <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end sm:justify-center border-t pt-4 sm:border-0 sm:pt-0 border-border">
-                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-primary bg-neutral-800 px-3 py-1.5 rounded-md border border-neutral-700">
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-primary bg-elevated px-3 py-1.5 rounded-md border border-border-strong">
                     {e.price}
                   </span>
-                  <Button variant="outline" size="md" className="group-hover:bg-neutral-100 group-hover:text-neutral-950">
+                  <Button variant="outline" size="md" className="group-hover:bg-inverted group-hover:text-on-inverted">
                     Details <ArrowRight className="size-3.5" />
                   </Button>
                 </div>

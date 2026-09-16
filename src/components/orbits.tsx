@@ -64,11 +64,11 @@ export function HeroOrbits({ className }: { className?: string }) {
 
       {/* -------------------- CENTER DTS CORE -------------------- */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="animate-drift flex size-36 flex-col items-center justify-center rounded-full border text-center shadow-xl backdrop-blur-md border-neutral-700/80 bg-surface/95">
+        <div className="animate-drift flex size-36 flex-col items-center justify-center rounded-full border text-center shadow-xl backdrop-blur-md border-border-strong/80 bg-surface/95">
           <span className="font-mono text-lg font-extrabold tracking-widest text-primary">
             DTC
           </span>
-          <span className="mt-1 max-w-[105px] font-mono text-[8px] font-semibold uppercase leading-tight tracking-wider text-neutral-300">
+          <span className="mt-1 max-w-[105px] font-mono text-[8px] font-semibold uppercase leading-tight tracking-wider text-body-soft">
             Advancing the Future Through Deep Tech
           </span>
         </div>
@@ -92,7 +92,7 @@ export function HeroOrbits({ className }: { className?: string }) {
                 {/* Counter-rotation: Static -node.angle + Dynamic orbit-rev */}
                 <div style={{ transform: `rotate(${-node.angle}deg)` }}>
                   <div style={{ animation: "orbit-rev 45s linear infinite" }}>
-                    <div className="group flex size-20 flex-col items-center justify-center gap-1 rounded-2xl border p-2 text-center shadow-lg transition-all duration-300 hover:scale-105 border-neutral-700 bg-card hover:border-neutral-100">
+                    <div className="group flex size-20 flex-col items-center justify-center gap-1 rounded-2xl border p-2 text-center shadow-lg transition-all duration-300 hover:scale-105 border-border-strong bg-card hover:border-inverted">
                       <span className="grid size-7 place-items-center text-primary transition-transform group-hover:scale-110">
                         <Icon className={cx("size-5", node.animClass)} strokeWidth={1.8} />
                       </span>
@@ -109,7 +109,7 @@ export function HeroOrbits({ className }: { className?: string }) {
       </div>
 
       {/* Orbiting Ambient Micro-Nodes */}
-      <span className="animate-pulse-node absolute left-[12%] top-[30%] size-1 rounded-full bg-neutral-100" />
+      <span className="animate-pulse-node absolute left-[12%] top-[30%] size-1 rounded-full bg-inverted" />
       <span className="animate-pulse-node absolute right-[18%] bottom-[28%] size-1 rounded-full bg-neutral-400" style={{ animationDelay: "1.2s" }} />
     </div>
   );
@@ -122,8 +122,8 @@ export function ActivityTicker() {
     <div className="ticker-paused relative overflow-hidden border-y py-3.5 border-border/80 bg-surface/50">
       <div className="animate-ticker flex w-max gap-8 whitespace-nowrap">
         {items.map((t, i) => (
-          <span key={i} className="inline-flex items-center gap-2.5 font-mono text-xs text-neutral-300">
-            <span className="size-1 rounded-full bg-neutral-100" aria-hidden />
+          <span key={i} className="inline-flex items-center gap-2.5 font-mono text-xs text-body-soft">
+            <span className="size-1 rounded-full bg-inverted" aria-hidden />
             {t}
           </span>
         ))}

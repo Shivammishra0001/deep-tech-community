@@ -127,10 +127,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 />
               </div>
             )}
-            <p className="font-display text-lg font-medium leading-relaxed text-neutral-200">{article.excerpt}</p>
+            <p className="font-display text-lg font-medium leading-relaxed text-body">{article.excerpt}</p>
             <div className="mt-8 space-y-6">
               {article.body.map((para) => (
-                <p key={para.slice(0, 32)} className="text-sm leading-relaxed text-neutral-300">
+                <p key={para.slice(0, 32)} className="text-sm leading-relaxed text-body-soft">
                   {para}
                 </p>
               ))}

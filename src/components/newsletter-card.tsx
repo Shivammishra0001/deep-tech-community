@@ -45,7 +45,7 @@ export function NewsletterSubscribeCard() {
     <Card className="relative overflow-hidden border border-border bg-[#0B0B0B] p-6 sm:p-8">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-xl">
-          <div className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-neutral-300">
+          <div className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-body-soft">
             <Mail className="size-3 text-primary" />
             WEEKLY RESEARCH DISPATCH
           </div>

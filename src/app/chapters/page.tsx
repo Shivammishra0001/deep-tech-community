@@ -19,7 +19,7 @@ export function RegionalMapSchematic() {
       <div className="flex items-center justify-between mb-4 relative z-10">
         <div className="flex items-center gap-2">
           <span className="size-2 rounded-full bg-neutral-300 animate-pulse" />
-          <span className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-neutral-200">
+          <span className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-body">
             REGIONAL NETWORK NODES
           </span>
         </div>
@@ -135,12 +135,12 @@ export default function ChaptersPage() {
                   <h2 className="mt-4 font-display text-2xl font-bold tracking-tight group-hover:underline text-primary">
                     <Link href={`/chapters/${c.slug}`}>{c.country}</Link>
                   </h2>
-                  <p className="mt-1.5 flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold text-neutral-200">
+                  <p className="mt-1.5 flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold text-body">
                     <MapPin className="size-4 text-primary" aria-hidden /> {c.city}
                   </p>
-                  <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-200 font-medium">{c.blurb}</p>
+                  <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-body font-medium">{c.blurb}</p>
 
-                  <div className="mt-5 space-y-2 border-t pt-4 font-sans text-xs sm:text-sm font-medium border-border text-neutral-300">
+                  <div className="mt-5 space-y-2 border-t pt-4 font-sans text-xs sm:text-sm font-medium border-border text-body-soft">
                     <p className="flex items-center gap-2">
                       <Users className="size-4 text-primary" aria-hidden />
                       Regional Chapter · Est. {c.founded}
@@ -175,7 +175,7 @@ export default function ChaptersPage() {
               <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-primary">
                 Establish a Chapter in Your City
               </h2>
-              <p className="mt-2 max-w-xl text-xs leading-relaxed text-neutral-300">
+              <p className="mt-2 max-w-xl text-xs leading-relaxed text-body-soft">
                 We expand deliberately — driven by committed lead organizers. If you can organize monthly technical labs and gather ten builders, we supply the infrastructure and global platform.
               </p>
             </div>

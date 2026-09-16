@@ -169,7 +169,7 @@ export default function NewsPage() {
             <button
               onClick={handleRefreshNews}
               disabled={refreshing}
-              className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-bold transition-colors border-neutral-700 bg-neutral-800 text-neutral-200 hover:bg-neutral-700 cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-bold transition-colors border-border-strong bg-elevated text-body hover:bg-neutral-700 cursor-pointer disabled:opacity-50"
             >
               {refreshing ? <Loader2 className="size-3.5 animate-spin" /> : <RefreshCw className="size-3.5" />}
               {refreshing ? "Fetching RSS Feeds..." : "Refresh News"}
@@ -184,7 +184,7 @@ export default function NewsPage() {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search AI, Quantum, Space, Cyber..."
               aria-label="Search news briefings"
-              className="h-10 w-full rounded-xl border pl-10 pr-4 font-sans text-xs placeholder:text-secondary transition-colors focus:border-neutral-900 focus:outline-none border-neutral-700 bg-surface text-primary"
+              className="h-10 w-full rounded-xl border pl-10 pr-4 font-sans text-xs placeholder:text-secondary transition-colors focus:border-neutral-900 focus:outline-none border-border-strong bg-surface text-primary"
             />
           </div>
         </div>
@@ -197,8 +197,8 @@ export default function NewsPage() {
               onClick={() => setCategoryFilter(cat)}
               className={`rounded-lg px-3 py-1.5 font-sans text-xs font-semibold transition-all cursor-pointer ${
                 categoryFilter === cat
-                  ? "bg-neutral-100 text-neutral-950 shadow-xs"
-                  : "bg-card text-secondary hover:bg-neutral-800"
+                  ? "bg-inverted text-on-inverted shadow-xs"
+                  : "bg-card text-secondary hover:bg-elevated"
               }`}
             >
               {cat}
@@ -223,7 +223,7 @@ export default function NewsPage() {
                   alt={featuredArticle.title}
                   className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                 />
-                <div className="absolute left-3 top-3 rounded-md bg-surface/80 px-2.5 py-1 font-mono text-[10px] font-bold text-neutral-200 backdrop-blur-md">
+                <div className="absolute left-3 top-3 rounded-md bg-surface/80 px-2.5 py-1 font-mono text-[10px] font-bold text-body backdrop-blur-md">
                   FEATURED BRIEFING
                 </div>
               </div>
@@ -243,13 +243,13 @@ export default function NewsPage() {
                 </div>
                 <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t pt-4 border-border font-mono text-xs">
                   <span className="text-muted truncate max-w-[200px]">
-                    Source: <strong className="text-neutral-200">{featuredArticle.source}</strong>
+                    Source: <strong className="text-body">{featuredArticle.source}</strong>
                   </span>
                   <a
                     href={featuredArticle.source_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-sans font-semibold border-neutral-700 bg-neutral-800 text-primary hover:bg-neutral-700 transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-sans font-semibold border-border-strong bg-elevated text-primary hover:bg-neutral-700 transition-colors"
                   >
                     Read Original Article <ExternalLink className="size-3.5" />
                   </a>
@@ -268,7 +268,7 @@ export default function NewsPage() {
         ) : filteredArticles.length === 0 ? (
           /* Empty State */
           <div className="mt-16 rounded-2xl border border-dashed p-12 text-center border-border">
-            <p className="font-mono text-sm font-bold text-neutral-200">
+            <p className="font-mono text-sm font-bold text-body">
               No news briefings found for "{query || categoryFilter}".
             </p>
             <p className="mt-1 font-sans text-xs text-muted">
@@ -279,7 +279,7 @@ export default function NewsPage() {
                 setQuery("");
                 setCategoryFilter("All Categories");
               }}
-              className="mt-4 rounded-lg px-4 py-2 font-sans text-xs font-bold bg-neutral-100 text-neutral-950 cursor-pointer"
+              className="mt-4 rounded-lg px-4 py-2 font-sans text-xs font-bold bg-inverted text-on-inverted cursor-pointer"
             >
               Clear Search Filters
             </button>
@@ -290,7 +290,7 @@ export default function NewsPage() {
             {filteredArticles.map((article) => (
               <RevealItem key={article.id}>
                 <div
-                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border p-5 shadow-xs transition-all duration-300 hover:shadow-md border-border bg-card/80 hover:border-neutral-700"
+                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border p-5 shadow-xs transition-all duration-300 hover:shadow-md border-border bg-card/80 hover:border-border-strong"
                 >
                   <div>
                     {/* Article Image */}
@@ -303,7 +303,7 @@ export default function NewsPage() {
                         alt={article.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute left-2.5 top-2.5 rounded-md bg-surface/80 px-2 py-0.5 font-mono text-[9px] font-bold text-neutral-200 backdrop-blur-md">
+                      <div className="absolute left-2.5 top-2.5 rounded-md bg-surface/80 px-2 py-0.5 font-mono text-[9px] font-bold text-body backdrop-blur-md">
                         {article.category}
                       </div>
                     </div>
@@ -319,7 +319,7 @@ export default function NewsPage() {
                       <Link href={`/news/${article.id}`}>{article.title}</Link>
                     </h3>
 
-                    <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-200 line-clamp-3">
+                    <p className="mt-2 font-sans text-xs leading-relaxed text-body line-clamp-3">
                       {article.summary}
                     </p>
                   </div>
@@ -330,7 +330,7 @@ export default function NewsPage() {
                       href={article.source_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border py-2 font-mono text-xs font-bold transition-colors border-neutral-700 bg-surface text-primary hover:bg-neutral-100 hover:text-neutral-950"
+                      className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border py-2 font-mono text-xs font-bold transition-colors border-border-strong bg-surface text-primary hover:bg-inverted hover:text-on-inverted"
                     >
                       Read Original Article <ExternalLink className="size-3.5" />
                     </a>

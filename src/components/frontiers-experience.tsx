@@ -60,7 +60,7 @@ export function FrontiersExperience() {
               TECHNOLOGIES
             </h2>
           </div>
-          <p className="max-w-sm font-sans text-sm sm:text-base font-medium leading-relaxed text-neutral-300">
+          <p className="max-w-sm font-sans text-sm sm:text-base font-medium leading-relaxed text-body-soft">
             Exploring the technologies shaping tomorrow.
             Built by people, for people, at the frontier.
           </p>
@@ -99,7 +99,7 @@ export function FrontiersExperience() {
                   <p className="mt-2 font-sans text-base font-semibold text-primary">
                     {f.description}
                   </p>
-                  <p className="mt-2 font-sans text-sm leading-relaxed text-neutral-300">
+                  <p className="mt-2 font-sans text-sm leading-relaxed text-body-soft">
                     {f.tagline}
                   </p>
                 </div>
@@ -107,7 +107,7 @@ export function FrontiersExperience() {
                 {/* Explore link */}
                 <Link
                   href={f.href}
-                  className="mt-8 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-primary border-b border-neutral-700 pb-0.5 hover:border-white transition-colors w-fit"
+                  className="mt-8 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-primary border-b border-border-strong pb-0.5 hover:border-white transition-colors w-fit"
                 >
                   Explore {f.title}
                   <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

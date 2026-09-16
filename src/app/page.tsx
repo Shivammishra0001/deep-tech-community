@@ -74,7 +74,7 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" />
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                     <DomainBadge domain={featuredArticle.domain} />
-                    <span className="rounded-md border border-neutral-700 bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
+                    <span className="rounded-md border border-border-strong bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
                       {featuredArticle.date}
                     </span>
                   </div>
@@ -84,16 +84,16 @@ export default function HomePage() {
                     <h3 className="font-display text-xl font-bold leading-tight tracking-tight group-hover:underline text-primary">
                       <Link href={`/news/${featuredArticle.slug}`}>{featuredArticle.title}</Link>
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-neutral-200 font-medium">
+                    <p className="mt-3 text-sm leading-relaxed text-body font-medium">
                       {featuredArticle.excerpt}
                     </p>
                   </div>
-                  <div className="mt-6 flex items-center justify-between border-t pt-4 font-sans text-xs font-semibold border-border text-neutral-200">
+                  <div className="mt-6 flex items-center justify-between border-t pt-4 font-sans text-xs font-semibold border-border text-body">
                     <div className="flex items-center gap-2">
                       <Avatar name={featuredArticle.author} className="size-7 text-xs font-bold" />
                       <span className="font-semibold text-primary">{featuredArticle.author}</span>
                     </div>
-                    <span className="text-neutral-200 font-semibold">{featuredArticle.readingTime} min read</span>
+                    <span className="text-body font-semibold">{featuredArticle.readingTime} min read</span>
                   </div>
                 </div>
               </Card>
@@ -113,7 +113,7 @@ export default function HomePage() {
                             className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="flex size-full items-center justify-center font-mono text-xs font-bold text-neutral-300">
+                          <div className="flex size-full items-center justify-center font-mono text-xs font-bold text-body-soft">
                             DTS
                           </div>
                         )}
@@ -122,12 +122,12 @@ export default function HomePage() {
                       <div className="flex flex-1 flex-col min-w-0">
                         <div className="flex items-center justify-between gap-2">
                           <DomainBadge domain={a.domain} />
-                          <span className="font-mono text-xs font-semibold text-neutral-200">{a.date}</span>
+                          <span className="font-mono text-xs font-semibold text-body">{a.date}</span>
                         </div>
                         <h4 className="mt-1.5 font-display text-sm sm:text-base font-bold leading-snug tracking-tight group-hover:underline text-primary line-clamp-2">
                           <Link href={`/news/${a.slug}`}>{a.title}</Link>
                         </h4>
-                        <p className="mt-1 font-sans text-xs font-medium text-neutral-200">
+                        <p className="mt-1 font-sans text-xs font-medium text-body">
                           By {a.author} · {a.readingTime} min
                         </p>
                       </div>
@@ -159,16 +159,16 @@ export default function HomePage() {
                   <Card hover className="group flex h-full flex-col justify-between">
                     <div>
                       <div className="flex items-start justify-between gap-3">
-                        <div className="w-20 shrink-0 rounded-xl border p-2.5 text-center shadow-sm border-neutral-700 bg-card">
+                        <div className="w-20 shrink-0 rounded-xl border p-2.5 text-center shadow-sm border-border-strong bg-card">
                           <p className="font-mono text-xs font-bold uppercase tracking-wider text-primary">{e.date.split(" ")[0]}</p>
                           <p className="mt-0.5 font-display text-2xl font-extrabold text-primary">{e.date.split(" ")[1]?.replace(",", "")}</p>
                         </div>
-                        <Badge className="font-semibold text-xs text-primary border-neutral-700">{e.type}</Badge>
+                        <Badge className="font-semibold text-xs text-primary border-border-strong">{e.type}</Badge>
                       </div>
                       <h3 className="mt-4 font-display text-base font-bold leading-snug tracking-tight group-hover:underline text-primary">
                         <Link href={`/events/${e.slug}`}>{e.title}</Link>
                       </h3>
-                      <div className="mt-3.5 space-y-1.5 font-sans text-xs font-semibold text-neutral-200">
+                      <div className="mt-3.5 space-y-1.5 font-sans text-xs font-semibold text-body">
                         <p className="flex items-center gap-2">
                           <Calendar className="size-4 text-primary" /> {e.date} · {e.time}
                         </p>
@@ -195,10 +195,10 @@ export default function HomePage() {
           ) : (
             <RevealVisual>
               <div className="rounded-2xl border border-border/80 bg-surface/50 p-12 text-center backdrop-blur-md">
-                <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-200">
+                <p className="font-mono text-xs font-bold uppercase tracking-widest text-body">
                   NO UPCOMING EVENTS
                 </p>
-                <p className="mt-2 text-sm text-neutral-300">
+                <p className="mt-2 text-sm text-body-soft">
                   New gatherings and technical sessions will appear here.
                 </p>
               </div>
@@ -229,7 +229,7 @@ export default function HomePage() {
                         <Avatar name={p.author} className="size-8 text-xs font-bold" />
                         <div>
                           <p className="font-display text-sm font-bold text-primary">{p.author}</p>
-                          <p className="font-mono text-xs font-semibold text-neutral-200">{p.role}</p>
+                          <p className="font-mono text-xs font-semibold text-body">{p.role}</p>
                         </div>
                       </div>
                     </div>
@@ -237,7 +237,7 @@ export default function HomePage() {
                     <h3 className="mt-4 font-display text-base font-bold leading-snug tracking-tight group-hover:underline text-primary">
                       <Link href="/community">{p.title}</Link>
                     </h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-neutral-200 font-medium">{p.excerpt}</p>
+                    <p className="mt-2.5 text-sm leading-relaxed text-body font-medium">{p.excerpt}</p>
                   </div>
 
                   <div className="mt-6 flex items-center justify-between border-t pt-4 border-border">
@@ -278,8 +278,8 @@ export default function HomePage() {
                         </h3>
                       </div>
                     </div>
-                    <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-neutral-200">{c.city}</p>
-                    <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-200 font-medium">{c.blurb}</p>
+                    <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-body">{c.city}</p>
+                    <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-body font-medium">{c.blurb}</p>
                   </div>
 
                   <div className="mt-6 pt-4 border-t border-border">
@@ -299,7 +299,7 @@ export default function HomePage() {
         <Container>
           <RevealVisual>
             <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-10 text-center text-primary shadow-2xl sm:p-16">
-              <Eyebrow className="text-neutral-300">Apply for Access</Eyebrow>
+              <Eyebrow className="text-body-soft">Apply for Access</Eyebrow>
               <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-primary">
                 Join Frontier Builders Worldwide
               </h2>
@@ -310,21 +310,21 @@ export default function HomePage() {
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5 relative z-10">
                 <Link
                   href="/join"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-neutral-950 hover:bg-neutral-100 px-6.5 h-12.5 font-sans text-sm sm:text-base font-bold shadow-lg transition-all duration-200 active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-on-inverted hover:bg-inverted px-6.5 h-12.5 font-sans text-sm sm:text-base font-bold shadow-lg transition-all duration-200 active:scale-95"
                 >
                   Join Community
                   <ArrowRight className="size-4" />
                 </Link>
                 <Link
                   href="/about"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/40 bg-card/90 text-primary hover:bg-neutral-800 hover:border-white px-6.5 h-12.5 font-sans text-sm sm:text-base font-bold shadow-sm transition-all duration-200 active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/40 bg-card/90 text-primary hover:bg-elevated hover:border-white px-6.5 h-12.5 font-sans text-sm sm:text-base font-bold shadow-sm transition-all duration-200 active:scale-95"
                 >
                   View Membership Tiers
                 </Link>
               </div>
 
               {/* Animated Live Member Counter */}
-              <div className="mt-6 flex items-center justify-center gap-2 font-sans text-xs font-semibold text-neutral-300">
+              <div className="mt-6 flex items-center justify-center gap-2 font-sans text-xs font-semibold text-body-soft">
                 <span className="size-2 rounded-full bg-neutral-500 animate-pulse" aria-hidden />
                 Practitioner-led global deep tech network
               </div>

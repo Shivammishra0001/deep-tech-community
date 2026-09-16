@@ -61,7 +61,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           {/* Abstract */}
           <section>
             <Eyebrow>Event Abstract</Eyebrow>
-            <div className="mt-4 space-y-4 text-sm leading-relaxed text-neutral-300">
+            <div className="mt-4 space-y-4 text-sm leading-relaxed text-body-soft">
               {ev.description.map((p) => (
                 <p key={p.slice(0, 32)}>{p}</p>
               ))}
