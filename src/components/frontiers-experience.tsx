@@ -50,13 +50,13 @@ const FRONTIERS = [
 
 export function FrontiersExperience() {
   return (
-    <section id="technologies" className="relative bg-[#050505] text-white scroll-mt-20 border-t border-neutral-900">
+    <section id="technologies" className="relative bg-background text-primary scroll-mt-20 border-t border-neutral-900">
 
       {/* ── SECTION HEADER ── */}
       <div className="border-b border-neutral-900 bg-[#070707] py-10 sm:py-12">
         <Container className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-primary">
               TECHNOLOGIES
             </h2>
           </div>
@@ -69,7 +69,7 @@ export function FrontiersExperience() {
 
       {/* ── FOUR TECHNOLOGY CARDS GRID ── */}
       <Container className="py-14 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-neutral-900 border border-neutral-900 rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-card border border-neutral-900 rounded-2xl overflow-hidden">
           {FRONTIERS.map((f, i) => {
             const Icon = f.icon;
             return (
@@ -79,24 +79,24 @@ export function FrontiersExperience() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group relative flex flex-col justify-between bg-[#0A0A0A] p-8 sm:p-10 hover:bg-[#111111] transition-colors duration-300"
+                className="group relative flex flex-col justify-between bg-surface p-8 sm:p-10 hover:bg-card transition-colors duration-300"
               >
                 {/* Number + Icon row */}
                 <div className="flex items-start justify-between">
-                  <span className="font-mono text-5xl sm:text-6xl font-black text-white leading-none tracking-tighter">
+                  <span className="font-mono text-5xl sm:text-6xl font-black text-primary leading-none tracking-tighter">
                     {f.num}
                   </span>
-                  <span className="grid size-10 place-items-center rounded-xl border border-neutral-800 bg-neutral-900 text-white group-hover:border-neutral-600 transition-colors">
+                  <span className="grid size-10 place-items-center rounded-xl border border-border bg-card text-primary group-hover:border-neutral-600 transition-colors">
                     <Icon className="size-5" />
                   </span>
                 </div>
 
                 {/* Title + description */}
                 <div className="mt-6">
-                  <h3 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight text-white">
+                  <h3 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight text-primary">
                     {f.title}
                   </h3>
-                  <p className="mt-2 font-sans text-base font-semibold text-white">
+                  <p className="mt-2 font-sans text-base font-semibold text-primary">
                     {f.description}
                   </p>
                   <p className="mt-2 font-sans text-sm leading-relaxed text-neutral-300">
@@ -107,7 +107,7 @@ export function FrontiersExperience() {
                 {/* Explore link */}
                 <Link
                   href={f.href}
-                  className="mt-8 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-white border-b border-neutral-700 pb-0.5 hover:border-white transition-colors w-fit"
+                  className="mt-8 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-primary border-b border-neutral-700 pb-0.5 hover:border-white transition-colors w-fit"
                 >
                   Explore {f.title}
                   <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

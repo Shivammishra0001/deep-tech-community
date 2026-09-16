@@ -77,20 +77,20 @@ export default function AboutPage() {
   return (
     <>
       {/* 1. Opening Statement */}
-      <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
+      <section className="relative overflow-hidden border-b border-border/80">
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="animate-rise">
               <Eyebrow>About the Community</Eyebrow>
-              <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-50">
+              <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-primary">
                 A Community, Not a Social Feed.
               </h1>
-              <p className="mt-3 sm:mt-3.5 max-w-xl font-sans text-[15px] sm:text-[16px] font-medium leading-relaxed text-neutral-700 dark:text-neutral-200">
+              <p className="mt-3 sm:mt-3.5 max-w-xl font-sans text-[15px] sm:text-[16px] font-medium leading-relaxed text-neutral-200">
                 Deep Tech Community is an open, practitioner-led platform connecting engineers, scientists, and builders across core technology frontiers. We exist to exchange deep technical insights, review research, and collaborate without noise.
               </p>
             </div>
             <RevealVisual delay={150}>
-              <div className="relative overflow-hidden rounded-xl border border-neutral-300 dark:border-neutral-800 shadow-sm">
+              <div className="relative overflow-hidden rounded-xl border border-border shadow-sm">
                 <SafeImage
                   src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200&auto=format&fit=crop"
                   alt="Deep Tech Community members collaborating"
@@ -108,10 +108,10 @@ export default function AboutPage() {
           <RevealItem>
             <Card className="h-full p-6 sm:p-7">
               <Eyebrow>Mission</Eyebrow>
-              <h3 className="mt-3 font-display text-xl font-bold leading-snug tracking-tight text-neutral-900 dark:text-neutral-50">
+              <h3 className="mt-3 font-display text-xl font-bold leading-snug tracking-tight text-primary">
                 Make deep tech knowledge accessible to anyone with the discipline to learn it.
               </h3>
-              <p className="mt-3 font-sans text-sm font-medium leading-relaxed text-neutral-600 dark:text-neutral-300">
+              <p className="mt-3 font-sans text-sm font-medium leading-relaxed text-neutral-300">
                 We remove the barriers that keep talented individuals out of hard technology: access to honest guidance, direct peer connection with practitioners, and a collaborative environment where rigorous questions are welcomed.
               </p>
             </Card>
@@ -120,10 +120,10 @@ export default function AboutPage() {
           <RevealItem>
             <Card className="h-full p-6 sm:p-7">
               <Eyebrow>Vision</Eyebrow>
-              <h3 className="mt-3 font-display text-xl font-bold leading-snug tracking-tight text-neutral-900 dark:text-neutral-50">
+              <h3 className="mt-3 font-display text-xl font-bold leading-snug tracking-tight text-primary">
                 An open ecosystem where frontier breakthroughs are built and understood collaboratively.
               </h3>
-              <p className="mt-3 font-sans text-sm font-medium leading-relaxed text-neutral-600 dark:text-neutral-300">
+              <p className="mt-3 font-sans text-sm font-medium leading-relaxed text-neutral-300">
                 A connected global network with regional study circles, open technical libraries, and transparent knowledge sharing across core domains.
               </p>
             </Card>
@@ -132,7 +132,7 @@ export default function AboutPage() {
       </Container>
 
       {/* 3. Technologies We Focus On */}
-      <Container className="py-8 sm:py-10 border-t border-neutral-200/80 dark:border-neutral-800/80">
+      <Container className="py-8 sm:py-10 border-t border-border/80">
         <RevealHeading>
           <SectionHeading
             eyebrow="Core Domains"
@@ -149,19 +149,19 @@ export default function AboutPage() {
                   <Card hover className="h-full flex flex-col justify-between p-6 sm:p-7 transition-colors">
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="grid size-10 place-items-center rounded-lg border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-50">
+                        <span className="grid size-10 place-items-center rounded-lg border border-neutral-700 bg-card text-primary">
                           <Icon className="size-5" />
                         </span>
-                        <span className="font-mono text-xs font-bold text-neutral-400 dark:text-neutral-300">{tech.num}</span>
+                        <span className="font-mono text-xs font-bold text-neutral-300">{tech.num}</span>
                       </div>
-                      <h4 className="mt-4 font-display text-xl font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
+                      <h4 className="mt-4 font-display text-xl font-bold tracking-tight group-hover:underline text-primary">
                         {tech.name}
                       </h4>
-                      <p className="mt-2 font-sans text-sm font-medium leading-relaxed text-neutral-600 dark:text-neutral-300">
+                      <p className="mt-2 font-sans text-sm font-medium leading-relaxed text-neutral-300">
                         {tech.description}
                       </p>
                     </div>
-                    <div className="mt-5 flex items-center gap-1.5 font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100">
+                    <div className="mt-5 flex items-center gap-1.5 font-mono text-xs font-bold text-primary">
                       <span>Explore Track</span>
                       <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
@@ -174,7 +174,7 @@ export default function AboutPage() {
       </Container>
 
       {/* 4. Operating Principles */}
-      <Container className="py-8 sm:py-10 border-t border-neutral-200/80 dark:border-neutral-800/80">
+      <Container className="py-8 sm:py-10 border-t border-border/80">
         <RevealHeading>
           <SectionHeading
             eyebrow="Community Values"
@@ -190,16 +190,16 @@ export default function AboutPage() {
                 <Card hover className="group flex flex-col justify-between p-6 sm:p-7 h-full">
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="grid size-10 place-items-center rounded-lg border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-50">
+                      <span className="grid size-10 place-items-center rounded-lg border border-neutral-700 bg-card text-primary">
                         <Icon className="size-5" />
                       </span>
-                      <span className="font-mono text-xs font-bold text-neutral-400 dark:text-neutral-300">{p.num}</span>
+                      <span className="font-mono text-xs font-bold text-neutral-300">{p.num}</span>
                     </div>
 
-                    <h4 className="mt-4 font-display text-lg sm:text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+                    <h4 className="mt-4 font-display text-lg sm:text-xl font-bold tracking-tight text-primary">
                       {p.title}
                     </h4>
-                    <p className="mt-2 font-sans text-sm font-medium leading-relaxed text-neutral-600 dark:text-neutral-300">
+                    <p className="mt-2 font-sans text-sm font-medium leading-relaxed text-neutral-300">
                       {p.text}
                     </p>
                   </div>
@@ -211,13 +211,13 @@ export default function AboutPage() {
       </Container>
 
       {/* 5. Participate & Contact */}
-      <Container className="py-8 sm:py-12 border-t border-neutral-200/80 dark:border-neutral-800/80">
+      <Container className="py-8 sm:py-12 border-t border-border/80">
         <RevealStagger className="grid gap-6 md:grid-cols-2">
           <RevealItem>
-            <div className="flex h-full flex-col justify-between rounded-2xl border border-neutral-800 bg-neutral-950 p-6 sm:p-8 text-neutral-50 shadow-sm">
+            <div className="flex h-full flex-col justify-between rounded-2xl border border-border bg-surface p-6 sm:p-8 text-primary shadow-sm">
               <div>
                 <Eyebrow className="text-neutral-300">Get Involved</Eyebrow>
-                <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-white">
+                <h3 className="mt-3 font-display text-2xl font-bold tracking-tight text-primary">
                   Join Verified Builders & Researchers
                 </h3>
                 <p className="mt-3 font-sans text-sm font-medium leading-relaxed text-neutral-300">
@@ -225,7 +225,7 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="mt-6">
-                <Button href="/join" variant="primary" size="md" className="bg-white text-neutral-950 hover:bg-neutral-200 font-bold">
+                <Button href="/join" variant="primary" size="md" className="text-neutral-950 font-bold">
                   Apply for Membership <ArrowRight className="size-3.5" />
                 </Button>
               </div>
@@ -236,20 +236,20 @@ export default function AboutPage() {
             <Card id="contact" className="flex h-full flex-col justify-between p-6 sm:p-8">
               <div>
                 <Eyebrow>Contact & Inquiries</Eyebrow>
-                <h3 className="mt-3 font-display text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+                <h3 className="mt-3 font-display text-xl font-bold tracking-tight text-primary">
                   Get in Touch
                 </h3>
-                <p className="mt-3 font-sans text-sm font-medium leading-relaxed text-neutral-600 dark:text-neutral-300">
+                <p className="mt-3 font-sans text-sm font-medium leading-relaxed text-neutral-300">
                   For questions about community programs, organizing local study sessions, or technical contributions, reach out directly.
                 </p>
               </div>
-              <div className="mt-6 border-t border-neutral-200/80 pt-4 dark:border-neutral-800 flex items-center gap-3">
-                <span className="grid size-9 place-items-center rounded-lg border border-neutral-300 bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-900">
-                  <Mail className="size-4 text-neutral-700 dark:text-neutral-200" aria-hidden />
+              <div className="mt-6 border-t pt-4 border-border flex items-center gap-3">
+                <span className="grid size-9 place-items-center rounded-lg border border-neutral-700 bg-card">
+                  <Mail className="size-4 text-neutral-200" aria-hidden />
                 </span>
                 <div>
-                  <p className="font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100">community@dyau.ai</p>
-                  <p className="font-sans text-xs text-neutral-500">General community inquiries & submissions</p>
+                  <p className="font-mono text-xs font-bold text-primary">community@dyau.ai</p>
+                  <p className="font-sans text-xs text-muted">General community inquiries & submissions</p>
                 </div>
               </div>
             </Card>

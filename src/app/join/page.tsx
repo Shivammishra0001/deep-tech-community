@@ -99,18 +99,18 @@ export default function JoinPage() {
         {/* Left: pitch */}
         <div className="animate-rise">
           <Eyebrow>Society Membership</Eyebrow>
-          <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-50">
+          <h1 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-primary">
             Join Verified Practitioners in Deep Tech.
           </h1>
-          <p className="mt-3 sm:mt-3.5 max-w-xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-200">
+          <p className="mt-3 sm:mt-3.5 max-w-xl text-sm leading-relaxed text-neutral-200">
             Membership is open to students, developers, researchers, founders, educators, and technology leaders. Zero noise, high technical signal.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {PERKS.map((p, i) => (
               <Card key={p.title}>
-                <p className="font-mono text-xs text-neutral-400">0{i + 1}</p>
-                <h3 className="mt-2 font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{p.title}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-neutral-600 dark:text-neutral-200">{p.text}</p>
+                <p className="font-mono text-xs text-secondary">0{i + 1}</p>
+                <h3 className="mt-2 font-display text-sm font-semibold text-primary">{p.title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-neutral-200">{p.text}</p>
               </Card>
             ))}
           </div>
@@ -120,14 +120,14 @@ export default function JoinPage() {
         <div className="lg:sticky lg:top-24 lg:self-start">
           {state === "done" ? (
             <Card className="text-center p-8">
-              <span className="mx-auto grid size-12 place-items-center rounded-full border border-neutral-900 bg-neutral-900 text-neutral-50 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-950">
+              <span className="mx-auto grid size-12 place-items-center rounded-full border border-neutral-100 bg-neutral-100 text-neutral-950">
                 <Check className="size-5" aria-hidden />
               </span>
-              <h2 className="mt-4 font-display text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
+              <h2 className="mt-4 font-display text-2xl font-semibold text-primary">
                 Application Received, {(name || user?.name || "Member").split(" ")[0]}
               </h2>
-              <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-200">
-                Invitation details have been sent to <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">{email || user?.email}</span>.
+              <p className="mt-2 text-xs leading-relaxed text-neutral-200">
+                Invitation details have been sent to <span className="font-mono font-semibold text-primary">{email || user?.email}</span>.
               </p>
               <div className="mt-6 flex justify-center gap-3">
                 <Button href="/events" variant="primary" size="md">
@@ -137,13 +137,13 @@ export default function JoinPage() {
             </Card>
           ) : (
             <Card className="p-8">
-              <div className="flex items-center justify-between border-b border-neutral-200 pb-4 dark:border-neutral-800">
+              <div className="flex items-center justify-between border-b pb-4 border-border">
                 <div>
-                  <h2 className="font-display text-xl font-semibold text-neutral-900 dark:text-neutral-100">Membership Application</h2>
-                  <p className="mt-0.5 text-xs text-neutral-500">Free, member-governed, enterprise-grade.</p>
+                  <h2 className="font-display text-xl font-semibold text-primary">Membership Application</h2>
+                  <p className="mt-0.5 text-xs text-muted">Free, member-governed, enterprise-grade.</p>
                 </div>
                 {user && (
-                  <Badge className="border-emerald-500/40 text-emerald-600 dark:text-emerald-400 text-[10px]">
+                  <Badge className="text-emerald-400 text-[10px]">
                     <ShieldCheck className="mr-1 size-3" /> Logged In
                   </Badge>
                 )}
@@ -151,11 +151,11 @@ export default function JoinPage() {
 
               {/* UNAUTHENTICATED GATE NOTICE */}
               {isAuthChecked && !user && (
-                <div className="mt-6 rounded-xl border border-amber-300 bg-amber-50 p-5 text-amber-950 dark:border-amber-800 dark:bg-amber-950/80 dark:text-amber-100">
+                <div className="mt-6 rounded-xl border p-5 border-amber-800 bg-amber-950/80 text-amber-100">
                   <div className="flex items-center gap-2 font-display text-sm font-bold">
-                    <Lock className="size-4 shrink-0 text-amber-700 dark:text-amber-400" /> Account Required to Apply
+                    <Lock className="size-4 shrink-0 text-amber-400" /> Account Required to Apply
                   </div>
-                  <p className="mt-1 text-xs leading-relaxed text-amber-900 dark:text-amber-200">
+                  <p className="mt-1 text-xs leading-relaxed text-amber-200">
                     You must create an account or log in first before submitting a membership application.
                   </p>
 
@@ -224,7 +224,7 @@ export default function JoinPage() {
                 </div>
 
                 {error && (
-                  <p role="alert" className="font-mono text-xs text-neutral-900 dark:text-neutral-100">{error}</p>
+                  <p role="alert" className="font-mono text-xs text-primary">{error}</p>
                 )}
 
                 <Button type="submit" variant="primary" size="md" disabled={state === "loading" || !user} className="w-full font-bold">

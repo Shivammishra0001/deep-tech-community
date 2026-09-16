@@ -96,15 +96,15 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
   return (
     <>
       {/* Header Banner */}
-      <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
+      <section className="relative overflow-hidden border-b border-border/80">
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="max-w-3xl animate-rise">
-            <span className="grid size-10 place-items-center rounded-lg border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100">
+            <span className="grid size-10 place-items-center rounded-lg border border-neutral-700 bg-neutral-800 text-primary">
               <Icon className="size-5" />
             </span>
-            <h1 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">{d.name}</h1>
-            <p className="mt-2 font-sans text-sm font-semibold text-neutral-700 dark:text-neutral-200">{d.tagline}</p>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{page.overview[0]}</p>
+            <h1 className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">{d.name}</h1>
+            <p className="mt-2 font-sans text-sm font-semibold text-neutral-200">{d.tagline}</p>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-neutral-300">{page.overview[0]}</p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Button href="/join" variant="primary" size="md">
                 Join Track
@@ -117,8 +117,8 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
           <div className="mt-12 grid max-w-xl grid-cols-3 gap-4">
             {page.facts.map((f) => (
               <Card key={f.label} className="p-4 text-center">
-                <p className="font-display text-lg font-bold text-neutral-900 dark:text-neutral-100">{f.value}</p>
-                <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-neutral-400">{f.label}</p>
+                <p className="font-display text-lg font-bold text-primary">{f.value}</p>
+                <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-secondary">{f.label}</p>
               </Card>
             ))}
           </div>
@@ -128,12 +128,12 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
       <Container className="grid gap-12 py-16 lg:grid-cols-[220px_1fr]">
         {/* Sticky section nav */}
         <aside className="hidden lg:block">
-          <nav aria-label="Sections" className="sticky top-24 space-y-1 font-mono text-xs border-l border-neutral-200 dark:border-neutral-800 pl-4">
+          <nav aria-label="Sections" className="sticky top-24 space-y-1 font-mono text-xs border-l border-border pl-4">
             {SECTIONS.map((s) => (
               <a
                 key={s.id}
                 href={`#${s.id}`}
-                className="block py-1 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
+                className="block py-1 text-muted hover:text-primary"
               >
                 {s.label}
               </a>
@@ -146,7 +146,7 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
           {/* 1. Overview */}
           <section id="overview" className="scroll-mt-24">
             <SectionHeading eyebrow="01 — Track Overview" title={`Engineering ${d.name}`} />
-            <div className="space-y-4 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+            <div className="space-y-4 text-sm leading-relaxed text-neutral-300">
               {page.overview.map((p) => (
                 <p key={p.slice(0, 24)}>{p}</p>
               ))}
@@ -169,12 +169,12 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
             <div className="space-y-3">
               {page.beginnerGuide.map((step, i) => (
                 <Card key={step.title} className="flex gap-4">
-                  <span className="grid size-7 shrink-0 place-items-center rounded-sm bg-neutral-900 font-mono text-xs font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950">
+                  <span className="grid size-7 shrink-0 place-items-center rounded-sm font-mono text-xs font-bold bg-neutral-100 text-neutral-950">
                     {i + 1}
                   </span>
                   <div>
-                    <h3 className="font-display text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">{step.title}</h3>
-                    <p className="mt-1 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">{step.text}</p>
+                    <h3 className="font-display text-base font-semibold tracking-tight text-primary">{step.title}</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-secondary">{step.text}</p>
                   </div>
                 </Card>
               ))}
@@ -193,14 +193,14 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
                 <Card key={phase.phase} className="flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between font-mono text-xs">
-                      <span className="font-bold text-neutral-900 dark:text-neutral-100">{phase.phase}</span>
-                      <span className="text-neutral-400">{phase.duration}</span>
+                      <span className="font-bold text-primary">{phase.phase}</span>
+                      <span className="text-secondary">{phase.duration}</span>
                     </div>
-                    <h3 className="mt-3 font-display text-base font-semibold text-neutral-900 dark:text-neutral-100">{phase.title}</h3>
+                    <h3 className="mt-3 font-display text-base font-semibold text-primary">{phase.title}</h3>
                     <ul className="mt-4 space-y-2">
                       {phase.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-xs text-neutral-600 dark:text-neutral-400">
-                          <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-neutral-900 dark:text-neutral-100" />
+                        <li key={item} className="flex items-start gap-2 text-xs text-secondary">
+                          <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" />
                           {item}
                         </li>
                       ))}
@@ -222,10 +222,10 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
               {latestNews.map((a) => (
                 <Card key={a.slug} hover className="group">
                   <DomainBadge domain={a.domain} />
-                  <h3 className="mt-3 font-display text-base font-semibold text-neutral-900 group-hover:underline dark:text-neutral-100">
+                  <h3 className="mt-3 font-display text-base font-semibold group-hover:underline text-primary">
                     <Link href={`/news/${a.slug}`}>{a.title}</Link>
                   </h3>
-                  <p className="mt-2 text-xs text-neutral-600 dark:text-neutral-400">{a.excerpt}</p>
+                  <p className="mt-2 text-xs text-secondary">{a.excerpt}</p>
                 </Card>
               ))}
             </div>
@@ -241,12 +241,12 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
             <div className="grid gap-4 sm:grid-cols-2">
               {INDUSTRY_UPDATES.map((u) => (
                 <Card key={u.title}>
-                  <div className="flex items-center justify-between font-mono text-[10px] text-neutral-400">
+                  <div className="flex items-center justify-between font-mono text-[10px] text-secondary">
                     <span>{u.source}</span>
                     <span>{u.date}</span>
                   </div>
-                  <h3 className="mt-2 font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{u.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">{u.blurb}</p>
+                  <h3 className="mt-2 font-display text-sm font-semibold text-primary">{u.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-secondary">{u.blurb}</p>
                 </Card>
               ))}
             </div>
@@ -259,12 +259,12 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
               title="Research Papers"
               description="Foundational publications analyzed in active research reading groups."
             />
-            <Card className="p-0 divide-y divide-neutral-200 dark:divide-neutral-800">
+            <Card className="p-0 divide-y divide-border">
               {page.papers.map((p) => (
                 <div key={p.title} className="p-4 sm:p-5 flex flex-wrap items-baseline justify-between gap-2">
                   <div className="min-w-0 flex-1">
-                    <p className="font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{p.title}</p>
-                    <p className="mt-1 text-xs text-neutral-500">{p.authors}</p>
+                    <p className="font-display text-sm font-semibold text-primary">{p.title}</p>
+                    <p className="mt-1 text-xs text-muted">{p.authors}</p>
                   </div>
                   <Badge>[{p.venue} · {p.year}]</Badge>
                 </div>
@@ -284,10 +284,10 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
                 <Card key={t.title} hover>
                   <div className="flex items-center justify-between font-mono text-[10px]">
                     <Badge>{t.level}</Badge>
-                    <span className="text-neutral-400">{t.duration}</span>
+                    <span className="text-secondary">{t.duration}</span>
                   </div>
-                  <h3 className="mt-3 font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{t.title}</h3>
-                  <p className="mt-1 font-mono text-xs text-neutral-500">By {t.author}</p>
+                  <h3 className="mt-3 font-display text-sm font-semibold text-primary">{t.title}</h3>
+                  <p className="mt-1 font-mono text-xs text-muted">By {t.author}</p>
                 </Card>
               ))}
             </div>
@@ -306,11 +306,11 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
                 <Card key={ca.title} hover>
                   <div className="flex items-center gap-2">
                     <Avatar name={ca.author} className="size-6 text-[8px]" />
-                    <span className="font-mono text-xs font-semibold text-neutral-900 dark:text-neutral-100">{ca.author}</span>
+                    <span className="font-mono text-xs font-semibold text-primary">{ca.author}</span>
                   </div>
-                  <h3 className="mt-3 font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{ca.title}</h3>
-                  <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">{ca.excerpt}</p>
-                  <p className="mt-3 font-mono text-[10px] text-neutral-400">{ca.readTime}</p>
+                  <h3 className="mt-3 font-display text-sm font-semibold text-primary">{ca.title}</h3>
+                  <p className="mt-1 text-xs text-secondary">{ca.excerpt}</p>
+                  <p className="mt-3 font-mono text-[10px] text-secondary">{ca.readTime}</p>
                 </Card>
               ))}
             </div>
@@ -323,15 +323,15 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
               title="Upcoming Events"
               action={{ label: "All Events", href: "/events" }}
             />
-            <Card className="p-0 divide-y divide-neutral-200 dark:divide-neutral-800">
+            <Card className="p-0 divide-y divide-border">
               {domainEvents.map((e) => (
                 <div key={e.slug} className="p-4 flex items-center justify-between">
                   <div>
                     <Badge>{e.type}</Badge>
-                    <p className="mt-2 font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                    <p className="mt-2 font-display text-sm font-semibold text-primary">
                       <Link href={`/events/${e.slug}`}>{e.title}</Link>
                     </p>
-                    <p className="mt-1 font-mono text-xs text-neutral-500">{e.date} · {e.venue}</p>
+                    <p className="mt-1 font-mono text-xs text-muted">{e.date} · {e.venue}</p>
                   </div>
                   <Button href={`/events/${e.slug}`} variant="ghost" size="sm">
                     Details <ArrowRight className="size-3" />

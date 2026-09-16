@@ -70,14 +70,14 @@ export function LogoSymbol({ className }: { className?: string }) {
 export function Logo({ className }: { className?: string }) {
   return (
     <Link href="/" className={cx("group inline-flex items-center gap-2.5", className)}>
-      <span className="inline-flex size-7.5 items-center justify-center rounded-md border border-neutral-800 bg-neutral-900 text-white transition-colors duration-200">
+      <span className="inline-flex size-7.5 items-center justify-center rounded-md border border-border bg-card text-primary transition-colors duration-200">
         <LogoSymbol className="size-full" />
       </span>
       <div className="flex flex-col leading-none">
-        <span className="font-sans text-sm font-semibold tracking-tight text-white group-hover:text-neutral-300 transition-colors">
+        <span className="font-sans text-sm font-semibold tracking-tight text-primary group-hover:text-neutral-300 transition-colors">
           DTC
         </span>
-        <span className="font-sans text-[9px] font-medium uppercase tracking-[0.12em] text-white mt-0.5">
+        <span className="font-sans text-[9px] font-medium uppercase tracking-[0.12em] text-primary mt-0.5">
           DEEP TECH COMMUNITY
         </span>
       </div>
@@ -134,25 +134,25 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.98, y: -8 }}
           transition={{ duration: 0.15 }}
-          className="relative z-10 w-full max-w-xl overflow-hidden rounded-lg border border-neutral-800 bg-[#0a0a0a]"
+          className="relative z-10 w-full max-w-xl overflow-hidden rounded-lg border border-border bg-surface"
         >
           {/* Search Input Box */}
-          <div className="flex items-center border-b border-neutral-800 px-4 py-3">
-            <Search className="size-4 text-neutral-400 mr-3 shrink-0" />
+          <div className="flex items-center border-b border-border px-4 py-3">
+            <Search className="size-4 text-secondary mr-3 shrink-0" />
             <input
               type="text"
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search technologies, research briefs, events, pages..."
-              className="w-full bg-transparent font-sans text-sm text-neutral-50 placeholder-neutral-500 outline-none"
+              className="w-full bg-transparent font-sans text-sm text-primary placeholder-neutral-500 outline-none"
             />
             {query && (
-              <button onClick={() => setQuery("")} className="text-xs text-neutral-400 hover:text-neutral-200">
+              <button onClick={() => setQuery("")} className="text-xs text-secondary hover:text-neutral-200">
                 Clear
               </button>
             )}
-            <kbd className="ml-2 rounded border border-neutral-800 bg-neutral-900 px-1.5 py-0.5 font-sans text-[10px] text-neutral-300">
+            <kbd className="ml-2 rounded border border-border bg-card px-1.5 py-0.5 font-sans text-[10px] text-neutral-300">
               ESC
             </kbd>
           </div>
@@ -171,14 +171,14 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                     <button
                       key={item.href}
                       onClick={() => handleSelect(item.href)}
-                      className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left transition-colors hover:bg-neutral-900 cursor-pointer"
+                      className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left transition-colors hover:bg-card cursor-pointer"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="flex size-7 items-center justify-center rounded border border-neutral-800 bg-neutral-900 text-neutral-300">
+                        <div className="flex size-7 items-center justify-center rounded border border-border bg-card text-neutral-300">
                           <Icon className="size-3.5" />
                         </div>
                         <div>
-                          <p className="font-sans text-xs font-semibold text-neutral-100">
+                          <p className="font-sans text-xs font-semibold text-primary">
                             {item.title}
                           </p>
                           <p className="font-sans text-[10px] uppercase tracking-wider text-neutral-300">
@@ -186,7 +186,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                           </p>
                         </div>
                       </div>
-                      <ChevronRight className="size-3.5 text-neutral-500" />
+                      <ChevronRight className="size-3.5 text-muted" />
                     </button>
                   );
                 })}
@@ -195,7 +195,7 @@ function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           </div>
 
           {/* Footer info */}
-          <div className="border-t border-neutral-800 bg-[#050505] px-4 py-2 font-sans text-[10px] text-neutral-400 flex justify-between items-center">
+          <div className="border-t border-border bg-background px-4 py-2 font-sans text-[10px] text-secondary flex justify-between items-center">
             <span>DEEP TECH COMMUNITY SEARCH</span>
             <span>PRESS ESC TO CLOSE</span>
           </div>
@@ -269,7 +269,7 @@ export function Navbar() {
     <>
       <header
         className={cx(
-          "sticky top-0 z-50 w-full transition-all duration-200 border-b border-neutral-900 bg-[#050505]",
+          "sticky top-0 z-50 w-full transition-all duration-200 border-b border-neutral-900 bg-background",
           scrolled ? "py-2 sm:py-2.5" : "py-2.5 sm:py-3"
         )}
       >
@@ -288,8 +288,8 @@ export function Navbar() {
                   className={cx(
                     "relative py-1 px-1 font-sans text-[12px] font-medium uppercase tracking-[0.03em] transition-colors duration-150",
                     isActive
-                      ? "text-white"
-                      : "text-neutral-400 hover:text-white"
+                      ? "text-primary"
+                      : "text-secondary hover:text-primary"
                   )}
                 >
                   {item.label}
@@ -307,7 +307,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-1 px-1.5 py-1 font-sans text-[11px] font-medium text-neutral-500 hover:text-neutral-200 transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-1.5 py-1 font-sans text-[11px] font-medium text-muted hover:text-neutral-200 transition-colors cursor-pointer"
               aria-label="Search platform"
             >
               <Search className="size-3.5" />
@@ -321,7 +321,7 @@ export function Navbar() {
               <div className="flex items-center gap-2">
                 <Link
                   href="/admin"
-                  className="flex items-center gap-2 rounded-md border border-neutral-800 bg-neutral-900 px-2.5 py-1 text-xs font-medium text-neutral-100 hover:bg-neutral-800 transition-colors"
+                  className="flex items-center gap-2 rounded-md border border-border bg-card px-2.5 py-1 text-xs font-medium text-primary hover:bg-neutral-800 transition-colors"
                 >
                   <span className="flex size-4.5 items-center justify-center rounded-full bg-white font-sans text-[9px] font-bold text-neutral-950">
                     {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
@@ -345,7 +345,7 @@ export function Navbar() {
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
-              className="grid size-7.5 place-items-center rounded-md border border-neutral-800 text-neutral-300 md:hidden cursor-pointer"
+              className="grid size-7.5 place-items-center rounded-md border border-border text-neutral-300 md:hidden cursor-pointer"
             >
               {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
             </button>
@@ -364,7 +364,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="sticky top-[49px] z-40 overflow-hidden border-b border-neutral-900 bg-[#050505] md:hidden"
+            className="sticky top-[49px] z-40 overflow-hidden border-b border-neutral-900 bg-background md:hidden"
           >
             <Container className="py-4 space-y-3">
               <div className="grid gap-1">
@@ -372,10 +372,10 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="flex items-center justify-between rounded-md px-3 py-2 font-sans text-xs font-medium uppercase tracking-wider text-neutral-300 hover:bg-neutral-900 hover:text-white"
+                    className="flex items-center justify-between rounded-md px-3 py-2 font-sans text-xs font-medium uppercase tracking-wider text-neutral-300 hover:bg-card hover:text-primary"
                   >
                     <span>{item.label}</span>
-                    <ChevronRight className="size-3.5 text-neutral-500" />
+                    <ChevronRight className="size-3.5 text-muted" />
                   </Link>
                 ))}
               </div>
@@ -388,7 +388,7 @@ export function Navbar() {
                         {user.name ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U"}
                       </div>
                       <div>
-                        <p className="font-sans text-xs font-semibold text-neutral-50">{user.name}</p>
+                        <p className="font-sans text-xs font-semibold text-primary">{user.name}</p>
                         <p className="font-sans text-[10px] text-neutral-300">{user.email}</p>
                       </div>
                     </div>
@@ -442,11 +442,11 @@ export function FooterNewsletter() {
   }
 
   return (
-    <div className="rounded-xl border border-neutral-300/80 bg-neutral-100/90 p-5 shadow-xs dark:border-neutral-800 dark:bg-neutral-900/90">
-      <p className="font-display text-[15px] font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+    <div className="rounded-xl border p-5 shadow-xs border-border bg-card/90">
+      <p className="font-display text-[15px] font-bold tracking-tight text-primary">
         DEEP TECH BRIEFING
       </p>
-      <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">
+      <p className="mt-2 text-sm leading-relaxed text-neutral-200 font-medium">
         Bi-weekly technical digests — open roadmaps, research highlights, and symposium schedules. No noise.
       </p>
 
@@ -470,11 +470,11 @@ export function FooterNewsletter() {
 
 export function Footer() {
   return (
-    <footer className="border-t border-neutral-200/90 bg-neutral-50/50 dark:border-neutral-800/90 dark:bg-neutral-950/50">
+    <footer className="border-t border-border/90 bg-surface/50">
       <Container className="grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1.6fr]">
         <div>
           <Logo />
-          <p className="mt-4 max-w-sm text-sm font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">
+          <p className="mt-4 max-w-sm text-sm font-medium leading-relaxed text-neutral-200">
             Open practitioner community platform for Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.
           </p>
           <div className="mt-5 flex gap-2.5">
@@ -483,7 +483,7 @@ export function Footer() {
                 key={label}
                 href="#"
                 aria-label={label}
-                className="grid size-9 place-items-center rounded-lg border border-neutral-300 bg-neutral-100 text-neutral-800 transition-colors hover:border-neutral-900 hover:text-neutral-950 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:border-neutral-100 dark:hover:text-white"
+                className="grid size-9 place-items-center rounded-lg border transition-colors border-neutral-700 bg-card text-neutral-200 hover:border-neutral-100 hover:text-primary"
               >
                 <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden>
                   <path d={path} />
@@ -494,30 +494,30 @@ export function Footer() {
         </div>
 
         <nav aria-label="Footer Navigation" className="grid content-start gap-2.5 text-sm font-sans">
-          <p className="mb-1 font-sans text-xs font-bold uppercase tracking-widest text-neutral-900 dark:text-neutral-100">
+          <p className="mb-1 font-sans text-xs font-bold uppercase tracking-widest text-primary">
             SITES
           </p>
-          <Link href="/about" className="font-semibold text-neutral-800 hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white">
+          <Link href="/about" className="font-semibold text-neutral-200 hover:text-primary">
             About Community
           </Link>
-          <Link href="/technologies" className="font-semibold text-neutral-800 hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white">
+          <Link href="/technologies" className="font-semibold text-neutral-200 hover:text-primary">
             Technologies
           </Link>
-          <Link href="/events" className="font-semibold text-neutral-800 hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white">
+          <Link href="/events" className="font-semibold text-neutral-200 hover:text-primary">
             Symposia &amp; Labs
           </Link>
-          <Link href="/community" className="font-semibold text-neutral-800 hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white">
+          <Link href="/community" className="font-semibold text-neutral-200 hover:text-primary">
             Member Forum
           </Link>
-          <Link href="/chapters" className="font-semibold text-neutral-800 hover:text-neutral-950 dark:text-neutral-200 dark:hover:text-white">
+          <Link href="/chapters" className="font-semibold text-neutral-200 hover:text-primary">
             Regional Chapters
           </Link>
         </nav>
 
         <FooterNewsletter />
       </Container>
-      <div className="border-t border-neutral-200 dark:border-neutral-800">
-        <Container className="flex flex-wrap items-center justify-between gap-2 py-6 font-mono text-[11px] text-neutral-500 dark:text-neutral-300">
+      <div className="border-t border-border">
+        <Container className="flex flex-wrap items-center justify-between gap-2 py-6 font-mono text-[11px] text-neutral-300">
           <p>© 2026 Dyau Deep Tech Community. Handcrafted Enterprise Platform.</p>
           <p>[ 01 AI · 02 QUANTUM · 03 CYBER · 04 AI GOVERNANCE ]</p>
         </Container>

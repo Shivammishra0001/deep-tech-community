@@ -60,12 +60,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!article) {
     return (
       <Container className="py-20 text-center">
-        <div className="mx-auto max-w-md rounded-2xl border border-neutral-300 p-8 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-md">
-          <p className="font-mono text-xs uppercase font-bold text-neutral-400">Briefing Unavailable</p>
-          <h1 className="mt-3 font-display text-xl font-bold text-neutral-900 dark:text-neutral-50">
+        <div className="mx-auto max-w-md rounded-2xl border p-8 border-border bg-card shadow-md">
+          <p className="font-mono text-xs uppercase font-bold text-secondary">Briefing Unavailable</p>
+          <h1 className="mt-3 font-display text-xl font-bold text-primary">
             Article Not Found
           </h1>
-          <p className="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
+          <p className="mt-2 text-xs text-secondary">
             This technical briefing may have been updated or archived.
           </p>
           <div className="mt-6">
@@ -83,29 +83,29 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   return (
     <>
       {/* Banner */}
-      <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
+      <section className="relative overflow-hidden border-b border-border/80">
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="max-w-3xl animate-rise">
             <Link
               href="/news"
-              className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+              className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-muted hover:text-primary transition-colors"
             >
               <ArrowLeft className="size-3.5" aria-hidden /> All Briefings
             </Link>
             <div className="mt-3 flex items-center gap-3">
               <DomainBadge domain={article.domain} />
-              <span className="inline-flex items-center gap-1.5 font-mono text-xs text-neutral-500">
+              <span className="inline-flex items-center gap-1.5 font-mono text-xs text-muted">
                 <Clock className="size-3.5" aria-hidden /> {article.readingTime} min read
               </span>
             </div>
-            <h1 className="mt-2.5 sm:mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-semibold leading-[1.12] tracking-tight text-neutral-900 dark:text-neutral-100">
+            <h1 className="mt-2.5 sm:mt-3 font-display text-2xl sm:text-3xl lg:text-4xl font-semibold leading-[1.12] tracking-tight text-primary">
               {article.title}
             </h1>
             <div className="mt-4 sm:mt-5 flex items-center gap-3">
               <Avatar name={article.author} className="size-9 font-bold" />
               <div>
-                <p className="font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{article.author}</p>
-                <p className="font-mono text-xs text-neutral-500">
+                <p className="font-display text-sm font-semibold text-primary">{article.author}</p>
+                <p className="font-mono text-xs text-muted">
                   {article.authorRole} · {article.date}
                 </p>
               </div>
@@ -119,7 +119,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
           <article className="mx-auto w-full max-w-2xl lg:mx-0 lg:max-w-none">
             {article.image && (
-              <div className="mb-8 relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-900 shadow-md">
+              <div className="mb-8 relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-border/80 bg-card shadow-md">
                 <SafeImage
                   src={article.image}
                   alt={article.title}
@@ -127,15 +127,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 />
               </div>
             )}
-            <p className="font-display text-lg font-medium leading-relaxed text-neutral-800 dark:text-neutral-200">{article.excerpt}</p>
+            <p className="font-display text-lg font-medium leading-relaxed text-neutral-200">{article.excerpt}</p>
             <div className="mt-8 space-y-6">
               {article.body.map((para) => (
-                <p key={para.slice(0, 32)} className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                <p key={para.slice(0, 32)} className="text-sm leading-relaxed text-neutral-300">
                   {para}
                 </p>
               ))}
             </div>
-            <div className="mt-10 flex flex-wrap gap-2 border-t border-neutral-200/80 pt-6 dark:border-neutral-800/80">
+            <div className="mt-10 flex flex-wrap gap-2 border-t pt-6 border-border/80">
               {article.tags.map((t) => (
                 <Tag key={t}>{t}</Tag>
               ))}
@@ -145,9 +145,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <Card className="mt-8 flex items-center gap-4">
               <Avatar name={article.author} className="size-10 font-bold" />
               <div>
-                <p className="font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{article.author}</p>
-                <p className="font-mono text-xs text-neutral-500">{article.authorRole}</p>
-                <p className="mt-1 text-xs text-neutral-400">
+                <p className="font-display text-sm font-semibold text-primary">{article.author}</p>
+                <p className="font-mono text-xs text-muted">{article.authorRole}</p>
+                <p className="mt-1 text-xs text-secondary">
                   Authored for Deep Tech Community technical library.
                 </p>
               </div>
@@ -160,17 +160,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {/* Sidebar */}
           <aside className="space-y-6">
             <div>
-              <p className="font-mono text-xs font-semibold uppercase tracking-wider text-neutral-400">
+              <p className="font-mono text-xs font-semibold uppercase tracking-wider text-secondary">
                 Related Briefings
               </p>
               <div className="mt-3 space-y-3">
                 {related.map((r) => (
                   <Card key={r.slug} hover className="group">
                     <DomainBadge domain={r.domain} />
-                    <p className="mt-2 font-display text-xs font-semibold leading-snug tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-100">
+                    <p className="mt-2 font-display text-xs font-semibold leading-snug tracking-tight group-hover:underline text-primary">
                       <Link href={`/news/${r.slug}`}>{r.title}</Link>
                     </p>
-                    <p className="mt-1 font-mono text-[10px] text-neutral-400">
+                    <p className="mt-1 font-mono text-[10px] text-secondary">
                       {r.date} · {r.readingTime} min
                     </p>
                   </Card>
@@ -178,8 +178,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               </div>
             </div>
             <Card>
-              <p className="font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">Subscribe to Briefings</p>
-              <p className="mt-1.5 text-xs text-neutral-600 dark:text-neutral-400">
+              <p className="font-display text-sm font-semibold text-primary">Subscribe to Briefings</p>
+              <p className="mt-1.5 text-xs text-secondary">
                 Monthly technical digest delivered to verified members.
               </p>
               <div className="mt-4">

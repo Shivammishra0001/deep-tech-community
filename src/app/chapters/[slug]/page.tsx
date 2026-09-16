@@ -37,12 +37,12 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
   return (
     <>
       {/* Header Banner */}
-      <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
+      <section className="relative overflow-hidden border-b border-border/80">
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="animate-rise">
             <Link
               href="/chapters"
-              className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
+              className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-muted hover:text-primary"
             >
               <ArrowLeft className="size-3.5" aria-hidden /> Return to Regional Chapters
             </Link>
@@ -51,10 +51,10 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
                 {ch.flag}
               </span>
               <div>
-                <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+                <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
                   {ch.country} Chapter
                 </h1>
-                <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-sans text-sm font-semibold text-neutral-700 dark:text-neutral-200">
+                <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-sans text-sm font-semibold text-neutral-200">
                   <span className="inline-flex items-center gap-1.5">
                     <MapPin className="size-3.5" aria-hidden /> {ch.city}
                   </span>
@@ -71,7 +71,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
           {/* 1. Overview */}
           <section id="overview">
             <Eyebrow>01 — Chapter Overview</Eyebrow>
-            <div className="mt-4 space-y-4 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+            <div className="mt-4 space-y-4 text-sm leading-relaxed text-neutral-300">
               {ch.about.map((p) => (
                 <p key={p.slice(0, 32)}>{p}</p>
               ))}
@@ -82,17 +82,17 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
           <section id="events">
             <SectionHeading eyebrow="02 — Symposia" title="Regional Events" action={{ label: "All Events", href: "/events" }} />
             <Card className="p-0 overflow-hidden">
-              <ul className="divide-y divide-neutral-200/80 dark:divide-neutral-800/80">
+              <ul className="divide-y divide-border/80">
                 {ch.events.map((e) => (
                   <li key={e.title} className="flex flex-wrap items-center gap-x-5 gap-y-2 p-4 sm:p-5">
-                    <span className="flex w-28 shrink-0 items-center gap-2 font-mono text-xs text-neutral-500">
+                    <span className="flex w-28 shrink-0 items-center gap-2 font-mono text-xs text-muted">
                       <Calendar className="size-3.5 shrink-0" aria-hidden /> {e.date}
                     </span>
-                    <span className="min-w-0 flex-1 font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                    <span className="min-w-0 flex-1 font-display text-sm font-semibold text-primary">
                       {e.title}
                     </span>
                     <Badge>{e.type}</Badge>
-                    <span className="font-mono text-xs text-neutral-400">{e.city}</span>
+                    <span className="font-mono text-xs text-secondary">{e.city}</span>
                   </li>
                 ))}
               </ul>
@@ -107,10 +107,10 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
                 <Card key={m.title}>
                   <div className="flex items-center justify-between font-mono text-[10px]">
                     <Badge>{m.rhythm}</Badge>
-                    <span className="text-neutral-400">{m.location}</span>
+                    <span className="text-secondary">{m.location}</span>
                   </div>
-                  <h3 className="mt-3 font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{m.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">{m.desc}</p>
+                  <h3 className="mt-3 font-display text-sm font-semibold text-primary">{m.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-secondary">{m.desc}</p>
                 </Card>
               ))}
             </div>
@@ -124,8 +124,8 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
                 <Card key={l.name} className="flex items-center gap-3.5">
                   <Avatar name={l.name} className="size-10" />
                   <div className="min-w-0">
-                    <p className="font-display text-sm font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">{l.name}</p>
-                    <p className="font-mono text-[11px] text-neutral-500">{l.role}</p>
+                    <p className="font-display text-sm font-semibold tracking-tight text-primary">{l.name}</p>
+                    <p className="font-mono text-[11px] text-muted">{l.role}</p>
                   </div>
                 </Card>
               ))}
@@ -137,9 +137,9 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
             <SectionHeading eyebrow="05 — Milestones" title="Chapter Activity Log &amp; Updates" />
             <ol className="space-y-4 font-mono text-xs">
               {ch.updates.map((u) => (
-                <li key={u.date} className="flex items-start gap-4 rounded-md border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">
-                  <span className="w-20 shrink-0 font-bold text-neutral-900 dark:text-neutral-100">{u.date}</span>
-                  <p className="font-sans text-xs text-neutral-700 dark:text-neutral-300">{u.text}</p>
+                <li key={u.date} className="flex items-start gap-4 rounded-md border p-4 border-border bg-card">
+                  <span className="w-20 shrink-0 font-bold text-primary">{u.date}</span>
+                  <p className="font-sans text-xs text-neutral-300">{u.text}</p>
                 </li>
               ))}
             </ol>
@@ -149,10 +149,10 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
         {/* Sidebar */}
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
           <Card>
-            <p className="font-display text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+            <p className="font-display text-base font-semibold tracking-tight text-primary">
               Join {ch.country} Chapter
             </p>
-            <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+            <p className="mt-2 text-xs leading-relaxed text-secondary">
               Select “{ch.country}” as your primary region when applying to receive direct access to local study circles and lab invitations.
             </p>
             <div className="mt-4">
@@ -163,7 +163,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
           </Card>
 
           <Card>
-            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-neutral-400">
+            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-secondary">
               Other Regional Hubs
             </p>
             <div className="mt-3 space-y-2">
@@ -171,13 +171,13 @@ export default async function ChapterPage({ params }: { params: Promise<{ slug: 
                 <Link
                   key={o.slug}
                   href={`/chapters/${o.slug}`}
-                  className="group flex items-center justify-between rounded-md p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                  className="group flex items-center justify-between rounded-md p-2 hover:bg-neutral-800"
                 >
-                  <span className="flex items-center gap-2 font-mono text-xs text-neutral-900 dark:text-neutral-100">
+                  <span className="flex items-center gap-2 font-mono text-xs text-primary">
                     <span>{o.flag}</span>
                     <span>{o.country}</span>
                   </span>
-                  <span className="font-mono text-[10px] text-neutral-400">{o.members} Members</span>
+                  <span className="font-mono text-[10px] text-secondary">{o.members} Members</span>
                 </Link>
               ))}
             </div>

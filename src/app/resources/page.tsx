@@ -51,21 +51,21 @@ function ResourceList({
   return (
     <Card>
       <div className="flex items-center gap-3">
-        <span className="grid size-9 place-items-center rounded-md border border-neutral-200 bg-neutral-100 text-neutral-900 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100">
+        <span className="grid size-9 place-items-center rounded-md border border-border bg-card text-primary">
           <Icon className="size-4" aria-hidden />
         </span>
         <div>
-          <h2 className="font-display text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">{title}</h2>
-          <p className="font-mono text-[10px] uppercase text-neutral-400">{note}</p>
+          <h2 className="font-display text-base font-semibold tracking-tight text-primary">{title}</h2>
+          <p className="font-mono text-[10px] uppercase text-secondary">{note}</p>
         </div>
       </div>
-      <ul className="mt-4 divide-y divide-neutral-100 dark:divide-neutral-800/80">
+      <ul className="mt-4 divide-y divide-border/80">
         {items.map((item, i) => (
           <li key={item.title} className="flex items-baseline gap-3 py-2.5">
-            <span className="w-5 shrink-0 font-mono text-[10px] text-neutral-400">{String(i + 1).padStart(2, "0")}</span>
+            <span className="w-5 shrink-0 font-mono text-[10px] text-secondary">{String(i + 1).padStart(2, "0")}</span>
             <div className="min-w-0 flex-1">
-              <p className="font-medium text-xs text-neutral-900 dark:text-neutral-100">{item.title}</p>
-              <p className="mt-0.5 font-mono text-[10px] text-neutral-500">{item.meta}</p>
+              <p className="font-medium text-xs text-primary">{item.title}</p>
+              <p className="mt-0.5 font-mono text-[10px] text-muted">{item.meta}</p>
             </div>
           </li>
         ))}
@@ -85,7 +85,7 @@ export default function ResourcesPage() {
       <Container className="space-y-8 py-8 sm:py-10">
         {/* Roadmaps */}
         <section>
-          <div className="mb-6 flex items-center justify-between border-b border-neutral-200/80 pb-3 dark:border-neutral-800/80">
+          <div className="mb-6 flex items-center justify-between border-b pb-3 border-border/80">
             <Eyebrow>Domain Roadmaps</Eyebrow>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -94,15 +94,15 @@ export default function ResourcesPage() {
               return (
                 <Card key={d.slug} hover className="group flex flex-col justify-between">
                   <div>
-                    <span className="grid size-8 place-items-center rounded-md border border-neutral-200 bg-neutral-100 text-neutral-900 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-100">
+                    <span className="grid size-8 place-items-center rounded-md border border-border bg-card text-primary">
                       <Icon className="size-4" aria-hidden />
                     </span>
-                    <p className="mt-3 font-display text-sm font-semibold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-100">
+                    <p className="mt-3 font-display text-sm font-semibold tracking-tight group-hover:underline text-primary">
                       {d.name}
                     </p>
-                    <p className="mt-1 font-mono text-[10px] text-neutral-400">Sequential Track →</p>
+                    <p className="mt-1 font-mono text-[10px] text-secondary">Sequential Track →</p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800">
+                  <div className="mt-4 pt-3 border-t border-border">
                     <Button href={`/technologies/${d.techSlug}#roadmap`} variant="ghost" size="sm" className="w-full">
                       View Roadmap <ArrowUpRight className="size-3" />
                     </Button>

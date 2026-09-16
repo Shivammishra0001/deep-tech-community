@@ -136,7 +136,7 @@ function Composer({ onPublished }: { onPublished: (p: Post) => void }) {
       <Card hover onClick={handleWritePostClick} className="cursor-pointer flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Avatar name={name || "You"} />
-          <span className="text-xs text-neutral-400">Share technical insights, upload diagrams, or publish a project…</span>
+          <span className="text-xs text-secondary">Share technical insights, upload diagrams, or publish a project…</span>
         </div>
         <Button variant="primary" size="sm" onClick={(e) => { e.stopPropagation(); handleWritePostClick(); }}>
           <PenLine className="size-3.5" aria-hidden /> Write Post
@@ -146,11 +146,11 @@ function Composer({ onPublished }: { onPublished: (p: Post) => void }) {
   }
 
   return (
-    <Card className="border-neutral-900 dark:border-neutral-100">
+    <Card>
       <form onSubmit={publish}>
         <div className="flex items-center justify-between">
-          <p className="font-display text-base font-semibold text-neutral-900 dark:text-neutral-100">Create Community Post</p>
-          <button type="button" onClick={() => setOpen(false)} className="font-mono text-xs text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100">
+          <p className="font-display text-base font-semibold text-primary">Create Community Post</p>
+          <button type="button" onClick={() => setOpen(false)} className="font-mono text-xs text-secondary hover:text-primary">
             [Cancel]
           </button>
         </div>
@@ -201,7 +201,7 @@ function Composer({ onPublished }: { onPublished: (p: Post) => void }) {
                 placeholder="https://... (or choose file below)"
               />
               <div className="flex items-center gap-2">
-                <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-neutral-300 bg-neutral-100 px-3 py-1.5 font-mono text-xs font-semibold text-neutral-800 hover:bg-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700">
+                <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-xs font-semibold border-neutral-700 bg-neutral-800 text-neutral-200 hover:bg-neutral-700">
                   <ImageIcon className="size-3.5" />
                   <span>Upload Local Image</span>
                   <input type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
@@ -210,7 +210,7 @@ function Composer({ onPublished }: { onPublished: (p: Post) => void }) {
                   <button
                     type="button"
                     onClick={() => setImage("")}
-                    className="font-mono text-xs text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
+                    className="font-mono text-xs text-muted hover:text-primary"
                   >
                     [Clear Image]
                   </button>
@@ -220,10 +220,10 @@ function Composer({ onPublished }: { onPublished: (p: Post) => void }) {
 
             {/* Live Image Preview Box */}
             {image && (
-              <div className="relative mt-3 aspect-[16/9] w-full overflow-hidden rounded-md border border-neutral-300 bg-neutral-900 dark:border-neutral-700">
+              <div className="relative mt-3 aspect-[16/9] w-full overflow-hidden rounded-md border bg-card border-neutral-700">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={image} alt="Preview" className="size-full object-cover" />
-                <span className="absolute bottom-2 left-2 rounded-sm bg-neutral-950/80 px-2 py-0.5 font-mono text-[10px] text-neutral-300 backdrop-blur-md">
+                <span className="absolute bottom-2 left-2 rounded-sm bg-surface/80 px-2 py-0.5 font-mono text-[10px] text-neutral-300 backdrop-blur-md">
                   Image Attached
                 </span>
               </div>
@@ -235,7 +235,7 @@ function Composer({ onPublished }: { onPublished: (p: Post) => void }) {
           </div>
         </div>
         {state === "error" && (
-          <p role="alert" className="mt-4 font-mono text-xs text-neutral-900 dark:text-neutral-100">
+          <p role="alert" className="mt-4 font-mono text-xs text-primary">
             {error}
           </p>
         )}
@@ -303,8 +303,8 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
           <div className="flex items-center gap-3">
             <Avatar name={post.author} domain={post.domain} kind={post.kind} />
             <div>
-              <p className="font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">{post.author}</p>
-              <p className="font-mono text-[11px] text-neutral-400">{post.authorRole}</p>
+              <p className="font-display text-sm font-semibold text-primary">{post.author}</p>
+              <p className="font-mono text-[11px] text-secondary">{post.authorRole}</p>
             </div>
           </div>
           <Badge>
@@ -313,13 +313,13 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
           </Badge>
         </div>
 
-        <h3 className="mt-4 font-display text-base font-semibold leading-snug tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h3 className="mt-4 font-display text-base font-semibold leading-snug tracking-tight text-primary">
           {post.title}
         </h3>
-        <p className="mt-2.5 whitespace-pre-line text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">{post.body}</p>
+        <p className="mt-2.5 whitespace-pre-line text-xs leading-relaxed text-neutral-300">{post.body}</p>
 
         {post.image && (
-          <div className="mt-4 overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-800 max-h-64">
+          <div className="mt-4 overflow-hidden rounded-md border border-border max-h-64">
             <img
               src={post.image}
               onError={(e) => {
@@ -339,11 +339,11 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4 font-mono text-xs dark:border-neutral-800">
+      <div className="mt-6 flex items-center justify-between border-t pt-4 font-mono text-xs border-border">
         <div className="flex items-center gap-4">
           <button
             onClick={like}
-            className={cx("flex items-center gap-1.5 hover:text-neutral-900 dark:hover:text-neutral-100", liked ? "text-neutral-900 dark:text-neutral-100 font-bold" : "text-neutral-500")}
+            className={cx("flex items-center gap-1.5 hover:text-primary", liked ? "text-primary font-bold" : "text-muted")}
           >
             <Heart className={cx("size-3.5", liked && "fill-current")} />
             <span>{post.likes}</span>
@@ -351,7 +351,7 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
 
           <button
             onClick={() => setShowComments(!showComments)}
-            className="flex items-center gap-1.5 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
+            className="flex items-center gap-1.5 text-muted hover:text-primary"
           >
             <MessageCircle className="size-3.5" />
             <span>{post.comments.length}</span>
@@ -361,7 +361,7 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
 
         <button
           onClick={() => setSaved(!saved)}
-          className={cx("flex items-center gap-1 hover:text-neutral-900 dark:hover:text-neutral-100", saved ? "text-neutral-900 dark:text-neutral-100 font-bold" : "text-neutral-500")}
+          className={cx("flex items-center gap-1 hover:text-primary", saved ? "text-primary font-bold" : "text-muted")}
         >
           <Bookmark className={cx("size-3.5", saved && "fill-current")} />
           <span>{saved ? "Saved" : "Save"}</span>
@@ -370,15 +370,15 @@ function PostCard({ post, onUpdate }: { post: Post; onUpdate: (p: Post) => void 
 
       {/* Comments */}
       {showComments && (
-        <div className="mt-4 border-t border-neutral-100 pt-4 dark:border-neutral-800">
+        <div className="mt-4 border-t pt-4 border-border">
           {post.comments.length > 0 && (
             <ul className="space-y-3">
               {post.comments.map((c) => (
                 <li key={c.id} className="flex gap-3 text-xs">
                   <Avatar name={c.author} className="size-6 text-[8px]" />
-                  <div className="min-w-0 flex-1 rounded-md border border-neutral-200 bg-neutral-50 p-2.5 dark:border-neutral-800 dark:bg-neutral-950">
-                    <p className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">{c.author}</p>
-                    <p className="mt-1 text-neutral-600 dark:text-neutral-300">{c.body}</p>
+                  <div className="min-w-0 flex-1 rounded-md border p-2.5 border-border bg-surface">
+                    <p className="font-mono font-semibold text-primary">{c.author}</p>
+                    <p className="mt-1 text-neutral-300">{c.body}</p>
                   </div>
                 </li>
               ))}
@@ -451,7 +451,7 @@ export default function CommunityPage() {
           />
 
           {/* Filter Bar */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200/80 pb-4 dark:border-neutral-800/80">
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-b pb-4 border-border/80">
             <div className="flex flex-wrap gap-2">
               {KIND_FILTERS.map((f) => (
                 <Button
@@ -490,11 +490,11 @@ export default function CommunityPage() {
           <RevealStagger className="mt-6 space-y-4">
             {posts === null ? (
               <div className="grid place-items-center py-20">
-                <Loader2 className="size-6 animate-spin text-neutral-400" />
+                <Loader2 className="size-6 animate-spin text-secondary" />
               </div>
             ) : visible.length === 0 ? (
               <Card className="text-center py-12">
-                <p className="font-mono text-xs text-neutral-400">No entries match the current filter criteria.</p>
+                <p className="font-mono text-xs text-secondary">No entries match the current filter criteria.</p>
               </Card>
             ) : (
               visible.map((p) => <RevealItem key={p.id}><PostCard post={p} onUpdate={updatePost} /></RevealItem>)
@@ -505,8 +505,8 @@ export default function CommunityPage() {
         {/* Sidebar */}
         <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
           <Card>
-            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-neutral-400">Community Charter</p>
-            <ul className="mt-3 space-y-2.5 text-xs text-neutral-600 dark:text-neutral-300">
+            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-secondary">Community Charter</p>
+            <ul className="mt-3 space-y-2.5 text-xs text-neutral-300">
               <li>• Technical depth over hot takes.</li>
               <li>• Security research requires responsible disclosure.</li>
               <li>• Code snippets must include environment reproduction details.</li>
@@ -515,19 +515,19 @@ export default function CommunityPage() {
           </Card>
 
           <Card>
-            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-neutral-400">Weekly Metrics</p>
+            <p className="font-mono text-xs font-semibold uppercase tracking-wider text-secondary">Weekly Metrics</p>
             <dl className="mt-3 space-y-2 font-mono text-xs">
               <div className="flex justify-between">
-                <dt className="text-neutral-500">Publications</dt>
-                <dd className="font-bold text-neutral-900 dark:text-neutral-100">47</dd>
+                <dt className="text-muted">Publications</dt>
+                <dd className="font-bold text-primary">47</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-neutral-500">Resolved Q&amp;As</dt>
-                <dd className="font-bold text-neutral-900 dark:text-neutral-100">31</dd>
+                <dt className="text-muted">Resolved Q&amp;As</dt>
+                <dd className="font-bold text-primary">31</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-neutral-500">Open Releases</dt>
-                <dd className="font-bold text-neutral-900 dark:text-neutral-100">9</dd>
+                <dt className="text-muted">Open Releases</dt>
+                <dd className="font-bold text-primary">9</dd>
               </div>
             </dl>
           </Card>

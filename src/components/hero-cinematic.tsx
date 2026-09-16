@@ -21,7 +21,7 @@ export function CinematicHero() {
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[88vh] lg:min-h-[92vh] flex flex-col justify-center items-center scroll-mt-20 pt-16 sm:pt-20 pb-16 sm:pb-20"
+      className="relative w-full overflow-hidden bg-background text-primary min-h-[88vh] lg:min-h-[92vh] flex flex-col justify-center items-center scroll-mt-20 pt-16 sm:pt-20 pb-16 sm:pb-20"
     >
       {/* ----------------- GHOSTFIBERS BACKGROUND VISUAL ----------------- */}
       <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
@@ -65,7 +65,7 @@ export function CinematicHero() {
           className="flex flex-col items-center text-center max-w-[860px] mx-auto"
         >
           {/* Refined 64–72px Desktop Headline with Medium/Regular Weight */}
-          <h1 className="font-sans text-[34px] sm:text-[46px] md:text-[56px] lg:text-[66px] xl:text-[70px] font-medium leading-[1.08] tracking-[-0.025em] text-neutral-50 uppercase max-w-[820px] text-center">
+          <h1 className="font-sans text-[34px] sm:text-[46px] md:text-[56px] lg:text-[66px] xl:text-[70px] font-medium leading-[1.08] tracking-[-0.025em] text-primary uppercase max-w-[820px] text-center">
             <StaggeredText
               text="WHERE FRONTIER BUILDERS ENGINEER THE FUTURE."
               segmentBy="Words"
@@ -103,10 +103,10 @@ export function CinematicHero() {
 
             <Link
               href="/community"
-              className="group inline-flex items-center justify-center gap-2.5 rounded-xl border border-neutral-700 bg-neutral-900/60 backdrop-blur-md px-7 sm:px-8 py-3.5 sm:py-4 font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider text-white transition-all duration-200 hover:border-neutral-400 hover:bg-neutral-800/80 active:scale-[0.98] cursor-pointer"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-xl border border-neutral-700 bg-card/60 backdrop-blur-md px-7 sm:px-8 py-3.5 sm:py-4 font-sans text-xs sm:text-sm font-semibold uppercase tracking-wider text-primary transition-all duration-200 hover:border-neutral-400 hover:bg-neutral-800/80 active:scale-[0.98] cursor-pointer"
             >
               <span>EXPLORE THE NETWORK</span>
-              <ChevronRight className="size-4 text-neutral-400 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-white" />
+              <ChevronRight className="size-4 text-secondary transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-primary" />
             </Link>
           </div>
         </motion.div>

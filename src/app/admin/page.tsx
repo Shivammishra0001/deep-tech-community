@@ -83,10 +83,10 @@ export default function AdminDashboardPage() {
           description="Global operations, chapter management, RBAC authorization, and API v1 backend telemetry for Deep Tech Society."
         />
 
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-b border-neutral-200 pb-6 dark:border-neutral-800">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-b pb-6 border-border">
           <div className="flex items-center gap-3">
             <Badge>GLOBAL ADMIN</Badge>
-            <span className="text-xs text-neutral-500 font-mono">Environment: Production (Edge)</span>
+            <span className="text-xs text-muted font-mono">Environment: Production (Edge)</span>
           </div>
           <div className="flex items-center gap-3">
             <Button variant="outline" size="sm" onClick={fetchMetrics} className="gap-2">
@@ -101,12 +101,12 @@ export default function AdminDashboardPage() {
         </div>
 
         {error && (
-          <Card className="mt-6 border-red-500/40 bg-red-500/5 p-4 text-red-600 dark:text-red-400">
+          <Card className="mt-6 border-red-500/40 bg-red-500/5 p-4 text-red-400">
             <div className="flex items-center gap-3">
               <Lock className="size-5 shrink-0" />
               <div>
                 <p className="font-medium">{error}</p>
-                <p className="text-xs text-neutral-500 mt-0.5">Please log in with an administrator account to access live data.</p>
+                <p className="text-xs text-muted mt-0.5">Please log in with an administrator account to access live data.</p>
               </div>
             </div>
           </Card>
@@ -115,88 +115,88 @@ export default function AdminDashboardPage() {
         {/* Metrics Grid */}
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card className="p-5">
-            <div className="flex items-center justify-between text-neutral-500 dark:text-neutral-400">
+            <div className="flex items-center justify-between text-secondary">
               <span className="text-xs font-mono font-medium uppercase tracking-wider">Total Members</span>
               <Users className="size-4" />
             </div>
-            <div className="mt-3 text-3xl font-bold font-mono tracking-tight text-neutral-900 dark:text-neutral-50">
+            <div className="mt-3 text-3xl font-bold font-mono tracking-tight text-primary">
               {metrics ? metrics.totalMembers.toLocaleString() : "—"}
             </div>
-            <span className="mt-1 text-xs text-neutral-500">+14% this month</span>
+            <span className="mt-1 text-xs text-muted">+14% this month</span>
           </Card>
 
           <Card className="p-5">
-            <div className="flex items-center justify-between text-neutral-500 dark:text-neutral-400">
+            <div className="flex items-center justify-between text-secondary">
               <span className="text-xs font-mono font-medium uppercase tracking-wider">Active Chapters</span>
               <Globe className="size-4" />
             </div>
-            <div className="mt-3 text-3xl font-bold font-mono tracking-tight text-neutral-900 dark:text-neutral-50">
+            <div className="mt-3 text-3xl font-bold font-mono tracking-tight text-primary">
               {metrics ? metrics.activeChapters : "—"}
             </div>
-            <span className="mt-1 text-xs text-neutral-500">Across 22 Countries</span>
+            <span className="mt-1 text-xs text-muted">Across 22 Countries</span>
           </Card>
 
           <Card className="p-5">
-            <div className="flex items-center justify-between text-neutral-500 dark:text-neutral-400">
+            <div className="flex items-center justify-between text-secondary">
               <span className="text-xs font-mono font-medium uppercase tracking-wider">Upcoming Events</span>
               <Calendar className="size-4" />
             </div>
-            <div className="mt-3 text-3xl font-bold font-mono tracking-tight text-neutral-900 dark:text-neutral-50">
+            <div className="mt-3 text-3xl font-bold font-mono tracking-tight text-primary">
               {metrics ? metrics.upcomingEvents : "—"}
             </div>
-            <span className="mt-1 text-xs text-neutral-500">Symposiums & Workshops</span>
+            <span className="mt-1 text-xs text-muted">Symposiums & Workshops</span>
           </Card>
 
           <Card className="p-5">
-            <div className="flex items-center justify-between text-neutral-500 dark:text-neutral-400">
+            <div className="flex items-center justify-between text-secondary">
               <span className="text-xs font-mono font-medium uppercase tracking-wider">Briefings Published</span>
               <FileText className="size-4" />
             </div>
-            <div className="mt-3 text-3xl font-bold font-mono tracking-tight text-neutral-900 dark:text-neutral-50">
+            <div className="mt-3 text-3xl font-bold font-mono tracking-tight text-primary">
               {metrics ? metrics.publishedBriefings : "—"}
             </div>
-            <span className="mt-1 text-xs text-neutral-500">98.2% Open Rate</span>
+            <span className="mt-1 text-xs text-muted">98.2% Open Rate</span>
           </Card>
         </div>
 
         {/* System Health Telemetry */}
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           <Card className="p-6">
-            <h3 className="font-semibold text-lg flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
+            <h3 className="font-semibold text-lg flex items-center gap-2 text-primary">
               <Activity className="size-5" /> Edge Infrastructure Health
             </h3>
             <div className="mt-4 space-y-3 font-mono text-xs">
-              <div className="flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-850">
-                <span className="text-neutral-500">Edge Proxy Rate Limiter</span>
-                <Badge className="border-emerald-500/40 text-emerald-600 dark:text-emerald-400">120 req/min Active</Badge>
+              <div className="flex items-center justify-between py-2 border-b border-neutral-850">
+                <span className="text-muted">Edge Proxy Rate Limiter</span>
+                <Badge className="text-emerald-400">120 req/min Active</Badge>
               </div>
-              <div className="flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-850">
-                <span className="text-neutral-500">JWT Token Signer</span>
-                <span className="font-medium text-neutral-900 dark:text-neutral-100">HS256 (jose Edge)</span>
+              <div className="flex items-center justify-between py-2 border-b border-neutral-850">
+                <span className="text-muted">JWT Token Signer</span>
+                <span className="font-medium text-primary">HS256 (jose Edge)</span>
               </div>
-              <div className="flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-850">
-                <span className="text-neutral-500">PostgreSQL Connection Pool</span>
-                <span className="font-medium text-neutral-900 dark:text-neutral-100">{metrics?.dbConnection || "CONNECTED"}</span>
+              <div className="flex items-center justify-between py-2 border-b border-neutral-850">
+                <span className="text-muted">PostgreSQL Connection Pool</span>
+                <span className="font-medium text-primary">{metrics?.dbConnection || "CONNECTED"}</span>
               </div>
               <div className="flex items-center justify-between py-2">
-                <span className="text-neutral-500">Redis Cache Hit Ratio</span>
-                <span className="font-medium text-neutral-900 dark:text-neutral-100">{metrics?.cacheHitRate || "99.4%"}</span>
+                <span className="text-muted">Redis Cache Hit Ratio</span>
+                <span className="font-medium text-primary">{metrics?.cacheHitRate || "99.4%"}</span>
               </div>
             </div>
           </Card>
 
           <Card className="p-6">
-            <h3 className="font-semibold text-lg flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
+            <h3 className="font-semibold text-lg flex items-center gap-2 text-primary">
               <ShieldCheck className="size-5" /> Recent Member Registrations
             </h3>
-            <div className="mt-4 divide-y divide-neutral-100 dark:divide-neutral-850">
+            <div className="mt-4 divide-y divide-neutral-850">
               {metrics?.recentSignups.map((signup) => (
                 <div key={signup.id} className="py-3 flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-sm text-neutral-900 dark:text-neutral-100">{signup.name}</p>
-                    <span className="text-xs text-neutral-500 font-mono">Domain: {signup.domain}</span>
+                    <p className="font-medium text-sm text-primary">{signup.name}</p>
+                    <span className="text-xs text-muted font-mono">Domain: {signup.domain}</span>
                   </div>
-                  <span className="text-xs text-neutral-400 font-mono">{signup.date}</span>
+                  <span className="text-xs text-secondary font-mono">{signup.date}</span>
                 </div>
               ))}
             </div>

@@ -42,17 +42,17 @@ export function NewsletterSubscribeCard() {
   }
 
   return (
-    <Card className="relative overflow-hidden border border-neutral-800 bg-[#0B0B0B] p-6 sm:p-8">
+    <Card className="relative overflow-hidden border border-border bg-[#0B0B0B] p-6 sm:p-8">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-xl">
-          <div className="inline-flex items-center gap-2 rounded-md border border-neutral-800 bg-neutral-900 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-neutral-300">
-            <Mail className="size-3 text-white" />
+          <div className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-neutral-300">
+            <Mail className="size-3 text-primary" />
             WEEKLY RESEARCH DISPATCH
           </div>
-          <h3 className="mt-3 font-display text-xl sm:text-2xl font-bold tracking-tight text-white">
+          <h3 className="mt-3 font-display text-xl sm:text-2xl font-bold tracking-tight text-primary">
             Subscribe to the Deep Tech Research Digest
           </h3>
-          <p className="mt-1.5 font-sans text-sm font-medium text-white leading-relaxed">
+          <p className="mt-1.5 font-sans text-sm font-medium text-primary leading-relaxed">
             Curated paper breakdowns, technical safety frameworks, and practitioner insights delivered every Tuesday. Zero marketing fluff.
           </p>
         </div>
@@ -65,7 +65,7 @@ export function NewsletterSubscribeCard() {
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === "loading" || status === "success"}
             required
-            className="bg-[#141414] border-neutral-800 text-neutral-100 placeholder:text-neutral-500 focus:border-neutral-600 sm:w-80"
+            className="bg-[#141414] border-border text-primary placeholder:text-muted focus:border-neutral-600 sm:w-80"
           />
           <Button
             type="submit"

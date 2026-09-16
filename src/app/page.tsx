@@ -51,7 +51,7 @@ export default function HomePage() {
       <FrontiersExperience />
 
       {/* ------------------- 3. NEWS ------------------- */}
-      <section id="news" className="relative py-16 sm:py-20 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
+      <section id="news" className="relative py-16 sm:py-20 border-t border-border/90 bg-surface scroll-mt-20">
         <Container>
           <RevealHeading>
             <SectionHeading
@@ -65,35 +65,35 @@ export default function HomePage() {
           <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
             <RevealVisual delay={100}>
               <Card hover className="group flex h-full flex-col justify-between overflow-hidden p-0">
-                <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-900">
+                <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border/80 bg-card">
                   <SafeImage
                     src={featuredArticle.image}
                     alt={featuredArticle.title}
                     className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" />
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                     <DomainBadge domain={featuredArticle.domain} />
-                    <span className="rounded-md border border-neutral-700 bg-neutral-950/90 px-2.5 py-1 font-mono text-xs font-bold text-neutral-100 backdrop-blur-md">
+                    <span className="rounded-md border border-neutral-700 bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
                       {featuredArticle.date}
                     </span>
                   </div>
                 </div>
                 <div className="flex flex-1 flex-col justify-between p-6">
                   <div>
-                    <h3 className="font-display text-xl font-bold leading-tight tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
+                    <h3 className="font-display text-xl font-bold leading-tight tracking-tight group-hover:underline text-primary">
                       <Link href={`/news/${featuredArticle.slug}`}>{featuredArticle.title}</Link>
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">
+                    <p className="mt-3 text-sm leading-relaxed text-neutral-200 font-medium">
                       {featuredArticle.excerpt}
                     </p>
                   </div>
-                  <div className="mt-6 flex items-center justify-between border-t border-neutral-200/80 pt-4 font-sans text-xs font-semibold text-neutral-800 dark:border-neutral-800 dark:text-neutral-200">
+                  <div className="mt-6 flex items-center justify-between border-t pt-4 font-sans text-xs font-semibold border-border text-neutral-200">
                     <div className="flex items-center gap-2">
                       <Avatar name={featuredArticle.author} className="size-7 text-xs font-bold" />
-                      <span className="font-semibold text-neutral-900 dark:text-neutral-50">{featuredArticle.author}</span>
+                      <span className="font-semibold text-primary">{featuredArticle.author}</span>
                     </div>
-                    <span className="text-neutral-800 dark:text-neutral-200 font-semibold">{featuredArticle.readingTime} min read</span>
+                    <span className="text-neutral-200 font-semibold">{featuredArticle.readingTime} min read</span>
                   </div>
                 </div>
               </Card>
@@ -105,7 +105,7 @@ export default function HomePage() {
                   <Card hover className="group p-4 sm:p-5">
                     <div className="flex items-center gap-4">
                       {/* 64x64px Square Thumbnail Visual */}
-                      <div className="relative size-16 shrink-0 overflow-hidden rounded-lg border border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-100 dark:bg-neutral-900 shadow-xs">
+                      <div className="relative size-16 shrink-0 overflow-hidden rounded-lg border border-border/90 bg-card shadow-xs">
                         {a.image ? (
                           <SafeImage
                             src={a.image}
@@ -122,12 +122,12 @@ export default function HomePage() {
                       <div className="flex flex-1 flex-col min-w-0">
                         <div className="flex items-center justify-between gap-2">
                           <DomainBadge domain={a.domain} />
-                          <span className="font-mono text-xs font-semibold text-neutral-400 dark:text-neutral-200">{a.date}</span>
+                          <span className="font-mono text-xs font-semibold text-neutral-200">{a.date}</span>
                         </div>
-                        <h4 className="mt-1.5 font-display text-sm sm:text-base font-bold leading-snug tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50 line-clamp-2">
+                        <h4 className="mt-1.5 font-display text-sm sm:text-base font-bold leading-snug tracking-tight group-hover:underline text-primary line-clamp-2">
                           <Link href={`/news/${a.slug}`}>{a.title}</Link>
                         </h4>
-                        <p className="mt-1 font-sans text-xs font-medium text-neutral-400 dark:text-neutral-200">
+                        <p className="mt-1 font-sans text-xs font-medium text-neutral-200">
                           By {a.author} · {a.readingTime} min
                         </p>
                       </div>
@@ -141,7 +141,7 @@ export default function HomePage() {
       </section>
 
       {/* ------------------- 4. EVENTS ------------------- */}
-      <section id="events" className="relative py-16 sm:py-20 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-50/70 dark:bg-neutral-900/40 scroll-mt-20">
+      <section id="events" className="relative py-16 sm:py-20 border-t border-border/90 bg-card/40 scroll-mt-20">
         <Container>
           <RevealHeading>
             <SectionHeading
@@ -159,26 +159,26 @@ export default function HomePage() {
                   <Card hover className="group flex h-full flex-col justify-between">
                     <div>
                       <div className="flex items-start justify-between gap-3">
-                        <div className="w-20 shrink-0 rounded-xl border border-neutral-300 bg-neutral-100 p-2.5 text-center shadow-sm dark:border-neutral-700 dark:bg-neutral-900">
-                          <p className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-neutral-100">{e.date.split(" ")[0]}</p>
-                          <p className="mt-0.5 font-display text-2xl font-extrabold text-neutral-900 dark:text-neutral-50">{e.date.split(" ")[1]?.replace(",", "")}</p>
+                        <div className="w-20 shrink-0 rounded-xl border p-2.5 text-center shadow-sm border-neutral-700 bg-card">
+                          <p className="font-mono text-xs font-bold uppercase tracking-wider text-primary">{e.date.split(" ")[0]}</p>
+                          <p className="mt-0.5 font-display text-2xl font-extrabold text-primary">{e.date.split(" ")[1]?.replace(",", "")}</p>
                         </div>
-                        <Badge className="font-semibold text-xs text-neutral-900 dark:text-neutral-100 border-neutral-300 dark:border-neutral-700">{e.type}</Badge>
+                        <Badge className="font-semibold text-xs text-primary border-neutral-700">{e.type}</Badge>
                       </div>
-                      <h3 className="mt-4 font-display text-base font-bold leading-snug tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
+                      <h3 className="mt-4 font-display text-base font-bold leading-snug tracking-tight group-hover:underline text-primary">
                         <Link href={`/events/${e.slug}`}>{e.title}</Link>
                       </h3>
-                      <div className="mt-3.5 space-y-1.5 font-sans text-xs font-semibold text-neutral-800 dark:text-neutral-200">
+                      <div className="mt-3.5 space-y-1.5 font-sans text-xs font-semibold text-neutral-200">
                         <p className="flex items-center gap-2">
-                          <Calendar className="size-4 text-neutral-900 dark:text-neutral-100" /> {e.date} · {e.time}
+                          <Calendar className="size-4 text-primary" /> {e.date} · {e.time}
                         </p>
                         <p className="flex items-center gap-2">
-                          <MapPin className="size-4 text-neutral-900 dark:text-neutral-100" /> {e.venue}
+                          <MapPin className="size-4 text-primary" /> {e.venue}
                         </p>
                       </div>
                     </div>
 
-                    <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4 dark:border-neutral-800">
+                    <div className="mt-6 flex items-center justify-between border-t pt-4 border-border">
                       <div className="flex gap-1">
                         {e.domains.slice(0, 2).map((dm) => (
                           <DomainBadge key={dm} domain={dm} />
@@ -194,11 +194,11 @@ export default function HomePage() {
             </RevealStagger>
           ) : (
             <RevealVisual>
-              <div className="rounded-2xl border border-neutral-300/80 dark:border-neutral-800/80 bg-white/50 dark:bg-neutral-950/50 p-12 text-center backdrop-blur-md">
-                <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-200">
+              <div className="rounded-2xl border border-border/80 bg-surface/50 p-12 text-center backdrop-blur-md">
+                <p className="font-mono text-xs font-bold uppercase tracking-widest text-neutral-200">
                   NO UPCOMING EVENTS
                 </p>
-                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">
+                <p className="mt-2 text-sm text-neutral-300">
                   New gatherings and technical sessions will appear here.
                 </p>
               </div>
@@ -208,7 +208,7 @@ export default function HomePage() {
       </section>
 
       {/* ------------------- 5. COMMUNITY ------------------- */}
-      <section id="community" className="relative py-16 sm:py-20 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
+      <section id="community" className="relative py-16 sm:py-20 border-t border-border/90 bg-surface scroll-mt-20">
         <Container>
           <RevealHeading>
             <SectionHeading
@@ -228,19 +228,19 @@ export default function HomePage() {
                       <div className="flex items-center gap-2.5">
                         <Avatar name={p.author} className="size-8 text-xs font-bold" />
                         <div>
-                          <p className="font-display text-sm font-bold text-neutral-900 dark:text-neutral-50">{p.author}</p>
-                          <p className="font-mono text-xs font-semibold text-neutral-800 dark:text-neutral-200">{p.role}</p>
+                          <p className="font-display text-sm font-bold text-primary">{p.author}</p>
+                          <p className="font-mono text-xs font-semibold text-neutral-200">{p.role}</p>
                         </div>
                       </div>
                     </div>
 
-                    <h3 className="mt-4 font-display text-base font-bold leading-snug tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
+                    <h3 className="mt-4 font-display text-base font-bold leading-snug tracking-tight group-hover:underline text-primary">
                       <Link href="/community">{p.title}</Link>
                     </h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">{p.excerpt}</p>
+                    <p className="mt-2.5 text-sm leading-relaxed text-neutral-200 font-medium">{p.excerpt}</p>
                   </div>
 
-                  <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4 dark:border-neutral-800">
+                  <div className="mt-6 flex items-center justify-between border-t pt-4 border-border">
                     <DomainBadge domain={p.domain} />
                     <Badge>{p.kind}</Badge>
                   </div>
@@ -252,7 +252,7 @@ export default function HomePage() {
       </section>
 
       {/* ------------------- 6. CHAPTERS ------------------- */}
-      <section id="chapters" className="relative py-16 sm:py-20 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-neutral-50/70 dark:bg-neutral-900/40 scroll-mt-20">
+      <section id="chapters" className="relative py-16 sm:py-20 border-t border-border/90 bg-card/40 scroll-mt-20">
         <Container>
           <RevealHeading>
             <SectionHeading
@@ -273,16 +273,16 @@ export default function HomePage() {
                         <span className="text-xl" role="img" aria-label={c.country}>
                           {c.flag}
                         </span>
-                        <h3 className="font-display text-lg sm:text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+                        <h3 className="font-display text-lg sm:text-xl font-bold tracking-tight text-primary">
                           {c.country}
                         </h3>
                       </div>
                     </div>
-                    <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-200">{c.city}</p>
-                    <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">{c.blurb}</p>
+                    <p className="mt-2 font-sans text-xs sm:text-sm font-semibold text-neutral-200">{c.city}</p>
+                    <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-200 font-medium">{c.blurb}</p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800">
+                  <div className="mt-6 pt-4 border-t border-border">
                     <Button href={`/chapters/${c.slug}`} variant="outline" size="sm" className="w-full font-sans font-semibold text-xs sm:text-sm">
                       Explore Chapter <ArrowUpRight className="size-3.5" />
                     </Button>
@@ -295,15 +295,15 @@ export default function HomePage() {
       </section>
 
       {/* ------------------- 7. ABOUT / CTA ------------------- */}
-      <section id="about" className="relative py-20 sm:py-28 border-t border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-950 scroll-mt-20">
+      <section id="about" className="relative py-20 sm:py-28 border-t border-border/90 bg-surface scroll-mt-20">
         <Container>
           <RevealVisual>
-            <div className="relative overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 p-10 text-center text-neutral-50 shadow-2xl sm:p-16">
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-10 text-center text-primary shadow-2xl sm:p-16">
               <Eyebrow className="text-neutral-300">Apply for Access</Eyebrow>
-              <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-neutral-50">
+              <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-primary">
                 Join Frontier Builders Worldwide
               </h2>
-              <p className="mx-auto mt-4 max-w-xl font-sans text-base sm:text-lg leading-relaxed text-white font-medium">
+              <p className="mx-auto mt-4 max-w-xl font-sans text-base sm:text-lg leading-relaxed text-primary font-medium">
                 Free membership for students, engineers, researchers, founders, and educators. Direct access to technical roadmaps, regional symposia, and active project channels.
               </p>
               
@@ -317,7 +317,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/about"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/40 bg-neutral-900/90 text-white hover:bg-neutral-800 hover:border-white px-6.5 h-12.5 font-sans text-sm sm:text-base font-bold shadow-sm transition-all duration-200 active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/40 bg-card/90 text-primary hover:bg-neutral-800 hover:border-white px-6.5 h-12.5 font-sans text-sm sm:text-base font-bold shadow-sm transition-all duration-200 active:scale-95"
                 >
                   View Membership Tiers
                 </Link>
@@ -325,7 +325,7 @@ export default function HomePage() {
 
               {/* Animated Live Member Counter */}
               <div className="mt-6 flex items-center justify-center gap-2 font-sans text-xs font-semibold text-neutral-300">
-                <span className="size-2 rounded-full bg-neutral-400 dark:bg-neutral-500 animate-pulse" aria-hidden />
+                <span className="size-2 rounded-full bg-neutral-500 animate-pulse" aria-hidden />
                 Practitioner-led global deep tech network
               </div>
             </div>

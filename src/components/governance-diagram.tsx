@@ -15,21 +15,21 @@ const NODES = [
 
 export function GovernanceDiagram({ className }: { className?: string }) {
   return (
-    <div className={cx("relative w-full rounded-2xl border border-neutral-800 bg-[#0A0A0A] p-6 sm:p-8 overflow-hidden shadow-2xl", className)}>
+    <div className={cx("relative w-full rounded-2xl border border-border bg-surface p-6 sm:p-8 overflow-hidden shadow-2xl", className)}>
       {/* Editorial Watermark */}
       <div className="absolute top-4 right-6 font-mono text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-600">
         AI Governance Decision Architecture // Fig. 04
       </div>
 
       <div className="mb-6">
-        <div className="inline-flex items-center gap-2 rounded-md border border-neutral-800 bg-neutral-900 px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-neutral-300">
+        <div className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-neutral-300">
           <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
           Algorithmic Audit & Risk System
         </div>
-        <h3 className="mt-3 font-display text-xl sm:text-2xl font-bold tracking-tight text-white">
+        <h3 className="mt-3 font-display text-xl sm:text-2xl font-bold tracking-tight text-primary">
           Interconnected Policy Nodes & Verification Pipelines
         </h3>
-        <p className="mt-1 font-sans text-xs sm:text-sm text-white max-w-xl">
+        <p className="mt-1 font-sans text-xs sm:text-sm text-primary max-w-xl">
           Deterministic evaluation rules, automated model cards, and human-in-the-loop oversight designed for EU AI Act & NIST AI RMF compliance.
         </p>
       </div>
@@ -45,23 +45,23 @@ export function GovernanceDiagram({ className }: { className?: string }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="group relative flex flex-col justify-between rounded-xl border border-neutral-800 bg-[#111111] p-4 sm:p-5 transition-all duration-300 hover:border-neutral-600 hover:bg-[#161616]"
+              className="group relative flex flex-col justify-between rounded-xl border border-border bg-card p-4 sm:p-5 transition-all duration-300 hover:border-neutral-600 hover:bg-[#161616]"
             >
               <div>
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-neutral-300">
                     {node.type}
                   </span>
-                  <div className="grid size-7 place-items-center rounded-lg border border-neutral-700 bg-neutral-900 text-neutral-200 transition-colors group-hover:border-neutral-500 group-hover:text-white">
+                  <div className="grid size-7 place-items-center rounded-lg border border-neutral-700 bg-card text-neutral-200 transition-colors group-hover:border-neutral-500 group-hover:text-primary">
                     <Icon className="size-4" />
                   </div>
                 </div>
-                <h4 className="mt-3 font-display text-sm sm:text-base font-bold text-neutral-100 group-hover:text-white">
+                <h4 className="mt-3 font-display text-sm sm:text-base font-bold text-primary group-hover:text-primary">
                   {node.title}
                 </h4>
               </div>
 
-              <div className="mt-4 flex items-center justify-between border-t border-neutral-800/80 pt-3 font-mono text-[10px] text-neutral-300">
+              <div className="mt-4 flex items-center justify-between border-t border-border/80 pt-3 font-mono text-[10px] text-neutral-300">
                 <span>Node 0{i + 1}</span>
                 <span className="text-emerald-400/90 font-medium flex items-center gap-1">
                   <span className="size-1.5 rounded-full bg-emerald-400" /> Active Verification
@@ -73,7 +73,7 @@ export function GovernanceDiagram({ className }: { className?: string }) {
       </div>
 
       {/* Bottom Architectural Legend */}
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-800/80 pt-4 font-mono text-xs text-neutral-300">
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border/80 pt-4 font-mono text-xs text-neutral-300">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1.5">
             <Lock className="size-3.5 text-neutral-300" /> Tamper-Proof Logs
@@ -82,7 +82,7 @@ export function GovernanceDiagram({ className }: { className?: string }) {
             <Network className="size-3.5 text-neutral-300" /> Multi-Agent Verification
           </span>
         </div>
-        <span className="text-white">ISO/IEC 42001 & NIST AI RMF Compliant</span>
+        <span className="text-primary">ISO/IEC 42001 & NIST AI RMF Compliant</span>
       </div>
     </div>
   );

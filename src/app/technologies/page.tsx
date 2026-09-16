@@ -30,29 +30,29 @@ export default function TechnologiesPage() {
                 <Card hover className="group flex flex-col justify-between p-6">
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="grid size-10 place-items-center rounded-lg border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100">
+                      <span className="grid size-10 place-items-center rounded-lg border border-neutral-700 bg-neutral-800 text-primary">
                         <Icon className="size-5" />
                       </span>
                     </div>
 
-                    <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
+                    <h2 className="mt-4 font-display text-2xl font-bold tracking-tight group-hover:underline text-primary">
                       <Link href={`/technologies/${d.techSlug}`}>{d.name}</Link>
                     </h2>
-                    <p className="mt-1.5 font-sans text-sm font-semibold text-neutral-700 dark:text-neutral-200">{d.tagline}</p>
-                    <p className="mt-3 font-sans text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">{d.description}</p>
+                    <p className="mt-1.5 font-sans text-sm font-semibold text-neutral-200">{d.tagline}</p>
+                    <p className="mt-3 font-sans text-sm leading-relaxed text-neutral-300">{d.description}</p>
                   </div>
 
                   <div>
-                    <div className="mt-6 grid grid-cols-3 divide-x divide-neutral-200 border-t border-neutral-200/80 pt-4 font-mono text-xs dark:divide-neutral-800 dark:border-neutral-800/80">
+                    <div className="mt-6 grid grid-cols-3 divide-x border-t pt-4 font-mono text-xs divide-border border-border/80">
                       {page.facts.map((f) => (
                         <div key={f.label} className="text-center first:pl-0 last:pr-0">
-                          <p className="font-bold text-neutral-900 dark:text-neutral-100">{f.value}</p>
+                          <p className="font-bold text-primary">{f.value}</p>
                           <p className="mt-0.5 text-[10px] text-neutral-300">{f.label}</p>
                         </div>
                       ))}
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800">
+                    <div className="mt-6 pt-4 border-t border-border">
                       <Button href={`/technologies/${d.techSlug}`} variant="outline" size="sm" className="w-full">
                         Explore Roadmap <ArrowUpRight className="size-3.5" />
                       </Button>

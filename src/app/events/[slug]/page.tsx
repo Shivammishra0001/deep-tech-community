@@ -21,12 +21,12 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
   return (
     <>
       {/* 1. Banner */}
-      <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
+      <section className="relative overflow-hidden border-b border-border/80">
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="max-w-3xl animate-rise">
             <Link
               href="/events"
-              className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
+              className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-muted hover:text-primary"
             >
               <ArrowLeft className="size-3.5" aria-hidden /> Return to All Events
             </Link>
@@ -37,10 +37,10 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                 <DomainBadge key={dm} domain={dm} />
               ))}
             </div>
-            <h1 className="mt-2.5 sm:mt-3 font-display text-3xl font-semibold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl lg:text-5xl">
+            <h1 className="mt-2.5 sm:mt-3 font-display text-3xl font-semibold leading-[1.1] tracking-tight text-primary sm:text-4xl lg:text-5xl">
               {ev.title}
             </h1>
-            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-neutral-500">
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-muted">
               <span className="inline-flex items-center gap-2">
                 <Calendar className="size-3.5" aria-hidden /> {ev.date}
               </span>
@@ -61,7 +61,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           {/* Abstract */}
           <section>
             <Eyebrow>Event Abstract</Eyebrow>
-            <div className="mt-4 space-y-4 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+            <div className="mt-4 space-y-4 text-sm leading-relaxed text-neutral-300">
               {ev.description.map((p) => (
                 <p key={p.slice(0, 32)}>{p}</p>
               ))}
@@ -73,11 +73,11 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
             <Eyebrow>Agenda &amp; Time Schedule</Eyebrow>
             <ol className="mt-5 space-y-3 font-mono text-xs">
               {ev.agenda.map((item) => (
-                <li key={item.time + item.title} className="flex gap-4 rounded-md border border-neutral-200 bg-white p-4 dark:border-neutral-800 dark:bg-neutral-900">
-                  <span className="w-20 shrink-0 font-bold text-neutral-900 dark:text-neutral-100">{item.time}</span>
+                <li key={item.time + item.title} className="flex gap-4 rounded-md border p-4 border-border bg-card">
+                  <span className="w-20 shrink-0 font-bold text-primary">{item.time}</span>
                   <div>
-                    <p className="font-sans font-semibold text-neutral-900 dark:text-neutral-100">{item.title}</p>
-                    {item.speaker && <p className="mt-0.5 font-sans text-neutral-500">{item.speaker}</p>}
+                    <p className="font-sans font-semibold text-primary">{item.title}</p>
+                    {item.speaker && <p className="mt-0.5 font-sans text-muted">{item.speaker}</p>}
                   </div>
                 </li>
               ))}
@@ -92,8 +92,8 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
                 <Card key={s.name} className="flex items-center gap-3.5">
                   <Avatar name={s.name} className="size-10" />
                   <div className="min-w-0">
-                    <p className="font-display text-sm font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">{s.name}</p>
-                    <p className="font-mono text-[11px] text-neutral-500">{s.role}</p>
+                    <p className="font-display text-sm font-semibold tracking-tight text-primary">{s.name}</p>
+                    <p className="font-mono text-[11px] text-muted">{s.role}</p>
                   </div>
                 </Card>
               ))}
@@ -105,11 +105,11 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
             <Eyebrow>Venue &amp; Logistics</Eyebrow>
             <Card className="mt-4">
               <div className="flex items-start gap-3">
-                <MapPin className="mt-1 size-5 text-neutral-900 dark:text-neutral-100" />
+                <MapPin className="mt-1 size-5 text-primary" />
                 <div>
-                  <h3 className="font-display text-base font-semibold text-neutral-900 dark:text-neutral-100">{ev.venue}</h3>
-                  <p className="mt-1 font-mono text-xs text-neutral-500">Format: {ev.format} · Capacity: {ev.capacity}</p>
-                  <p className="mt-3 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+                  <h3 className="font-display text-base font-semibold text-primary">{ev.venue}</h3>
+                  <p className="mt-1 font-mono text-xs text-muted">Format: {ev.format} · Capacity: {ev.capacity}</p>
+                  <p className="mt-3 text-xs leading-relaxed text-secondary">
                     Detailed access instructions, room assignments, and streaming credentials will be dispatched to confirmed attendees 48 hours prior to the event start time.
                   </p>
                 </div>
@@ -120,14 +120,14 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           {/* 6. FAQ */}
           <section>
             <Eyebrow>Frequently Asked Questions</Eyebrow>
-            <Card className="mt-4 p-0 divide-y divide-neutral-200 dark:divide-neutral-800">
+            <Card className="mt-4 p-0 divide-y divide-border">
               {ev.faqs.map((f) => (
                 <details key={f.q} className="group p-4">
-                  <summary className="flex cursor-pointer list-none items-center justify-between font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                  <summary className="flex cursor-pointer list-none items-center justify-between font-display text-sm font-semibold text-primary">
                     {f.q}
-                    <ChevronDown className="size-4 text-neutral-400 transition-transform group-open:rotate-180" />
+                    <ChevronDown className="size-4 text-secondary transition-transform group-open:rotate-180" />
                   </summary>
-                  <p className="mt-2 text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">{f.a}</p>
+                  <p className="mt-2 text-xs leading-relaxed text-secondary">{f.a}</p>
                 </details>
               ))}
             </Card>
@@ -137,9 +137,9 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
           <section>
             <Eyebrow>Event Gallery &amp; Archives</Eyebrow>
             <Card className="mt-4 text-center py-8">
-              <Camera className="mx-auto size-6 text-neutral-400" />
-              <p className="mt-3 font-display text-sm font-semibold text-neutral-900 dark:text-neutral-100">Symposium Recordings &amp; Photo Archives</p>
-              <p className="mt-1 font-mono text-xs text-neutral-500 max-w-md mx-auto">
+              <Camera className="mx-auto size-6 text-secondary" />
+              <p className="mt-3 font-display text-sm font-semibold text-primary">Symposium Recordings &amp; Photo Archives</p>
+              <p className="mt-1 font-mono text-xs text-muted max-w-md mx-auto">
                 Photo archives and slide decks are published to the member library within 7 days following event completion.
               </p>
             </Card>
@@ -150,25 +150,25 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <Card>
             <div className="flex items-center justify-between">
-              <p className="font-display text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">Event Registration</p>
-              <BadgeCheck className="size-5 text-neutral-900 dark:text-neutral-100" />
+              <p className="font-display text-base font-semibold tracking-tight text-primary">Event Registration</p>
+              <BadgeCheck className="size-5 text-primary" />
             </div>
-            <dl className="mt-4 space-y-2.5 border-b border-neutral-100 pb-4 font-mono text-xs text-neutral-500 dark:border-neutral-800">
+            <dl className="mt-4 space-y-2.5 border-b pb-4 font-mono text-xs text-muted border-border">
               <div className="flex justify-between">
                 <dt>Date</dt>
-                <dd className="font-semibold text-neutral-900 dark:text-neutral-100">{ev.date}</dd>
+                <dd className="font-semibold text-primary">{ev.date}</dd>
               </div>
               <div className="flex justify-between">
                 <dt>Format</dt>
-                <dd className="font-semibold text-neutral-900 dark:text-neutral-100">{ev.format}</dd>
+                <dd className="font-semibold text-primary">{ev.format}</dd>
               </div>
               <div className="flex justify-between">
                 <dt>Capacity</dt>
-                <dd className="font-semibold text-neutral-900 dark:text-neutral-100">{ev.capacity}</dd>
+                <dd className="font-semibold text-primary">{ev.capacity}</dd>
               </div>
               <div className="flex justify-between">
                 <dt>Cost</dt>
-                <dd className="font-semibold text-neutral-900 dark:text-neutral-100">{ev.price}</dd>
+                <dd className="font-semibold text-primary">{ev.price}</dd>
               </div>
             </dl>
             <div className="mt-5">

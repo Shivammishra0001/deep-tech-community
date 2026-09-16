@@ -1,15 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar, Footer } from "@/components/chrome";
 import { GlobalClickGlow } from "@/components/glow";
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
-  ],
+  themeColor: "#050505",
   width: "device-width",
   initialScale: 1,
 };
@@ -94,14 +90,14 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark" style={{ colorScheme: "dark" }} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" style={{ colorScheme: "dark" }} data-scroll-behavior="smooth">
       <head>
         <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
         <link rel="icon" href="/favicon.png?v=2" type="image/png" />
         <link rel="shortcut icon" href="/favicon.png?v=2" />
         <link rel="apple-touch-icon" href="/apple-icon.png?v=2" />
       </head>
-      <body className="min-h-screen font-sans bg-white text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50 selection:bg-neutral-900 selection:text-neutral-50 dark:selection:bg-neutral-100 dark:selection:text-neutral-950">
+      <body className="min-h-screen font-sans antialiased bg-background text-primary selection:bg-primary selection:text-background">
         <Script
           id="json-ld"
           type="application/ld+json"
@@ -109,20 +105,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-neutral-900 focus:px-4 focus:py-2.5 focus:font-mono focus:text-xs focus:font-semibold focus:text-neutral-50 focus:shadow-lg dark:focus:bg-neutral-100 dark:focus:text-neutral-950"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:px-4 focus:py-2.5 focus:font-mono focus:text-xs focus:font-semibold focus:shadow-lg focus:bg-neutral-100 focus:text-neutral-950"
         >
           Skip to main content
         </a>
-        <ThemeProvider>
-          <GlobalClickGlow />
-          <div className="flex min-h-screen flex-col">
-            <Navbar />
-            <main id="main" className="flex-1 min-w-0" tabIndex={-1}>
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </ThemeProvider>
+        <GlobalClickGlow />
+        <div className="flex min-h-screen flex-col">
+          <Navbar />
+          <main id="main" className="flex-1 min-w-0" tabIndex={-1}>
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

@@ -13,13 +13,13 @@ export const metadata: Metadata = {
 
 export function RegionalMapSchematic() {
   return (
-    <div className="relative mb-12 overflow-hidden rounded-2xl border border-neutral-300 dark:border-neutral-800 bg-neutral-50/80 dark:bg-neutral-900/60 p-6 sm:p-8 backdrop-blur-md shadow-sm">
+    <div className="relative mb-12 overflow-hidden rounded-2xl border border-border bg-card/60 p-6 sm:p-8 backdrop-blur-md shadow-sm">
 
       {/* Top Header Badge */}
       <div className="flex items-center justify-between mb-4 relative z-10">
         <div className="flex items-center gap-2">
-          <span className="size-2 rounded-full bg-neutral-400 dark:bg-neutral-300 animate-pulse" />
-          <span className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-neutral-600 dark:text-neutral-200">
+          <span className="size-2 rounded-full bg-neutral-300 animate-pulse" />
+          <span className="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-neutral-200">
             REGIONAL NETWORK NODES
           </span>
         </div>
@@ -37,7 +37,7 @@ export function RegionalMapSchematic() {
           </defs>
 
           {/* Grid Latitude & Longitude Lines */}
-          <g className="stroke-neutral-300/60 dark:stroke-neutral-800/80" strokeWidth="1" strokeDasharray="4 6">
+          <g className="stroke-neutral-800/80" strokeWidth="1" strokeDasharray="4 6">
             <line x1="50" y1="100" x2="850" y2="100" />
             <line x1="50" y1="200" x2="850" y2="200" />
             <line x1="50" y1="300" x2="850" y2="300" />
@@ -47,15 +47,15 @@ export function RegionalMapSchematic() {
           </g>
 
           {/* Abstract World / Asia Geometric Polygons */}
-          <g className="fill-none stroke-neutral-400/40 dark:stroke-neutral-700/50" strokeWidth="1.5">
+          <g className="fill-none stroke-neutral-700/50" strokeWidth="1.5">
             {/* Europe / Eurasia outline */}
             <polygon points="120,80 280,70 340,110 300,160 220,150 140,110" />
             {/* Asia continent schematic */}
             <polygon points="360,60 620,50 780,120 720,220 540,210 400,160" />
             {/* India subcontinent schematic */}
-            <polygon points="410,175 480,170 510,245 445,290 395,230" className="stroke-neutral-500/80 dark:stroke-neutral-500/90" strokeWidth="1.8" />
+            <polygon points="410,175 480,170 510,245 445,290 395,230" className="stroke-neutral-500/90" strokeWidth="1.8" />
             {/* Southeast Asia & Malaysia schematic */}
-            <polygon points="560,210 630,220 660,270 590,285 540,250" className="stroke-neutral-500/80 dark:stroke-neutral-500/90" strokeWidth="1.8" />
+            <polygon points="560,210 630,220 660,270 590,285 540,250" className="stroke-neutral-500/90" strokeWidth="1.8" />
             {/* Australia schematic */}
             <polygon points="680,270 820,260 840,340 710,350" />
           </g>
@@ -69,10 +69,10 @@ export function RegionalMapSchematic() {
 
           {/* ---------------- REGIONAL NODE 1: INDIA (IN) ---------------- */}
           <g transform="translate(445, 250)">
-            <circle r="18" className="fill-neutral-400/20 dark:fill-neutral-500/15 animate-ping" />
-            <circle r="8" className="fill-white stroke-neutral-800 dark:fill-neutral-950 dark:stroke-neutral-200" strokeWidth="2.5" />
-            <circle r="3" className="fill-neutral-800 dark:fill-neutral-200" />
-            <text x="14" y="-12" className="fill-neutral-900 dark:fill-neutral-50 font-mono text-[11px] font-bold">
+            <circle r="18" className="fill-neutral-500/15 animate-ping" />
+            <circle r="8" className="fill-neutral-950 stroke-neutral-200" strokeWidth="2.5" />
+            <circle r="3" className="fill-neutral-200" />
+            <text x="14" y="-12" className="fill-neutral-50 font-mono text-[11px] font-bold">
               INDIA [IN]
             </text>
             <text x="14" y="2" className="fill-neutral-500 font-mono text-[9px]">
@@ -82,10 +82,10 @@ export function RegionalMapSchematic() {
 
           {/* ---------------- REGIONAL NODE 2: MALAYSIA (MY) ---------------- */}
           <g transform="translate(610, 270)">
-            <circle r="16" className="fill-neutral-400/20 dark:fill-neutral-500/15 animate-ping" />
-            <circle r="7" className="fill-white stroke-neutral-700 dark:fill-neutral-950 dark:stroke-neutral-300" strokeWidth="2.5" />
-            <circle r="2.5" className="fill-neutral-700 dark:fill-neutral-300" />
-            <text x="12" y="-10" className="fill-neutral-900 dark:fill-neutral-50 font-mono text-[11px] font-bold">
+            <circle r="16" className="fill-neutral-500/15 animate-ping" />
+            <circle r="7" className="fill-neutral-950 stroke-neutral-300" strokeWidth="2.5" />
+            <circle r="2.5" className="fill-neutral-300" />
+            <text x="12" y="-10" className="fill-neutral-50 font-mono text-[11px] font-bold">
               MALAYSIA [MY]
             </text>
             <text x="12" y="4" className="fill-neutral-500 font-mono text-[9px]">
@@ -95,10 +95,10 @@ export function RegionalMapSchematic() {
 
           {/* ---------------- REGIONAL NODE 3: SINGAPORE (SG) ---------------- */}
           <g transform="translate(640, 295)">
-            <circle r="16" className="fill-neutral-400/20 dark:fill-neutral-500/15 animate-ping" />
-            <circle r="7" className="fill-white stroke-neutral-700 dark:fill-neutral-950 dark:stroke-neutral-300" strokeWidth="2.5" />
-            <circle r="2.5" className="fill-neutral-700 dark:fill-neutral-300" />
-            <text x="12" y="14" className="fill-neutral-900 dark:fill-neutral-50 font-mono text-[11px] font-bold">
+            <circle r="16" className="fill-neutral-500/15 animate-ping" />
+            <circle r="7" className="fill-neutral-950 stroke-neutral-300" strokeWidth="2.5" />
+            <circle r="2.5" className="fill-neutral-300" />
+            <text x="12" y="14" className="fill-neutral-50 font-mono text-[11px] font-bold">
               SINGAPORE [SG]
             </text>
             <text x="12" y="26" className="fill-neutral-500 font-mono text-[9px]">
@@ -132,27 +132,27 @@ export default function ChaptersPage() {
                       {c.flag}
                     </span>
                   </div>
-                  <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
+                  <h2 className="mt-4 font-display text-2xl font-bold tracking-tight group-hover:underline text-primary">
                     <Link href={`/chapters/${c.slug}`}>{c.country}</Link>
                   </h2>
-                  <p className="mt-1.5 flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold text-neutral-700 dark:text-neutral-200">
-                    <MapPin className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden /> {c.city}
+                  <p className="mt-1.5 flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold text-neutral-200">
+                    <MapPin className="size-4 text-primary" aria-hidden /> {c.city}
                   </p>
-                  <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">{c.blurb}</p>
+                  <p className="mt-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-200 font-medium">{c.blurb}</p>
 
-                  <div className="mt-5 space-y-2 border-t border-neutral-100 pt-4 font-sans text-xs sm:text-sm font-medium text-neutral-700 dark:border-neutral-800 dark:text-neutral-300">
+                  <div className="mt-5 space-y-2 border-t pt-4 font-sans text-xs sm:text-sm font-medium border-border text-neutral-300">
                     <p className="flex items-center gap-2">
-                      <Users className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden />
+                      <Users className="size-4 text-primary" aria-hidden />
                       Regional Chapter · Est. {c.founded}
                     </p>
                     <p className="flex items-center gap-2 truncate">
-                      <Calendar className="size-4 text-neutral-900 dark:text-neutral-100" aria-hidden />
+                      <Calendar className="size-4 text-primary" aria-hidden />
                       Next: {c.events[0]?.title}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4 dark:border-neutral-800">
+                <div className="mt-6 flex items-center justify-between border-t pt-4 border-border">
                   <div className="flex -space-x-1.5">
                     {c.leads.slice(0, 3).map((l) => (
                       <Avatar key={l.name} name={l.name} className="size-7 text-[9px]" />
@@ -172,10 +172,10 @@ export default function ChaptersPage() {
           <Card className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
             <div>
               <Eyebrow>Start a Chapter</Eyebrow>
-              <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+              <h2 className="mt-2 font-display text-xl font-semibold tracking-tight text-primary">
                 Establish a Chapter in Your City
               </h2>
-              <p className="mt-2 max-w-xl text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">
+              <p className="mt-2 max-w-xl text-xs leading-relaxed text-neutral-300">
                 We expand deliberately — driven by committed lead organizers. If you can organize monthly technical labs and gather ten builders, we supply the infrastructure and global platform.
               </p>
             </div>

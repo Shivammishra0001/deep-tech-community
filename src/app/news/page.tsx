@@ -164,12 +164,12 @@ export default function NewsPage() {
 
       <Container className="py-6 sm:py-8 space-y-6">
         {/* Top Control Bar: Search & Admin Manual Refresh */}
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-neutral-200/80 pb-6 dark:border-neutral-800/80">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b pb-6 border-border/80">
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={handleRefreshNews}
               disabled={refreshing}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 bg-neutral-100 px-3 py-1.5 font-mono text-xs font-bold text-neutral-800 transition-colors hover:bg-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-bold transition-colors border-neutral-700 bg-neutral-800 text-neutral-200 hover:bg-neutral-700 cursor-pointer disabled:opacity-50"
             >
               {refreshing ? <Loader2 className="size-3.5 animate-spin" /> : <RefreshCw className="size-3.5" />}
               {refreshing ? "Fetching RSS Feeds..." : "Refresh News"}
@@ -177,14 +177,14 @@ export default function NewsPage() {
           </div>
 
           <div className="relative w-full sm:w-80">
-            <Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-neutral-400" />
+            <Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-secondary" />
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search AI, Quantum, Space, Cyber..."
               aria-label="Search news briefings"
-              className="h-10 w-full rounded-xl border border-neutral-300 bg-white pl-10 pr-4 font-sans text-xs text-neutral-900 placeholder:text-neutral-400 transition-colors focus:border-neutral-900 focus:outline-none dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100"
+              className="h-10 w-full rounded-xl border pl-10 pr-4 font-sans text-xs placeholder:text-secondary transition-colors focus:border-neutral-900 focus:outline-none border-neutral-700 bg-surface text-primary"
             />
           </div>
         </div>
@@ -197,8 +197,8 @@ export default function NewsPage() {
               onClick={() => setCategoryFilter(cat)}
               className={`rounded-lg px-3 py-1.5 font-sans text-xs font-semibold transition-all cursor-pointer ${
                 categoryFilter === cat
-                  ? "bg-neutral-900 text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-xs"
-                  : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800"
+                  ? "bg-neutral-100 text-neutral-950 shadow-xs"
+                  : "bg-card text-secondary hover:bg-neutral-800"
               }`}
             >
               {cat}
@@ -208,48 +208,48 @@ export default function NewsPage() {
 
         {/* Error Banner */}
         {error && (
-          <div role="alert" className="rounded-xl border border-red-300 bg-red-50 p-4 text-xs font-semibold text-red-900 dark:border-red-900 dark:bg-red-950 dark:text-red-200 flex items-center gap-2">
+          <div role="alert" className="rounded-xl border p-4 text-xs font-semibold border-red-900 bg-red-950 text-red-200 flex items-center gap-2">
             <AlertCircle className="size-4 shrink-0" /> {error}
           </div>
         )}
 
         {/* Featured News Hero Card */}
         {featuredArticle && categoryFilter === "All Categories" && !query && (
-          <div className="overflow-hidden rounded-2xl border border-neutral-300 bg-white shadow-lg dark:border-neutral-800 dark:bg-neutral-900/90">
+          <div className="overflow-hidden rounded-2xl border shadow-lg border-border bg-card/90">
             <div className="grid md:grid-cols-2">
-              <div className="relative h-64 md:h-auto overflow-hidden bg-neutral-950">
+              <div className="relative h-64 md:h-auto overflow-hidden bg-surface">
                 <SafeImage
                   src={featuredArticle.image_url}
                   alt={featuredArticle.title}
                   className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                 />
-                <div className="absolute left-3 top-3 rounded-md bg-neutral-950/80 px-2.5 py-1 font-mono text-[10px] font-bold text-neutral-200 backdrop-blur-md">
+                <div className="absolute left-3 top-3 rounded-md bg-surface/80 px-2.5 py-1 font-mono text-[10px] font-bold text-neutral-200 backdrop-blur-md">
                   FEATURED BRIEFING
                 </div>
               </div>
               <div className="flex flex-col justify-between p-6 sm:p-8">
                 <div>
-                  <div className="flex items-center gap-2 font-mono text-xs text-neutral-500">
-                    <span className="font-bold text-neutral-900 dark:text-neutral-100">{featuredArticle.category}</span>
+                  <div className="flex items-center gap-2 font-mono text-xs text-muted">
+                    <span className="font-bold text-primary">{featuredArticle.category}</span>
                     <span>·</span>
                     <span>{new Date(featuredArticle.published_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                   </div>
-                  <h2 className="mt-3 font-display text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 leading-snug">
+                  <h2 className="mt-3 font-display text-xl sm:text-2xl font-bold tracking-tight text-primary leading-snug">
                     {featuredArticle.title}
                   </h2>
-                  <p className="mt-3 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3 leading-relaxed">
+                  <p className="mt-3 text-xs sm:text-sm text-secondary line-clamp-3 leading-relaxed">
                     {featuredArticle.summary}
                   </p>
                 </div>
-                <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-neutral-200/80 pt-4 dark:border-neutral-800 font-mono text-xs">
-                  <span className="text-neutral-500 truncate max-w-[200px]">
-                    Source: <strong className="text-neutral-700 dark:text-neutral-200">{featuredArticle.source}</strong>
+                <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t pt-4 border-border font-mono text-xs">
+                  <span className="text-muted truncate max-w-[200px]">
+                    Source: <strong className="text-neutral-200">{featuredArticle.source}</strong>
                   </span>
                   <a
                     href={featuredArticle.source_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 bg-white px-3 py-1.5 font-sans font-semibold text-neutral-900 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+                    className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-sans font-semibold border-neutral-700 bg-neutral-800 text-primary hover:bg-neutral-700 transition-colors"
                   >
                     Read Original Article <ExternalLink className="size-3.5" />
                   </a>
@@ -262,16 +262,16 @@ export default function NewsPage() {
         {/* Loading State */}
         {loading ? (
           <div className="mt-16 flex flex-col items-center justify-center gap-3 text-center">
-            <Loader2 className="size-8 animate-spin text-neutral-500" />
-            <p className="font-mono text-xs text-neutral-500">Fetching live Deep Tech news from database...</p>
+            <Loader2 className="size-8 animate-spin text-muted" />
+            <p className="font-mono text-xs text-muted">Fetching live Deep Tech news from database...</p>
           </div>
         ) : filteredArticles.length === 0 ? (
           /* Empty State */
-          <div className="mt-16 rounded-2xl border border-dashed border-neutral-300 p-12 text-center dark:border-neutral-800">
-            <p className="font-mono text-sm font-bold text-neutral-700 dark:text-neutral-200">
+          <div className="mt-16 rounded-2xl border border-dashed p-12 text-center border-border">
+            <p className="font-mono text-sm font-bold text-neutral-200">
               No news briefings found for "{query || categoryFilter}".
             </p>
-            <p className="mt-1 font-sans text-xs text-neutral-500">
+            <p className="mt-1 font-sans text-xs text-muted">
               Try selecting another category or click "Refresh News" to trigger an RSS feed sync.
             </p>
             <button
@@ -279,7 +279,7 @@ export default function NewsPage() {
                 setQuery("");
                 setCategoryFilter("All Categories");
               }}
-              className="mt-4 rounded-lg bg-neutral-900 px-4 py-2 font-sans text-xs font-bold text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 cursor-pointer"
+              className="mt-4 rounded-lg px-4 py-2 font-sans text-xs font-bold bg-neutral-100 text-neutral-950 cursor-pointer"
             >
               Clear Search Filters
             </button>
@@ -290,11 +290,11 @@ export default function NewsPage() {
             {filteredArticles.map((article) => (
               <RevealItem key={article.id}>
                 <div
-                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-neutral-200 bg-white p-5 shadow-xs transition-all duration-300 hover:border-neutral-400 hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/80 dark:hover:border-neutral-700"
+                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border p-5 shadow-xs transition-all duration-300 hover:shadow-md border-border bg-card/80 hover:border-neutral-700"
                 >
                   <div>
                     {/* Article Image */}
-                    <div className="relative mb-4 h-44 overflow-hidden rounded-xl bg-neutral-950">
+                    <div className="relative mb-4 h-44 overflow-hidden rounded-xl bg-surface">
                       <img
                         src={article.image_url}
                         onError={(e) => {
@@ -303,34 +303,34 @@ export default function NewsPage() {
                         alt={article.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute left-2.5 top-2.5 rounded-md bg-neutral-950/80 px-2 py-0.5 font-mono text-[9px] font-bold text-neutral-200 backdrop-blur-md">
+                      <div className="absolute left-2.5 top-2.5 rounded-md bg-surface/80 px-2 py-0.5 font-mono text-[9px] font-bold text-neutral-200 backdrop-blur-md">
                         {article.category}
                       </div>
                     </div>
 
                     {/* Title & Metadata */}
-                    <div className="flex items-center gap-2 font-mono text-[11px] text-neutral-500 dark:text-neutral-400">
+                    <div className="flex items-center gap-2 font-mono text-[11px] text-secondary">
                       <span>{article.source}</span>
                       <span>•</span>
                       <span>{new Date(article.published_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                     </div>
 
-                    <h3 className="mt-2.5 font-display text-base font-bold tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50 line-clamp-2 cursor-pointer">
+                    <h3 className="mt-2.5 font-display text-base font-bold tracking-tight group-hover:underline text-primary line-clamp-2 cursor-pointer">
                       <Link href={`/news/${article.id}`}>{article.title}</Link>
                     </h3>
 
-                    <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-600 dark:text-neutral-200 line-clamp-3">
+                    <p className="mt-2 font-sans text-xs leading-relaxed text-neutral-200 line-clamp-3">
                       {article.summary}
                     </p>
                   </div>
 
                   {/* Footer Link */}
-                  <div className="mt-5 border-t border-neutral-100 pt-3 dark:border-neutral-800/80">
+                  <div className="mt-5 border-t pt-3 border-border/80">
                     <a
                       href={article.source_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-neutral-300 bg-neutral-50 py-2 font-mono text-xs font-bold text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-neutral-50 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-100 dark:hover:text-neutral-950"
+                      className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg border py-2 font-mono text-xs font-bold transition-colors border-neutral-700 bg-surface text-primary hover:bg-neutral-100 hover:text-neutral-950"
                     >
                       Read Original Article <ExternalLink className="size-3.5" />
                     </a>

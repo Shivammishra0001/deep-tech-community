@@ -42,9 +42,9 @@ function FieldWithIcon({
   icon?: any;
 }) {
   return (
-    <div className="group relative flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100 overflow-hidden">
+    <div className="group relative flex h-11 w-full items-center rounded-lg border border-neutral-700 bg-surface transition-colors focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-100 overflow-hidden">
       {Icon && (
-        <div className="flex size-10 shrink-0 items-center justify-center text-neutral-400 pointer-events-none select-none">
+        <div className="flex size-10 shrink-0 items-center justify-center text-secondary pointer-events-none select-none">
           <Icon className="size-4" />
         </div>
       )}
@@ -56,7 +56,7 @@ function FieldWithIcon({
         onChange={onChange}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className={`h-full flex-1 min-w-0 bg-transparent text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none border-none ring-0 shadow-none appearance-none ${
+        className={`h-full flex-1 min-w-0 bg-transparent text-sm text-primary placeholder:text-muted focus:outline-none border-none ring-0 shadow-none appearance-none ${
           Icon ? "pr-3.5" : "px-3.5"
         }`}
       />
@@ -82,8 +82,8 @@ function PasswordFieldWithIcon({
   const [show, setShow] = useState(false);
 
   return (
-    <div className="group relative flex h-11 w-full items-center rounded-lg border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-950 transition-colors focus-within:border-neutral-900 dark:focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-900 dark:focus-within:ring-neutral-100 overflow-hidden">
-      <div className="flex size-10 shrink-0 items-center justify-center text-neutral-400 pointer-events-none select-none">
+    <div className="group relative flex h-11 w-full items-center rounded-lg border border-neutral-700 bg-surface transition-colors focus-within:border-neutral-100 focus-within:ring-1 focus-within:ring-neutral-100 overflow-hidden">
+      <div className="flex size-10 shrink-0 items-center justify-center text-secondary pointer-events-none select-none">
         <Lock className="size-4" />
       </div>
       <input
@@ -94,14 +94,14 @@ function PasswordFieldWithIcon({
         onChange={onChange}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className="h-full flex-1 min-w-0 bg-transparent px-0 font-mono text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-400 dark:placeholder:text-neutral-500 focus:outline-none border-none ring-0 shadow-none appearance-none"
+        className="h-full flex-1 min-w-0 bg-transparent px-0 font-mono text-sm text-primary placeholder:text-muted focus:outline-none border-none ring-0 shadow-none appearance-none"
       />
       <button
         type="button"
         onClick={() => setShow(!show)}
         title={show ? "Hide password" : "Show password"}
         tabIndex={-1}
-        className="flex size-10 shrink-0 items-center justify-center text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors cursor-pointer outline-none"
+        className="flex size-10 shrink-0 items-center justify-center text-secondary hover:text-primary transition-colors cursor-pointer outline-none"
       >
         {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
       </button>
@@ -274,22 +274,22 @@ export default function LoginPage() {
   return (
     <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden py-12 lg:py-16">
       <div className="relative w-full max-w-5xl animate-rise px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl border border-neutral-300 dark:border-neutral-800 bg-white/95 dark:bg-neutral-900/95 shadow-2xl overflow-hidden backdrop-blur-xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl border border-border bg-card/95 shadow-2xl overflow-hidden backdrop-blur-xl">
 
           {/* ---------------- LEFT PANEL (Obsidian Theme with DTS Orbits & Tagline) ---------------- */}
-          <div className="hidden md:flex flex-col justify-between p-10 lg:p-12 bg-neutral-950 text-neutral-50 relative overflow-hidden border-r border-neutral-800">
+          <div className="hidden md:flex flex-col justify-between p-10 lg:p-12 bg-surface text-primary relative overflow-hidden border-r border-border">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-96 rounded-full bg-white/5 blur-3xl pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 rounded-md border border-neutral-800 bg-neutral-900 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-300">
-                <span className="size-1.5 rounded-full bg-neutral-400 dark:bg-neutral-500 animate-pulse" />
+              <div className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-300">
+                <span className="size-1.5 rounded-full bg-neutral-500 animate-pulse" />
                 ENTERPRISE MEMBER PORTAL
               </div>
 
-              <h2 className="mt-6 font-display text-2xl lg:text-3xl font-extrabold tracking-tight leading-tight text-neutral-50">
+              <h2 className="mt-6 font-display text-2xl lg:text-3xl font-extrabold tracking-tight leading-tight text-primary">
                 Where Frontier Builders Engineer the Future.
               </h2>
-              <p className="mt-3 font-sans text-sm leading-relaxed text-neutral-400 font-normal">
+              <p className="mt-3 font-sans text-sm leading-relaxed text-secondary font-normal">
                 Member-governed access to technical roadmaps, paper breakdowns, and regional symposia across AI, Quantum, Cybersecurity, and AI Governance.
               </p>
             </div>
@@ -298,27 +298,27 @@ export default function LoginPage() {
               <HeroOrbits className="max-w-[280px] lg:max-w-[320px]" />
             </div>
 
-            <div className="relative z-10 border-t border-neutral-800/80 pt-6">
+            <div className="relative z-10 border-t border-border/80 pt-6">
               <p className="font-sans text-xs sm:text-sm italic leading-relaxed text-neutral-300">
                 &ldquo;Direct peer access to quantum researchers and SOC playbooks transformed how our team deploys frontier infrastructure.&rdquo;
               </p>
               <div className="mt-3 flex items-center gap-2.5">
-                <div className="size-7 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center font-mono text-xs font-bold text-neutral-100">
+                <div className="size-7 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center font-mono text-xs font-bold text-primary">
                   EM
                 </div>
                 <div>
                   <p className="font-display text-xs font-bold text-neutral-200">Dr. Elena Marchetti</p>
-                  <p className="font-mono text-[10px] text-neutral-400">Quantum Information Lead · Milan</p>
+                  <p className="font-mono text-[10px] text-secondary">Quantum Information Lead · Milan</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* ---------------- RIGHT PANEL (Direct Email & Password Form) ---------------- */}
-          <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center bg-white/95 dark:bg-neutral-900/95">
-            <div className="flex items-center justify-between border-b border-neutral-200/90 pb-6 dark:border-neutral-800">
+          <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center bg-card/95">
+            <div className="flex items-center justify-between border-b pb-6 border-border">
               <Logo />
-              <Badge className="font-mono text-[10px] font-bold uppercase tracking-wider text-neutral-900 dark:text-neutral-100">
+              <Badge className="font-mono text-[10px] font-bold uppercase tracking-wider text-primary">
                 <ShieldCheck className="mr-1 size-3.5" /> SECURE AUTH
               </Badge>
             </div>
@@ -326,14 +326,14 @@ export default function LoginPage() {
             {/* DONE / LOGGED IN SUCCESS */}
             {step === "done" && (
               <div className="mt-8 text-center">
-                <span className="mx-auto grid size-14 place-items-center rounded-2xl border border-neutral-300 bg-neutral-100 text-neutral-900 shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-50">
+                <span className="mx-auto grid size-14 place-items-center rounded-2xl border shadow-sm border-neutral-700 bg-neutral-800 text-primary">
                   <Check className="size-7" aria-hidden />
                 </span>
-                <h1 className="mt-5 font-display text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+                <h1 className="mt-5 font-display text-2xl font-bold tracking-tight text-primary">
                   Welcome to Deep Tech Community!
                 </h1>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">
-                  Hello <strong className="text-neutral-900 dark:text-neutral-100">{fullName || loginIdentifier.split("@")[0] || email.split("@")[0] || "Member"}</strong>, you are signed in successfully.
+                <p className="mt-2 text-sm leading-relaxed text-neutral-200 font-medium">
+                  Hello <strong className="text-primary">{fullName || loginIdentifier.split("@")[0] || email.split("@")[0] || "Member"}</strong>, you are signed in successfully.
                 </p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                   <Button href={redirectPath || "/community"} variant="primary" size="lg" className="w-full font-bold">
@@ -350,14 +350,14 @@ export default function LoginPage() {
               <div className="mt-6">
                 {/* Redirect Banner Notice */}
                 {redirectPath && (
-                  <div className="mb-6 rounded-xl border border-neutral-300 bg-neutral-100 p-3.5 text-xs text-neutral-800 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-200 flex items-center gap-2">
+                  <div className="mb-6 rounded-xl border p-3.5 text-xs border-neutral-700 bg-surface text-neutral-200 flex items-center gap-2">
                     <AlertCircle className="size-4 shrink-0" />
                     <span>Please log in or create an account first to complete your membership application.</span>
                   </div>
                 )}
 
                 {/* Mode Selector Tabs */}
-                <div className="grid grid-cols-2 rounded-xl border border-neutral-300 p-1 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-950">
+                <div className="grid grid-cols-2 rounded-xl border p-1 border-border bg-surface">
                   <button
                     type="button"
                     onClick={() => {
@@ -369,8 +369,8 @@ export default function LoginPage() {
                     className={cx(
                       "rounded-lg py-2 font-display text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5",
                       mode === "login"
-                        ? "bg-neutral-900 text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-sm"
-                        : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                        ? "bg-neutral-100 text-neutral-950 shadow-sm"
+                        : "text-secondary hover:text-primary"
                     )}
                   >
                     <LogIn className="size-3.5" /> Log In
@@ -386,8 +386,8 @@ export default function LoginPage() {
                     className={cx(
                       "rounded-lg py-2 font-display text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5",
                       mode === "signup"
-                        ? "bg-neutral-900 text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950 shadow-sm"
-                        : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                        ? "bg-neutral-100 text-neutral-950 shadow-sm"
+                        : "text-secondary hover:text-primary"
                     )}
                   >
                     <UserPlus className="size-3.5" /> Create Account
@@ -395,10 +395,10 @@ export default function LoginPage() {
                 </div>
 
                 <div className="mt-6">
-                  <h1 className="font-display text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+                  <h1 className="font-display text-2xl font-bold tracking-tight text-primary">
                     {mode === "login" ? "Access Member Portal" : "Create Practitioner Account"}
                   </h1>
-                  <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                  <p className="mt-1 text-xs text-secondary">
                     {mode === "login"
                       ? "Enter your email or phone number and password to log in."
                       : "Enter your full name, email, phone number, and password."}
@@ -407,7 +407,7 @@ export default function LoginPage() {
 
                 {/* Account Already Exists Banner */}
                 {accountExists && (
-                  <div role="alert" className="mt-4 rounded-xl border border-amber-300 bg-amber-50 p-4 text-xs text-amber-900 dark:border-amber-800 dark:bg-amber-950/80 dark:text-amber-200">
+                  <div role="alert" className="mt-4 rounded-xl border p-4 text-xs border-amber-800 bg-amber-950/80 text-amber-200">
                     <p className="font-bold flex items-center gap-1.5">
                       <AlertCircle className="size-4 shrink-0" /> Account Already Exists
                     </p>
@@ -420,7 +420,7 @@ export default function LoginPage() {
                         setError("");
                         setAccountExists(false);
                       }}
-                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg border border-amber-900/30 bg-amber-900/10 px-3 py-1.5 font-mono text-xs font-bold text-amber-950 dark:text-amber-100 hover:underline cursor-pointer"
+                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg border border-amber-900/30 bg-amber-900/10 px-3 py-1.5 font-mono text-xs font-bold text-amber-100 hover:underline cursor-pointer"
                     >
                       Log in directly with {email || "your credentials"} <ArrowRight className="size-3.5" />
                     </button>
@@ -429,7 +429,7 @@ export default function LoginPage() {
 
                 {/* Account Not Found Banner */}
                 {accountNotFound && (
-                  <div role="alert" className="mt-4 rounded-xl border border-neutral-300 bg-neutral-100 p-4 text-xs text-neutral-800 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-200">
+                  <div role="alert" className="mt-4 rounded-xl border p-4 text-xs border-border bg-surface text-neutral-200">
                     <p className="font-bold flex items-center gap-1.5">
                       <AlertCircle className="size-4 shrink-0" /> Account Not Found
                     </p>
@@ -442,7 +442,7 @@ export default function LoginPage() {
                         setError("");
                         setAccountNotFound(false);
                       }}
-                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg border border-neutral-400 bg-neutral-200 px-3 py-1.5 font-mono text-xs font-bold text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 hover:underline cursor-pointer"
+                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs font-bold border-neutral-700 bg-neutral-800 text-primary hover:underline cursor-pointer"
                     >
                       Create an account now <ArrowRight className="size-3.5" />
                     </button>
@@ -451,7 +451,7 @@ export default function LoginPage() {
 
                 {/* Error Banner */}
                 {error && !accountExists && !accountNotFound && (
-                  <div role="alert" className="mt-4 rounded-lg border border-red-300 bg-red-50 p-3 text-xs font-semibold text-red-900 dark:border-red-900 dark:bg-red-950 dark:text-red-200">
+                  <div role="alert" className="mt-4 rounded-lg border p-3 text-xs font-semibold border-red-900 bg-red-950 text-red-200">
                     {error}
                   </div>
                 )}
@@ -528,7 +528,7 @@ export default function LoginPage() {
                         <select
                           value={countryCode}
                           onChange={(e) => setCountryCode(e.target.value)}
-                          className="h-11 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-950 px-2.5 font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100 shrink-0 outline-none"
+                          className="h-11 rounded-lg border border-neutral-700 bg-surface px-2.5 font-mono text-xs font-bold text-primary shrink-0 outline-none"
                         >
                           {COUNTRY_CODES.map((c) => (
                             <option key={c.code} value={c.code}>

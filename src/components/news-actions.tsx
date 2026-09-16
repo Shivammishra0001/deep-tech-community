@@ -109,17 +109,17 @@ export function NewsInteractiveCard({
   return (
     <Card hover className="group flex flex-col justify-between overflow-hidden p-0 transition-all duration-300">
       {image && (
-        <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-900">
+        <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border/80 bg-card">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={image}
             alt={title}
             className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" />
           <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
             <DomainBadge domain={domain} />
-            <span className="rounded-md border border-neutral-700 bg-neutral-950/90 px-2.5 py-1 font-mono text-xs font-bold text-neutral-100 backdrop-blur-md">
+            <span className="rounded-md border border-neutral-700 bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
               {date}
             </span>
           </div>
@@ -131,33 +131,33 @@ export function NewsInteractiveCard({
           {!image && (
             <div className="mb-3 flex items-center justify-between gap-2">
               <DomainBadge domain={domain} />
-              <span className="font-mono text-xs font-semibold text-neutral-800 dark:text-neutral-200">{date}</span>
+              <span className="font-mono text-xs font-semibold text-neutral-200">{date}</span>
             </div>
           )}
-          <h3 className="font-display text-lg sm:text-xl font-bold leading-snug tracking-tight text-neutral-900 group-hover:underline dark:text-neutral-50">
+          <h3 className="font-display text-lg sm:text-xl font-bold leading-snug tracking-tight group-hover:underline text-primary">
             <Link href={`/news/${slug}`}>{title}</Link>
           </h3>
-          <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-700 dark:text-neutral-200 font-medium">
+          <p className="mt-3 line-clamp-3 font-sans text-sm sm:text-base leading-relaxed text-neutral-200 font-medium">
             {summary}
           </p>
         </div>
 
         {/* Author & Read Time */}
-        <div className="mt-6 flex items-center justify-between border-t border-neutral-100 pt-4 dark:border-neutral-800/60">
-          <div className="flex items-center gap-2 font-sans text-xs sm:text-sm font-semibold text-neutral-800 dark:text-neutral-200">
-            <User className="size-4 text-neutral-900 dark:text-neutral-100" />
+        <div className="mt-6 flex items-center justify-between border-t pt-4 border-border/60">
+          <div className="flex items-center gap-2 font-sans text-xs sm:text-sm font-semibold text-neutral-200">
+            <User className="size-4 text-primary" />
             <span>{author}</span>
           </div>
           {readTime && (
-            <span className="flex items-center gap-1 font-sans text-xs sm:text-sm font-semibold text-neutral-800 dark:text-neutral-200">
-              <Clock className="size-4 text-neutral-900 dark:text-neutral-100" />
+            <span className="flex items-center gap-1 font-sans text-xs sm:text-sm font-semibold text-neutral-200">
+              <Clock className="size-4 text-primary" />
               {readTime}
             </span>
           )}
         </div>
 
         {/* Interactive Actions Toolbar: Like, Comment, Share, Save */}
-        <div className="mt-4 flex items-center justify-between border-t border-neutral-200/80 pt-3 dark:border-neutral-800/80">
+        <div className="mt-4 flex items-center justify-between border-t pt-3 border-border/80">
           <div className="flex items-center gap-1.5">
             {/* Like Button */}
             <button
@@ -165,12 +165,12 @@ export function NewsInteractiveCard({
               className={cx(
                 "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all duration-200 cursor-pointer",
                 isLiked
-                  ? "bg-rose-50 text-rose-600 dark:bg-rose-950/60 dark:text-rose-400"
-                  : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+                  ? "bg-rose-950/60 text-rose-400"
+                  : "text-secondary hover:bg-neutral-800 hover:text-primary"
               )}
               title={isLiked ? "Unlike" : "Like article"}
             >
-              <Heart className={cx("size-4", isLiked && "fill-current text-rose-600 dark:text-rose-400")} />
+              <Heart className={cx("size-4", isLiked && "fill-current text-rose-400")} />
               <span>{likes}</span>
             </button>
 
@@ -184,8 +184,8 @@ export function NewsInteractiveCard({
               className={cx(
                 "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all duration-200 cursor-pointer",
                 showComments
-                  ? "bg-neutral-200 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100"
-                  : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+                  ? "bg-neutral-800 text-primary"
+                  : "text-secondary hover:bg-neutral-800 hover:text-primary"
               )}
               title="View & add comments"
             >
@@ -198,10 +198,10 @@ export function NewsInteractiveCard({
             {/* Share Button */}
             <button
               onClick={handleShare}
-              className="relative inline-flex items-center gap-1 rounded-lg p-1.5 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100 transition-colors cursor-pointer"
+              className="relative inline-flex items-center gap-1 rounded-lg p-1.5 text-secondary hover:bg-neutral-800 hover:text-primary transition-colors cursor-pointer"
               title="Share article link"
             >
-              {copied ? <Check className="size-4 text-emerald-600 dark:text-emerald-400" /> : <Share2 className="size-4" />}
+              {copied ? <Check className="size-4 text-emerald-400" /> : <Share2 className="size-4" />}
             </button>
 
             {/* Save / Bookmark Button */}
@@ -210,8 +210,8 @@ export function NewsInteractiveCard({
               className={cx(
                 "inline-flex items-center gap-1 rounded-lg p-1.5 transition-colors cursor-pointer",
                 isSaved
-                  ? "text-neutral-900 dark:text-neutral-100"
-                  : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+                  ? "text-primary"
+                  : "text-secondary hover:bg-neutral-800 hover:text-primary"
               )}
               title={isSaved ? "Saved to bookmarks" : "Save article"}
             >
@@ -222,26 +222,26 @@ export function NewsInteractiveCard({
 
         {/* Toast feedback when share link is copied */}
         {copied && (
-          <p className="mt-2 text-center font-mono text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 animate-fade">
+          <p className="mt-2 text-center font-mono text-[10px] font-semibold text-emerald-400 animate-fade">
             Article link copied to clipboard!
           </p>
         )}
 
         {/* Collapsible Comment Drawer */}
         {showComments && (
-          <div className="mt-4 space-y-3 border-t border-neutral-200/80 pt-3 dark:border-neutral-800/80 animate-fade">
-            <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+          <div className="mt-4 space-y-3 border-t pt-3 border-border/80 animate-fade">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-secondary">
               Discussion ({comments.length})
             </p>
 
             <div className="max-h-48 space-y-2.5 overflow-y-auto pr-1">
               {comments.map((c) => (
-                <div key={c.id} className="rounded-lg border border-neutral-200/90 bg-neutral-50/80 p-2.5 text-xs dark:border-neutral-800/90 dark:bg-neutral-900/60">
+                <div key={c.id} className="rounded-lg border p-2.5 text-xs border-border/90 bg-card/60">
                   <div className="flex items-center justify-between">
-                    <span className="font-display font-semibold text-neutral-900 dark:text-neutral-100">{c.author}</span>
-                    <span className="font-mono text-[10px] text-neutral-400">{c.date}</span>
+                    <span className="font-display font-semibold text-primary">{c.author}</span>
+                    <span className="font-mono text-[10px] text-secondary">{c.date}</span>
                   </div>
-                  <p className="mt-1 font-sans text-neutral-700 dark:text-neutral-200 font-medium leading-relaxed">{c.body}</p>
+                  <p className="mt-1 font-sans text-neutral-200 font-medium leading-relaxed">{c.body}</p>
                 </div>
               ))}
             </div>
@@ -340,9 +340,9 @@ export function ArticleDetailPageActions({
   }
 
   return (
-    <div className="mt-10 rounded-2xl border border-neutral-300 dark:border-neutral-800 bg-neutral-50/70 dark:bg-neutral-900/60 p-6 sm:p-8 backdrop-blur-md">
+    <div className="mt-10 rounded-2xl border border-border bg-card/60 p-6 sm:p-8 backdrop-blur-md">
       {/* Top Action Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-neutral-200/80 dark:border-neutral-800/80">
+      <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-border/80">
         <div className="flex items-center gap-3">
           {/* Like */}
           <button
@@ -350,11 +350,11 @@ export function ArticleDetailPageActions({
             className={cx(
               "inline-flex items-center gap-2 rounded-lg border px-4 py-2 font-mono text-xs font-semibold transition-all duration-200 cursor-pointer",
               isLiked
-                ? "border-rose-300 bg-rose-50 text-rose-600 dark:border-rose-900 dark:bg-rose-950/60 dark:text-rose-400"
-                : "border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-200 dark:hover:bg-neutral-900"
+                ? "border-rose-900 bg-rose-950/60 text-rose-400"
+                : "border-neutral-700 bg-surface text-neutral-200 hover:bg-card"
             )}
           >
-            <Heart className={cx("size-4", isLiked && "fill-current text-rose-600 dark:text-rose-400")} />
+            <Heart className={cx("size-4", isLiked && "fill-current text-rose-400")} />
             <span>{likes} Likes</span>
           </button>
 
@@ -364,8 +364,8 @@ export function ArticleDetailPageActions({
             className={cx(
               "inline-flex items-center gap-2 rounded-lg border px-4 py-2 font-mono text-xs font-semibold transition-all duration-200 cursor-pointer",
               isSaved
-                ? "border-neutral-900 bg-neutral-900 text-neutral-50 dark:border-neutral-100 dark:bg-neutral-100 dark:text-neutral-950"
-                : "border-neutral-300 bg-white text-neutral-800 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-200 dark:hover:bg-neutral-900"
+                ? "border-neutral-100 bg-neutral-100 text-neutral-950"
+                : "border-neutral-700 bg-surface text-neutral-200 hover:bg-card"
             )}
           >
             <Bookmark className={cx("size-4", isSaved && "fill-current")} />
@@ -376,16 +376,16 @@ export function ArticleDetailPageActions({
         {/* Share */}
         <button
           onClick={handleShare}
-          className="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2 font-mono text-xs font-semibold text-neutral-800 hover:bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-200 dark:hover:bg-neutral-900 transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 rounded-lg border px-4 py-2 font-mono text-xs font-semibold border-neutral-700 bg-surface text-neutral-200 hover:bg-card transition-colors cursor-pointer"
         >
-          {copied ? <Check className="size-4 text-emerald-600 dark:text-emerald-400" /> : <Share2 className="size-4" />}
+          {copied ? <Check className="size-4 text-emerald-400" /> : <Share2 className="size-4" />}
           <span>{copied ? "Link Copied!" : "Share Article"}</span>
         </button>
       </div>
 
       {/* Discussion Section */}
       <div className="mt-6 space-y-6">
-        <h3 className="font-display text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
+        <h3 className="font-display text-lg font-bold tracking-tight text-primary">
           Community Discussion ({comments.length})
         </h3>
 
@@ -408,15 +408,15 @@ export function ArticleDetailPageActions({
         {/* Comment List */}
         <div className="space-y-3.5 pt-2">
           {comments.map((c) => (
-            <div key={c.id} className="rounded-xl border border-neutral-200/90 bg-white p-4 text-xs sm:text-sm dark:border-neutral-800/90 dark:bg-neutral-950">
+            <div key={c.id} className="rounded-xl border p-4 text-xs sm:text-sm border-border/90 bg-surface">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Avatar name={c.author} className="size-6" />
-                  <span className="font-display font-semibold text-neutral-900 dark:text-neutral-100">{c.author}</span>
+                  <span className="font-display font-semibold text-primary">{c.author}</span>
                 </div>
-                <span className="font-mono text-[10px] text-neutral-400">{c.date}</span>
+                <span className="font-mono text-[10px] text-secondary">{c.date}</span>
               </div>
-              <p className="mt-2 font-sans text-neutral-700 dark:text-neutral-200 font-medium leading-relaxed">{c.body}</p>
+              <p className="mt-2 font-sans text-neutral-200 font-medium leading-relaxed">{c.body}</p>
             </div>
           ))}
         </div>
