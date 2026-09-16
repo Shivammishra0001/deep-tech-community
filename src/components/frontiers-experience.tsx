@@ -1,43 +1,44 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowUpRight, Cpu, Zap, ShieldCheck, Scale } from "lucide-react";
 import { Container } from "@/components/ui";
+import { SafeImage } from "@/components/safe-image";
+import { RevealHeading, RevealStagger, RevealItem } from "@/components/reveal";
+import { DOMAINS } from "@/data/core";
 
 const FRONTIERS = [
   {
-    num: "01",
     slug: "artificial-intelligence",
     title: "AI",
     subtitle: "ARTIFICIAL INTELLIGENCE",
     description: "Machines that reason, learn and create.",
     tagline: "Foundation models, test-time compute, reasoning frameworks, and autonomous agents.",
     icon: Cpu,
+    image: DOMAINS.ai.image,
     href: "/technologies/artificial-intelligence",
   },
   {
-    num: "02",
     slug: "quantum-computing",
     title: "QUANTUM",
     subtitle: "QUANTUM COMPUTING",
     description: "Computation beyond classical limits.",
     tagline: "Qubits, quantum error correction, fault-tolerant algorithms, and QKD networking.",
     icon: Zap,
+    image: DOMAINS.quantum.image,
     href: "/technologies/quantum-computing",
   },
   {
-    num: "03",
     slug: "cybersecurity",
     title: "CYBERSECURITY",
     subtitle: "CYBERSECURITY & ZERO TRUST",
     description: "Defending the digital frontier.",
     tagline: "Post-quantum cryptography, zero-trust architectures, SOC simulation, and threat research.",
     icon: ShieldCheck,
+    image: DOMAINS.cybersecurity.image,
     href: "/technologies/cybersecurity",
   },
   {
-    num: "04",
     slug: "ai-governance",
     title: "AI GOVERNANCE",
     subtitle: "AI GOVERNANCE & SAFETY",
@@ -45,77 +46,119 @@ const FRONTIERS = [
     tagline: "Algorithmic auditability, EU AI Act compliance stacks, safety evaluations, and policy trees.",
     icon: Scale,
     href: "/technologies/ai-governance",
+    image: DOMAINS.governance.image,
   },
+];
+
+/**
+ * Internal hairlines for the 2x2 plate, by index. The four panels share one
+ * bordered surface rather than floating as separate cards, so the dividers
+ * live on the panels themselves: bottom rules between stacked panels on
+ * mobile, and a cross at md where the composition becomes 2x2.
+ */
+const EDGES = [
+  "border-b border-border hover:border-border-strong md:border-r",
+  "border-b border-border hover:border-border-strong",
+  "border-b border-border hover:border-border-strong md:border-b-0 md:border-r",
+  "",
 ];
 
 export function FrontiersExperience() {
   return (
-    <section id="technologies" className="relative bg-background text-primary scroll-mt-20 border-t border-neutral-900">
+    <section
+      id="technologies"
+      className="relative scroll-mt-20 border-t border-border bg-background py-20 text-primary sm:py-24 lg:py-28"
+    >
+      <Container>
+        {/* ── SECTION HEADER ───────────────────────────────────────────────
+            Eyebrow, headline and standfirst use the hero's typography so the
+            two sections read as one system. */}
+        <RevealHeading>
+          <div className="border-b border-border pb-10 sm:pb-12">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted sm:text-[11px]">
+              01 / TECHNOLOGIES
+            </p>
 
-      {/* ── SECTION HEADER ── */}
-      <div className="border-b border-neutral-900 bg-[#070707] py-10 sm:py-12">
-        <Container className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-primary">
-              TECHNOLOGIES
-            </h2>
+            <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+              <h2
+                className="font-sans font-medium uppercase tracking-[-0.015em] text-primary
+                           text-[clamp(1.875rem,7vw,2.25rem)]
+                           sm:text-[clamp(2.25rem,5vw,2.75rem)]
+                           lg:text-[3rem] lg:tracking-[-0.022em]
+                           leading-[1.08]"
+              >
+                TECHNOLOGIES
+              </h2>
+
+              <p className="max-w-[420px] font-sans text-[15px] font-normal leading-[1.65] text-secondary sm:text-base lg:pb-1.5">
+                Exploring the technologies shaping tomorrow. Built by people, for people, at the
+                frontier.
+              </p>
+            </div>
           </div>
-          <p className="max-w-sm font-sans text-sm sm:text-base font-medium leading-relaxed text-body-soft">
-            Exploring the technologies shaping tomorrow.
-            Built by people, for people, at the frontier.
-          </p>
-        </Container>
-      </div>
+        </RevealHeading>
 
-      {/* ── FOUR TECHNOLOGY CARDS GRID ── */}
-      <Container className="py-14 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-card border border-neutral-900 rounded-2xl overflow-hidden">
+        {/* ── THE FOUR TECHNOLOGY PANELS ───────────────────────────────────
+            One surface divided by hairlines, not four detached cards. */}
+        <RevealStagger
+          className="mt-12 grid grid-cols-1 overflow-hidden rounded-2xl border border-border bg-card sm:mt-14 md:grid-cols-2"
+          staggerDelay={110}
+        >
           {FRONTIERS.map((f, i) => {
             const Icon = f.icon;
             return (
-              <motion.div
-                key={f.num}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group relative flex flex-col justify-between bg-surface p-8 sm:p-10 hover:bg-card transition-colors duration-300"
-              >
-                {/* Number + Icon row */}
-                <div className="flex items-start justify-between">
-                  <span className="font-mono text-5xl sm:text-6xl font-black text-primary leading-none tracking-tighter">
-                    {f.num}
-                  </span>
-                  <span className="grid size-10 place-items-center rounded-xl border border-border bg-card text-primary group-hover:border-neutral-600 transition-colors">
-                    <Icon className="size-5" />
-                  </span>
-                </div>
-
-                {/* Title + description */}
-                <div className="mt-6">
-                  <h3 className="font-display text-2xl sm:text-3xl font-black uppercase tracking-tight text-primary">
-                    {f.title}
-                  </h3>
-                  <p className="mt-2 font-sans text-base font-semibold text-primary">
-                    {f.description}
-                  </p>
-                  <p className="mt-2 font-sans text-sm leading-relaxed text-body-soft">
-                    {f.tagline}
-                  </p>
-                </div>
-
-                {/* Explore link */}
+              <RevealItem key={f.slug} className="flex" distance={16}>
                 <Link
                   href={f.href}
-                  className="mt-8 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-primary border-b border-border-strong pb-0.5 hover:border-white transition-colors w-fit"
+                  className={`group relative flex w-full flex-col transition-colors duration-300 ${EDGES[i]}`}
                 >
-                  Explore {f.title}
-                  <ArrowUpRight className="size-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  {/* Image band. The photograph is desaturated and held well
+                      below the type, then dissolved into the panel colour so
+                      it reads as a plate rather than a thumbnail. */}
+                  <div
+                    className="relative h-40 w-full overflow-hidden bg-surface sm:h-44 lg:h-52"
+                    aria-hidden="true"
+                  >
+                    <SafeImage
+                      src={f.image}
+                      alt=""
+                      className="size-full object-cover opacity-[0.62] grayscale brightness-75 transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:opacity-[0.78]"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,17,17,0)_0%,rgba(17,17,17,0.3)_58%,rgba(17,17,17,0.88)_88%,#111111_100%)]" />
+                  </div>
+
+                  <div className="relative flex flex-1 flex-col px-7 pb-8 pt-7 sm:px-9 sm:pb-10 sm:pt-8 lg:px-10 lg:pb-11">
+                    {/* Full technology name, kept quiet above the short form. */}
+                    <p className="flex items-center gap-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
+                      <Icon className="size-3.5 shrink-0" aria-hidden="true" />
+                      {f.subtitle}
+                    </p>
+
+                    <h3 className="mt-4 font-sans text-[22px] font-medium uppercase leading-[1.1] tracking-[-0.015em] text-primary sm:text-[26px] lg:text-[28px]">
+                      {f.title}
+                    </h3>
+
+                    <p className="mt-4 max-w-[38ch] font-sans text-[15px] font-normal leading-[1.55] text-secondary sm:text-base lg:text-[17px]">
+                      {f.description}
+                    </p>
+
+                    <p className="mt-3 max-w-[48ch] font-sans text-[13px] font-normal leading-[1.7] text-muted sm:text-sm">
+                      {f.tagline}
+                    </p>
+
+                    <span className="mt-auto flex items-center gap-2 pt-8 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 group-hover:text-primary sm:pt-10">
+                      EXPLORE
+                      <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </span>
+                  </div>
+
+                  {/* Hover wash — a silver breath over the panel, nothing more. */}
+                  <span className="pointer-events-none absolute inset-0 bg-primary opacity-0 transition-opacity duration-300 group-hover:opacity-[0.022]" />
                 </Link>
-              </motion.div>
+              </RevealItem>
             );
           })}
-        </div>
+        </RevealStagger>
       </Container>
     </section>
   );
