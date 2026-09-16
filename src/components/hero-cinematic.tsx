@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
@@ -13,38 +12,15 @@ const GhostFibers = dynamic(() => import("@/components/GhostFibers"), {
 });
 
 export function CinematicHero() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
   const shouldReduceMotion = useReducedMotion();
 
   // Scroll Parallax hooks
   const { scrollY } = useScroll();
   const headlineY = useTransform(scrollY, [0, 600], [0, shouldReduceMotion ? 0 : -30]);
 
-  // Mouse Move listener for subtle 3D tilt on desktop
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (shouldReduceMotion || typeof window === "undefined" || window.innerWidth < 1024) return;
-      const rect = containerRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-      setMousePos({ x, y });
-    },
-    [shouldReduceMotion]
-  );
-
-  const handleMouseLeave = useCallback(() => {
-    setMousePos({ x: 0, y: 0 });
-  }, []);
-
   return (
     <section
       id="hero"
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       className="relative w-full overflow-hidden bg-[#050505] text-neutral-50 min-h-[88vh] lg:min-h-[92vh] flex flex-col justify-center items-center scroll-mt-20 pt-16 sm:pt-20 pb-16 sm:pb-20"
     >
       {/* ----------------- GHOSTFIBERS BACKGROUND VISUAL ----------------- */}

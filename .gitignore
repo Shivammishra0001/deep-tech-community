@@ -9,3 +9,6 @@ credentials.json
 *.json.key
 digitalocean.env
 *.env
+
+# Build artifacts
+tsconfig.tsbuildinfo

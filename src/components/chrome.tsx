@@ -1,25 +1,10 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Menu,
-  X,
-  ArrowRight,
-  Search,
-  Cpu,
-  Users,
-  Newspaper,
-  Calendar,
-  Info,
-  MapPin,
-  LogOut,
-  ChevronRight,
-  ShieldCheck,
-  Zap,
-} from "lucide-react";
+import { Menu, X, ArrowRight, Search, Cpu, Users, Newspaper, Calendar, Info, MapPin, ChevronRight, ShieldCheck, Zap } from "lucide-react";
 import { Container, cx, Button, Input } from "@/components/ui";
 
 const SOCIALS: { label: string; path: string }[] = [

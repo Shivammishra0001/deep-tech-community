@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Clock, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import { Container, DomainBadge, Avatar, Tag, Card, Button } from "@/components/ui";
 import { SafeImage } from "@/components/safe-image";
 import { ARTICLES, relatedArticles, Article } from "@/data/news";
@@ -84,7 +84,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <>
       {/* Banner */}
       <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
-        <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="max-w-3xl animate-rise">
             <Link

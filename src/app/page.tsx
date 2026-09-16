@@ -1,12 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Calendar, MapPin, Layers, Cpu, Shield, BookOpen, Users, MessageSquare, Newspaper, Globe } from "lucide-react";
-import { Container, Eyebrow, SectionHeading, DomainBadge, Avatar, Button, Card, Badge, Tag, cx } from "@/components/ui";
-import { ActivityTicker } from "@/components/orbits";
+import { ArrowRight, ArrowUpRight, Calendar, MapPin } from "lucide-react";
+import { Container, Eyebrow, SectionHeading, DomainBadge, Avatar, Button, Card, Badge } from "@/components/ui";
 import { CinematicHero } from "@/components/hero-cinematic";
 import { FrontiersExperience } from "@/components/frontiers-experience";
-import { Reveal, RevealHeading, RevealText, RevealVisual, RevealStagger, RevealItem, CountUp } from "@/components/reveal";
-import { DOMAIN_LIST, STATS, CHAPTERS } from "@/data/core";
-import { TECH_PAGES } from "@/data/technologies";
+import { RevealHeading, RevealVisual, RevealStagger, RevealItem } from "@/components/reveal";
+import { CHAPTERS } from "@/data/core";
 import { ARTICLES } from "@/data/news";
 import { EVENTS, isUpcomingEvent } from "@/data/events";
 import { SafeImage } from "@/components/safe-image";

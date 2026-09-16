@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, MapPin, Users, Calendar } from "lucide-react";
-import { Container, PageHero, Avatar, Eyebrow, Card, Button, Badge } from "@/components/ui";
+import { Container, PageHero, Avatar, Eyebrow, Card, Button } from "@/components/ui";
 import { CHAPTERS } from "@/data/core";
 import type { Metadata } from "next";
 import { RevealStagger, RevealItem, Reveal } from "@/components/reveal";

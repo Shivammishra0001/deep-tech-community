@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, Clock, MapPin, Users, BadgeCheck, ChevronDown, Camera } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, MapPin, BadgeCheck, ChevronDown, Camera } from "lucide-react";
 import { Container, DomainBadge, Eyebrow, Avatar, Card, Badge } from "@/components/ui";
 import { EVENTS } from "@/data/events";
-import { DOMAINS } from "@/data/core";
 import { RegisterForm } from "@/components/register-form";
 import type { Metadata } from "next";
 
@@ -23,7 +22,6 @@ export default async function EventDetailPage({ params }: { params: Promise<{ sl
     <>
       {/* 1. Banner */}
       <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
-        <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="max-w-3xl animate-rise">
             <Link

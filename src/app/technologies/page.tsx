@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { Container, PageHero, Card, Badge, DomainBadge, Button } from "@/components/ui";
+import { Container, PageHero, Card, Button } from "@/components/ui";
 import { DOMAIN_LIST } from "@/data/core";
 import { TECH_PAGES } from "@/data/technologies";
 import type { Metadata } from "next";

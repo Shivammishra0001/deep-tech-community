@@ -78,7 +78,6 @@ export default function AboutPage() {
     <>
       {/* 1. Opening Statement */}
       <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
-        <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="animate-rise">

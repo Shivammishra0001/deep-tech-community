@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Search, ExternalLink, RefreshCw, Loader2, Calendar, ShieldCheck, Tag, AlertCircle } from "lucide-react";
-import { Container, PageHero, Button, Badge } from "@/components/ui";
+import { Search, ExternalLink, RefreshCw, Loader2, AlertCircle } from "lucide-react";
+import { Container, PageHero } from "@/components/ui";
 import { ARTICLES } from "@/data/news";
 import { SafeImage } from "@/components/safe-image";
 import { RevealStagger, RevealItem } from "@/components/reveal";

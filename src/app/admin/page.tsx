@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ShieldCheck, Users, Globe, Calendar, FileText, Activity, Database, Server, RefreshCw, Key, ArrowRight, Lock } from "lucide-react";
+import { ShieldCheck, Users, Globe, Calendar, FileText, Activity, RefreshCw, Lock } from "lucide-react";
 import { PageHero, Card, Badge, Button, Container, cx } from "@/components/ui";
 
 type AdminMetrics = {

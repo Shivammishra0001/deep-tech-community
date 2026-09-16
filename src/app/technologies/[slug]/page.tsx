@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, BookOpen, Calendar, FileText, GraduationCap, MapPin, Wrench, CheckCircle2, TrendingUp, User, Clock } from "lucide-react";
-import { Container, DomainBadge, Eyebrow, SectionHeading, Card, Button, Badge, Tag, Avatar } from "@/components/ui";
-import { DOMAINS, DOMAIN_LIST } from "@/data/core";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { Container, DomainBadge, SectionHeading, Card, Button, Badge, Avatar } from "@/components/ui";
+import { DOMAINS } from "@/data/core";
 import { TECH_PAGES } from "@/data/technologies";
 import { ARTICLES } from "@/data/news";
 import { EVENTS } from "@/data/events";
@@ -97,7 +97,6 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
     <>
       {/* Header Banner */}
       <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
-        <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
         <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
           <div className="max-w-3xl animate-rise">
             <span className="grid size-10 place-items-center rounded-lg border border-neutral-300 bg-neutral-100 text-neutral-900 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100">

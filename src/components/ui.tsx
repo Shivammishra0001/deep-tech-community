@@ -456,7 +456,6 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden border-b border-neutral-200/80 dark:border-neutral-800/80">
-      <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
       <Container className="relative pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8">
         <div className="max-w-3xl">
           <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] tracking-tight text-neutral-900 dark:text-neutral-50">

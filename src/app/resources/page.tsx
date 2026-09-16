@@ -1,16 +1,5 @@
-import Link from "next/link";
-import {
-  ArrowUpRight,
-  BookOpen,
-  Compass,
-  FileText,
-  GraduationCap,
-  Terminal,
-  Layers,
-  Globe,
-  BookMarked,
-} from "lucide-react";
-import { Container, PageHero, Eyebrow, Card, Button, Badge } from "@/components/ui";
+import { ArrowUpRight, BookOpen, FileText, GraduationCap, Terminal, BookMarked } from "lucide-react";
+import { Container, PageHero, Eyebrow, Card, Button } from "@/components/ui";
 import { DOMAIN_LIST } from "@/data/core";
 import type { Metadata } from "next";
 

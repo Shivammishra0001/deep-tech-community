@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { communityPosts, postComments } from "@/db/schema";
-import { and, eq, inArray } from "drizzle-orm";
+import { inArray } from "drizzle-orm";
 
 type SeedPost = {
   author: string;

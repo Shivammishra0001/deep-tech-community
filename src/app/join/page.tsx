@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { Check, Loader2, ArrowRight, Lock, ShieldCheck, UserPlus, LogIn, AlertCircle } from "lucide-react";
+import { Check, ArrowRight, Lock, ShieldCheck, UserPlus, LogIn } from "lucide-react";
 import { Container, Button, Input, Label, Select, Eyebrow, Card, Badge, cx } from "@/components/ui";
 import { DOMAIN_LIST, CHAPTERS } from "@/data/core";
 
@@ -96,7 +95,6 @@ export default function JoinPage() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="bg-grid bg-grid-fade absolute inset-0" aria-hidden />
       <Container className="relative grid gap-12 pt-6 pb-6 sm:pt-7 sm:pb-7 lg:pt-8 lg:pb-8 lg:grid-cols-[1fr_480px]">
         {/* Left: pitch */}
         <div className="animate-rise">

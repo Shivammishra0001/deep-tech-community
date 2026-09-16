@@ -1,5 +1,5 @@
 import { Brain, Atom, Shield, Scale } from "lucide-react";
-import { DOMAIN_LIST, TICKER } from "@/data/core";
+import { TICKER } from "@/data/core";
 import { cx } from "@/components/ui";
 
 const DOMAIN_NODES = [
