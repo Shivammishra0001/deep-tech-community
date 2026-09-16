@@ -1,19 +1,14 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Calendar, MapPin } from "lucide-react";
-import { Container, Eyebrow, SectionHeading, DomainBadge, Avatar, Button, Card, Badge } from "@/components/ui";
+import { Container, Eyebrow, SectionHeading, DomainBadge, Button, Card, Badge } from "@/components/ui";
 import { CinematicHero } from "@/components/hero-cinematic";
 import { FrontiersExperience } from "@/components/frontiers-experience";
+import { NewsletterSection } from "@/components/newsletter-section";
 import { RevealHeading, RevealVisual, RevealStagger, RevealItem } from "@/components/reveal";
 import { CHAPTERS } from "@/data/core";
-import { ARTICLES, type Article } from "@/data/news";
 import { EVENTS, isUpcomingEvent } from "@/data/events";
-import { SafeImage } from "@/components/safe-image";
 
 export default function HomePage() {
-  const featuredArticle: Article | undefined = ARTICLES.find((a) => a.featured) ?? ARTICLES[0];
-  const latestArticles = featuredArticle
-    ? ARTICLES.filter((a) => a.slug !== featuredArticle.slug).slice(0, 3)
-    : [];
   const upcomingEvents = EVENTS.filter((e) => isUpcomingEvent(e.date));
 
   return (
@@ -24,107 +19,8 @@ export default function HomePage() {
       {/* ------------------- 2. TECHNOLOGIES (PROMPT 05 REDESIGN) ------------------- */}
       <FrontiersExperience />
 
-      {/* ------------------- 3. NEWS ------------------- */}
-      <section id="news" className="relative py-16 sm:py-20 border-t border-border/90 bg-surface scroll-mt-20">
-        <Container>
-          <RevealHeading>
-            <SectionHeading
-              title="Newsletter"
-              description="Research, technical perspectives and important developments across frontier technology."
-              action={{ label: "All Briefings", href: "/news" }}
-            />
-          </RevealHeading>
-
-          {featuredArticle ? (
-            <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-              <RevealVisual delay={100}>
-                <Card hover className="group flex h-full flex-col justify-between overflow-hidden p-0">
-                  <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border/80 bg-card">
-                    <SafeImage
-                      src={featuredArticle.image}
-                      alt={featuredArticle.title}
-                      className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                      <DomainBadge domain={featuredArticle.domain} />
-                      <span className="rounded-md border border-border-strong bg-surface/90 px-2.5 py-1 font-mono text-xs font-bold text-primary backdrop-blur-md">
-                        {featuredArticle.date}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex flex-1 flex-col justify-between p-6">
-                    <div>
-                      <h3 className="font-display text-xl font-bold leading-tight tracking-tight group-hover:underline text-primary">
-                        <Link href={`/news/${featuredArticle.slug}`}>{featuredArticle.title}</Link>
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-body font-medium">
-                        {featuredArticle.excerpt}
-                      </p>
-                    </div>
-                    <div className="mt-6 flex items-center justify-between border-t pt-4 font-sans text-xs font-semibold border-border text-body">
-                      <div className="flex items-center gap-2">
-                        <Avatar name={featuredArticle.author} className="size-7 text-xs font-bold" />
-                        <span className="font-semibold text-primary">{featuredArticle.author}</span>
-                      </div>
-                      <span className="text-body font-semibold">{featuredArticle.readingTime} min read</span>
-                    </div>
-                  </div>
-                </Card>
-              </RevealVisual>
-
-              <RevealStagger className="flex flex-col gap-4" delay={150}>
-                {latestArticles.map((a) => (
-                  <RevealItem key={a.slug}>
-                    <Card hover className="group p-4 sm:p-5">
-                      <div className="flex items-center gap-4">
-                        {/* 64x64px Square Thumbnail Visual */}
-                        <div className="relative size-16 shrink-0 overflow-hidden rounded-lg border border-border/90 bg-card shadow-xs">
-                          {a.image ? (
-                            <SafeImage
-                              src={a.image}
-                              alt={a.title}
-                              className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            />
-                          ) : (
-                            <div className="flex size-full items-center justify-center font-mono text-xs font-bold text-body-soft">
-                              DTS
-                            </div>
-                          )}
-                        </div>
-
-                        <div className="flex flex-1 flex-col min-w-0">
-                          <div className="flex items-center justify-between gap-2">
-                            <DomainBadge domain={a.domain} />
-                            <span className="font-mono text-xs font-semibold text-body">{a.date}</span>
-                          </div>
-                          <h4 className="mt-1.5 font-display text-sm sm:text-base font-bold leading-snug tracking-tight group-hover:underline text-primary line-clamp-2">
-                            <Link href={`/news/${a.slug}`}>{a.title}</Link>
-                          </h4>
-                          <p className="mt-1 font-sans text-xs font-medium text-body">
-                            By {a.author} · {a.readingTime} min
-                          </p>
-                        </div>
-                      </div>
-                    </Card>
-                  </RevealItem>
-                ))}
-              </RevealStagger>
-            </div>
-          ) : (
-            <RevealVisual>
-              <div className="rounded-2xl border border-border/80 bg-surface/50 p-12 text-center backdrop-blur-md">
-                <p className="font-mono text-xs font-bold uppercase tracking-widest text-body">
-                  NOTHING PUBLISHED YET
-                </p>
-                <p className="mt-2 text-sm text-body-soft">
-                  Research notes and technical briefings will appear here as they are published.
-                </p>
-              </div>
-            </RevealVisual>
-          )}
-        </Container>
-      </section>
+      {/* ------------------- 3. NEWSLETTER ------------------- */}
+      <NewsletterSection />
 
       {/* ------------------- 4. EVENTS ------------------- */}
       <section id="events" className="relative py-16 sm:py-20 border-t border-border/90 bg-card/40 scroll-mt-20">
