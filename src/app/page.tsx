@@ -1,11 +1,10 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Container, Eyebrow, SectionHeading } from "@/components/ui";
+import { Container, SectionHeading } from "@/components/ui";
 import { CinematicHero } from "@/components/hero-cinematic";
 import { FrontiersExperience } from "@/components/frontiers-experience";
 import { NewsletterSection } from "@/components/newsletter-section";
 import { EventsSection } from "@/components/events-section";
 import { ChaptersSection } from "@/components/chapters-section";
+import { JoinSection } from "@/components/join-section";
 import { RevealHeading, RevealVisual } from "@/components/reveal";
 
 export default function HomePage() {
@@ -51,36 +50,8 @@ export default function HomePage() {
       {/* ------------------- 6. CHAPTERS ------------------- */}
       <ChaptersSection />
 
-      {/* ------------------- 7. ABOUT / CTA ------------------- */}
-      <section id="about" className="relative py-20 sm:py-28 border-t border-border/90 bg-surface scroll-mt-20">
-        <Container>
-          <RevealVisual>
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-surface p-10 text-center text-primary shadow-2xl sm:p-16">
-              <Eyebrow className="text-body-soft">Open Membership</Eyebrow>
-              <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl text-primary">
-                Join Frontier Builders Worldwide
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl font-sans text-base sm:text-lg leading-relaxed text-primary font-medium">
-                Membership is free and open to students, engineers, researchers, founders, and educators. Direct access to technical roadmaps, regional symposia, and active project channels.
-              </p>
-              
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5 relative z-10">
-                <Link
-                  href="/join"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-white text-on-inverted hover:bg-inverted px-6.5 h-12.5 font-sans text-sm sm:text-base font-bold shadow-lg transition-all duration-200 active:scale-95"
-                >
-                  Join Community
-                  <ArrowRight className="size-4" />
-                </Link>
-              </div>
-
-              <p className="mt-6 font-sans text-xs font-semibold text-body-soft">
-                Practitioner-led global deep tech network
-              </p>
-            </div>
-          </RevealVisual>
-        </Container>
-      </section>
+      {/* ------------------- 7. JOIN ------------------- */}
+      <JoinSection />
     </div>
   );
 }
