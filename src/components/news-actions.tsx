@@ -286,7 +286,7 @@ export function ArticleDetailPageActions({
   }
 
   function handleShare() {
-    const url = typeof window !== "undefined" ? window.location.href : `https://globaldeeptech.society/news/${slug}`;
+    const url = typeof window !== "undefined" ? window.location.href : `https://community.dyau.ai/news/${slug}`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(url);
       setCopied(true);

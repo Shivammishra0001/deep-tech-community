@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://globaldeeptech.society"),
+  metadataBase: new URL("https://community.dyau.ai"),
   title: {
     default: "Deep Tech Community — AI · Quantum · Cybersecurity · AI Governance",
     template: "%s | Deep Tech Community",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "Deep Tech Community — Frontier Tech Platform",
     description:
       "Connecting engineers, scientists, and founders across AI, Quantum Computing, Cybersecurity, and AI Governance.",
-    url: "https://globaldeeptech.society",
+    url: "https://community.dyau.ai",
     siteName: "Deep Tech Community",
     locale: "en_US",
     type: "website",
@@ -72,8 +72,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Deep Tech Community",
-  url: "https://globaldeeptech.society",
-  logo: "https://globaldeeptech.society/logo.png",
+  url: "https://community.dyau.ai",
+  logo: "https://community.dyau.ai/logo.png",
   description:
     "Practitioner community platform for Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.",
   sameAs: [
