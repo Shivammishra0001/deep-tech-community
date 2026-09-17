@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
-import { Container, cx, Button, Input } from "@/components/ui";
+import { Container, cx } from "@/components/ui";
 
 const NAV_ITEMS = [
   { label: "TECHNOLOGIES", href: "/technologies" },
@@ -299,91 +299,87 @@ export function Navbar() {
   );
 }
 
-export function FooterNewsletter() {
-  const [email, setEmail] = useState("");
-  const router = useRouter();
+/** Footer navigation mirrors the primary nav, so a route reads the same in both. */
+const FOOTER_LINKS = [
+  { label: "TECHNOLOGIES", href: "/technologies" },
+  { label: "NETWORK", href: "/community" },
+  { label: "NEWSLETTER", href: "/news" },
+  { label: "EVENTS", href: "/events" },
+  { label: "CHAPTERS", href: "/chapters" },
+  { label: "ABOUT", href: "/about" },
+];
 
-  async function subscribe(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email.trim()) return;
-    const targetEmail = email.trim();
-
-    try {
-      fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: targetEmail }),
-      });
-    } catch {}
-
-    router.push(`/login?email=${encodeURIComponent(targetEmail)}&mode=signup`);
-  }
-
-  return (
-    <div className="rounded-xl border p-5 shadow-xs border-border bg-card/90">
-      <p className="font-display text-[15px] font-bold tracking-tight text-primary">
-        DEEP TECH BRIEFING
-      </p>
-      <p className="mt-2 text-sm leading-relaxed text-body font-medium">
-        Technical digests — open roadmaps, research highlights, and symposium schedules. No noise.
-      </p>
-
-      <form suppressHydrationWarning onSubmit={subscribe} className="mt-3.5 flex gap-2">
-        <Input
-          id="footer-email"
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="researcher@lab.org"
-          className="h-10 text-xs font-medium"
-        />
-        <Button type="submit" variant="primary" size="md">
-          <ArrowRight className="size-4" />
-        </Button>
-      </form>
-    </div>
-  );
-}
+const LEGAL_LINKS = [
+  { label: "PRIVACY", href: "/privacy" },
+  { label: "TERMS", href: "/terms" },
+];
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/90 bg-surface/50">
-      <Container className="grid gap-10 py-16 md:grid-cols-[1.4fr_1fr_1.6fr]">
-        <div>
-          <Logo />
-          <p className="mt-4 max-w-sm text-sm font-medium leading-relaxed text-body">
-            Open practitioner community platform for Artificial Intelligence, Quantum Computing, Cybersecurity, and AI Governance.
-          </p>
+    <footer className="border-t border-border bg-background">
+      <Container className="py-16 sm:py-20">
+        <div className="flex flex-col gap-12 lg:flex-row lg:justify-between lg:gap-16">
+          {/* Brand */}
+          <div className="max-w-[400px]">
+            <Logo />
+            <p className="mt-6 font-sans text-[15px] font-normal leading-[1.65] text-secondary">
+              Open practitioner community platform for Artificial Intelligence, Quantum Computing,
+              Cybersecurity, and AI Governance.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-12 sm:flex-row sm:gap-16 lg:gap-20">
+            {/* Sitemap */}
+            <nav aria-label="Footer">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted sm:text-[11px]">
+                SITES
+              </p>
+              <ul className="mt-5 grid gap-3.5 sm:grid-cols-2 sm:gap-x-14 lg:gap-x-16">
+                {FOOTER_LINKS.map((l) => (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      className="font-sans text-[13px] font-medium uppercase tracking-[0.12em] text-secondary transition-colors duration-200 hover:text-primary"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* The same primary button the hero, newsletter and join sections use. */}
+            <div className="shrink-0">
+              <Link
+                href="/join"
+                className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg bg-primary px-7
+                           font-sans text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] text-background
+                           transition-colors duration-200 hover:bg-white"
+              >
+                JOIN THE COMMUNITY
+                <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </div>
         </div>
-
-        <nav aria-label="Footer Navigation" className="grid content-start gap-2.5 text-sm font-sans">
-          <p className="mb-1 font-sans text-xs font-bold uppercase tracking-widest text-primary">
-            SITES
-          </p>
-          <Link href="/about" className="font-semibold text-body hover:text-primary">
-            About Community
-          </Link>
-          <Link href="/technologies" className="font-semibold text-body hover:text-primary">
-            Technologies
-          </Link>
-          <Link href="/events" className="font-semibold text-body hover:text-primary">
-            Symposia &amp; Labs
-          </Link>
-          <Link href="/community" className="font-semibold text-body hover:text-primary">
-            Member Forum
-          </Link>
-          <Link href="/chapters" className="font-semibold text-body hover:text-primary">
-            Regional Chapters
-          </Link>
-        </nav>
-
-        <FooterNewsletter />
       </Container>
+
       <div className="border-t border-border">
-        <Container className="flex flex-wrap items-center justify-between gap-2 py-6 font-mono text-[11px] text-body-soft">
-          <p>© 2026 Dyau Deep Tech Community.</p>
-          <p>[ 01 AI · 02 QUANTUM · 03 CYBER · 04 AI GOVERNANCE ]</p>
+        <Container className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-mono text-[11px] tracking-[0.04em] text-muted sm:text-xs">
+            © 2026 Dyau Deep Tech Community.
+          </p>
+          <div className="flex items-center gap-7">
+            {LEGAL_LINKS.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-200 hover:text-primary sm:text-[11px]"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
         </Container>
       </div>
     </footer>
