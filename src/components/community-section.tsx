@@ -55,15 +55,13 @@ export function CommunitySection() {
         </RevealHeading>
 
         {/* ── THE EMPTY FORUM ────────────────────────────────────────────
-            Kept lower and quieter than the events sheet above it, so two
-            empty states in succession do not read as the same panel twice. */}
+            A compact band, not a panel: the standfirst above already says
+            what will appear here, so the state itself only has to say that
+            nothing has yet. */}
         <RevealVisual delay={100}>
-          <div className="mt-12 rounded-2xl border border-border bg-card px-7 py-10 sm:mt-14 sm:px-10 sm:py-12 lg:px-12">
+          <div className="mt-12 rounded-2xl border border-border bg-card px-7 py-8 sm:mt-14 sm:px-10 sm:py-9 lg:px-12">
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted sm:text-[11px]">
               NO COMMUNITY POSTS YET
-            </p>
-            <p className="mt-5 max-w-[30ch] font-sans text-[18px] font-normal leading-[1.35] tracking-[-0.01em] text-primary sm:text-[20px] lg:text-[22px]">
-              Articles, open projects and technical debriefs shared by members will appear here.
             </p>
           </div>
         </RevealVisual>

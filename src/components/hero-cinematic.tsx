@@ -42,7 +42,7 @@ export function CinematicHero() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.28em] text-muted"
           >
-            01 / FRONTIER NETWORK
+            00 / FRONTIER NETWORK
           </motion.p>
 
           {/* Headline — 64-72px at desktop, medium weight, held to a column
