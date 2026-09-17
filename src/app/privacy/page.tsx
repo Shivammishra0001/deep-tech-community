@@ -27,7 +27,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-display text-lg font-semibold text-primary">3. Data Export &amp; Erasure</h2>
             <p className="mt-2">
-              Members may request a complete data export or account erasure by contacting privacy@globaldeeptech.society. Erasure requests are completed within 30 days.
+              Members may request a complete data export or account erasure by contacting community@dyau.ai. Erasure requests are completed within 30 days.
             </p>
           </section>
         </Card>
