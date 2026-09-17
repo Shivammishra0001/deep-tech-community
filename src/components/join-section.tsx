@@ -24,7 +24,7 @@ export function JoinSection() {
         <RevealHeading>
           <div className="border-b border-border pb-10 sm:pb-12">
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted sm:text-[11px]">
-              05 / JOIN
+              06 / JOIN
             </p>
 
             <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">

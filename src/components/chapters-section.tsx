@@ -79,7 +79,7 @@ export function ChaptersSection() {
           <div className="border-b border-border pb-10 sm:pb-12">
             <div className="flex items-center justify-between gap-6">
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted sm:text-[11px]">
-                04 / CHAPTERS
+                05 / CHAPTERS
               </p>
               <Link
                 href="/chapters"
