@@ -51,7 +51,7 @@ export function HeroBackdrop() {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 70% 90% at 72% 38%, #101010 0%, #0A0A0A 42%, #050505 78%)",
+            "radial-gradient(ellipse 70% 90% at 72% 38%, var(--hb-atm-1) 0%, var(--hb-atm-2) 42%, var(--hb-atm-3) 78%)",
         }}
       />
 
@@ -60,10 +60,10 @@ export function HeroBackdrop() {
         style={{
           y: gridY,
           backgroundImage: [
-            "repeating-linear-gradient(0deg, rgba(255,255,255,0.030) 0 1px, transparent 1px 48px)",
-            "repeating-linear-gradient(90deg, rgba(255,255,255,0.030) 0 1px, transparent 1px 48px)",
-            "repeating-linear-gradient(0deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 192px)",
-            "repeating-linear-gradient(90deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 192px)",
+            "repeating-linear-gradient(0deg, var(--rule-fine) 0 1px, transparent 1px 48px)",
+            "repeating-linear-gradient(90deg, var(--rule-fine) 0 1px, transparent 1px 48px)",
+            "repeating-linear-gradient(0deg, var(--rule-coarse) 0 1px, transparent 1px 192px)",
+            "repeating-linear-gradient(90deg, var(--rule-coarse) 0 1px, transparent 1px 192px)",
           ].join(","),
           maskImage: "radial-gradient(ellipse 88% 82% at 62% 42%, #000 12%, transparent 76%)",
           WebkitMaskImage: "radial-gradient(ellipse 88% 82% at 62% 42%, #000 12%, transparent 76%)",
@@ -91,7 +91,7 @@ export function HeroBackdrop() {
           </mask>
         </defs>
 
-        <g mask="url(#hb-mask)" stroke="#ffffff" strokeWidth="1" vectorEffect="non-scaling-stroke">
+        <g mask="url(#hb-mask)" stroke="var(--hb-ink)" strokeWidth="1" vectorEffect="non-scaling-stroke">
           {/* Contour field */}
           {CONTOURS.map((c) => (
             <path key={c.d} d={c.d} strokeOpacity={c.o} />
@@ -127,8 +127,8 @@ export function HeroBackdrop() {
 
       {/* Grain */}
       <div
-        className="absolute inset-0 opacity-[0.045]"
-        style={{ backgroundImage: GRAIN_TILE, backgroundRepeat: "repeat" }}
+        className="absolute inset-0"
+        style={{ backgroundImage: GRAIN_TILE, backgroundRepeat: "repeat", opacity: "var(--hb-grain)" }}
       />
 
       {/* Vignette */}
@@ -136,14 +136,26 @@ export function HeroBackdrop() {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 100% 100% at 50% 45%, transparent 38%, rgba(5,5,5,0.55) 100%)",
+            "radial-gradient(ellipse 100% 100% at 50% 45%, transparent 38%, var(--hb-vignette) 100%)",
         }}
       />
 
       {/* Contrast scrim under the type column. The plate is already dark, so
           this only needs to guarantee the floor, not hide the artwork. */}
-      <div className="absolute inset-0 md:hidden bg-[linear-gradient(180deg,rgba(5,5,5,0.35)_0%,rgba(5,5,5,0.45)_55%,rgba(5,5,5,0.6)_100%)]" />
-      <div className="absolute inset-0 hidden md:block bg-[linear-gradient(90deg,rgba(5,5,5,0.72)_0%,rgba(5,5,5,0.42)_34%,rgba(5,5,5,0.08)_66%,rgba(5,5,5,0)_100%)]" />
+      <div
+        className="absolute inset-0 md:hidden"
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, rgba(var(--scrim-rgb),0.35) 0%, rgba(var(--scrim-rgb),0.45) 55%, rgba(var(--scrim-rgb),0.6) 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 hidden md:block"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, rgba(var(--scrim-rgb),0.72) 0%, rgba(var(--scrim-rgb),0.42) 34%, rgba(var(--scrim-rgb),0.08) 66%, rgba(var(--scrim-rgb),0) 100%)",
+        }}
+      />
 
       {/* Hairline seam into the next section. */}
       <div className="absolute inset-x-0 bottom-0 h-px bg-border" />

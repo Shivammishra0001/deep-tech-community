@@ -6,11 +6,12 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Container, cx } from "@/components/ui";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const NAV_ITEMS = [
   { label: "TECHNOLOGIES", href: "/technologies" },
-  { label: "NETWORK", href: "/community" },
   { label: "NEWSLETTER", href: "/news" },
+  { label: "CHAPTERS", href: "/chapters" },
   { label: "EVENTS", href: "/events" },
   { label: "ABOUT", href: "/about" },
 ];
@@ -92,7 +93,7 @@ function JoinCta({ size = "sm", className }: { size?: "sm" | "md"; className?: s
         "group inline-flex items-center justify-center gap-2 rounded-lg bg-primary",
         size === "sm" ? "h-9 px-4" : "h-10 px-5",
         "font-sans text-[12px] font-semibold uppercase tracking-[0.08em] text-background",
-        "transition-colors duration-200 hover:bg-white",
+        "transition-colors duration-200 hover:bg-cta-hover",
         className,
       )}
     >
@@ -197,6 +198,8 @@ export function Navbar() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2.5">
+          <ThemeToggle />
+
           {user ? (
             <Link
               href="/admin"
@@ -354,7 +357,7 @@ export function Footer() {
                 href="/join"
                 className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg bg-primary px-7
                            font-sans text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] text-background
-                           transition-colors duration-200 hover:bg-white"
+                           transition-colors duration-200 hover:bg-cta-hover"
               >
                 JOIN THE COMMUNITY
                 <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />

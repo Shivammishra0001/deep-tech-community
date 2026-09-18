@@ -7,37 +7,124 @@
   --font-geist: "Geist", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
 
-  /* ---- Dark design tokens -------------------------------------------------
-     This site is dark-only by design: there is no light palette and no theme
-     switch. These are the single source of truth for surface and text colour.
-     Each generates the matching Tailwind utilities -- --color-card gives
-     bg-card / text-card / border-card -- and supports opacity, e.g. bg-card/90. */
+  /* ---- Design tokens ------------------------------------------------------
+     Dark is the default and lives here, so Tailwind generates every utility
+     from it -- --color-card gives bg-card / text-card / border-card, with
+     opacity support like bg-card/90. The light palette re-declares the same
+     custom properties under :root[data-theme="light"] further down, so every
+     utility on the site follows the theme without a single class changing. */
   --color-background: #050505;  /* page background                            */
   --color-surface:    #0A0A0A;  /* section bands sitting on the background    */
   --color-card:       #111111;  /* raised panels and cards                    */
   --color-border:     #242424;  /* hairlines, dividers, card outlines         */
   --color-primary:    #F2F2F2;  /* primary text: headings, emphasis           */
   --color-secondary:  #A0A0A0;  /* secondary text                             */
-  --color-muted:      #6F6F6F;  /* muted text, placeholders, timestamps       */
+  --color-muted:      #808080;  /* muted text, placeholders, timestamps       */
 
-  /* Steps the three-tone scale above does not cover. Each is exactly the
-     colour that already rendered here, so adding them changed nothing on
-     screen -- they only give the remaining utilities a name.                  */
+  /* Steps the three-tone scale above does not cover. */
   --color-elevated:      #262626;  /* chips/inputs sitting above a card     */
   --color-border-strong: #404040;  /* interactive + emphasised borders      */
   --color-body:          #E5E5E5;  /* body copy                             */
   --color-body-soft:     #D4D4D4;  /* secondary body copy                   */
-  --color-inverted:      #F5F5F5;  /* light fills: primary buttons, avatars */
-  --color-on-inverted:   #0A0A0A;  /* text sitting on those light fills     */
+  --color-inverted:      #F5F5F5;  /* solid fills: primary buttons, avatars */
+  --color-on-inverted:   #0A0A0A;  /* text sitting on those fills           */
+  --color-cta-hover:     #FFFFFF;  /* primary button, hovered               */
 
   --shadow-hairline: 0 0 0 1px rgb(255 255 255 / 0.08);
   --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
   --shadow-lift: 0 4px 12px rgb(0 0 0 / 0.5), 0 20px 40px -12px rgb(0 0 0 / 0.7);
 }
 
+
+/* ---------------------------------------------------------------------------
+   THEME LAYER
+
+   Dark is the default; light re-declares the same properties. Nothing below
+   introduces a second design -- the composition, type and spacing are shared,
+   only the values differ. The data-theme attribute is set by an inline script
+   in <head> before first paint, so there is no flash of the wrong theme.
+   --------------------------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+
+  /* Gradient stops and washes the plates are built from. The -rgb triples feed
+     rgba() so one value covers a family of alphas. */
+  --scrim-rgb: 5, 5, 5;        /* page-coloured scrims over the hero art     */
+  --card-rgb: 17, 17, 17;      /* image bands dissolving into a card          */
+  --rule-fine: rgba(255, 255, 255, 0.030);
+  --rule-coarse: rgba(255, 255, 255, 0.045);
+  --sheet-fine: rgba(255, 255, 255, 0.028);
+  --sheet-coarse: rgba(255, 255, 255, 0.040);
+
+  /* Hero backdrop */
+  --hb-atm-1: #101010;
+  --hb-atm-2: #0A0A0A;
+  --hb-atm-3: #050505;
+  --hb-ink: #ffffff;           /* stroke for the instrument plate             */
+  --hb-grain: 0.045;
+  --hb-vignette: rgba(5, 5, 5, 0.55);
+
+  /* Photographs are held well back from the type in both themes. */
+  --photo-opacity: 0.62;
+  --photo-opacity-hover: 0.78;
+  --photo-brightness: 0.75;
+
+  --selection-bg: rgb(255 255 255 / 0.2);
+  --scrollbar-thumb: rgb(255 255 255 / 0.15);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-background: #F5F5F3;
+  --color-surface:    #FFFFFF;
+  --color-card:       #EEEEEC;
+  --color-border:     #D8D8D4;
+  --color-primary:    #111111;
+  --color-secondary:  #555555;
+
+  /* Derived to hold the same relationships the dark scale has: muted sits one
+     step back from secondary, elevated one step forward from card, and the
+     solid fills invert so a primary button stays the highest-contrast element
+     on the page. */
+  --color-muted:         #6B6B67;
+  --color-elevated:      #E2E2DE;
+  --color-border-strong: #B0B0AA;
+  --color-body:          #1F1F1F;
+  --color-body-soft:     #3A3A38;
+  --color-inverted:      #111111;
+  --color-on-inverted:   #F5F5F3;
+  --color-cta-hover:     #000000;
+
+  --scrim-rgb: 245, 245, 243;
+  --card-rgb: 238, 238, 236;
+  --rule-fine: rgba(0, 0, 0, 0.055);
+  --rule-coarse: rgba(0, 0, 0, 0.075);
+  --sheet-fine: rgba(0, 0, 0, 0.05);
+  --sheet-coarse: rgba(0, 0, 0, 0.07);
+
+  --hb-atm-1: #FFFFFF;
+  --hb-atm-2: #FAFAF8;
+  --hb-atm-3: #F5F5F3;
+  --hb-ink: #000000;
+  --hb-grain: 0.028;
+  --hb-vignette: rgba(120, 120, 114, 0.14);
+
+  --photo-opacity: 0.68;
+  --photo-opacity-hover: 0.82;
+  --photo-brightness: 0.95;
+
+  --selection-bg: rgb(0 0 0 / 0.12);
+  --scrollbar-thumb: rgb(0 0 0 / 0.2);
+}
+
+/* The theme toggle keeps both marks in the DOM and lets CSS pick, so the
+   button never depends on client state and cannot mismatch on hydration. */
+:root[data-theme="light"] .theme-icon-sun { display: none; }
+:root:not([data-theme="light"]) .theme-icon-moon { display: none; }
+
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
 }
 
 body {
@@ -51,7 +138,7 @@ body {
 }
 
 ::selection {
-  background: rgb(255 255 255 / 0.2);
+  background: var(--selection-bg);
 }
 
 /* ---------- Motion & Micro-interactions ---------- */
@@ -153,7 +240,7 @@ button:active, a:active {
 /* Hairline Scrollbars */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgb(255 255 255 / 0.15) transparent;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 :focus-visible {

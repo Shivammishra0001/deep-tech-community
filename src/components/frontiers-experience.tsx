@@ -122,9 +122,15 @@ export function FrontiersExperience() {
                     <SafeImage
                       src={f.image}
                       alt=""
-                      className="size-full object-cover opacity-[0.62] grayscale brightness-75 transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:opacity-[0.78]"
+                      className="size-full object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.05] [filter:grayscale(1)_brightness(var(--photo-brightness))] [opacity:var(--photo-opacity)] group-hover:[opacity:var(--photo-opacity-hover)]"
                     />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,17,17,0)_0%,rgba(17,17,17,0.3)_58%,rgba(17,17,17,0.88)_88%,#111111_100%)]" />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(180deg, rgba(var(--card-rgb),0) 0%, rgba(var(--card-rgb),0.3) 58%, rgba(var(--card-rgb),0.88) 88%, var(--color-card) 100%)",
+                      }}
+                    />
                   </div>
 
                   <div className="relative flex flex-1 flex-col px-7 pb-8 pt-7 sm:px-9 sm:pb-10 sm:pt-8 lg:px-10 lg:pb-11">

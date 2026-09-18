@@ -90,8 +90,23 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" style={{ colorScheme: "dark" }} data-scroll-behavior="smooth">
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
+        {/* Resolve the theme before first paint so the page never flashes the
+            wrong one. A stored choice wins; otherwise the system preference
+            decides, and stays live because nothing is written until the
+            visitor picks a side. Kept inline and dependency-free on purpose:
+            anything deferred would paint first. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var s=localStorage.getItem('dtc-theme');" +
+              "var t=(s==='light'||s==='dark')?s:" +
+              "(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');" +
+              "document.documentElement.setAttribute('data-theme',t);}" +
+              "catch(e){document.documentElement.setAttribute('data-theme','dark');}})();",
+          }}
+        />
         <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
         <link rel="icon" href="/favicon.png?v=2" type="image/png" />
         <link rel="shortcut icon" href="/favicon.png?v=2" />

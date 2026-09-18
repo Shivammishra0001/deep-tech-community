@@ -98,9 +98,9 @@ export function Button({
   const styles = cn(
     "btn-hover inline-flex items-center justify-center gap-2 rounded-lg font-sans text-xs sm:text-sm font-semibold tracking-tight transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:pointer-events-none",
     variant === "primary" &&
-      "bg-inverted text-on-inverted hover:bg-white shadow-sm",
+      "bg-inverted text-on-inverted hover:bg-cta-hover shadow-sm",
     variant === "secondary" &&
-      "bg-elevated text-primary hover:bg-neutral-700",
+      "bg-elevated text-primary hover:bg-border-strong",
     variant === "outline" &&
       "border bg-transparent border-border-strong text-primary hover:bg-elevated",
     variant === "ghost" &&

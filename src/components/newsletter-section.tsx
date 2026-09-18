@@ -81,7 +81,7 @@ function SubscribeForm() {
           disabled={pending || done}
           className="group inline-flex h-12 shrink-0 items-center justify-center gap-2.5 rounded-lg bg-primary px-7
                      font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-background
-                     transition-colors duration-200 hover:bg-white
+                     transition-colors duration-200 hover:bg-cta-hover
                      disabled:pointer-events-none disabled:opacity-50 sm:text-[13px]"
         >
           {pending ? (
@@ -139,9 +139,11 @@ function LeadBriefing({ article }: { article: Article }) {
         <SafeImage
           src={article.image}
           alt=""
-          className="size-full object-cover opacity-[0.62] grayscale brightness-75 transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:opacity-[0.78]"
+          className="size-full object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.05] [filter:grayscale(1)_brightness(var(--photo-brightness))] [opacity:var(--photo-opacity)] group-hover:[opacity:var(--photo-opacity-hover)]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,17,17,0)_0%,rgba(17,17,17,0.55)_100%)] lg:bg-[linear-gradient(90deg,rgba(17,17,17,0)_40%,rgba(17,17,17,0.9)_100%)]" />
+        <div
+          className="absolute inset-0 [background-image:linear-gradient(180deg,rgba(var(--card-rgb),0)_0%,rgba(var(--card-rgb),0.55)_100%)] lg:[background-image:linear-gradient(90deg,rgba(var(--card-rgb),0)_40%,rgba(var(--card-rgb),0.9)_100%)]"
+        />
       </div>
 
       <div className="flex flex-col p-7 sm:p-9 lg:p-10">

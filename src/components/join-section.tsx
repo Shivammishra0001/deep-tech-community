@@ -66,7 +66,7 @@ export function JoinSection() {
                   href="/join"
                   className="group inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-lg bg-primary px-7
                              font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-background
-                             transition-colors duration-200 hover:bg-white sm:w-auto sm:text-[13px]"
+                             transition-colors duration-200 hover:bg-cta-hover sm:w-auto sm:text-[13px]"
                 >
                   JOIN THE COMMUNITY
                   <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />

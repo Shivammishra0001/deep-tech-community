@@ -13,9 +13,9 @@ import { EVENTS, isUpcomingEvent, type TechEvent } from "@/data/events";
  * sits on clean ground, and kept below the hero's grid in strength.
  */
 const SCHEDULE_LINES = [
-  "repeating-linear-gradient(0deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 40px)",
-  "repeating-linear-gradient(90deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 40px)",
-  "repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 160px)",
+  "repeating-linear-gradient(0deg, var(--sheet-fine) 0 1px, transparent 1px 40px)",
+  "repeating-linear-gradient(90deg, var(--sheet-fine) 0 1px, transparent 1px 40px)",
+  "repeating-linear-gradient(90deg, var(--sheet-coarse) 0 1px, transparent 1px 160px)",
 ].join(",");
 
 /** Wide panel: the sheet fills the open space to the right of the type. */
