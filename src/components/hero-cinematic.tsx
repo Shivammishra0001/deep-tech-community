@@ -49,12 +49,12 @@ export function CinematicHero() {
               width that breaks it across three lines instead of filling the
               viewport. */}
           <h1
-            className="mt-6 sm:mt-7 mx-auto max-w-[330px] sm:max-w-[420px] lg:max-w-[620px] font-sans uppercase text-primary
+            className="mt-6 sm:mt-7 mx-auto max-w-[370px] sm:max-w-[470px] lg:max-w-[600px] font-sans uppercase text-primary
                        text-[clamp(2.25rem,7.4vw,2.75rem)]
                        sm:text-[clamp(2.75rem,6.2vw,3.5rem)]
                        lg:text-[clamp(3.5rem,5vw,4.125rem)]
                        xl:text-[4.5rem]
-                       font-medium leading-[1.12] sm:leading-[1.08] lg:leading-[1.06]
+                       font-semibold leading-[1.12] sm:leading-[1.08] lg:leading-[1.06]
                        tracking-[-0.015em] lg:tracking-[-0.022em]"
           >
             <StaggeredText
@@ -72,7 +72,7 @@ export function CinematicHero() {
             {...fadeUp}
             transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.35, ease: "easeOut" }}
             className="mt-7 lg:mt-8 mx-auto max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px]
-                       font-normal leading-[1.65] text-secondary"
+                       font-medium leading-[1.65] text-secondary"
           >
             A practitioner-led community for engineers, researchers, founders, and students
             working across the technologies shaping what comes next.
@@ -97,7 +97,7 @@ export function CinematicHero() {
             <Link
               href="/community"
               className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg border border-btn-border bg-btn px-7
-                         font-sans text-[12px] sm:text-[13px] font-medium uppercase tracking-[0.1em] text-btn-text
+                         font-sans text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] text-btn-text
                          transition-colors duration-200 hover:border-accent-border hover:text-accent"
             >
               EXPLORE THE NETWORK

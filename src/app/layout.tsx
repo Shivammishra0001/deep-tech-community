@@ -112,7 +112,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="shortcut icon" href="/favicon.png?v=2" />
         <link rel="apple-touch-icon" href="/apple-icon.png?v=2" />
       </head>
-      <body className="min-h-screen font-sans antialiased bg-background text-primary selection:bg-primary selection:text-background">
+      <body className="min-h-screen font-sans bg-background text-primary">
         <Script
           id="json-ld"
           type="application/ld+json"

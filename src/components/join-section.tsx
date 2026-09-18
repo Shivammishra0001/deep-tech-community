@@ -29,7 +29,7 @@ export function JoinSection() {
 
             <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
               <h2
-                className="max-w-[16ch] font-sans font-medium uppercase tracking-[-0.015em] text-primary
+                className="max-w-[16ch] font-sans font-semibold uppercase tracking-[-0.015em] text-primary
                            text-[clamp(1.875rem,7vw,2.25rem)]
                            sm:text-[clamp(2.25rem,5vw,2.75rem)]
                            lg:text-[3rem] lg:tracking-[-0.022em]
@@ -38,7 +38,7 @@ export function JoinSection() {
                 JOIN FRONTIER BUILDERS WORLDWIDE
               </h2>
 
-              <p className="max-w-[420px] font-sans text-[15px] font-normal leading-[1.65] text-secondary sm:text-base lg:pb-1.5">
+              <p className="max-w-[420px] font-sans text-[15px] font-medium leading-[1.65] text-secondary sm:text-base lg:pb-1.5">
                 Membership is free and open to students, engineers, researchers, founders, and
                 educators.
               </p>
@@ -51,7 +51,7 @@ export function JoinSection() {
           <div className="mt-12 rounded-2xl border border-border bg-card sm:mt-14">
             <div className="flex flex-col lg:flex-row lg:items-stretch">
               <div className="flex flex-1 flex-col justify-center px-7 py-10 sm:px-10 sm:py-12 lg:px-12">
-                <p className="max-w-[46ch] font-sans text-[17px] font-normal leading-[1.55] tracking-[-0.01em] text-primary sm:text-[20px]">
+                <p className="max-w-[46ch] font-sans text-[17px] font-medium leading-[1.55] tracking-[-0.01em] text-primary sm:text-[20px]">
                   Direct access to technical roadmaps, regional symposia, and active project
                   channels.
                 </p>

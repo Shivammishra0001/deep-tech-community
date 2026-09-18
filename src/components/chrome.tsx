@@ -49,7 +49,7 @@ export function Logo({ className }: { className?: string }) {
         <span className="font-sans text-sm font-semibold tracking-tight text-primary group-hover:text-body-soft transition-colors">
           DTC
         </span>
-        <span className="font-sans text-[9px] font-medium uppercase tracking-[0.12em] text-primary mt-0.5">
+        <span className="font-sans text-[9px] font-semibold uppercase tracking-[0.12em] text-primary mt-0.5">
           DEEP TECH COMMUNITY
         </span>
       </div>
@@ -77,7 +77,7 @@ function HeaderBrand() {
         <span className="font-sans text-[15px] font-semibold leading-none tracking-[-0.01em] text-primary">
           DTC
         </span>
-        <span className="mt-[5px] font-sans text-[9px] font-medium uppercase leading-none tracking-[0.18em] text-muted transition-colors duration-200 group-hover:text-secondary">
+        <span className="mt-[5px] font-sans text-[9px] font-semibold uppercase leading-none tracking-[0.18em] text-muted transition-colors duration-200 group-hover:text-secondary">
           Deep Tech Community
         </span>
       </span>
@@ -180,7 +180,7 @@ export function Navbar() {
                 href={item.href}
                 aria-current={isActive ? "page" : undefined}
                 className={cx(
-                  "relative py-1 font-sans text-[12px] font-medium uppercase tracking-[0.12em] transition-colors duration-200",
+                  "relative py-1 font-sans text-[12px] font-semibold uppercase tracking-[0.12em] transition-colors duration-200",
                   isActive ? "text-primary" : "text-secondary hover:text-primary",
                 )}
               >
@@ -252,7 +252,7 @@ export function Navbar() {
                       href={item.href}
                       aria-current={isActive ? "page" : undefined}
                       className={cx(
-                        "flex h-12 items-center font-sans text-[13px] font-medium uppercase tracking-[0.12em] transition-colors duration-200",
+                        "flex h-12 items-center font-sans text-[13px] font-semibold uppercase tracking-[0.12em] transition-colors duration-200",
                         isActive ? "text-primary" : "text-secondary hover:text-primary",
                       )}
                     >
@@ -286,7 +286,7 @@ export function Navbar() {
                   <div className="flex items-center gap-2.5">
                     <Link
                       href="/login"
-                      className="inline-flex h-10 flex-1 items-center justify-center rounded-lg border border-border font-sans text-[12px] font-medium uppercase tracking-[0.08em] text-body transition-colors duration-200 hover:border-border-strong hover:text-primary"
+                      className="inline-flex h-10 flex-1 items-center justify-center rounded-lg border border-border font-sans text-[12px] font-semibold uppercase tracking-[0.08em] text-body transition-colors duration-200 hover:border-border-strong hover:text-primary"
                     >
                       Log in
                     </Link>
@@ -325,7 +325,7 @@ export function Footer() {
           {/* Brand */}
           <div className="max-w-[400px]">
             <Logo />
-            <p className="mt-6 font-sans text-[15px] font-normal leading-[1.65] text-secondary">
+            <p className="mt-6 font-sans text-[15px] font-medium leading-[1.65] text-secondary">
               Open practitioner community platform for Artificial Intelligence, Quantum Computing,
               Cybersecurity, and AI Governance.
             </p>
@@ -342,7 +342,7 @@ export function Footer() {
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="font-sans text-[13px] font-medium uppercase tracking-[0.12em] text-secondary transition-colors duration-200 hover:text-primary"
+                      className="font-sans text-[13px] font-semibold uppercase tracking-[0.12em] text-secondary transition-colors duration-200 hover:text-primary"
                     >
                       {l.label}
                     </Link>

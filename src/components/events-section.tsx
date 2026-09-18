@@ -57,7 +57,7 @@ function EventRow({ event, first }: { event: TechEvent; first: boolean }) {
       </span>
 
       <span className="flex-1">
-        <span className="block font-sans text-[17px] font-normal leading-[1.4] tracking-[-0.01em] text-primary sm:text-[19px]">
+        <span className="block font-sans text-[17px] font-medium leading-[1.4] tracking-[-0.01em] text-primary sm:text-[19px]">
           {event.title}
         </span>
         <span className="mt-2 block font-sans text-[13px] leading-[1.6] text-muted sm:text-sm">
@@ -107,7 +107,7 @@ export function EventsSection() {
 
             <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
               <h2
-                className="font-sans font-medium uppercase tracking-[-0.015em] text-primary
+                className="font-sans font-semibold uppercase tracking-[-0.015em] text-primary
                            text-[clamp(1.875rem,7vw,2.25rem)]
                            sm:text-[clamp(2.25rem,5vw,2.75rem)]
                            lg:text-[3rem] lg:tracking-[-0.022em]
@@ -116,7 +116,7 @@ export function EventsSection() {
                 EVENTS
               </h2>
 
-              <p className="max-w-[420px] font-sans text-[15px] font-normal leading-[1.65] text-secondary sm:text-base lg:pb-1.5">
+              <p className="max-w-[420px] font-sans text-[15px] font-medium leading-[1.65] text-secondary sm:text-base lg:pb-1.5">
                 Practitioner-led conferences, hands-on security labs, and research reading groups.
               </p>
             </div>
@@ -142,7 +142,7 @@ export function EventsSection() {
                 <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted sm:text-[11px]">
                   NO UPCOMING EVENTS
                 </p>
-                <p className="mt-5 max-w-[22ch] font-sans text-[20px] font-normal leading-[1.3] tracking-[-0.015em] text-primary sm:text-[24px] lg:text-[28px]">
+                <p className="mt-5 max-w-[22ch] font-sans text-[20px] font-medium leading-[1.3] tracking-[-0.015em] text-primary sm:text-[24px] lg:text-[28px]">
                   New gatherings and technical sessions will appear here.
                 </p>
               </div>

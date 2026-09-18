@@ -81,7 +81,7 @@ export function FrontiersExperience() {
 
             <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
               <h2
-                className="font-sans font-medium uppercase tracking-[-0.015em] text-primary
+                className="font-sans font-semibold uppercase tracking-[-0.015em] text-primary
                            text-[clamp(1.875rem,7vw,2.25rem)]
                            sm:text-[clamp(2.25rem,5vw,2.75rem)]
                            lg:text-[3rem] lg:tracking-[-0.022em]
@@ -90,7 +90,7 @@ export function FrontiersExperience() {
                 TECHNOLOGIES
               </h2>
 
-              <p className="max-w-[420px] font-sans text-[15px] font-normal leading-[1.65] text-secondary sm:text-base lg:pb-1.5">
+              <p className="max-w-[420px] font-sans text-[15px] font-medium leading-[1.65] text-secondary sm:text-base lg:pb-1.5">
                 Exploring the technologies shaping tomorrow. Built by people, for people, at the
                 frontier.
               </p>
@@ -140,15 +140,15 @@ export function FrontiersExperience() {
                       {f.subtitle}
                     </p>
 
-                    <h3 className="mt-4 font-sans text-[22px] font-medium uppercase leading-[1.1] tracking-[-0.015em] text-primary sm:text-[26px] lg:text-[28px]">
+                    <h3 className="mt-4 font-sans text-[22px] font-semibold uppercase leading-[1.1] tracking-[-0.015em] text-primary sm:text-[26px] lg:text-[28px]">
                       {f.title}
                     </h3>
 
-                    <p className="mt-4 max-w-[38ch] font-sans text-[15px] font-normal leading-[1.55] text-secondary sm:text-base lg:text-[17px]">
+                    <p className="mt-4 max-w-[38ch] font-sans text-[15px] font-medium leading-[1.55] text-secondary sm:text-base lg:text-[17px]">
                       {f.description}
                     </p>
 
-                    <p className="mt-3 max-w-[48ch] font-sans text-[13px] font-normal leading-[1.7] text-muted sm:text-sm">
+                    <p className="mt-3 max-w-[48ch] font-sans text-[13px] font-medium leading-[1.7] text-muted sm:text-sm">
                       {f.tagline}
                     </p>
 

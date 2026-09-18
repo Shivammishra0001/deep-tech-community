@@ -46,7 +46,7 @@ function ChapterPanel({ chapter, edges }: { chapter: Chapter; edges: string }) {
         {chapter.country}
       </h3>
 
-      <p className="mt-4 font-sans text-[15px] font-normal leading-[1.6] text-secondary sm:text-base">
+      <p className="mt-4 font-sans text-[15px] font-medium leading-[1.6] text-secondary sm:text-base">
         {chapter.city}
       </p>
 
@@ -92,7 +92,7 @@ export function ChaptersSection() {
 
             <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
               <h2
-                className="font-sans font-medium uppercase tracking-[-0.015em] text-primary
+                className="font-sans font-semibold uppercase tracking-[-0.015em] text-primary
                            text-[clamp(1.875rem,7vw,2.25rem)]
                            sm:text-[clamp(2.25rem,5vw,2.75rem)]
                            lg:text-[3rem] lg:tracking-[-0.022em]
@@ -101,7 +101,7 @@ export function ChaptersSection() {
                 CHAPTERS
               </h2>
 
-              <p className="max-w-[420px] font-sans text-[15px] font-normal leading-[1.65] text-secondary sm:text-base lg:pb-1.5">
+              <p className="max-w-[420px] font-sans text-[15px] font-medium leading-[1.65] text-secondary sm:text-base lg:pb-1.5">
                 Regional chapters connect members in their own cities and time zones.
               </p>
             </div>
