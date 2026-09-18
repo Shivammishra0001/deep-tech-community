@@ -40,7 +40,7 @@ export function CinematicHero() {
           <motion.p
             {...fadeUp}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.28em] text-muted"
+            className="font-mono text-[11px] sm:text-[12px] font-bold uppercase tracking-[0.26em] text-secondary"
           >
             THE FRONTIER NETWORK FOR DEEP TECH
           </motion.p>
@@ -71,8 +71,8 @@ export function CinematicHero() {
           <motion.p
             {...fadeUp}
             transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.35, ease: "easeOut" }}
-            className="mt-7 lg:mt-8 mx-auto max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px]
-                       font-medium leading-[1.65] text-secondary"
+            className="mt-7 lg:mt-8 mx-auto max-w-[620px] font-sans text-[15px] sm:text-base lg:text-[17px]
+                       font-semibold leading-[1.6] text-secondary"
           >
             A practitioner-led community for engineers, researchers, founders, and students
             working across the technologies shaping what comes next.

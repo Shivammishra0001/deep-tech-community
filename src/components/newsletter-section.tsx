@@ -149,7 +149,7 @@ function LeadBriefing({ article }: { article: Article }) {
       <div className="flex flex-col p-7 sm:p-9 lg:p-10">
         <div className="flex flex-wrap items-center gap-3">
           <DomainBadge domain={article.domain} />
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
+          <span className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary">
             {article.date}
           </span>
         </div>
@@ -162,7 +162,7 @@ function LeadBriefing({ article }: { article: Article }) {
           {article.excerpt}
         </p>
 
-        <span className="mt-auto flex items-center gap-2 pt-8 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 group-hover:text-accent">
+        <span className="mt-auto flex items-center gap-2 pt-8 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-secondary transition-colors duration-300 group-hover:text-accent">
           READ BRIEFING
           <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
@@ -179,7 +179,7 @@ function BriefingRow({ article }: { article: Article }) {
       className="group flex flex-col gap-3 border-t border-border px-1 py-6 transition-colors duration-300
                  hover:border-accent-border sm:flex-row sm:items-baseline sm:gap-8 sm:py-7"
     >
-      <span className="shrink-0 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted sm:w-32">
+      <span className="shrink-0 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary sm:w-32">
         {article.date}
       </span>
 
@@ -187,7 +187,7 @@ function BriefingRow({ article }: { article: Article }) {
         {article.title}
       </span>
 
-      <span className="flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted transition-colors duration-300 group-hover:text-accent">
+      <span className="flex shrink-0 items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary transition-colors duration-300 group-hover:text-accent">
         {article.readingTime} MIN
         <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </span>
@@ -209,12 +209,12 @@ export function NewsletterSection() {
         <RevealHeading>
           <div className="border-b border-border pb-10 sm:pb-12">
             <div className="flex items-center justify-between gap-6">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted sm:text-[11px]">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-secondary sm:text-[12px]">
                 02 / NEWSLETTER
               </p>
               <Link
                 href="/news"
-                className="group inline-flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 hover:text-primary sm:text-[11px]"
+                className="group inline-flex shrink-0 items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-secondary transition-colors duration-300 hover:text-primary sm:text-[12px]"
               >
                 ALL BRIEFINGS
                 <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -260,7 +260,7 @@ export function NewsletterSection() {
           <RevealVisual delay={100}>
             <div className="mt-12 rounded-2xl border border-border bg-card px-7 py-10 sm:mt-14 sm:px-10 sm:py-12">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-baseline lg:justify-between lg:gap-16">
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted sm:text-[11px]">
+                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary sm:text-[12px]">
                   NOTHING PUBLISHED YET
                 </p>
                 <p className="max-w-[420px] font-sans text-[15px] leading-[1.65] text-secondary sm:text-base">

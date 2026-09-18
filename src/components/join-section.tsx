@@ -23,7 +23,7 @@ export function JoinSection() {
         {/* ── SECTION HEADER ─────────────────────────────────────────────── */}
         <RevealHeading>
           <div className="border-b border-border pb-10 sm:pb-12">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted sm:text-[11px]">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-secondary sm:text-[12px]">
               06 / JOIN
             </p>
 
@@ -72,7 +72,7 @@ export function JoinSection() {
                   <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </Link>
 
-                <p className="mt-5 max-w-[34ch] font-sans text-[13px] leading-[1.6] text-muted">
+                <p className="mt-5 max-w-[34ch] font-sans text-[13px] font-medium leading-[1.6] text-secondary">
                   Joining is free. Create an account, then complete a short membership form.
                 </p>
               </div>

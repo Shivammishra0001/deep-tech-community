@@ -23,12 +23,12 @@ export function CommunitySection() {
         <RevealHeading>
           <div className="border-b border-border pb-10 sm:pb-12">
             <div className="flex items-center justify-between gap-6">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted sm:text-[11px]">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-secondary sm:text-[12px]">
                 04 / COMMUNITY
               </p>
               <Link
                 href="/community"
-                className="group inline-flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 hover:text-primary sm:text-[11px]"
+                className="group inline-flex shrink-0 items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-secondary transition-colors duration-300 hover:text-primary sm:text-[12px]"
               >
                 OPEN FORUM
                 <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -60,7 +60,7 @@ export function CommunitySection() {
             nothing has yet. */}
         <RevealVisual delay={100}>
           <div className="mt-12 rounded-2xl border border-border bg-card px-7 py-8 sm:mt-14 sm:px-10 sm:py-9 lg:px-12">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted sm:text-[11px]">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary sm:text-[12px]">
               NO COMMUNITY POSTS YET
             </p>
           </div>

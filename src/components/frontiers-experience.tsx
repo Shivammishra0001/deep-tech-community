@@ -75,7 +75,7 @@ export function FrontiersExperience() {
             two sections read as one system. */}
         <RevealHeading>
           <div className="border-b border-border pb-10 sm:pb-12">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted sm:text-[11px]">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-secondary sm:text-[12px]">
               01 / TECHNOLOGIES
             </p>
 
@@ -135,7 +135,7 @@ export function FrontiersExperience() {
 
                   <div className="relative flex flex-1 flex-col px-7 pb-8 pt-7 sm:px-9 sm:pb-10 sm:pt-8 lg:px-10 lg:pb-11">
                     {/* Full technology name, kept quiet above the short form. */}
-                    <p className="flex items-center gap-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
+                    <p className="flex items-center gap-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary">
                       <Icon className="size-3.5 shrink-0" aria-hidden="true" />
                       {f.subtitle}
                     </p>
@@ -148,11 +148,11 @@ export function FrontiersExperience() {
                       {f.description}
                     </p>
 
-                    <p className="mt-3 max-w-[48ch] font-sans text-[13px] font-medium leading-[1.7] text-muted sm:text-sm">
+                    <p className="mt-3 max-w-[48ch] font-sans text-[13px] font-medium leading-[1.7] text-secondary sm:text-sm">
                       {f.tagline}
                     </p>
 
-                    <span className="mt-auto flex items-center gap-2 pt-8 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 group-hover:text-accent sm:pt-10">
+                    <span className="mt-auto flex items-center gap-2 pt-8 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-secondary transition-colors duration-300 group-hover:text-accent sm:pt-10">
                       EXPLORE
                       <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>

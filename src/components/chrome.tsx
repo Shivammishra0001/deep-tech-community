@@ -334,7 +334,7 @@ export function Footer() {
           <div className="flex flex-col gap-12 sm:flex-row sm:gap-16 lg:gap-20">
             {/* Sitemap */}
             <nav aria-label="Footer">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted sm:text-[11px]">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary sm:text-[12px]">
                 SITES
               </p>
               <ul className="mt-5 grid gap-3.5 sm:grid-cols-2 sm:gap-x-14 lg:gap-x-16">
@@ -377,7 +377,7 @@ export function Footer() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-200 hover:text-primary sm:text-[11px]"
+                className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-secondary transition-colors duration-200 hover:text-primary sm:text-[12px]"
               >
                 {l.label}
               </Link>

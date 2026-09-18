@@ -38,7 +38,7 @@ function ChapterPanel({ chapter, edges }: { chapter: Chapter; edges: string }) {
         <span className="h-px flex-1 bg-border transition-colors duration-300 group-hover:bg-accent-border" />
       </span>
 
-      <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted">
+      <p className="mt-5 font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-secondary">
         {chapter.code}
       </p>
 
@@ -51,11 +51,11 @@ function ChapterPanel({ chapter, edges }: { chapter: Chapter; edges: string }) {
       </p>
 
       <span className="mt-auto block pt-10">
-        <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
+        <span className="block font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary">
           EST. {chapter.founded}
         </span>
 
-        <span className="mt-4 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 group-hover:text-accent">
+        <span className="mt-4 flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-secondary transition-colors duration-300 group-hover:text-accent">
           EXPLORE CHAPTER
           <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
@@ -78,12 +78,12 @@ export function ChaptersSection() {
         <RevealHeading>
           <div className="border-b border-border pb-10 sm:pb-12">
             <div className="flex items-center justify-between gap-6">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted sm:text-[11px]">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-secondary sm:text-[12px]">
                 05 / CHAPTERS
               </p>
               <Link
                 href="/chapters"
-                className="group inline-flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 hover:text-primary sm:text-[11px]"
+                className="group inline-flex shrink-0 items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-secondary transition-colors duration-300 hover:text-primary sm:text-[12px]"
               >
                 ALL CHAPTERS
                 <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

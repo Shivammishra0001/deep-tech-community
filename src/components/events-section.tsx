@@ -48,7 +48,7 @@ function EventRow({ event, first }: { event: TechEvent; first: boolean }) {
                   ${first ? "" : "border-t border-border hover:border-accent-border"}`}
     >
       <span className="flex shrink-0 items-baseline gap-2 sm:w-24 sm:flex-col sm:items-start sm:gap-0.5">
-        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
+        <span className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary">
           {month}
         </span>
         <span className="font-sans text-[22px] font-medium leading-none tracking-[-0.015em] text-primary">
@@ -71,7 +71,7 @@ function EventRow({ event, first }: { event: TechEvent; first: boolean }) {
             <DomainBadge key={d} domain={d} />
           ))}
         </span>
-        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted transition-colors duration-300 group-hover:text-accent">
+        <span className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary transition-colors duration-300 group-hover:text-accent">
           {event.type}
         </span>
         <ArrowUpRight className="size-3.5 text-accent transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent-bright" />
@@ -93,12 +93,12 @@ export function EventsSection() {
         <RevealHeading>
           <div className="border-b border-border pb-10 sm:pb-12">
             <div className="flex items-center justify-between gap-6">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted sm:text-[11px]">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-secondary sm:text-[12px]">
                 03 / EVENTS
               </p>
               <Link
                 href="/events"
-                className="group inline-flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 hover:text-primary sm:text-[11px]"
+                className="group inline-flex shrink-0 items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-secondary transition-colors duration-300 hover:text-primary sm:text-[12px]"
               >
                 ALL EVENTS
                 <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -139,7 +139,7 @@ export function EventsSection() {
               <div className="pointer-events-none absolute inset-0 hidden md:block" style={RULES_WIDE} aria-hidden="true" />
 
               <div className="relative px-7 pb-24 pt-14 sm:px-10 sm:pb-28 sm:pt-16 md:pb-16 lg:px-12 lg:py-20">
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted sm:text-[11px]">
+                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.22em] text-secondary sm:text-[12px]">
                   NO UPCOMING EVENTS
                 </p>
                 <p className="mt-5 max-w-[22ch] font-sans text-[20px] font-medium leading-[1.3] tracking-[-0.015em] text-primary sm:text-[24px] lg:text-[28px]">
