@@ -58,7 +58,7 @@ export function ThemeToggle({ className }: { className?: string }) {
         "inline-flex size-9 shrink-0 items-center justify-center rounded-lg border border-border",
         "text-secondary transition-colors duration-200",
         "hover:border-border-strong hover:text-primary",
-        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40",
+        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent",
         className ?? "",
       ].join(" ")}
     >

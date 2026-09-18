@@ -11,8 +11,8 @@ import { CHAPTERS, type Chapter } from "@/data/core";
  * a two-divider row once the three sit side by side.
  */
 const EDGES = [
-  "border-b border-border hover:border-border-strong md:border-b-0 md:border-r",
-  "border-b border-border hover:border-border-strong md:border-b-0 md:border-r",
+  "border-b border-border hover:border-accent-border md:border-b-0 md:border-r",
+  "border-b border-border hover:border-accent-border md:border-b-0 md:border-r",
   "",
 ];
 
@@ -34,8 +34,8 @@ function ChapterPanel({ chapter, edges }: { chapter: Chapter; edges: string }) {
       {/* Network node and its run of line — the only geographic gesture here.
           Static, hairline weight, and carrying no position or status. */}
       <span className="-mr-7 flex items-center gap-3 sm:-mr-9 md:-mr-7 lg:-mr-10" aria-hidden="true">
-        <span className="size-[5px] shrink-0 rounded-full bg-muted transition-colors duration-300 group-hover:bg-primary" />
-        <span className="h-px flex-1 bg-border transition-colors duration-300 group-hover:bg-border-strong" />
+        <span className="size-[5px] shrink-0 rounded-full bg-muted transition-colors duration-300 group-hover:bg-accent" />
+        <span className="h-px flex-1 bg-border transition-colors duration-300 group-hover:bg-accent-border" />
       </span>
 
       <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-muted">
@@ -55,9 +55,9 @@ function ChapterPanel({ chapter, edges }: { chapter: Chapter; edges: string }) {
           EST. {chapter.founded}
         </span>
 
-        <span className="mt-4 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 group-hover:text-primary">
+        <span className="mt-4 flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 group-hover:text-accent">
           EXPLORE CHAPTER
-          <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
       </span>
 
@@ -86,7 +86,7 @@ export function ChaptersSection() {
                 className="group inline-flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 hover:text-primary sm:text-[11px]"
               >
                 ALL CHAPTERS
-                <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
 

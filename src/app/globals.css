@@ -8,27 +8,51 @@
   --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
 
   /* ---- Design tokens ------------------------------------------------------
-     Dark is the default and lives here, so Tailwind generates every utility
-     from it -- --color-card gives bg-card / text-card / border-card, with
-     opacity support like bg-card/90. The light palette re-declares the same
-     custom properties under :root[data-theme="light"] further down, so every
-     utility on the site follows the theme without a single class changing. */
-  --color-background: #050505;  /* page background                            */
-  --color-surface:    #0A0A0A;  /* section bands sitting on the background    */
-  --color-card:       #111111;  /* raised panels and cards                    */
-  --color-border:     #242424;  /* hairlines, dividers, card outlines         */
-  --color-primary:    #F2F2F2;  /* primary text: headings, emphasis           */
-  --color-secondary:  #A0A0A0;  /* secondary text                             */
-  --color-muted:      #808080;  /* muted text, placeholders, timestamps       */
+     One brand, two palettes. Dark is the default and lives here, so Tailwind
+     generates every utility from it; light re-declares the same custom
+     properties under :root[data-theme="light"]. Components reference tokens
+     only -- no component hardcodes a colour -- so the whole site follows the
+     theme without a single class changing.
 
-  /* Steps the three-tone scale above does not cover. */
-  --color-elevated:      #262626;  /* chips/inputs sitting above a card     */
-  --color-border-strong: #404040;  /* interactive + emphasised borders      */
-  --color-body:          #E5E5E5;  /* body copy                             */
-  --color-body-soft:     #D4D4D4;  /* secondary body copy                   */
-  --color-inverted:      #F5F5F5;  /* solid fills: primary buttons, avatars */
-  --color-on-inverted:   #0A0A0A;  /* text sitting on those fills           */
-  --color-cta-hover:     #FFFFFF;  /* primary button, hovered               */
+     Neutrals carry the page; electric blue is an accent and nothing else. */
+
+  /* Surfaces */
+  --color-background: #050608;  /* page                                       */
+  --color-hero:       #06080B;  /* the hero band                              */
+  --color-surface:    #090C10;  /* section bands sitting on the page          */
+  --color-card:       #0E1217;  /* panels and cards                           */
+  --color-elevated:   #141920;  /* chips and inputs above a card              */
+
+  /* Text, four steps */
+  --color-primary:    #F5F7FA;  /* headings and emphasis                      */
+  --color-secondary:  #A8AFB7;  /* body copy                                  */
+  --color-muted:      #7A838D;  /* labels, timestamps, technical captions     */
+  --color-faint:      #555D66;  /* the quietest tier                          */
+
+  /* Borders — structure comes from hairlines, not shadows */
+  --color-border:        #242B33;  /* default hairline                        */
+  --color-border-soft:   #1A2027;  /* quieter divider                         */
+  --color-border-strong: #34404C;  /* interactive and emphasised              */
+
+  /* Buttons */
+  --color-inverted:      #F5F7FA;  /* primary fill                            */
+  --color-on-inverted:   #050608;  /* text on that fill                       */
+  --color-cta-hover:     #FFFFFF;  /* primary fill, hovered                   */
+  --color-btn:           #0D1116;  /* secondary fill                          */
+  --color-btn-text:      #F5F7FA;
+  --color-btn-border:    #36414D;
+
+  /* Accent — roughly 5% of the page: links, active nav, focus, hover edges,
+     arrows, data points. Never a section background. */
+  --color-accent:        #3D9BFF;
+  --color-accent-bright: #69B8FF;
+  --color-accent-soft:   #10243A;  /* tinted background behind accent text    */
+  --color-accent-border: #285B86;
+
+  /* Legacy aliases, folded onto the four-step text scale above so older
+     pages inherit the same hierarchy rather than a fifth and sixth tone. */
+  --color-body:          #A8AFB7;
+  --color-body-soft:     #7A838D;
 
   --shadow-hairline: 0 0 0 1px rgb(255 255 255 / 0.08);
   --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
@@ -49,27 +73,34 @@
 
   /* Gradient stops and washes the plates are built from. The -rgb triples feed
      rgba() so one value covers a family of alphas. */
-  --scrim-rgb: 5, 5, 5;        /* page-coloured scrims over the hero art     */
-  --card-rgb: 17, 17, 17;      /* image bands dissolving into a card          */
+  --scrim-rgb: 5, 6, 8;
+  --card-rgb: 14, 18, 23;
+
+  /* Background pattern system — barely visible by design. */
+  --grid-line: rgba(255, 255, 255, 0.035);
+  --grid-line-blue: rgba(61, 155, 255, 0.10);
   --rule-fine: rgba(255, 255, 255, 0.030);
   --rule-coarse: rgba(255, 255, 255, 0.045);
   --sheet-fine: rgba(255, 255, 255, 0.028);
   --sheet-coarse: rgba(255, 255, 255, 0.040);
 
-  /* Hero backdrop */
-  --hb-atm-1: #101010;
-  --hb-atm-2: #0A0A0A;
-  --hb-atm-3: #050505;
-  --hb-ink: #ffffff;           /* stroke for the instrument plate             */
-  --hb-grain: 0.045;
-  --hb-vignette: rgba(5, 5, 5, 0.55);
+  --accent-glow: rgba(61, 155, 255, 0.14);
 
-  /* Photographs are held well back from the type in both themes. */
+  /* Hero backdrop */
+  --hb-atm-1: #0C1219;
+  --hb-atm-2: #080B0F;
+  --hb-atm-3: #050608;
+  --hb-ink: #ffffff;
+  --hb-grain: 0.04;
+  --hb-vignette: rgba(5, 6, 8, 0.55);
+
+  /* Cinematic but controlled: deep blacks, cool highlights, still realistic. */
   --photo-opacity: 0.62;
   --photo-opacity-hover: 0.78;
   --photo-brightness: 0.75;
+  --photo-saturate: 0.15;
 
-  --selection-bg: rgb(255 255 255 / 0.2);
+  --selection-bg: rgba(61, 155, 255, 0.28);
   --scrollbar-thumb: rgb(255 255 255 / 0.15);
 }
 
@@ -77,44 +108,60 @@
   color-scheme: light;
 
   --color-background: #F5F5F3;
-  --color-surface:    #FFFFFF;
-  --color-card:       #EEEEEC;
-  --color-border:     #D8D8D4;
-  --color-primary:    #111111;
-  --color-secondary:  #555555;
+  --color-hero:       #FAFAF8;
+  --color-surface:    #F0F0EE;
+  --color-card:       #FFFFFF;
+  --color-elevated:   #FFFFFF;
 
-  /* Derived to hold the same relationships the dark scale has: muted sits one
-     step back from secondary, elevated one step forward from card, and the
-     solid fills invert so a primary button stays the highest-contrast element
-     on the page. */
-  --color-muted:         #5A5A56;
-  --color-elevated:      #E2E2DE;
-  --color-border-strong: #B0B0AA;
-  --color-body:          #1F1F1F;
-  --color-body-soft:     #333331;
-  --color-inverted:      #111111;
-  --color-on-inverted:   #F5F5F3;
-  --color-cta-hover:     #000000;
+  --color-primary:    #08090A;
+  --color-secondary:  #4F555B;
+  --color-muted:      #686E74;
+  --color-faint:      #9BA0A5;
 
-  --scrim-rgb: 245, 245, 243;
-  --card-rgb: 238, 238, 236;
-  --rule-fine: rgba(0, 0, 0, 0.055);
-  --rule-coarse: rgba(0, 0, 0, 0.075);
-  --sheet-fine: rgba(0, 0, 0, 0.05);
-  --sheet-coarse: rgba(0, 0, 0, 0.07);
+  --color-border:        #D9DAD8;
+  --color-border-soft:   #E7E7E4;
+  --color-border-strong: #BFC2C5;
+
+  --color-inverted:      #08090A;
+  --color-on-inverted:   #FFFFFF;
+  --color-cta-hover:     #22262B;
+  --color-btn:           #FFFFFF;
+  --color-btn-text:      #08090A;
+  --color-btn-border:    #C9CBCB;
+
+  --color-accent:        #1677D2;
+  --color-accent-bright: #2F91F4;
+  --color-accent-soft:   #E7F2FF;
+  --color-accent-border: #A8D4FF;
+
+  --color-body:          #4F555B;
+  --color-body-soft:     #686E74;
+
+  --scrim-rgb: 250, 250, 248;
+  --card-rgb: 255, 255, 255;
+
+  --grid-line: rgba(0, 0, 0, 0.035);
+  --grid-line-blue: rgba(22, 119, 210, 0.08);
+  --rule-fine: rgba(0, 0, 0, 0.045);
+  --rule-coarse: rgba(0, 0, 0, 0.065);
+  --sheet-fine: rgba(0, 0, 0, 0.042);
+  --sheet-coarse: rgba(0, 0, 0, 0.06);
+
+  --accent-glow: rgba(22, 119, 210, 0.12);
 
   --hb-atm-1: #FFFFFF;
-  --hb-atm-2: #FAFAF8;
-  --hb-atm-3: #F5F5F3;
+  --hb-atm-2: #FCFCFA;
+  --hb-atm-3: #FAFAF8;
   --hb-ink: #000000;
-  --hb-grain: 0.028;
-  --hb-vignette: rgba(120, 120, 114, 0.14);
+  --hb-grain: 0.026;
+  --hb-vignette: rgba(120, 124, 130, 0.13);
 
-  --photo-opacity: 0.68;
-  --photo-opacity-hover: 0.82;
-  --photo-brightness: 0.95;
+  --photo-opacity: 0.70;
+  --photo-opacity-hover: 0.84;
+  --photo-brightness: 0.98;
+  --photo-saturate: 0.12;
 
-  --selection-bg: rgb(0 0 0 / 0.12);
+  --selection-bg: rgba(22, 119, 210, 0.18);
   --scrollbar-thumb: rgb(0 0 0 / 0.2);
 }
 

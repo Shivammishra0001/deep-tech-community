@@ -57,9 +57,9 @@ const FRONTIERS = [
  * mobile, and a cross at md where the composition becomes 2x2.
  */
 const EDGES = [
-  "border-b border-border hover:border-border-strong md:border-r",
-  "border-b border-border hover:border-border-strong",
-  "border-b border-border hover:border-border-strong md:border-b-0 md:border-r",
+  "border-b border-border hover:border-accent-border md:border-r",
+  "border-b border-border hover:border-accent-border",
+  "border-b border-border hover:border-accent-border md:border-b-0 md:border-r",
   "",
 ];
 
@@ -122,7 +122,7 @@ export function FrontiersExperience() {
                     <SafeImage
                       src={f.image}
                       alt=""
-                      className="size-full object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.05] [filter:grayscale(1)_brightness(var(--photo-brightness))] [opacity:var(--photo-opacity)] group-hover:[opacity:var(--photo-opacity-hover)]"
+                      className="size-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.05] [filter:saturate(var(--photo-saturate))_brightness(var(--photo-brightness))] [opacity:var(--photo-opacity)] group-hover:[opacity:var(--photo-opacity-hover)]"
                     />
                     <div
                       className="absolute inset-0"
@@ -152,9 +152,9 @@ export function FrontiersExperience() {
                       {f.tagline}
                     </p>
 
-                    <span className="mt-auto flex items-center gap-2 pt-8 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 group-hover:text-primary sm:pt-10">
+                    <span className="mt-auto flex items-center gap-2 pt-8 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 group-hover:text-accent sm:pt-10">
                       EXPLORE
-                      <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>
                   </div>
 

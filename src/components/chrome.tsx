@@ -162,7 +162,7 @@ export function Navbar() {
     name ? name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) : "U";
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/85 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-hero/90 backdrop-blur-xl">
       <Container
         className={cx(
           "flex items-center justify-between gap-6 transition-[height] duration-300 ease-out",
@@ -187,7 +187,7 @@ export function Navbar() {
                 {item.label}
                 <span
                   className={cx(
-                    "pointer-events-none absolute -bottom-px left-0 right-0 h-px bg-primary transition-opacity duration-200",
+                    "pointer-events-none absolute -bottom-px left-0 right-0 h-px bg-accent transition-opacity duration-200",
                     isActive ? "opacity-100" : "opacity-0",
                   )}
                   aria-hidden
@@ -205,7 +205,7 @@ export function Navbar() {
               href="/admin"
               className="hidden h-9 items-center gap-2.5 rounded-lg border border-border px-3 font-sans text-[12px] font-medium text-body transition-colors duration-200 hover:border-border-strong hover:text-primary lg:inline-flex"
             >
-              <span className="grid size-5 place-items-center rounded-full bg-primary font-sans text-[9px] font-bold text-background">
+              <span className="grid size-5 place-items-center rounded-full bg-inverted font-sans text-[9px] font-bold text-on-inverted">
                 {initials(user.name)}
               </span>
               <span className="max-w-[96px] truncate">{user.name.split(" ")[0]}</span>
@@ -355,8 +355,8 @@ export function Footer() {
             <div className="shrink-0">
               <Link
                 href="/join"
-                className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg bg-primary px-7
-                           font-sans text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] text-background
+                className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg bg-inverted px-7
+                           font-sans text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] text-on-inverted
                            transition-colors duration-200 hover:bg-cta-hover"
               >
                 JOIN THE COMMUNITY

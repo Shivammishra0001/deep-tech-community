@@ -72,15 +72,15 @@ function SubscribeForm() {
           disabled={pending || done}
           className="h-12 w-full rounded-lg border border-border bg-background px-4 font-sans text-[15px]
                      text-primary placeholder:text-muted transition-colors duration-200
-                     hover:border-border-strong
-                     focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/30
+                     hover:border-accent-border
+                     focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent
                      disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={pending || done}
-          className="group inline-flex h-12 shrink-0 items-center justify-center gap-2.5 rounded-lg bg-primary px-7
-                     font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-background
+          className="group inline-flex h-12 shrink-0 items-center justify-center gap-2.5 rounded-lg bg-inverted px-7
+                     font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-on-inverted
                      transition-colors duration-200 hover:bg-cta-hover
                      disabled:pointer-events-none disabled:opacity-50 sm:text-[13px]"
         >
@@ -133,13 +133,13 @@ function LeadBriefing({ article }: { article: Article }) {
     <Link
       href={`/news/${article.slug}`}
       className="group grid overflow-hidden rounded-2xl border border-border bg-card
-                 transition-colors duration-300 hover:border-border-strong lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
+                 transition-colors duration-300 hover:border-accent-border lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
     >
       <div className="relative h-52 overflow-hidden bg-surface sm:h-64 lg:h-full lg:min-h-[300px]" aria-hidden="true">
         <SafeImage
           src={article.image}
           alt=""
-          className="size-full object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.05] [filter:grayscale(1)_brightness(var(--photo-brightness))] [opacity:var(--photo-opacity)] group-hover:[opacity:var(--photo-opacity-hover)]"
+          className="size-full object-cover transition-all duration-700 ease-out group-hover:scale-[1.05] [filter:saturate(var(--photo-saturate))_brightness(var(--photo-brightness))] [opacity:var(--photo-opacity)] group-hover:[opacity:var(--photo-opacity-hover)]"
         />
         <div
           className="absolute inset-0 [background-image:linear-gradient(180deg,rgba(var(--card-rgb),0)_0%,rgba(var(--card-rgb),0.55)_100%)] lg:[background-image:linear-gradient(90deg,rgba(var(--card-rgb),0)_40%,rgba(var(--card-rgb),0.9)_100%)]"
@@ -162,9 +162,9 @@ function LeadBriefing({ article }: { article: Article }) {
           {article.excerpt}
         </p>
 
-        <span className="mt-auto flex items-center gap-2 pt-8 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 group-hover:text-primary">
+        <span className="mt-auto flex items-center gap-2 pt-8 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 group-hover:text-accent">
           READ BRIEFING
-          <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
       </div>
     </Link>
@@ -177,7 +177,7 @@ function BriefingRow({ article }: { article: Article }) {
     <Link
       href={`/news/${article.slug}`}
       className="group flex flex-col gap-3 border-t border-border px-1 py-6 transition-colors duration-300
-                 hover:border-border-strong sm:flex-row sm:items-baseline sm:gap-8 sm:py-7"
+                 hover:border-accent-border sm:flex-row sm:items-baseline sm:gap-8 sm:py-7"
     >
       <span className="shrink-0 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted sm:w-32">
         {article.date}
@@ -187,9 +187,9 @@ function BriefingRow({ article }: { article: Article }) {
         {article.title}
       </span>
 
-      <span className="flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted transition-colors duration-300 group-hover:text-primary">
+      <span className="flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted transition-colors duration-300 group-hover:text-accent">
         {article.readingTime} MIN
-        <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </span>
     </Link>
   );
@@ -217,7 +217,7 @@ export function NewsletterSection() {
                 className="group inline-flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 hover:text-primary sm:text-[11px]"
               >
                 ALL BRIEFINGS
-                <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
 

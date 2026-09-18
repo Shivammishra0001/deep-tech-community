@@ -25,7 +25,7 @@ export function CinematicHero() {
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden bg-background text-primary scroll-mt-20
+      className="relative w-full overflow-hidden bg-hero text-primary scroll-mt-20
                  flex items-center
                  min-h-[620px] py-24
                  sm:min-h-[680px]
@@ -86,8 +86,8 @@ export function CinematicHero() {
           >
             <Link
               href="/join"
-              className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg bg-primary px-7
-                         font-sans text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] text-background
+              className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg bg-inverted px-7
+                         font-sans text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] text-on-inverted
                          transition-colors duration-200 hover:bg-cta-hover"
             >
               JOIN THE COMMUNITY
@@ -96,9 +96,9 @@ export function CinematicHero() {
 
             <Link
               href="/community"
-              className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg border border-border px-7
-                         font-sans text-[12px] sm:text-[13px] font-medium uppercase tracking-[0.1em] text-secondary
-                         transition-colors duration-200 hover:border-border-strong hover:text-primary"
+              className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-lg border border-btn-border bg-btn px-7
+                         font-sans text-[12px] sm:text-[13px] font-medium uppercase tracking-[0.1em] text-btn-text
+                         transition-colors duration-200 hover:border-accent-border hover:text-accent"
             >
               EXPLORE THE NETWORK
               <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />

@@ -45,7 +45,7 @@ function EventRow({ event, first }: { event: TechEvent; first: boolean }) {
       href={`/events/${event.slug}`}
       className={`group flex flex-col gap-4 px-1 py-6 transition-colors duration-300
                   sm:flex-row sm:items-center sm:gap-8 sm:py-7
-                  ${first ? "" : "border-t border-border hover:border-border-strong"}`}
+                  ${first ? "" : "border-t border-border hover:border-accent-border"}`}
     >
       <span className="flex shrink-0 items-baseline gap-2 sm:w-24 sm:flex-col sm:items-start sm:gap-0.5">
         <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted">
@@ -71,10 +71,10 @@ function EventRow({ event, first }: { event: TechEvent; first: boolean }) {
             <DomainBadge key={d} domain={d} />
           ))}
         </span>
-        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted transition-colors duration-300 group-hover:text-primary">
+        <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-muted transition-colors duration-300 group-hover:text-accent">
           {event.type}
         </span>
-        <ArrowUpRight className="size-3.5 text-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
+        <ArrowUpRight className="size-3.5 text-accent transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent-bright" />
       </span>
     </Link>
   );
@@ -101,7 +101,7 @@ export function EventsSection() {
                 className="group inline-flex shrink-0 items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted transition-colors duration-300 hover:text-primary sm:text-[11px]"
               >
                 ALL EVENTS
-                <ArrowUpRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="size-3.5 text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
 

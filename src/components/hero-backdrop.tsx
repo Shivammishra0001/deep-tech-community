@@ -17,7 +17,7 @@ const GRAIN_TILE =
 
 export function HeroBackdrop() {
   return (
-    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-background" aria-hidden="true">
+    <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-hero" aria-hidden="true">
       {/* Atmosphere: a single pool of light, centred behind the type. */}
       <div
         className="absolute inset-0"

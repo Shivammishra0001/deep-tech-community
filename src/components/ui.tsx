@@ -413,7 +413,7 @@ export function Label({ htmlFor, children }: { htmlFor: string; children: ReactN
 }
 
 const fieldCls =
-  "w-full rounded-lg border px-4 py-3 text-sm sm:text-base transition-colors focus:outline-none focus:ring-1 border-border-strong bg-surface text-primary placeholder:text-muted focus:border-inverted focus:ring-inverted font-sans";
+  "w-full rounded-lg border px-4 py-3 text-sm sm:text-base transition-colors focus:outline-none focus:ring-1 border-border-strong bg-surface text-primary placeholder:text-muted focus:border-accent focus:ring-accent font-sans";
 
 export function Input(props: InputHTMLAttributes<HTMLInputElement>) {
   return <input suppressHydrationWarning {...props} className={cn(fieldCls, props.className)} />;

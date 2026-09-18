@@ -64,8 +64,8 @@ export function JoinSection() {
               <div className="flex flex-col justify-center px-7 py-10 sm:px-10 sm:py-12 lg:px-12">
                 <Link
                   href="/join"
-                  className="group inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-lg bg-primary px-7
-                             font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-background
+                  className="group inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-lg bg-inverted px-7
+                             font-sans text-[12px] font-semibold uppercase tracking-[0.1em] text-on-inverted
                              transition-colors duration-200 hover:bg-cta-hover sm:w-auto sm:text-[13px]"
                 >
                   JOIN THE COMMUNITY
