@@ -15,15 +15,9 @@ const NODES = [
 
 export function GovernanceDiagram({ className }: { className?: string }) {
   return (
-    <div className={cx("relative w-full rounded-2xl border border-border bg-surface p-6 sm:p-8 overflow-hidden shadow-2xl", className)}>
-      {/* Editorial Watermark */}
-      <div className="absolute top-4 right-6 font-mono text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-600">
-        AI Governance Decision Architecture // Fig. 04
-      </div>
-
+    <div className={cx("relative w-full rounded-2xl border border-border bg-surface p-6 sm:p-8 overflow-hidden shadow-soft", className)}>
       <div className="mb-6">
         <div className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-3 py-1 font-mono text-xs font-semibold uppercase tracking-wider text-body-soft">
-          <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
           Algorithmic Audit & Risk System
         </div>
         <h3 className="mt-3 font-display text-xl sm:text-2xl font-bold tracking-tight text-primary">
@@ -45,14 +39,14 @@ export function GovernanceDiagram({ className }: { className?: string }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="group relative flex flex-col justify-between rounded-xl border border-border bg-card p-4 sm:p-5 transition-all duration-300 hover:border-neutral-600 hover:bg-[#161616]"
+              className="group relative flex flex-col justify-between rounded-xl border border-border bg-card p-4 sm:p-5 transition-all duration-300 hover:border-border-strong hover:bg-elevated/40"
             >
               <div>
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-body-soft">
                     {node.type}
                   </span>
-                  <div className="grid size-7 place-items-center rounded-lg border border-border-strong bg-card text-body transition-colors group-hover:border-neutral-500 group-hover:text-primary">
+                  <div className="grid size-7 place-items-center rounded-lg border border-border-strong bg-card text-body transition-colors group-hover:border-border-strong group-hover:text-primary">
                     <Icon className="size-4" />
                   </div>
                 </div>
@@ -63,9 +57,6 @@ export function GovernanceDiagram({ className }: { className?: string }) {
 
               <div className="mt-4 flex items-center justify-between border-t border-border/80 pt-3 font-mono text-[10px] text-body-soft">
                 <span>Node 0{i + 1}</span>
-                <span className="text-emerald-400/90 font-medium flex items-center gap-1">
-                  <span className="size-1.5 rounded-full bg-emerald-400" /> Active Verification
-                </span>
               </div>
             </motion.div>
           );
