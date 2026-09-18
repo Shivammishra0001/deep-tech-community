@@ -35,7 +35,7 @@ export function CinematicHero() {
       <HeroBackdrop />
 
       <Container className="relative z-10">
-        <motion.div style={{ y: contentY }} className="max-w-[820px]">
+        <motion.div style={{ y: contentY }} className="mx-auto max-w-[880px] text-center">
           {/* Eyebrow */}
           <motion.p
             {...fadeUp}
@@ -49,7 +49,7 @@ export function CinematicHero() {
               width that breaks it across three lines instead of filling the
               viewport. */}
           <h1
-            className="mt-6 sm:mt-7 max-w-[560px] md:max-w-[680px] lg:max-w-[760px] font-sans uppercase text-primary
+            className="mt-6 sm:mt-7 mx-auto max-w-[600px] md:max-w-[760px] lg:max-w-[860px] font-sans uppercase text-primary
                        text-[clamp(2.25rem,7.4vw,2.75rem)]
                        sm:text-[clamp(2.75rem,6.2vw,3.5rem)]
                        lg:text-[clamp(3.5rem,5vw,4.125rem)]
@@ -71,7 +71,7 @@ export function CinematicHero() {
           <motion.p
             {...fadeUp}
             transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.35, ease: "easeOut" }}
-            className="mt-7 lg:mt-8 max-w-[520px] font-sans text-[15px] sm:text-base lg:text-[17px]
+            className="mt-7 lg:mt-8 mx-auto max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px]
                        font-normal leading-[1.65] text-secondary"
           >
             A practitioner-led network for engineers, researchers, founders and students building
@@ -82,7 +82,7 @@ export function CinematicHero() {
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.6, delay: shouldReduceMotion ? 0 : 0.5, ease: "easeOut" }}
-            className="mt-10 lg:mt-12 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4"
+            className="mt-10 lg:mt-12 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-4"
           >
             <Link
               href="/join"

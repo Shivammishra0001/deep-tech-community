@@ -87,11 +87,11 @@
      step back from secondary, elevated one step forward from card, and the
      solid fills invert so a primary button stays the highest-contrast element
      on the page. */
-  --color-muted:         #6B6B67;
+  --color-muted:         #5A5A56;
   --color-elevated:      #E2E2DE;
   --color-border-strong: #B0B0AA;
   --color-body:          #1F1F1F;
-  --color-body-soft:     #3A3A38;
+  --color-body-soft:     #333331;
   --color-inverted:      #111111;
   --color-on-inverted:   #F5F5F3;
   --color-cta-hover:     #000000;
