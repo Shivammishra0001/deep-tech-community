@@ -42,14 +42,14 @@ export function CinematicHero() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.28em] text-muted"
           >
-            00 / FRONTIER NETWORK
+            THE FRONTIER NETWORK FOR DEEP TECH
           </motion.p>
 
           {/* Headline — 64-72px at desktop, medium weight, held to a column
               width that breaks it across three lines instead of filling the
               viewport. */}
           <h1
-            className="mt-6 sm:mt-7 mx-auto max-w-[600px] md:max-w-[760px] lg:max-w-[860px] font-sans uppercase text-primary
+            className="mt-6 sm:mt-7 mx-auto max-w-[330px] sm:max-w-[420px] lg:max-w-[620px] font-sans uppercase text-primary
                        text-[clamp(2.25rem,7.4vw,2.75rem)]
                        sm:text-[clamp(2.75rem,6.2vw,3.5rem)]
                        lg:text-[clamp(3.5rem,5vw,4.125rem)]
@@ -58,7 +58,7 @@ export function CinematicHero() {
                        tracking-[-0.015em] lg:tracking-[-0.022em]"
           >
             <StaggeredText
-              text="WHERE FRONTIER BUILDERS ENGINEER THE FUTURE."
+              text="BUILD WHAT'S BEYOND THE OBVIOUS."
               segmentBy="Words"
               staggerDirection="Forward"
               direction="Top"
@@ -74,8 +74,8 @@ export function CinematicHero() {
             className="mt-7 lg:mt-8 mx-auto max-w-[560px] font-sans text-[15px] sm:text-base lg:text-[17px]
                        font-normal leading-[1.65] text-secondary"
           >
-            A practitioner-led network for engineers, researchers, founders and students building
-            what comes next.
+            A practitioner-led community for engineers, researchers, founders, and students
+            working across the technologies shaping what comes next.
           </motion.p>
 
           {/* Calls to action */}
